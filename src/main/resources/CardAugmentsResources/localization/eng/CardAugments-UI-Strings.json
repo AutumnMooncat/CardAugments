@@ -1,0 +1,8 @@
+{
+  "YesNoFormat:Format": {
+    "TEXT": ["YES","NO","MAYBE"]
+  },
+  "YesNoFormat:ModConfigMaybe": {
+    "TEXT": ["Convert X Cost to MAYBE"]
+  }
+}
