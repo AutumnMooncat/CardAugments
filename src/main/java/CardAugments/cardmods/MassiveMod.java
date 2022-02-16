@@ -30,7 +30,12 @@ public class MassiveMod extends AbstractAugment {
     public boolean shouldApply(AbstractCard card) {
         AbstractCard upgradeCheck = card.makeCopy();
         upgradeCheck.upgrade();
-        return card.cost == upgradeCheck.cost && card.cost > 0 && card.cost <= 3 && (card.baseDamage > 0 || card.baseBlock > 0);
+        return card.cost == upgradeCheck.cost && validCard(card);
+    }
+
+    @Override
+    public boolean validCard(AbstractCard card) {
+        return card.cost > 0 && card.cost <= 3 && (card.baseDamage > 0 || card.baseBlock > 0);
     }
 
     @Override

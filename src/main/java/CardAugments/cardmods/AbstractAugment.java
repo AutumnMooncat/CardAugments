@@ -15,6 +15,18 @@ public abstract class AbstractAugment extends AbstractCardModifier {
 
     public abstract AugmentRarity getModRarity();
 
+    public abstract boolean validCard(AbstractCard card);
+
+    @Override
+    public boolean shouldApply(AbstractCard card) {
+        if (!validCard(card)) {
+            return false;
+        }
+        AbstractCard upgradeCheck = card.makeCopy();
+        upgradeCheck.upgrade();
+        return validCard(upgradeCheck);
+    }
+
     @Override
     public void onInitialApplication(AbstractCard card) {
         setPrefixSuffix(card);

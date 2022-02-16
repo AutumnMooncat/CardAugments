@@ -6,10 +6,7 @@ import CardAugments.util.FormatHelper;
 import basemod.abstracts.AbstractCardModifier;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.ExhaustiveField;
 import com.evacipated.cardcrawl.mod.stslib.patches.CommonKeywordIconsPatches;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.LocalizedStrings;
 
@@ -28,16 +25,7 @@ public class EchoMod extends AbstractAugment {
     }
 
     @Override
-    public boolean shouldApply(AbstractCard card) {
-        if (!validCard(card)) {
-            return false;
-        }
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
-        return validCard(upgradeCheck);
-    }
-
-    private boolean validCard(AbstractCard card) {
+    public boolean validCard(AbstractCard card) {
         return card.cost != -2 && isNormalCard(card) && !card.purgeOnUse && !card.exhaust && card.type != AbstractCard.CardType.POWER && (ExhaustiveField.ExhaustiveFields.baseExhaustive.get(card) == -1 || ExhaustiveField.ExhaustiveFields.exhaustive.get(card) == -1);
     }
 

@@ -23,7 +23,7 @@ public class QuickMod extends AbstractAugment {
     }
 
     @Override
-    public boolean shouldApply(AbstractCard card) {
+    public boolean validCard(AbstractCard card) {
         return card.baseDamage > 0;
     }
 
