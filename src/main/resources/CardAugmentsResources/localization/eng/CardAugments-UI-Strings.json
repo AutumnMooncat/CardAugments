@@ -16,6 +16,12 @@
   "CardAugments:ExampleMod": {
     "TEXT": ["Card text goes here if required", "Prefix text", "Suffix text"]
   },
+  "CardAugments:AmplifiedMod": {
+    "TEXT": ["Amplified ", ""]
+  },
+  "CardAugments:ChargedMod": {
+    "TEXT": [" NL Next turn, gain [E] [E] .","Charged ", ""]
+  },
   "CardAugments:EchoMod": {
     "TEXT": [" NL cardaugments:Echo.","Echoing ", ""]
   },
@@ -23,9 +29,15 @@
     "TEXT": ["Massive ", ""]
   },
   "CardAugments:QuickMod": {
-    "TEXT": [" NL Draw 1 card.", "Quick ", ""]
+    "TEXT": [" NL Draw %d card.", "Quick ", ""]
+  },
+  "CardAugments:ShivMod": {
+    "TEXT": [" NL Add %d *Shiv into your hand.", "", " and Dagger"]
   },
   "CardAugments:TinyMod": {
     "TEXT": ["Tiny ", ""]
+  },
+  "CardAugments:UnrestrictedMod": {
+    "TEXT": ["cardaugments:Unrestricted. NL ","Unrestricted ", ""]
   }
 }
