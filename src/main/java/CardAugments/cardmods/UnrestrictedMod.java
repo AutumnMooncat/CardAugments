@@ -49,6 +49,6 @@ public class UnrestrictedMod extends AbstractAugment {
 
     @Override
     public String identifier(AbstractCard card) {
-        return super.identifier(card);
+        return ID;
     }
 }

@@ -60,6 +60,6 @@ public class ShivMod extends AbstractAugment {
 
     @Override
     public String identifier(AbstractCard card) {
-        return super.identifier(card);
+        return ID;
     }
 }
