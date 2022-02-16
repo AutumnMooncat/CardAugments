@@ -2,27 +2,41 @@ package CardAugments.patches;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
+import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardModifierManager;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.events.shrines.GremlinMatchGame;
 import com.megacrit.cardcrawl.neow.NeowReward;
 import com.megacrit.cardcrawl.screens.select.GridCardSelectScreen;
 import javassist.CtBehavior;
+import mintySpire.patches.cards.betterUpdatePreview.CardFields;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class OnCardGeneratedPatches {
+
     @SpirePatch2(clz = AbstractDungeon.class, method = "getRewardCards")
     public static class ModifySpawnedCardsPatch {
         @SpirePostfixPatch
         public static void patch(ArrayList<AbstractCard> __result) {
             for (AbstractCard c : __result) {
-                rollCardAugment(c);
+                rollCardAugment(c, __result.indexOf(c));
+            }
+        }
+    }
+
+    @SpirePatch2(clz = AbstractDungeon.class, method = "getColorlessRewardCards")
+    public static class ModifySpawnedColorlessCardsPatch {
+        @SpirePostfixPatch
+        public static void patch(ArrayList<AbstractCard> __result) {
+            for (AbstractCard c : __result) {
+                rollCardAugment(c, __result.indexOf(c));
             }
         }
     }
@@ -77,8 +91,12 @@ public class OnCardGeneratedPatches {
     }
 
     public static void rollCardAugment(AbstractCard c) {
+        rollCardAugment(c, -1);
+    }
+
+    public static void rollCardAugment(AbstractCard c, int index) {
         if (AbstractDungeon.miscRng.random(99) < CardAugmentsMod.modProbabilityPercent) {
-            applyWeightedCardMod(c, rollRarity());
+            applyWeightedCardMod(c, rollRarity(), index);
         }
     }
 
@@ -93,7 +111,7 @@ public class OnCardGeneratedPatches {
         }
     }
 
-    public static void applyWeightedCardMod(AbstractCard c, AbstractAugment.AugmentRarity rarity) {
+    public static void applyWeightedCardMod(AbstractCard c, AbstractAugment.AugmentRarity rarity, int index) {
         ArrayList<AbstractAugment> validMods = new ArrayList<>();
         switch (rarity) {
             case COMMON:
@@ -107,7 +125,11 @@ public class OnCardGeneratedPatches {
                 break;
         }
         if (!validMods.isEmpty()) {
-            CardModifierManager.addModifier(c, validMods.get(AbstractDungeon.miscRng.random(validMods.size()-1)).makeCopy());
+            AbstractCardModifier m = validMods.get(AbstractDungeon.miscRng.random(validMods.size()-1)).makeCopy();
+            CardModifierManager.addModifier(c, m);
+            if (index != -1 && CardAugmentsMod.isMintyLoaded) {
+                CardModifierManager.addModifier(CardFields.SCVPopup.unupgradedCardRewards.get(CardCrawlGame.cardPopup).get(index), m);
+            }
         }
     }
 }

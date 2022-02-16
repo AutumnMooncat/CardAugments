@@ -7,6 +7,7 @@ import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.stslib.Keyword;
+import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
@@ -32,6 +33,8 @@ public class CardAugmentsMod implements
     // Making relics? EditRelicsSubscriber. etc., etc., for a full list and how to make your own, visit the basemod wiki.
     public static final Logger logger = LogManager.getLogger(CardAugmentsMod.class.getName());
     private static String modID;
+
+    public static boolean isMintyLoaded;
 
     // Mod-settings settings. This is if you want an on/off savable button
     public static SpireConfig cardAugmentsConfig;
@@ -137,6 +140,9 @@ public class CardAugmentsMod implements
     @Override
     public void receivePostInitialize() {
         logger.info("Loading badge image and mod options");
+
+        //Minty be messing with my stuff
+        isMintyLoaded = Loader.isModLoaded("mintyspire");
 
         //Grab the strings
         uiStrings = CardCrawlGame.languagePack.getUIString(makeID("ModConfigs"));

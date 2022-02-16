@@ -52,6 +52,14 @@
             <systemPath>${Steam.path}/workshop/content/646570/1609158507/StSLib.jar</systemPath>
             <!--<systemPath>${basedir}/../lib/StSLib.jar</systemPath>-->
         </dependency>
+        <dependency>
+            <groupId>gk</groupId>
+            <artifactId>MintySpire</artifactId>
+            <version>2.5.5</version>
+            <scope>system</scope>
+            <systemPath>${Steam.path}/workshop/content/646570/1812723899/MintySpire.jar</systemPath>
+            <!--<systemPath>${basedir}/../lib/StSLib.jar</systemPath>-->
+        </dependency>
     </dependencies>
 
 
