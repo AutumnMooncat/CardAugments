@@ -3,13 +3,15 @@ package CardAugments.patches;
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import basemod.helpers.CardModifierManager;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
+import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.events.shrines.GremlinMatchGame;
+import com.megacrit.cardcrawl.neow.NeowReward;
 import com.megacrit.cardcrawl.screens.select.GridCardSelectScreen;
+import javassist.CtBehavior;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -28,8 +30,35 @@ public class OnCardGeneratedPatches {
     @SpirePatch2(clz = GridCardSelectScreen.class, method = "openConfirmationGrid")
     public static class ModifyConfirmScreenCards {
         @SpirePostfixPatch
-        public static void patch(GridCardSelectScreen __instance, CardGroup group) {
+        public static void patch(CardGroup group) {
             for (AbstractCard c : group.group) {
+                rollCardAugment(c);
+            }
+        }
+    }
+
+    @SpirePatch2(clz = GremlinMatchGame.class, method = "initializeCards")
+    public static class ModifyMatchGameCards {
+        @SpireInsertPatch(locator = Locator.class, localvars = "retVal")
+        public static void patch(ArrayList<AbstractCard> retVal) {
+            for (AbstractCard c : retVal) {
+                rollCardAugment(c);
+            }
+        }
+        private static class Locator extends SpireInsertLocator {
+            @Override
+            public int[] Locate(CtBehavior ctMethodToPatch) throws Exception {
+                Matcher finalMatcher = new Matcher.MethodCallMatcher(AbstractPlayer.class, "getStartCardForEvent");
+                return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
+            }
+        }
+    }
+
+    @SpirePatch2(clz = NeowReward.class, method = "getRewardCards")
+    public static class ModifyNeowRewardCardsPatch {
+        @SpirePostfixPatch
+        public static void patch(ArrayList<AbstractCard> __result) {
+            for (AbstractCard c : __result) {
                 rollCardAugment(c);
             }
         }
@@ -54,7 +83,7 @@ public class OnCardGeneratedPatches {
     }
 
     public static AbstractAugment.AugmentRarity rollRarity() {
-        int roll = AbstractDungeon.miscRng.random(CardAugmentsMod.commonWeight + CardAugmentsMod.uncommonWeight + CardAugmentsMod.rareWeight);
+        int roll = AbstractDungeon.miscRng.random(CardAugmentsMod.commonWeight + CardAugmentsMod.uncommonWeight + CardAugmentsMod.rareWeight - 1);
         if (roll < CardAugmentsMod.commonWeight) {
             return AbstractAugment.AugmentRarity.COMMON;
         } else if (roll < CardAugmentsMod.commonWeight + CardAugmentsMod.uncommonWeight) {
