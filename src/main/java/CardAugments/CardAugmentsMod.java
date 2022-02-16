@@ -1,12 +1,15 @@
 package CardAugments;
 
+import CardAugments.cardmods.AbstractAugment;
 import CardAugments.util.TextureLoader;
 import basemod.*;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.evacipated.cardcrawl.mod.stslib.Keyword;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
+import com.google.gson.Gson;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.FontHelper;
@@ -14,28 +17,55 @@ import com.megacrit.cardcrawl.localization.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Properties;
 
 @SpireInitializer
 public class CardAugmentsMod implements
         EditStringsSubscriber,
-        PostInitializeSubscriber {
+        PostInitializeSubscriber,
+        EditKeywordsSubscriber {
     // Make sure to implement the subscribers *you* are using (read basemod wiki). Editing cards? EditCardsSubscriber.
     // Making relics? EditRelicsSubscriber. etc., etc., for a full list and how to make your own, visit the basemod wiki.
     public static final Logger logger = LogManager.getLogger(CardAugmentsMod.class.getName());
     private static String modID;
 
     // Mod-settings settings. This is if you want an on/off savable button
-    public static Properties yesNoDefaultSettings = new Properties();
+    public static SpireConfig cardAugmentsConfig;
+    public static String FILE_NAME = "CardsAugmentsConfig";
 
-    public static final String ENABLE_MAYBE_SETTING = "enableMaybe";
-    public static boolean enableMaybe = false; // The boolean we'll be setting on/off (true/false)
+    public static final String ENABLE_MODS_SETTING = "enableMods";
+    public static boolean enableMods = true; // The boolean we'll be setting on/off (true/false)
+
+    public static final String MOD_PROBABILITY = "modChance";
+    public static int modProbabilityPercent = 50;
+
+    public static final String COMMON_WEIGHT = "commonWeight";
+    public static int commonWeight = 5;
+
+    public static final String UNCOMMON_WEIGHT = "uncommonWeight";
+    public static int uncommonWeight = 3;
+
+    public static final String RARE_WEIGHT = "rareWeight";
+    public static int rareWeight = 1;
+
+    public static final String MODIFY_STARTERS = "modifyStarters";
+    public static boolean modifyStarters = false;
+
+    //Cardmod Lists
+    public static final ArrayList<AbstractAugment> commonMods = new ArrayList<>();
+    public static final ArrayList<AbstractAugment> uncommonMods = new ArrayList<>();
+    public static final ArrayList<AbstractAugment> rareMods = new ArrayList<>();
 
 
     //This is for the in-game mod settings panel.
-    private static final String MODNAME = "Card Augments";
+    public static UIStrings uiStrings;
+    public static String[] TEXT;
+    public static String[] EXTRA_TEXT;
     private static final String AUTHOR = "Mistress Alison";
-    private static final String DESCRIPTION = "Adds random modifiers to card rewards.";
     
     // =============== INPUT TEXTURE LOCATION =================
     
@@ -55,21 +85,32 @@ public class CardAugmentsMod implements
         setModID("CardAugments");
         
         logger.info("Done subscribing");
-        
-        logger.info("Adding mod settings");
 
         // This loads the mod settings.
         // The actual mod Button is added below in receivePostInitialize()
-        yesNoDefaultSettings.setProperty(ENABLE_MAYBE_SETTING, "FALSE"); // This is the default setting. It's actually set...
+        logger.info("Adding mod settings");
+        // This loads the mod settings.
+        // The actual mod Button is added below in receivePostInitialize()
+        Properties cardAugmentsDefaultSettings = new Properties();
+        cardAugmentsDefaultSettings.setProperty(ENABLE_MODS_SETTING, Boolean.toString(enableMods));
+        cardAugmentsDefaultSettings.setProperty(MOD_PROBABILITY, String.valueOf(modProbabilityPercent));
+        cardAugmentsDefaultSettings.setProperty(COMMON_WEIGHT, String.valueOf(commonWeight));
+        cardAugmentsDefaultSettings.setProperty(UNCOMMON_WEIGHT, String.valueOf(uncommonWeight));
+        cardAugmentsDefaultSettings.setProperty(RARE_WEIGHT, String.valueOf(rareWeight));
+        cardAugmentsDefaultSettings.setProperty(MODIFY_STARTERS, Boolean.toString(modifyStarters));
         try {
-            SpireConfig config = new SpireConfig("CardAugments", "YesNoConfig", yesNoDefaultSettings); // ...right here
-            // the "fileName" parameter is the name of the file MTS will create where it will save our setting.
-            config.load(); // Load the setting and set the boolean to equal it
-            enableMaybe = config.getBool(ENABLE_MAYBE_SETTING);
-            //enableStrongerWantedEffect = config.getBool(FIVE_STAR_WANTED_SETTING);
-        } catch (Exception e) {
+            cardAugmentsConfig = new SpireConfig(modID, FILE_NAME, cardAugmentsDefaultSettings);
+            enableMods = cardAugmentsConfig.getBool(ENABLE_MODS_SETTING);
+            modProbabilityPercent = cardAugmentsConfig.getInt(MOD_PROBABILITY);
+            commonWeight = cardAugmentsConfig.getInt(COMMON_WEIGHT);
+            uncommonWeight = cardAugmentsConfig.getInt(UNCOMMON_WEIGHT);
+            rareWeight = cardAugmentsConfig.getInt(RARE_WEIGHT);
+            modifyStarters = cardAugmentsConfig.getBool(MODIFY_STARTERS);
+        } catch (IOException e) {
+            logger.error("Card Augments SpireConfig initialization failed:");
             e.printStackTrace();
         }
+        logger.info("Card Augments CONFIG OPTIONS LOADED:");
 
         logger.info("Done adding mod settings");
         
@@ -95,40 +136,131 @@ public class CardAugmentsMod implements
     
     @Override
     public void receivePostInitialize() {
-                logger.info("Loading badge image and mod options");
-        
-        // Load the Mod Badge
-        Texture badgeTexture = TextureLoader.getTexture(BADGE_IMAGE);
-        
+        logger.info("Loading badge image and mod options");
+
+        //Grab the strings
+        uiStrings = CardCrawlGame.languagePack.getUIString(makeID("ModConfigs"));
+        EXTRA_TEXT = uiStrings.EXTRA_TEXT;
+        TEXT = uiStrings.TEXT;
         // Create the Mod Menu
         ModPanel settingsPanel = new ModPanel();
 
-        float currentYposition = 740f;
-        
-        // Create the on/off button:
-        ModLabeledToggleButton enableMaybeButton = new ModLabeledToggleButton(CardCrawlGame.languagePack.getUIString(CardAugmentsMod.makeID("ModConfigMaybe")).TEXT[0],
-                350.0f, currentYposition, Settings.CREAM_COLOR, FontHelper.charDescFont, // Position (trial and error it), color, font
-                enableMaybe, // Boolean it uses
-                settingsPanel, // The mod panel in which this button will be in
-                (label) -> {}, // thing??????? idk
-                (button) -> { // The actual button:
-            
-            enableMaybe = button.enabled; // The boolean true/false will be whether the button is enabled or not
-            try {
-                // And based on that boolean, set the settings and save them
-                SpireConfig config = new SpireConfig("CardAugments", "YesNoConfig", yesNoDefaultSettings);
-                config.setBool(ENABLE_MAYBE_SETTING, enableMaybe);
-                config.save();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
+        // Load the Mod Badge
+        Texture badgeTexture = TextureLoader.getTexture(BADGE_IMAGE);
+        BaseMod.registerModBadge(badgeTexture, EXTRA_TEXT[0], AUTHOR, EXTRA_TEXT[1], settingsPanel);
 
-        settingsPanel.addUIElement(enableMaybeButton); // Add the button to the settings panel. Button is a go.
-        
-        BaseMod.registerModBadge(badgeTexture, MODNAME, AUTHOR, DESCRIPTION, settingsPanel);
+        //Get the longest slider text for positioning
+        ArrayList<String> labelStrings = new ArrayList<>(Arrays.asList(TEXT));
+        float sliderOffset = getSliderPosition(labelStrings);
+        labelStrings.clear();
+        float currentYposition = 740f;
+        float spacingY = 55f;
+
+        //Used to set the unused self damage setting.
+        ModLabeledToggleButton enableModsButton = new ModLabeledToggleButton(TEXT[0],400.0f - 40f, currentYposition - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
+                cardAugmentsConfig.getBool(ENABLE_MODS_SETTING), settingsPanel, (label) -> {}, (button) -> {
+            cardAugmentsConfig.setBool(ENABLE_MODS_SETTING, button.enabled);
+            enableMods = button.enabled;
+            try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
+        });
+        currentYposition -= spacingY;
+
+        //Used for probability of a mod being applied
+        ModLabel probabilityLabel = new ModLabel(TEXT[1], 400f, currentYposition, Settings.CREAM_COLOR, FontHelper.charDescFont, settingsPanel, modLabel -> {});
+        ModMinMaxSlider probabilitySlider = new ModMinMaxSlider("",
+                400f + sliderOffset,
+                currentYposition + 7f,
+                0, 100, cardAugmentsConfig.getInt(MOD_PROBABILITY), "%.0f", settingsPanel, slider -> {
+            cardAugmentsConfig.setInt(MOD_PROBABILITY, (int)slider.getValue());
+            modProbabilityPercent = (int)slider.getValue();
+            try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
+        });
+        currentYposition -= spacingY;
+
+        //Used for common mod weight
+        ModLabel commonLabel = new ModLabel(TEXT[2], 400f, currentYposition, Settings.CREAM_COLOR, FontHelper.charDescFont, settingsPanel, modLabel -> {});
+        ModMinMaxSlider commonSlider = new ModMinMaxSlider("",
+                400f + sliderOffset,
+                currentYposition + 7f,
+                1, 10, cardAugmentsConfig.getInt(COMMON_WEIGHT), "%.0f", settingsPanel, slider -> {
+            cardAugmentsConfig.setInt(COMMON_WEIGHT, (int)slider.getValue());
+            commonWeight = (int)slider.getValue();
+            try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
+        });
+        currentYposition -= spacingY;
+
+        //Used for uncommon mod weight
+        ModLabel uncommonLabel = new ModLabel(TEXT[3], 400f, currentYposition, Settings.CREAM_COLOR, FontHelper.charDescFont, settingsPanel, modLabel -> {});
+        ModMinMaxSlider uncommonSlider = new ModMinMaxSlider("",
+                400f + sliderOffset,
+                currentYposition + 7f,
+                1, 10, cardAugmentsConfig.getInt(UNCOMMON_WEIGHT), "%.0f", settingsPanel, slider -> {
+            cardAugmentsConfig.setInt(UNCOMMON_WEIGHT, (int)slider.getValue());
+            uncommonWeight = (int)slider.getValue();
+            try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
+        });
+        currentYposition -= spacingY;
+
+        //Used for rare mod weight
+        ModLabel rareLabel = new ModLabel(TEXT[4], 400f, currentYposition, Settings.CREAM_COLOR, FontHelper.charDescFont, settingsPanel, modLabel -> {});
+        ModMinMaxSlider rareSlider = new ModMinMaxSlider("",
+                400f + sliderOffset,
+                currentYposition + 7f,
+                1, 10, cardAugmentsConfig.getInt(RARE_WEIGHT), "%.0f", settingsPanel, slider -> {
+            cardAugmentsConfig.setInt(RARE_WEIGHT, (int)slider.getValue());
+            rareWeight = (int)slider.getValue();
+            try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
+        });
+        currentYposition -= spacingY;
+
+        //Used to modify starter cards
+        ModLabeledToggleButton enableStarterModificationButton = new ModLabeledToggleButton(TEXT[5],400.0f - 40f, currentYposition - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
+                cardAugmentsConfig.getBool(MODIFY_STARTERS), settingsPanel, (label) -> {}, (button) -> {
+            cardAugmentsConfig.setBool(MODIFY_STARTERS, button.enabled);
+            modifyStarters = button.enabled;
+            try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
+        });
+        currentYposition -= spacingY;
+
+        settingsPanel.addUIElement(enableModsButton);
+        settingsPanel.addUIElement(probabilityLabel);
+        settingsPanel.addUIElement(probabilitySlider);
+        settingsPanel.addUIElement(commonLabel);
+        settingsPanel.addUIElement(commonSlider);
+        settingsPanel.addUIElement(uncommonLabel);
+        settingsPanel.addUIElement(uncommonSlider);
+        settingsPanel.addUIElement(rareLabel);
+        settingsPanel.addUIElement(rareSlider);
+        settingsPanel.addUIElement(enableStarterModificationButton);
 
         logger.info("Done loading badge Image and mod options");
+
+        logger.info("Loading card mods...");
+        new AutoAdd(modID)
+                .packageFilter("CardAugments.cardmods")
+                .any(AbstractAugment.class, (info, abstractAugment) -> {
+                    switch (abstractAugment.getModRarity()) {
+                    case COMMON:
+                        commonMods.add(abstractAugment);
+                        break;
+                    case UNCOMMON:
+                        uncommonMods.add(abstractAugment);
+                        break;
+                    case RARE:
+                        rareMods.add(abstractAugment);
+                        break;
+                }});
+        logger.info("Done loading card mods");
+
+    }
+
+    //Get the longest text so all sliders are centered
+    private float getSliderPosition (ArrayList<String> stringsToCompare) {
+        float longest = 0;
+        for (String s : stringsToCompare) {
+            longest = Math.max(longest, FontHelper.getWidth(FontHelper.charDescFont, s, 1f /Settings.scale));
+        }
+        return longest + 40f;
     }
     
     // =============== / POST-INITIALIZE/ =================
@@ -166,5 +298,27 @@ public class CardAugmentsMod implements
     // in order to avoid conflicts if any other mod uses the same ID.
     public static String makeID(String idText) {
         return getModID() + ":" + idText;
+    }
+
+    @Override
+    public void receiveEditKeywords() {
+        // Keywords on cards are supposed to be Capitalized, while in Keyword-String.json they're lowercase
+        //
+        // Multiword keywords on cards are done With_Underscores
+        //
+        // If you're using multiword keywords, the first element in your NAMES array in your keywords-strings.json has to be the same as the PROPER_NAME.
+        // That is, in Card-Strings.json you would have #yA_Long_Keyword (#y highlights the keyword in yellow).
+        // In Keyword-Strings.json you would have PROPER_NAME as A Long Keyword and the first element in NAMES be a long keyword, and the second element be a_long_keyword
+
+        Gson gson = new Gson();
+        String json = Gdx.files.internal(getModID()+"Resources/localization/"+loadLocalizationIfAvailable("CardAugments-Keyword-Strings.json")).readString(String.valueOf(StandardCharsets.UTF_8));
+        com.evacipated.cardcrawl.mod.stslib.Keyword[] keywords = gson.fromJson(json, com.evacipated.cardcrawl.mod.stslib.Keyword[].class);
+
+        if (keywords != null) {
+            for (Keyword keyword : keywords) {
+                BaseMod.addKeyword(getModID().toLowerCase(), keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
+                //  getModID().toLowerCase() makes your keyword mod specific (it won't show up in other cards that use that word)
+            }
+        }
     }
 }

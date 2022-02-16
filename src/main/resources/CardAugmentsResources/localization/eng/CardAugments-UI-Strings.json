@@ -1,8 +1,31 @@
 {
-  "YesNoFormat:Format": {
-    "TEXT": ["YES","NO","MAYBE"]
+  "CardAugments:ModConfigs": {
+    "TEXT": [
+      "Enable Card Augments",
+      "Mod percent chance (50):",
+      "Common mod weight (5):",
+      "Uncommon mod weight (3):",
+      "Rare mod weight (1):",
+      "Modify starter cards"
+    ],
+    "EXTRA_TEXT": [
+      "Card Augments",
+      "Adds randomly rolled card modifiers to card rewards. See the Mod Options if you would like to change any configurations!"
+    ]
   },
-  "YesNoFormat:ModConfigMaybe": {
-    "TEXT": ["Convert X Cost to MAYBE"]
+  "CardAugments:ExampleMod": {
+    "TEXT": ["Card text goes here if required", "Prefix text", "Suffix text"]
+  },
+  "CardAugments:EchoMod": {
+    "TEXT": [" NL cardaugments:Echo.","Echoing ", ""]
+  },
+  "CardAugments:MassiveMod": {
+    "TEXT": ["Massive ", ""]
+  },
+  "CardAugments:QuickMod": {
+    "TEXT": [" NL Draw 1 card.", "Quick ", ""]
+  },
+  "CardAugments:TinyMod": {
+    "TEXT": ["Tiny ", ""]
   }
 }
