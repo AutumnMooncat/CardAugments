@@ -35,6 +35,9 @@
   "CardAugments:GhostlyMod": {
     "TEXT": ["Ghostly ", "", "Ethereal. NL "]
   },
+  "CardAugments:GreedMod": {
+    "TEXT": ["", " of Greed", " NL If Fatal, gain %d Gold. NL Exhaust."]
+  },
   "CardAugments:MassiveMod": {
     "TEXT": ["Massive ", ""]
   },
