@@ -104,6 +104,7 @@ public class CardAugmentsMod implements
         cardAugmentsDefaultSettings.setProperty(UNCOMMON_WEIGHT, String.valueOf(uncommonWeight));
         cardAugmentsDefaultSettings.setProperty(RARE_WEIGHT, String.valueOf(rareWeight));
         cardAugmentsDefaultSettings.setProperty(MODIFY_STARTERS, Boolean.toString(modifyStarters));
+        cardAugmentsDefaultSettings.setProperty(ALLOW_ORBS, Boolean.toString(allowOrbs));
         try {
             cardAugmentsConfig = new SpireConfig(modID, FILE_NAME, cardAugmentsDefaultSettings);
             enableMods = cardAugmentsConfig.getBool(ENABLE_MODS_SETTING);
@@ -112,6 +113,7 @@ public class CardAugmentsMod implements
             uncommonWeight = cardAugmentsConfig.getInt(UNCOMMON_WEIGHT);
             rareWeight = cardAugmentsConfig.getInt(RARE_WEIGHT);
             modifyStarters = cardAugmentsConfig.getBool(MODIFY_STARTERS);
+            allowOrbs = cardAugmentsConfig.getBool(ALLOW_ORBS);
         } catch (IOException e) {
             logger.error("Card Augments SpireConfig initialization failed:");
             e.printStackTrace();
@@ -231,6 +233,15 @@ public class CardAugmentsMod implements
         });
         currentYposition -= spacingY;
 
+        //Used to allow orbs without prismatic shard
+        ModLabeledToggleButton enableAllowOrbsButton = new ModLabeledToggleButton(TEXT[6],400.0f - 40f, currentYposition - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
+                cardAugmentsConfig.getBool(ALLOW_ORBS), settingsPanel, (label) -> {}, (button) -> {
+            cardAugmentsConfig.setBool(ALLOW_ORBS, button.enabled);
+            allowOrbs = button.enabled;
+            try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
+        });
+        currentYposition -= spacingY;
+
         settingsPanel.addUIElement(enableModsButton);
         settingsPanel.addUIElement(probabilityLabel);
         settingsPanel.addUIElement(probabilitySlider);
@@ -241,6 +252,7 @@ public class CardAugmentsMod implements
         settingsPanel.addUIElement(rareLabel);
         settingsPanel.addUIElement(rareSlider);
         settingsPanel.addUIElement(enableStarterModificationButton);
+        settingsPanel.addUIElement(enableAllowOrbsButton);
 
         logger.info("Done loading badge Image and mod options");
 
