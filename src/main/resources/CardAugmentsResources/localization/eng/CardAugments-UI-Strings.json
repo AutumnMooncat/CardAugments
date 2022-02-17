@@ -64,5 +64,8 @@
   },
   "CardAugments:UnrestrictedMod": {
     "TEXT": ["Unrestricted ", "", "cardaugments:Unrestricted. NL "]
+  },
+  "CardAugments:VoidMod": {
+    "TEXT": ["Void ", "", " NL Shuffle %d *Void into your draw pile."]
   }
 }
