@@ -58,6 +58,9 @@ public class CardAugmentsMod implements
     public static final String MODIFY_STARTERS = "modifyStarters";
     public static boolean modifyStarters = false;
 
+    public static final String ALLOW_ORBS = "allowOrbs";
+    public static boolean allowOrbs = false;
+
     //Cardmod Lists
     public static final ArrayList<AbstractAugment> commonMods = new ArrayList<>();
     public static final ArrayList<AbstractAugment> uncommonMods = new ArrayList<>();
