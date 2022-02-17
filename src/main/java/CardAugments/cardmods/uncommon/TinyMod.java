@@ -27,7 +27,7 @@ public class TinyMod extends AbstractAugment {
 
     public int getDamageNerf(AbstractCard card) {
         AbstractCard upgrade = card.makeCopy();
-        card.upgrade();
+        upgrade.upgrade();
         int check = Math.max(card.baseDamage, upgrade.baseDamage);
         if (check <= 3) {
             return 1;
@@ -44,7 +44,7 @@ public class TinyMod extends AbstractAugment {
 
     public int getBlockNerf(AbstractCard card) {
         AbstractCard upgrade = card.makeCopy();
-        card.upgrade();
+        upgrade.upgrade();
         int check = Math.max(card.baseBlock, upgrade.baseBlock);
         if (check <= 3) {
             return 1;

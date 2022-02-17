@@ -25,7 +25,7 @@ public class QuickMod extends AbstractAugment {
 
     public int getDamageNerf(AbstractCard card) {
         AbstractCard upgrade = card.makeCopy();
-        card.upgrade();
+        upgrade.upgrade();
         int check = Math.max(card.baseDamage, upgrade.baseDamage);
         if (check <= 5) {
             return 1;
