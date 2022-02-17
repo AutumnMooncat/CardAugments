@@ -1,6 +1,7 @@
 package CardAugments.cardmods;
 
 import basemod.abstracts.AbstractCardModifier;
+import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.ExhaustiveField;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -27,7 +28,37 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         MAJOR_DEBUFF,
     }
 
-    public void modifyBaseStat(AbstractCard card, BuffType type, BuffScale scaling) {
+    public abstract AugmentRarity getModRarity();
+
+    public abstract boolean validCard(AbstractCard card);
+
+    @Override
+    public boolean shouldApply(AbstractCard card) {
+        if (!validCard(card)) {
+            return false;
+        }
+        AbstractCard upgradeCheck = card.makeCopy();
+        upgradeCheck.upgrade();
+        return validCard(upgradeCheck);
+    }
+
+    protected void addToBot(AbstractGameAction action) {
+        AbstractDungeon.actionManager.addToBottom(action);
+    }
+
+    protected void addToTop(AbstractGameAction action) {
+        AbstractDungeon.actionManager.addToTop(action);
+    }
+
+    public static boolean isNormalCard(AbstractCard card) {
+        return card.type != AbstractCard.CardType.CURSE && card.type != AbstractCard.CardType.STATUS;
+    }
+
+    public static boolean cardDoesntExhaust(AbstractCard card) {
+        return !card.exhaust && !card.purgeOnUse && ExhaustiveField.ExhaustiveFields.baseExhaustive.get(card) == -1 && ExhaustiveField.ExhaustiveFields.exhaustive.get(card) == -1;
+    }
+
+    public static void modifyBaseStat(AbstractCard card, BuffType type, BuffScale scaling) {
         AbstractCard upgradeCheck = card.makeCopy();
         upgradeCheck.upgrade();
         switch (type) {
@@ -55,7 +86,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         }
     }
 
-    public int getStatModification(int baseStat, BuffScale scaling) {
+    public static int getStatModification(int baseStat, BuffScale scaling) {
         switch (scaling) {
             case MAJOR_BUFF:
                 return (int) (Math.ceil(baseStat/3f) + 1);
@@ -71,31 +102,5 @@ public abstract class AbstractAugment extends AbstractCardModifier {
                 return (int) -(Math.ceil(baseStat/3f) + 1);
         }
         return 0;
-    }
-
-    public abstract AugmentRarity getModRarity();
-
-    public abstract boolean validCard(AbstractCard card);
-
-    @Override
-    public boolean shouldApply(AbstractCard card) {
-        if (!validCard(card)) {
-            return false;
-        }
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
-        return validCard(upgradeCheck);
-    }
-
-    protected void addToBot(AbstractGameAction action) {
-        AbstractDungeon.actionManager.addToBottom(action);
-    }
-
-    protected void addToTop(AbstractGameAction action) {
-        AbstractDungeon.actionManager.addToTop(action);
-    }
-
-    protected static boolean isNormalCard(AbstractCard card) {
-        return card.type == AbstractCard.CardType.ATTACK || card.type == AbstractCard.CardType.SKILL || card.type == AbstractCard.CardType.POWER;
     }
 }

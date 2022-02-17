@@ -4,7 +4,6 @@ import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import CardAugments.patches.EchoFieldPatches;
 import basemod.abstracts.AbstractCardModifier;
-import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.ExhaustiveField;
 import com.evacipated.cardcrawl.mod.stslib.patches.CommonKeywordIconsPatches;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -25,7 +24,7 @@ public class EchoMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost != -2 && isNormalCard(card) && !card.purgeOnUse && !card.exhaust && card.type != AbstractCard.CardType.POWER && (ExhaustiveField.ExhaustiveFields.baseExhaustive.get(card) == -1 || ExhaustiveField.ExhaustiveFields.exhaustive.get(card) == -1);
+        return card.cost != -2 && isNormalCard(card) && cardDoesntExhaust(card) && card.type != AbstractCard.CardType.POWER;
     }
 
     @Override
