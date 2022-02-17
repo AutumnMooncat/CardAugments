@@ -23,6 +23,9 @@
   "CardAugments:ChargedMod": {
     "TEXT": ["Charged ", "", " NL Next turn, gain [E] [E] ."]
   },
+  "CardAugments:BrutalMod": {
+    "TEXT": ["Brutal ", "", "Ethereal. NL "]
+  },
   "CardAugments:EchoMod": {
     "TEXT": ["Echoing ", "", " NL cardaugments:Echo. Purge."]
   },
