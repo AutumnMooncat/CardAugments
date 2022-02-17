@@ -12,7 +12,6 @@ public class TinyMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        super.onInitialApplication(card);
         if (card.baseDamage > 1) {
             modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MODERATE_DEBUFF);
         }

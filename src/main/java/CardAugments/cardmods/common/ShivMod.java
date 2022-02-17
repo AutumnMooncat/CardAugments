@@ -23,7 +23,6 @@ public class ShivMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        super.onInitialApplication(card);
         if (card.cardsToPreview == null) {
             card.cardsToPreview = new Shiv();
         }

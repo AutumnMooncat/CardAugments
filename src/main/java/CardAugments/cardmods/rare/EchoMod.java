@@ -17,7 +17,6 @@ public class EchoMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        super.onInitialApplication(card);
         EchoFieldPatches.EchoFields.echo.set(card, EchoFieldPatches.EchoFields.echo.get(card) + AMOUNT);
         card.purgeOnUse = true;
     }

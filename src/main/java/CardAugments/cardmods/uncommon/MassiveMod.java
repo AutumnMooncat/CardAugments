@@ -12,7 +12,6 @@ public class MassiveMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        super.onInitialApplication(card);
         if (card.baseDamage > 0) {
             modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MAJOR_BUFF);
         }

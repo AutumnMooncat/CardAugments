@@ -12,7 +12,6 @@ public class BrutalMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        super.onInitialApplication(card);
         modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MAJOR_BUFF);
         card.isEthereal = true;
     }

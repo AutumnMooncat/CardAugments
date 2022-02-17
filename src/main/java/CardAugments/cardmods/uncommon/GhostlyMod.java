@@ -12,7 +12,6 @@ public class GhostlyMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        super.onInitialApplication(card);
         modifyBaseStat(card, BuffType.BLOCK, BuffScale.MAJOR_BUFF);
         card.isEthereal = true;
     }

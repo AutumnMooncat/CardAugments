@@ -14,7 +14,6 @@ public class UnrestrictedMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        super.onInitialApplication(card);
         UnrestrictedFieldPatches.UnrestrictedField.unrestricted.set(card, true);
     }
 
