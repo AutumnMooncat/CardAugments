@@ -1,6 +1,7 @@
-package CardAugments.cardmods;
+package CardAugments.cardmods.rare;
 
 import CardAugments.CardAugmentsMod;
+import CardAugments.cardmods.AbstractAugment;
 import CardAugments.patches.UnrestrictedFieldPatches;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.cards.AbstractCard;

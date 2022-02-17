@@ -1,31 +1,31 @@
-package CardAugments.cardmods;
+package CardAugments.cardmods.uncommon;
 
 import CardAugments.CardAugmentsMod;
+import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
+import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.tempCards.Shiv;
+import com.megacrit.cardcrawl.characters.Defect;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.orbs.Lightning;
+import com.megacrit.cardcrawl.relics.PrismaticShard;
 
-public class ShivMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID("ShivMod");
+public class ElectroMod extends AbstractAugment {
+    public static final String ID = CardAugmentsMod.makeID("ElectroMod");
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
-    private static final int SHIVS = 1;
+    private static final int ORBS = 1;
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost >= 0 && card.type != AbstractCard.CardType.POWER && isNormalCard(card);
+        return orbCheck() && isNormalCard(card);
     }
 
-    @Override
-    public void onInitialApplication(AbstractCard card) {
-        super.onInitialApplication(card);
-        if (card.cardsToPreview == null) {
-            card.cardsToPreview = new Shiv();
-        }
+    public boolean orbCheck() {
+        return CardAugmentsMod.allowOrbs || AbstractDungeon.player.hasRelic(PrismaticShard.ID) || AbstractDungeon.player instanceof Defect;
     }
 
     @Override
@@ -35,22 +35,22 @@ public class ShivMod extends AbstractAugment {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + String.format(TEXT[2], SHIVS);
+        return rawDescription + String.format(TEXT[2], ORBS);
     }
 
     @Override
     public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
-        this.addToBot(new MakeTempCardInHandAction(new Shiv(), SHIVS));
+        this.addToBot(new ChannelAction(new Lightning()));
     }
 
     @Override
     public AugmentRarity getModRarity() {
-        return AugmentRarity.COMMON;
+        return AugmentRarity.UNCOMMON;
     }
 
     @Override
     public AbstractCardModifier makeCopy() {
-        return new ShivMod();
+        return new ElectroMod();
     }
 
     @Override

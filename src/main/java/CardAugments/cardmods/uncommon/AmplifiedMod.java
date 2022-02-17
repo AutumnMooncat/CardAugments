@@ -1,6 +1,7 @@
-package CardAugments.cardmods;
+package CardAugments.cardmods.uncommon;
 
 import CardAugments.CardAugmentsMod;
+import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.megacrit.cardcrawl.cards.AbstractCard;

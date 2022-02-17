@@ -1,14 +1,13 @@
-package CardAugments.cardmods;
+package CardAugments.cardmods.rare;
 
 import CardAugments.CardAugmentsMod;
+import CardAugments.cardmods.AbstractAugment;
 import CardAugments.patches.EchoFieldPatches;
-import CardAugments.util.FormatHelper;
 import basemod.abstracts.AbstractCardModifier;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.ExhaustiveField;
 import com.evacipated.cardcrawl.mod.stslib.patches.CommonKeywordIconsPatches;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.localization.LocalizedStrings;
 
 public class EchoMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID("EchoMod");

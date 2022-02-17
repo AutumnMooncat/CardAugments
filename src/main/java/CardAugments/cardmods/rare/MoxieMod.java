@@ -1,6 +1,7 @@
-package CardAugments.cardmods;
+package CardAugments.cardmods.rare;
 
 import CardAugments.CardAugmentsMod;
+import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardModifierManager;
 import com.evacipated.cardcrawl.mod.stslib.damagemods.AbstractDamageModifier;

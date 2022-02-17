@@ -1,60 +1,61 @@
-package CardAugments.cardmods;
+package CardAugments.cardmods.uncommon;
 
 import CardAugments.CardAugmentsMod;
+import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 
-public class MassiveMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID("MassiveMod");
+public class TinyMod extends AbstractAugment {
+    public static final String ID = CardAugmentsMod.makeID("TinyMod");
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     @Override
     public void onInitialApplication(AbstractCard card) {
         super.onInitialApplication(card);
-        if (card.baseDamage > 0) {
-            card.baseDamage += getDamageBuff(card);
+        if (card.baseDamage > 1) {
+            card.baseDamage -= getDamageNerf(card);
             card.damage = card.baseDamage;
         }
-        if (card.baseBlock > 0) {
-            card.baseBlock += getBlockBuff(card);
+        if (card.baseBlock > 1) {
+            card.baseBlock -= getBlockNerf(card);
             card.block = card.baseBlock;
         }
-        card.cost = card.cost + 1;
+        card.cost = card.cost - 1;
         card.costForTurn = card.cost;
     }
 
-    public int getDamageBuff(AbstractCard card) {
+    public int getDamageNerf(AbstractCard card) {
         AbstractCard upgrade = card.makeCopy();
         card.upgrade();
         int check = Math.max(card.baseDamage, upgrade.baseDamage);
         if (check <= 3) {
-            return 2;
+            return 1;
         } else if (check <= 6) {
-            return 3;
+            return 2;
         } else if (check <= 9) {
-            return 4;
+            return 3;
         } else if (check <= 12) {
-            return 5;
+            return 4;
         } else {
-            return 6;
+            return 5;
         }
     }
 
-    public int getBlockBuff(AbstractCard card) {
+    public int getBlockNerf(AbstractCard card) {
         AbstractCard upgrade = card.makeCopy();
         card.upgrade();
         int check = Math.max(card.baseBlock, upgrade.baseBlock);
         if (check <= 3) {
-            return 2;
+            return 1;
         } else if (check <= 6) {
-            return 3;
+            return 2;
         } else if (check <= 9) {
-            return 4;
+            return 3;
         } else if (check <= 12) {
-            return 5;
+            return 4;
         } else {
-            return 6;
+            return 5;
         }
     }
 
@@ -67,7 +68,7 @@ public class MassiveMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost > 0 && card.cost <= 3 && (card.baseDamage > 0 || card.baseBlock > 0);
+        return card.cost > 0 && card.cost <= 3 && (card.baseDamage > 1 || card.baseBlock > 1);
     }
 
     @Override
@@ -82,7 +83,7 @@ public class MassiveMod extends AbstractAugment {
 
     @Override
     public AbstractCardModifier makeCopy() {
-        return new MassiveMod();
+        return new TinyMod();
     }
 
     @Override
