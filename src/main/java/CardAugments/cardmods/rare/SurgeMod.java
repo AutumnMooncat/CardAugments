@@ -20,7 +20,7 @@ public class SurgeMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.rarity != AbstractCard.CardRarity.COMMON && card.cost != -2 && isNormalCard(card) && !card.purgeOnUse && !card.exhaust && card.type != AbstractCard.CardType.POWER && (ExhaustiveField.ExhaustiveFields.baseExhaustive.get(card) == -1 || ExhaustiveField.ExhaustiveFields.exhaustive.get(card) == -1);
+        return card.rarity != AbstractCard.CardRarity.BASIC && card.rarity != AbstractCard.CardRarity.COMMON && card.cost != -2 && isNormalCard(card) && !card.purgeOnUse && !card.exhaust && card.type != AbstractCard.CardType.POWER && (ExhaustiveField.ExhaustiveFields.baseExhaustive.get(card) == -1 || ExhaustiveField.ExhaustiveFields.exhaustive.get(card) == -1);
     }
 
     @Override
