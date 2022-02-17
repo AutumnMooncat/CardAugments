@@ -9,21 +9,53 @@ public class TinyMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID("TinyMod");
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
-    private static final float MULTI = 0.44f;
-
     @Override
     public void onInitialApplication(AbstractCard card) {
         super.onInitialApplication(card);
-        if (card.baseDamage > 0) {
-            card.baseDamage *= 1 - (MULTI/card.cost);
+        if (card.baseDamage > 1) {
+            card.baseDamage -= getDamageNerf(card);
             card.damage = card.baseDamage;
         }
-        if (card.baseBlock > 0) {
-            card.baseBlock *= 1 - (MULTI/card.cost);
+        if (card.baseBlock > 1) {
+            card.baseBlock -= getBlockNerf(card);
             card.block = card.baseBlock;
         }
         card.cost = card.cost - 1;
         card.costForTurn = card.cost;
+    }
+
+    public int getDamageNerf(AbstractCard card) {
+        AbstractCard upgrade = card.makeCopy();
+        card.upgrade();
+        int check = Math.max(card.baseDamage, upgrade.baseDamage);
+        if (check <= 3) {
+            return 1;
+        } else if (check <= 6) {
+            return 2;
+        } else if (check <= 9) {
+            return 3;
+        } else if (check <= 12) {
+            return 4;
+        } else {
+            return 5;
+        }
+    }
+
+    public int getBlockNerf(AbstractCard card) {
+        AbstractCard upgrade = card.makeCopy();
+        card.upgrade();
+        int check = Math.max(card.baseBlock, upgrade.baseBlock);
+        if (check <= 3) {
+            return 1;
+        } else if (check <= 6) {
+            return 2;
+        } else if (check <= 9) {
+            return 3;
+        } else if (check <= 12) {
+            return 4;
+        } else {
+            return 5;
+        }
     }
 
     @Override
@@ -35,17 +67,12 @@ public class TinyMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost > 0 && card.cost <= 3 && (card.baseDamage > 0 || card.baseBlock > 0);
+        return card.cost > 0 && card.cost <= 3 && (card.baseDamage > 1 || card.baseBlock > 1);
     }
 
     @Override
-    public String getPrefix() {
-        return TEXT[0];
-    }
-
-    @Override
-    public String getSuffix() {
-        return TEXT[1];
+    public String modifyName(String cardName, AbstractCard card) {
+        return TEXT[0] + cardName + TEXT[1];
     }
 
     @Override
