@@ -24,6 +24,7 @@ public class MoxieMod extends AbstractAugment {
     public void onInitialApplication(AbstractCard card) {
         super.onInitialApplication(card);
         DamageModifierManager.addModifier(card, new MoxieDamage(BOOST));
+        card.exhaust = true;
     }
 
     @Override
