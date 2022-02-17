@@ -21,7 +21,7 @@ public class GreedMod extends AbstractAugment {
     @Override
     public void onInitialApplication(AbstractCard card) {
         super.onInitialApplication(card);
-        DamageModifierManager.addModifier(card, new MoxieMod.MoxieDamage(GOLD));
+        DamageModifierManager.addModifier(card, new GreedDamage(GOLD));
         card.exhaust = true;
     }
 
