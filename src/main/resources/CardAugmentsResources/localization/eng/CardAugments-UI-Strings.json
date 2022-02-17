@@ -38,6 +38,9 @@
   "CardAugments:QuickMod": {
     "TEXT": ["Quick ", "", " NL Draw %d card."]
   },
+  "CardAugments:RollMod": {
+    "TEXT": ["", " and Roll", " NL Next turn, gain %d Block."]
+  },
   "CardAugments:ShivMod": {
     "TEXT": ["", " and Dagger", " NL Add %d *Shiv into your hand."]
   },
