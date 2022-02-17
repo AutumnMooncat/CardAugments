@@ -44,6 +44,9 @@
   "CardAugments:ShivMod": {
     "TEXT": ["", " and Dagger", " NL Add %d *Shiv into your hand."]
   },
+  "CardAugments:SurgeMod": {
+    "TEXT": ["", " Surge", " NL Gain %d Artifact. NL Exhaust."]
+  },
   "CardAugments:TinyMod": {
     "TEXT": ["Tiny ", ""]
   },
