@@ -18,29 +18,30 @@ public class ChargedMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        super.onInitialApplication(card);
         card.cost = card.cost + 1;
         card.costForTurn = card.cost;
     }
 
     @Override
+    public boolean shouldApply(AbstractCard card) {
+        AbstractCard upgradeCheck = card.makeCopy();
+        upgradeCheck.upgrade();
+        return card.cost == upgradeCheck.cost && card.baseMagicNumber <= upgradeCheck.baseMagicNumber && validCard(card);
+    }
+
+    @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost >= 0 && card.type != AbstractCard.CardType.POWER && isNormalCard(card);
+        return card.cost >= 0 && isNormalCard(card);
     }
 
     @Override
-    public String getPrefix() {
-        return TEXT[1];
-    }
-
-    @Override
-    public String getSuffix() {
-        return TEXT[2];
+    public String modifyName(String cardName, AbstractCard card) {
+        return TEXT[0] + cardName + TEXT[1];
     }
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + TEXT[0];
+        return rawDescription + TEXT[2];
     }
 
     @Override
