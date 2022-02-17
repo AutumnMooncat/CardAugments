@@ -29,6 +29,9 @@
   "CardAugments:ElectroMod": {
     "TEXT": ["Electro ", "", " NL Channel %d Lightning."]
   },
+  "CardAugments:GhostlyMod": {
+    "TEXT": ["Ghostly ", "", "Ethereal. NL "]
+  },
   "CardAugments:MassiveMod": {
     "TEXT": ["Massive ", ""]
   },
