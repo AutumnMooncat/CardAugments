@@ -15,7 +15,7 @@
     ]
   },
   "CardAugments:ExampleMod": {
-    "TEXT": ["Prefix name", "Suffix name", "Prefix description", "Suffix description"]
+    "TEXT": ["Prefix name", "Suffix name", "Description stuff"]
   },
   "CardAugments:AmplifiedMod": {
     "TEXT": ["Amplified ", ""]
@@ -31,6 +31,9 @@
   },
   "CardAugments:ElectroMod": {
     "TEXT": ["Electro ", "", " NL Channel %d Lightning."]
+  },
+  "CardAugments:EndlessMod": {
+    "TEXT": ["Endless ", "", " NL Whenever you draw this card, add a copy of it into your hand."]
   },
   "CardAugments:GhostlyMod": {
     "TEXT": ["Ghostly ", "", "Ethereal. NL "]
