@@ -2,11 +2,12 @@
   "CardAugments:ModConfigs": {
     "TEXT": [
       "Enable Card Augments",
-      "Mod percent chance (50):",
-      "Common mod weight (5):",
-      "Uncommon mod weight (3):",
-      "Rare mod weight (1):",
-      "Modify starter cards"
+      "Mod Percent Chance (50):",
+      "Common Mod Weight (5):",
+      "Uncommon Mod Weight (3):",
+      "Rare Mod Weight (1):",
+      "Modify Starter Sards",
+      "Allow Orb Mods Without Prismatic Shard"
     ],
     "EXTRA_TEXT": [
       "Card Augments",
