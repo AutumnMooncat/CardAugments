@@ -5,7 +5,6 @@ import basemod.abstracts.AbstractCardModifier;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.colorless.PanicButton;
-import com.megacrit.cardcrawl.cards.purple.Halt;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import javassist.ClassPool;
 import javassist.CtMethod;
@@ -17,30 +16,38 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class AmplifiedMod extends AbstractAugment {
-    private static ArrayList<String> excluded = new ArrayList<>(Arrays.asList(Halt.ID, PanicButton.ID));
+    private static final ArrayList<String> excluded = new ArrayList<>(Arrays.asList(PanicButton.ID));
     public static final String ID = CardAugmentsMod.makeID("AmplifiedMod");
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
-    private static final float MULTI = 1.6f;
-
     @Override
     public void onInitialApplication(AbstractCard card) {
-        super.onInitialApplication(card);
-        if (card.baseMagicNumber == Math.floor(card.baseMagicNumber * MULTI)) {
-            card.baseMagicNumber++;
-        } else {
-            card.baseMagicNumber *= MULTI;
-        }
+        card.baseMagicNumber += getMagicBoost(card);
         card.magicNumber = card.baseMagicNumber;
         card.cost = card.cost + 1;
         card.costForTurn = card.cost;
+    }
+
+    public int getMagicBoost(AbstractCard card) {
+        AbstractCard upgrade = card.makeCopy();
+        upgrade.upgrade();
+        int check = Math.max(card.baseMagicNumber, upgrade.baseMagicNumber);
+        if (check <= 3) {
+            return 1;
+        } else if (check <= 6) {
+            return 2;
+        } else if (check <= 9) {
+            return 3;
+        } else {
+            return 4;
+        }
     }
 
     @Override
     public boolean shouldApply(AbstractCard card) {
         AbstractCard upgradeCheck = card.makeCopy();
         upgradeCheck.upgrade();
-        return card.baseMagicNumber <= upgradeCheck.baseMagicNumber && validCard(card);
+        return card.cost == upgradeCheck.cost && card.baseMagicNumber <= upgradeCheck.baseMagicNumber && validCard(card);
     }
 
     @Override
@@ -74,13 +81,8 @@ public class AmplifiedMod extends AbstractAugment {
     }
 
     @Override
-    public String getPrefix() {
-        return TEXT[0];
-    }
-
-    @Override
-    public String getSuffix() {
-        return TEXT[1];
+    public String modifyName(String cardName, AbstractCard card) {
+        return TEXT[0] + cardName + TEXT[1];
     }
 
     @Override
