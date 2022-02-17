@@ -30,18 +30,13 @@ public class EchoMod extends AbstractAugment {
     }
 
     @Override
-    public String getPrefix() {
-        return TEXT[1];
-    }
-
-    @Override
-    public String getSuffix() {
-        return TEXT[2];
+    public String modifyName(String cardName, AbstractCard card) {
+        return TEXT[0] + cardName + TEXT[1];
     }
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + TEXT[0] + " NL " + FormatHelper.capitalize(purgeName) + LocalizedStrings.PERIOD;
+        return rawDescription + TEXT[2];// + " NL " + FormatHelper.capitalize(purgeName) + LocalizedStrings.PERIOD;
     }
 
     @Override

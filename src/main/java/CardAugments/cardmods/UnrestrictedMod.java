@@ -23,13 +23,8 @@ public class UnrestrictedMod extends AbstractAugment {
     }
 
     @Override
-    public String getPrefix() {
-        return TEXT[1];
-    }
-
-    @Override
-    public String getSuffix() {
-        return TEXT[2];
+    public String modifyName(String cardName, AbstractCard card) {
+        return TEXT[1] + cardName + TEXT[2];
     }
 
     @Override

@@ -14,30 +14,36 @@
     ]
   },
   "CardAugments:ExampleMod": {
-    "TEXT": ["Card text goes here if required", "Prefix text", "Suffix text"]
+    "TEXT": ["Prefix name", "Suffix name", "Prefix description", "Suffix description"]
   },
   "CardAugments:AmplifiedMod": {
     "TEXT": ["Amplified ", ""]
   },
   "CardAugments:ChargedMod": {
-    "TEXT": [" NL Next turn, gain [E] [E] .","Charged ", ""]
+    "TEXT": ["Charged ", "", " NL Next turn, gain [E] [E] ."]
   },
   "CardAugments:EchoMod": {
-    "TEXT": [" NL cardaugments:Echo.","Echoing ", ""]
+    "TEXT": ["Echoing ", "", " NL cardaugments:Echo. Purge."]
+  },
+  "CardAugments:ElectroMod": {
+    "TEXT": ["Electro ", "", " NL Channel %d Lightning."]
   },
   "CardAugments:MassiveMod": {
     "TEXT": ["Massive ", ""]
   },
+  "CardAugments:MoxieMod": {
+    "TEXT": ["Ritual ", "", " NL If Fatal, permanently increase this card's damage by %d. NL Exhaust."]
+  },
   "CardAugments:QuickMod": {
-    "TEXT": [" NL Draw %d card.", "Quick ", ""]
+    "TEXT": ["Quick ", "", " NL Draw %d card."]
   },
   "CardAugments:ShivMod": {
-    "TEXT": [" NL Add %d *Shiv into your hand.", "", " and Dagger"]
+    "TEXT": ["", " and Dagger", " NL Add %d *Shiv into your hand."]
   },
   "CardAugments:TinyMod": {
     "TEXT": ["Tiny ", ""]
   },
   "CardAugments:UnrestrictedMod": {
-    "TEXT": ["cardaugments:Unrestricted. NL ","Unrestricted ", ""]
+    "TEXT": ["Unrestricted ", "", "cardaugments:Unrestricted. NL "]
   }
 }

@@ -29,18 +29,13 @@ public class ShivMod extends AbstractAugment {
     }
 
     @Override
-    public String getPrefix() {
-        return TEXT[1];
-    }
-
-    @Override
-    public String getSuffix() {
-        return TEXT[2];
+    public String modifyName(String cardName, AbstractCard card) {
+        return TEXT[0] + cardName + TEXT[1];
     }
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + String.format(TEXT[0], SHIVS);
+        return rawDescription + String.format(TEXT[2], SHIVS);
     }
 
     @Override
