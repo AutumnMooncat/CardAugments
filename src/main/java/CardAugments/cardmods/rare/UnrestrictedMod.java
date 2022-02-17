@@ -25,12 +25,12 @@ public class UnrestrictedMod extends AbstractAugment {
 
     @Override
     public String modifyName(String cardName, AbstractCard card) {
-        return TEXT[1] + cardName + TEXT[2];
+        return TEXT[0] + cardName + TEXT[1];
     }
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return TEXT[0] + rawDescription;
+        return TEXT[2] + rawDescription;
     }
 
     @Override
