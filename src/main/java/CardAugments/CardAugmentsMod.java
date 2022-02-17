@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 @SpireInitializer
@@ -162,7 +163,7 @@ public class CardAugmentsMod implements
 
         //Get the longest slider text for positioning
         ArrayList<String> labelStrings = new ArrayList<>(Arrays.asList(TEXT));
-        float sliderOffset = getSliderPosition(labelStrings);
+        float sliderOffset = getSliderPosition(labelStrings.subList(1,5));
         labelStrings.clear();
         float currentYposition = 740f;
         float spacingY = 55f;
@@ -182,8 +183,8 @@ public class CardAugmentsMod implements
                 400f + sliderOffset,
                 currentYposition + 7f,
                 0, 100, cardAugmentsConfig.getInt(MOD_PROBABILITY), "%.0f", settingsPanel, slider -> {
-            cardAugmentsConfig.setInt(MOD_PROBABILITY, (int)slider.getValue());
-            modProbabilityPercent = (int)slider.getValue();
+            cardAugmentsConfig.setInt(MOD_PROBABILITY, Math.round(slider.getValue()));
+            modProbabilityPercent = Math.round(slider.getValue());
             try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
         });
         currentYposition -= spacingY;
@@ -194,8 +195,8 @@ public class CardAugmentsMod implements
                 400f + sliderOffset,
                 currentYposition + 7f,
                 1, 10, cardAugmentsConfig.getInt(COMMON_WEIGHT), "%.0f", settingsPanel, slider -> {
-            cardAugmentsConfig.setInt(COMMON_WEIGHT, (int)slider.getValue());
-            commonWeight = (int)slider.getValue();
+            cardAugmentsConfig.setInt(COMMON_WEIGHT, Math.round(slider.getValue()));
+            commonWeight = Math.round(slider.getValue());
             try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
         });
         currentYposition -= spacingY;
@@ -206,8 +207,8 @@ public class CardAugmentsMod implements
                 400f + sliderOffset,
                 currentYposition + 7f,
                 1, 10, cardAugmentsConfig.getInt(UNCOMMON_WEIGHT), "%.0f", settingsPanel, slider -> {
-            cardAugmentsConfig.setInt(UNCOMMON_WEIGHT, (int)slider.getValue());
-            uncommonWeight = (int)slider.getValue();
+            cardAugmentsConfig.setInt(UNCOMMON_WEIGHT, Math.round(slider.getValue()));
+            uncommonWeight = Math.round(slider.getValue());
             try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
         });
         currentYposition -= spacingY;
@@ -218,8 +219,8 @@ public class CardAugmentsMod implements
                 400f + sliderOffset,
                 currentYposition + 7f,
                 1, 10, cardAugmentsConfig.getInt(RARE_WEIGHT), "%.0f", settingsPanel, slider -> {
-            cardAugmentsConfig.setInt(RARE_WEIGHT, (int)slider.getValue());
-            rareWeight = (int)slider.getValue();
+            cardAugmentsConfig.setInt(RARE_WEIGHT, Math.round(slider.getValue()));
+            rareWeight = Math.round(slider.getValue());
             try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
         });
         currentYposition -= spacingY;
@@ -276,7 +277,7 @@ public class CardAugmentsMod implements
     }
 
     //Get the longest text so all sliders are centered
-    private float getSliderPosition (ArrayList<String> stringsToCompare) {
+    private float getSliderPosition (List<String> stringsToCompare) {
         float longest = 0;
         for (String s : stringsToCompare) {
             longest = Math.max(longest, FontHelper.getWidth(FontHelper.charDescFont, s, 1f /Settings.scale));
