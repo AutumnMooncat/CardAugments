@@ -18,24 +18,7 @@ public class QuickMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        super.onInitialApplication(card);
-        card.baseDamage -= getDamageNerf(card);
-        card.damage = card.baseDamage;
-    }
-
-    public int getDamageNerf(AbstractCard card) {
-        AbstractCard upgrade = card.makeCopy();
-        upgrade.upgrade();
-        int check = Math.max(card.baseDamage, upgrade.baseDamage);
-        if (check <= 5) {
-            return 1;
-        } else if (check <= 10) {
-            return 2;
-        } else if (check <= 15) {
-            return 3;
-        } else {
-            return 4;
-        }
+        modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MINOR_DEBUFF);
     }
 
     @Override

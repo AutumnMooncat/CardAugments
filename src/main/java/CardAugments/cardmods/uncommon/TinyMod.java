@@ -14,49 +14,13 @@ public class TinyMod extends AbstractAugment {
     public void onInitialApplication(AbstractCard card) {
         super.onInitialApplication(card);
         if (card.baseDamage > 1) {
-            card.baseDamage -= getDamageNerf(card);
-            card.damage = card.baseDamage;
+            modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MODERATE_DEBUFF);
         }
         if (card.baseBlock > 1) {
-            card.baseBlock -= getBlockNerf(card);
-            card.block = card.baseBlock;
+            modifyBaseStat(card, BuffType.BLOCK, BuffScale.MODERATE_DEBUFF);
         }
         card.cost = card.cost - 1;
         card.costForTurn = card.cost;
-    }
-
-    public int getDamageNerf(AbstractCard card) {
-        AbstractCard upgrade = card.makeCopy();
-        upgrade.upgrade();
-        int check = Math.max(card.baseDamage, upgrade.baseDamage);
-        if (check <= 3) {
-            return 1;
-        } else if (check <= 6) {
-            return 2;
-        } else if (check <= 9) {
-            return 3;
-        } else if (check <= 12) {
-            return 4;
-        } else {
-            return 5;
-        }
-    }
-
-    public int getBlockNerf(AbstractCard card) {
-        AbstractCard upgrade = card.makeCopy();
-        upgrade.upgrade();
-        int check = Math.max(card.baseBlock, upgrade.baseBlock);
-        if (check <= 3) {
-            return 1;
-        } else if (check <= 6) {
-            return 2;
-        } else if (check <= 9) {
-            return 3;
-        } else if (check <= 12) {
-            return 4;
-        } else {
-            return 5;
-        }
     }
 
     @Override

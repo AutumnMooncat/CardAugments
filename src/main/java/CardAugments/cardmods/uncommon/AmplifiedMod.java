@@ -23,25 +23,9 @@ public class AmplifiedMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        card.baseMagicNumber += getMagicBoost(card);
-        card.magicNumber = card.baseMagicNumber;
+        modifyBaseStat(card, BuffType.MAGIC, BuffScale.MODERATE_BUFF);
         card.cost = card.cost + 1;
         card.costForTurn = card.cost;
-    }
-
-    public int getMagicBoost(AbstractCard card) {
-        AbstractCard upgrade = card.makeCopy();
-        upgrade.upgrade();
-        int check = Math.max(card.baseMagicNumber, upgrade.baseMagicNumber);
-        if (check <= 3) {
-            return 1;
-        } else if (check <= 6) {
-            return 2;
-        } else if (check <= 9) {
-            return 3;
-        } else {
-            return 4;
-        }
     }
 
     @Override
