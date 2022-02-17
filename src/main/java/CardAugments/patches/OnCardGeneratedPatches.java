@@ -78,6 +78,16 @@ public class OnCardGeneratedPatches {
         }
     }
 
+    @SpirePatch2(clz = NeowReward.class, method = "getColorlessRewardCards")
+    public static class ModifyNeowRewardColorlessCardsPatch {
+        @SpirePostfixPatch
+        public static void patch(ArrayList<AbstractCard> __result) {
+            for (AbstractCard c : __result) {
+                rollCardAugment(c);
+            }
+        }
+    }
+
     @SpirePatch2(clz = AbstractPlayer.class, method = "initializeStarterDeck")
     public static class ModifyStarterCards {
         @SpirePostfixPatch
