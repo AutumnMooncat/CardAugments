@@ -50,6 +50,9 @@
   "CardAugments:GreedMod": {
     "TEXT": ["", " of Greed", " NL If Fatal, gain %d Gold. NL Exhaust."]
   },
+  "CardAugments:LuckyMod": {
+    "TEXT": ["Lucky ", "", " NL Scry %d."]
+  },
   "CardAugments:MassiveMod": {
     "TEXT": ["Massive ", ""]
   },
