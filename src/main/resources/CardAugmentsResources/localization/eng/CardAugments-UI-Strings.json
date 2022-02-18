@@ -20,6 +20,9 @@
   "CardAugments:AmplifiedMod": {
     "TEXT": ["Amplified ", ""]
   },
+  "CardAugments:AutoMod": {
+    "TEXT": ["Auto-", "","Autoplay. NL "," NL Draw %d card."]
+  },
   "CardAugments:BootMod": {
     "TEXT": ["Boot ", "", "Innate. NL "]
   },
