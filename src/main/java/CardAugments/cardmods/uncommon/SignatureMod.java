@@ -8,8 +8,8 @@ import com.megacrit.cardcrawl.cards.purple.SignatureMove;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
-public class PickyMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID("PickyMod");
+public class SignatureMod extends AbstractAugment {
+    public static final String ID = CardAugmentsMod.makeID("SignatureMod");
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     @Override
@@ -19,7 +19,7 @@ public class PickyMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.type == AbstractCard.CardType.ATTACK && card.baseDamage > 0 && !(card instanceof SignatureMove);
+        return card.type == AbstractCard.CardType.ATTACK && card.baseDamage > 0;
     }
 
     @Override
@@ -29,6 +29,9 @@ public class PickyMod extends AbstractAugment {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
+        if (card instanceof SignatureMove) {
+            return rawDescription;
+        }
         return TEXT[2] + rawDescription;
     }
 
@@ -49,7 +52,7 @@ public class PickyMod extends AbstractAugment {
 
     @Override
     public AbstractCardModifier makeCopy() {
-        return new PickyMod();
+        return new SignatureMod();
     }
 
     @Override
