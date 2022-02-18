@@ -50,6 +50,9 @@
   "CardAugments:MoxieMod": {
     "TEXT": ["Ritual ", "", " NL If Fatal, permanently increase this card's damage by %d. NL Exhaust."]
   },
+  "CardAugments:PickyMod": {
+    "TEXT": ["Picky ", "", "Can only be played if this is the only Attack in your hand. NL "]
+  },
   "CardAugments:PureMod": {
     "TEXT": ["Pure ", "", " NL Exhaust all Status and Curse cards in your hand."]
   },
