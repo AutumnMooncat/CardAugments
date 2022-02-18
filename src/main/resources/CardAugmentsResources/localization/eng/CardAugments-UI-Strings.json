@@ -20,6 +20,9 @@
   "CardAugments:AmplifiedMod": {
     "TEXT": ["Amplified ", ""]
   },
+  "CardAugments:BootMod": {
+    "TEXT": ["Boot ", "", "Innate. NL "]
+  },
   "CardAugments:BrutalMod": {
     "TEXT": ["Brutal ", "", "Ethereal. NL "]
   },
@@ -67,6 +70,9 @@
   },
   "CardAugments:SignatureMod": {
     "TEXT": ["Signature ", "", "Can only be played if this is the only Attack in your hand. NL "]
+  },
+  "CardAugments:StickyMod": {
+    "TEXT": ["Sticky ", "", "Retain. NL "]
   },
   "CardAugments:SurgeMod": {
     "TEXT": ["", " Surge", " NL Gain %d Artifact. NL Exhaust."]
