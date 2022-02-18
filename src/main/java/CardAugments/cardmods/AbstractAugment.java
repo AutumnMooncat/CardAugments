@@ -2,9 +2,16 @@ package CardAugments.cardmods;
 
 import basemod.abstracts.AbstractCardModifier;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.ExhaustiveField;
+import com.evacipated.cardcrawl.modthespire.Loader;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.colorless.PanicButton;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import javassist.ClassPool;
+import javassist.CtMethod;
+import javassist.expr.ExprEditor;
+import javassist.expr.FieldAccess;
+import org.apache.commons.lang3.StringUtils;
 
 public abstract class AbstractAugment extends AbstractCardModifier {
     public enum AugmentRarity {
@@ -102,5 +109,30 @@ public abstract class AbstractAugment extends AbstractCardModifier {
                 return (int) -(Math.ceil(baseStat/3f) + 1);
         }
         return 0;
+    }
+
+    private static boolean usesMagic;
+
+    public static boolean usesMagic(AbstractCard card) {
+        usesMagic = false;
+        if (card.baseMagicNumber > 0 && StringUtils.containsIgnoreCase(card.rawDescription, "!M!") && !(card instanceof PanicButton)) {
+            try {
+                ClassPool pool = Loader.getClassPool();
+                CtMethod ctClass = pool.get(card.getClass().getName()).getDeclaredMethod("use");
+
+                ctClass.instrument(new ExprEditor() {
+                    @Override
+                    public void edit(FieldAccess f) {
+
+                        if (f.getFieldName().equals("magicNumber") && !f.isWriter()) {
+                            usesMagic = true;
+                        }
+
+                    }
+                });
+
+            } catch (Exception ignored) { }
+        }
+        return usesMagic;
     }
 }
