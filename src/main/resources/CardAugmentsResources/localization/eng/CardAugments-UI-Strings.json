@@ -44,6 +44,9 @@
   "CardAugments:MassiveMod": {
     "TEXT": ["Massive ", ""]
   },
+  "CardAugments:MK2Mod": {
+    "TEXT": ["", " MK2"]
+  },
   "CardAugments:MoxieMod": {
     "TEXT": ["Ritual ", "", " NL If Fatal, permanently increase this card's damage by %d. NL Exhaust."]
   },
