@@ -6,12 +6,9 @@ import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.characters.Defect;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.orbs.Lightning;
-import com.megacrit.cardcrawl.relics.PrismaticShard;
 
 public class ElectroMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID("ElectroMod");
@@ -21,11 +18,7 @@ public class ElectroMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return orbCheck() && isNormalCard(card);
-    }
-
-    public boolean orbCheck() {
-        return CardAugmentsMod.allowOrbs || AbstractDungeon.player.hasRelic(PrismaticShard.ID) || AbstractDungeon.player instanceof Defect;
+        return allowOrbMods() && isNormalCard(card);
     }
 
     @Override

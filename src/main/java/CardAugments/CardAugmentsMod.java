@@ -12,6 +12,7 @@ import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.FontHelper;
@@ -21,10 +22,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 @SpireInitializer
 public class CardAugmentsMod implements
@@ -67,6 +65,9 @@ public class CardAugmentsMod implements
     public static final ArrayList<AbstractAugment> commonMods = new ArrayList<>();
     public static final ArrayList<AbstractAugment> uncommonMods = new ArrayList<>();
     public static final ArrayList<AbstractAugment> rareMods = new ArrayList<>();
+
+    //List of orbies
+    public static final ArrayList<AbstractPlayer.PlayerClass> ORB_CHARS = new ArrayList<>(Collections.singletonList(AbstractPlayer.PlayerClass.DEFECT));
 
 
     //This is for the in-game mod settings panel.
@@ -124,6 +125,10 @@ public class CardAugmentsMod implements
 
         logger.info("Done adding mod settings");
         
+    }
+
+    public static void registerOrbCharacter(AbstractPlayer.PlayerClass clz) {
+        ORB_CHARS.add(clz);
     }
 
     public static void setModID(String ID) {

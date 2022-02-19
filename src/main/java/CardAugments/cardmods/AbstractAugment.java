@@ -1,17 +1,24 @@
 package CardAugments.cardmods;
 
+import CardAugments.CardAugmentsMod;
 import basemod.abstracts.AbstractCardModifier;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.ExhaustiveField;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.colorless.PanicButton;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.characters.Defect;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.relics.PrismaticShard;
 import javassist.ClassPool;
 import javassist.CtMethod;
 import javassist.expr.ExprEditor;
 import javassist.expr.FieldAccess;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 public abstract class AbstractAugment extends AbstractCardModifier {
     public enum AugmentRarity {
@@ -42,6 +49,10 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     public abstract boolean validCard(AbstractCard card);
 
     public void onDamaged(AbstractCard c) {}
+
+    public void onUpgradeCheck(AbstractCard card) {}
+
+    public void updateDynvar(AbstractCard card) {}
 
     @Override
     public boolean shouldApply(AbstractCard card) {
@@ -144,7 +155,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         return usesMagic;
     }
 
-    public void onUpgradeCheck(AbstractCard card) {}
-
-    public void updateDynvar(AbstractCard card) {}
+    public static boolean allowOrbMods() {
+        return CardAugmentsMod.allowOrbs || AbstractDungeon.player.hasRelic(PrismaticShard.ID) || CardAugmentsMod.ORB_CHARS.contains(AbstractDungeon.player.chosenClass);
+    }
 }
