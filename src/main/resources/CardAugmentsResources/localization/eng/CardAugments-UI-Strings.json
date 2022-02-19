@@ -56,6 +56,9 @@
   "CardAugments:MassiveMod": {
     "TEXT": ["Massive ", ""]
   },
+  "CardAugments:MasterfulMod": {
+    "TEXT": ["Masterful ", "", " NL Costs 1 additional [E] for each time you lose HP this combat."]
+  },
   "CardAugments:MK2Mod": {
     "TEXT": ["", " MK2"]
   },
