@@ -74,6 +74,9 @@
   "CardAugments:QuickMod": {
     "TEXT": ["Quick ", "", " NL Draw %d card."]
   },
+  "CardAugments:ReshuffleMod": {
+    "TEXT": ["Sneaky ", "", " NL cardaugments:Reshuffle."]
+  },
   "CardAugments:RollMod": {
     "TEXT": ["", " and Roll", " NL Next turn, gain %d Block."]
   },
