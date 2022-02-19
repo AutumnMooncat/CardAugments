@@ -89,6 +89,9 @@
   "CardAugments:StickyMod": {
     "TEXT": ["Sticky ", "", "Retain. NL "]
   },
+  "CardAugments:StreamlinedMod": {
+    "TEXT": ["Streamlined ", "", " NL Reduce this card's cost by 1 this combat."]
+  },
   "CardAugments:SurgeMod": {
     "TEXT": ["", " Surge", " NL Gain %d Artifact. NL Exhaust."]
   },
