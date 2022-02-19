@@ -27,12 +27,14 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     }
 
     public enum BuffScale {
+        HUGE_BUFF,
         MAJOR_BUFF,
         MODERATE_BUFF,
         MINOR_BUFF,
         MINOR_DEBUFF,
         MODERATE_DEBUFF,
         MAJOR_DEBUFF,
+        HUGE_DEBUFF,
     }
 
     public abstract AugmentRarity getModRarity();
@@ -95,18 +97,22 @@ public abstract class AbstractAugment extends AbstractCardModifier {
 
     public static int getStatModification(int baseStat, BuffScale scaling) {
         switch (scaling) {
+            case HUGE_BUFF:
+                return (int) Math.ceil(baseStat/2f);
             case MAJOR_BUFF:
-                return (int) (Math.ceil(baseStat/3f) + 1);
-            case MODERATE_BUFF:
                 return (int) Math.ceil(baseStat/3f);
+            case MODERATE_BUFF:
+                return (int) Math.ceil(baseStat/4f);
             case MINOR_BUFF:
                 return (int) Math.ceil(baseStat/5f);
             case MINOR_DEBUFF:
                 return (int) -Math.ceil(baseStat/5f);
             case MODERATE_DEBUFF:
-                return (int) -Math.ceil(baseStat/3f);
+                return (int) -Math.ceil(baseStat/4f);
             case MAJOR_DEBUFF:
-                return (int) -(Math.ceil(baseStat/3f) + 1);
+                return (int) -Math.ceil(baseStat/3f);
+            case HUGE_DEBUFF:
+                return (int) -Math.ceil(baseStat/2f);
         }
         return 0;
     }
