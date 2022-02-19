@@ -4,6 +4,7 @@ import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDiscardAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.status.VoidCard;
@@ -49,7 +50,7 @@ public class VoidMod extends AbstractAugment {
 
     @Override
     public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
-        this.addToBot(new MakeTempCardInDiscardAction(new VoidCard(), VOIDS));
+        this.addToBot(new MakeTempCardInDrawPileAction(new VoidCard(), VOIDS, true, true));
     }
 
     @Override
