@@ -1,4 +1,4 @@
-package CardAugments.cardmods.rare;
+package CardAugments.cutStuff;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
