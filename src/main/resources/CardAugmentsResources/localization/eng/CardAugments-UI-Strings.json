@@ -53,6 +53,12 @@
   "CardAugments:GreedMod": {
     "TEXT": ["", " of Greed", " NL If Fatal, gain %d Gold. NL Exhaust."]
   },
+  "CardAugments:HemoMod": {
+    "TEXT": ["Hemo ", "", "Lose %d HP. NL "]
+  },
+  "CardAugments:HeavyMod": {
+    "TEXT": ["Heavy ", "", " NL Strength affects this card %d times."]
+  },
   "CardAugments:LuckyMod": {
     "TEXT": ["Lucky ", "", " NL Scry %d."]
   },
@@ -96,7 +102,7 @@
     "TEXT": ["", " Surge", " NL Gain %d Artifact. NL Exhaust."]
   },
   "CardAugments:TearMod": {
-    "TEXT": ["", " and Tear", " NL Deal %s damage to a random enemy."]
+    "TEXT": ["", " and Tear", " NL Deal !CardAugments:V! damage to a random enemy."]
   },
   "CardAugments:TinyMod": {
     "TEXT": ["Tiny ", ""]
