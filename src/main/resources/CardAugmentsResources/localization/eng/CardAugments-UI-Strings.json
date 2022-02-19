@@ -44,6 +44,9 @@
   "CardAugments:EndlessMod": {
     "TEXT": ["Endless ", "", " NL Whenever you draw this card, add a copy of it into your hand."]
   },
+  "CardAugments:ForOneMod": {
+    "TEXT": ["", " for One", " NL Move a random cost 0 card from your discard pile to your hand."]
+  },
   "CardAugments:GhostlyMod": {
     "TEXT": ["Ghostly ", "", "Ethereal. NL "]
   },
