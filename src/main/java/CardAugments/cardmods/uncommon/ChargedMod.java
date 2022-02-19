@@ -27,7 +27,7 @@ public class ChargedMod extends AbstractAugment {
     public boolean shouldApply(AbstractCard card) {
         AbstractCard upgradeCheck = card.makeCopy();
         upgradeCheck.upgrade();
-        return card.cost == upgradeCheck.cost && card.baseMagicNumber <= upgradeCheck.baseMagicNumber && validCard(card);
+        return card.cost == upgradeCheck.cost && validCard(card);
     }
 
     @Override
