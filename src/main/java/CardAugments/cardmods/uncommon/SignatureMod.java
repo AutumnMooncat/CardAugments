@@ -14,7 +14,7 @@ public class SignatureMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        modifyBaseStat(card, AbstractAugment.BuffType.DAMAGE, AbstractAugment.BuffScale.MAJOR_BUFF);
+        modifyBaseStat(card, AbstractAugment.BuffType.DAMAGE, BuffScale.HUGE_BUFF);
     }
 
     @Override
