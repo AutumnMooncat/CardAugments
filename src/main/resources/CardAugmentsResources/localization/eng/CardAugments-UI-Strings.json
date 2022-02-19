@@ -83,6 +83,9 @@
   "CardAugments:SurgeMod": {
     "TEXT": ["", " Surge", " NL Gain %d Artifact. NL Exhaust."]
   },
+  "CardAugments:TearMod": {
+    "TEXT": ["", " and Tear", " NL Deal %s damage to a random enemy."]
+  },
   "CardAugments:TinyMod": {
     "TEXT": ["Tiny ", ""]
   },
