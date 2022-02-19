@@ -31,7 +31,7 @@ public class NuclearMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return allowOrbMods() && isNormalCard(card);
+        return allowOrbMods() && isNormalCard(card) && card.rarity != AbstractCard.CardRarity.BASIC && card.rarity != AbstractCard.CardRarity.COMMON;
     }
 
     @Override
