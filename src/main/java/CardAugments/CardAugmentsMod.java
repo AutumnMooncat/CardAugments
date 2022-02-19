@@ -1,7 +1,7 @@
 package CardAugments;
 
 import CardAugments.cardmods.AbstractAugment;
-import CardAugments.util.DynamicDynamicVariableManager;
+import CardAugments.patches.ModVar;
 import CardAugments.util.TextureLoader;
 import basemod.*;
 import basemod.interfaces.*;
@@ -279,7 +279,8 @@ public class CardAugmentsMod implements
 
         logger.info("Setting up Dynamic Dynamic Variable Manager...");
 
-        BaseMod.addDynamicVariable(new DynamicDynamicVariableManager());
+        //BaseMod.addDynamicVariable(new DynamicDynamicVariableManager());
+        BaseMod.addDynamicVariable(new ModVar());
 
         logger.info("Done");
 

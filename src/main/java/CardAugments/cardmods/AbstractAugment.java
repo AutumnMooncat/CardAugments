@@ -143,4 +143,8 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         }
         return usesMagic;
     }
+
+    public void onUpgradeCheck(AbstractCard card) {}
+
+    public void updateDynvar(AbstractCard card) {}
 }
