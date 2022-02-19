@@ -1,6 +1,5 @@
 package CardAugments.damagemods;
 
-import CardAugments.cardmods.rare.GreedMod;
 import com.evacipated.cardcrawl.mod.stslib.damagemods.AbstractDamageModifier;
 import com.evacipated.cardcrawl.mod.stslib.damagemods.DamageModifierManager;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -8,6 +7,7 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.MinionPower;
+import com.megacrit.cardcrawl.vfx.GainPennyEffect;
 
 public class GreedDamage extends AbstractDamageModifier {
     int gold;
@@ -22,6 +22,9 @@ public class GreedDamage extends AbstractDamageModifier {
         if (DamageModifierManager.getInstigator(info) instanceof AbstractCard) {
             if (targetHit.currentHealth > 0 && targetHit.currentHealth - lastDamageTaken <= 0 && !targetHit.halfDead && !targetHit.hasPower(MinionPower.POWER_ID)) {
                 AbstractDungeon.player.gainGold(gold);
+                for(int i = 0; i < this.gold; ++i) {
+                    AbstractDungeon.effectList.add(new GainPennyEffect(info.owner,targetHit.hb.cX, targetHit.hb.cY, info.owner.hb.cX, info.owner.hb.cY, true));
+                }
             }
         }
     }
