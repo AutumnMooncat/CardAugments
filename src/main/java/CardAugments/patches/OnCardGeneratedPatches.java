@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.events.shrines.GremlinMatchGame;
 import com.megacrit.cardcrawl.neow.NeowReward;
 import com.megacrit.cardcrawl.screens.select.GridCardSelectScreen;
+import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 import javassist.CtBehavior;
 import mintySpire.patches.cards.betterUpdatePreview.CardFields;
 
@@ -97,6 +98,14 @@ public class OnCardGeneratedPatches {
                     rollCardAugment(c);
                 }
             }
+        }
+    }
+
+    @SpirePatch2(clz = ShowCardAndObtainEffect.class, method = SpirePatch.CONSTRUCTOR, paramtypez = {AbstractCard.class, float.class, float.class, boolean.class})
+    public static class ModifySpawnedMasterDeckCards {
+        @SpirePostfixPatch
+        public static void patch(AbstractCard ___card) {
+            rollCardAugment(___card);
         }
     }
 
