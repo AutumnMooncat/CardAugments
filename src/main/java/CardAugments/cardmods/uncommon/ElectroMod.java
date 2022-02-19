@@ -17,8 +17,13 @@ public class ElectroMod extends AbstractAugment {
     private static final int ORBS = 1;
 
     @Override
+    public void onInitialApplication(AbstractCard card) {
+        modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MODERATE_DEBUFF);
+    }
+
+    @Override
     public boolean validCard(AbstractCard card) {
-        return allowOrbMods() && isNormalCard(card);
+        return card.cost != -2 && allowOrbMods() && isNormalCard(card) && card.baseDamage > 0;
     }
 
     @Override
