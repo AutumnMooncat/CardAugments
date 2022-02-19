@@ -106,5 +106,8 @@
   },
   "CardAugments:VoidMod": {
     "TEXT": ["Void ", "", " NL Shuffle %d *Void into your draw pile."]
+  },
+  "CardAugments:WallopMod": {
+    "TEXT": ["Walloping ", "", " NL Gain Block equal to unblocked damage dealt."]
   }
 }
