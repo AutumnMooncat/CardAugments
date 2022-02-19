@@ -41,6 +41,8 @@ public abstract class AbstractAugment extends AbstractCardModifier {
 
     public abstract boolean validCard(AbstractCard card);
 
+    public void onDamaged(AbstractCard c) {}
+
     @Override
     public boolean shouldApply(AbstractCard card) {
         if (!validCard(card)) {
