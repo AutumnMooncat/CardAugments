@@ -1,6 +1,7 @@
 package CardAugments;
 
 import CardAugments.cardmods.AbstractAugment;
+import CardAugments.util.DynamicDynamicVariableManager;
 import CardAugments.util.TextureLoader;
 import basemod.*;
 import basemod.interfaces.*;
@@ -258,6 +259,7 @@ public class CardAugmentsMod implements
         logger.info("Done loading badge Image and mod options");
 
         logger.info("Loading card mods...");
+
         new AutoAdd(modID)
                 .packageFilter("CardAugments.cardmods")
                 .any(AbstractAugment.class, (info, abstractAugment) -> {
@@ -272,7 +274,14 @@ public class CardAugmentsMod implements
                         rareMods.add(abstractAugment);
                         break;
                 }});
+
         logger.info("Done loading card mods");
+
+        logger.info("Setting up Dynamic Dynamic Variable Manager...");
+
+        BaseMod.addDynamicVariable(new DynamicDynamicVariableManager());
+
+        logger.info("Done");
 
     }
 
