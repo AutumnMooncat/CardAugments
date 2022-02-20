@@ -18,11 +18,12 @@ public class ShivMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost >= 0 && card.type != AbstractCard.CardType.POWER && isNormalCard(card);
+        return card.cost != -2 && isNormalCard(card) && card.baseDamage > 1;
     }
 
     @Override
     public void onInitialApplication(AbstractCard card) {
+        modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MINOR_DEBUFF);
         if (card.cardsToPreview == null) {
             card.cardsToPreview = new Shiv();
         }
