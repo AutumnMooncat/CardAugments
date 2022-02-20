@@ -136,6 +136,20 @@ public class CardAugmentsMod implements
         ORB_CHARS.add(clz);
     }
 
+    public static void registerAugment(AbstractAugment a) {
+        switch (a.getModRarity()) {
+            case COMMON:
+                commonMods.add(a);
+                break;
+            case UNCOMMON:
+                uncommonMods.add(a);
+                break;
+            case RARE:
+                rareMods.add(a);
+                break;
+        }
+    }
+
     public static void setModID(String ID) {
         modID = ID;
     }
@@ -272,18 +286,7 @@ public class CardAugmentsMod implements
 
         new AutoAdd(modID)
                 .packageFilter("CardAugments.cardmods")
-                .any(AbstractAugment.class, (info, abstractAugment) -> {
-                    switch (abstractAugment.getModRarity()) {
-                    case COMMON:
-                        commonMods.add(abstractAugment);
-                        break;
-                    case UNCOMMON:
-                        uncommonMods.add(abstractAugment);
-                        break;
-                    case RARE:
-                        rareMods.add(abstractAugment);
-                        break;
-                }});
+                .any(AbstractAugment.class, (info, abstractAugment) -> {registerAugment(abstractAugment);});
 
         logger.info("Done loading card mods");
 
