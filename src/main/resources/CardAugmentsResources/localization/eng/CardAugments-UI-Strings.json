@@ -122,6 +122,9 @@
   "CardAugments:SurgeMod": {
     "TEXT": ["", " Surge", " NL Gain %d Artifact. NL Exhaust."]
   },
+  "CardAugments:SwivelMod": {
+    "TEXT": ["Swivelled ", "", " NL The next Attack you play costs 0."]
+  },
   "CardAugments:TearMod": {
     "TEXT": ["", " and Tear", " NL Deal !CardAugments:V! damage to a random enemy."]
   },
