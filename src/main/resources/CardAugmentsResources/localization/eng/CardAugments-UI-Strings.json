@@ -113,6 +113,9 @@
   "CardAugments:SignatureMod": {
     "TEXT": ["Signature ", "", "Can only be played if this is the only Attack in your hand. NL "]
   },
+  "CardAugments:SlipperyMod": {
+    "TEXT": ["Slippery ", "", " NL When drawn, discard this card."]
+  },
   "CardAugments:StickyMod": {
     "TEXT": ["Sticky ", "", "Retain. NL "]
   },
