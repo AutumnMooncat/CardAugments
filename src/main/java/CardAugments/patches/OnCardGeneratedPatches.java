@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.events.shrines.GremlinMatchGame;
 import com.megacrit.cardcrawl.neow.NeowReward;
+import com.megacrit.cardcrawl.relics.PandorasBox;
 import com.megacrit.cardcrawl.screens.select.GridCardSelectScreen;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 import javassist.CtBehavior;
@@ -97,6 +98,23 @@ public class OnCardGeneratedPatches {
                 for (AbstractCard c : __instance.masterDeck.group) {
                     rollCardAugment(c);
                 }
+            }
+        }
+    }
+
+    @SpirePatch2(clz = PandorasBox.class, method = "onEquip")
+    public static class ModifyPandoraCards {
+        @SpireInsertPatch(locator = Locator.class, localvars = "group")
+        public static void patch(CardGroup group) {
+            for (AbstractCard c : group.group) {
+                rollCardAugment(c);
+            }
+        }
+        private static class Locator extends SpireInsertLocator {
+            @Override
+            public int[] Locate(CtBehavior ctMethodToPatch) throws Exception {
+                Matcher finalMatcher = new Matcher.MethodCallMatcher(GridCardSelectScreen.class, "openConfirmationGrid");
+                return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
             }
         }
     }
