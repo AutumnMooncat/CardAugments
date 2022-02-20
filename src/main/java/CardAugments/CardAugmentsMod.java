@@ -1,20 +1,26 @@
 package CardAugments;
 
 import CardAugments.cardmods.AbstractAugment;
+import CardAugments.cardmods.uncommon.SanctifiedMod;
 import CardAugments.patches.ModVar;
 import CardAugments.util.TextureLoader;
 import basemod.*;
+import basemod.helpers.CardBorderGlowManager;
+import basemod.helpers.CardModifierManager;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.stslib.Keyword;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.*;
 import org.apache.logging.log4j.LogManager;
@@ -286,6 +292,23 @@ public class CardAugmentsMod implements
 
         //BaseMod.addDynamicVariable(new DynamicDynamicVariableManager());
         BaseMod.addDynamicVariable(new ModVar());
+
+        CardBorderGlowManager.addGlowInfo(new CardBorderGlowManager.GlowInfo() {
+            @Override
+            public boolean test(AbstractCard card) {
+                return CardModifierManager.modifiers(card).stream().anyMatch(m -> m.identifier(card).equals(SanctifiedMod.ID)) && SanctifiedMod.glowCheck(card);
+            }
+
+            @Override
+            public Color getColor(AbstractCard card) {
+                return Color.GOLD.cpy();
+            }
+
+            @Override
+            public String glowID() {
+                return SanctifiedMod.ID;
+            }
+        });
 
         logger.info("Done");
 

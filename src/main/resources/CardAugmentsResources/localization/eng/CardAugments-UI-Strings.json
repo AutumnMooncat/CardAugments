@@ -99,7 +99,10 @@
     "TEXT": ["Sneaky ", "", " NL cardaugments:Reshuffle."]
   },
   "CardAugments:RollMod": {
-    "TEXT": ["", " and Roll", " NL Next turn, gain %d Block."]
+    "TEXT": ["", " and Roll", " NL Next turn, gain !CardAugments:V! Block."]
+  },
+  "CardAugments:SanctifiedMod": {
+    "TEXT": ["Sanctified ", "", " NL If the last card played this combat was a Skill, draw %d cards."]
   },
   "CardAugments:SearingMod": {
     "TEXT": ["Searing ", "", " NL Can be Upgraded any number of times."]
