@@ -15,7 +15,7 @@ public class HemoMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID("HemoMod");
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
-    private static final int LOSS = 3;
+    private static final int LOSS = 2;
 
     @Override
     public void onInitialApplication(AbstractCard card) {
