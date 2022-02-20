@@ -23,8 +23,12 @@ public class TearMod extends AbstractAugment {
         super.onInitialApplication(card);
         ModVar.setVal(card, getAmount(card));
         ModVar.setBaseVal(card, getAmount(card));
-        modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MAJOR_DEBUFF);
-        modifyBaseStat(card, BuffType.BLOCK, BuffScale.MODERATE_DEBUFF);
+        if (card.baseDamage > 0) {
+            modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MAJOR_DEBUFF);
+        }
+        if (card.baseBlock > 0) {
+            modifyBaseStat(card, BuffType.BLOCK, BuffScale.MODERATE_DEBUFF);
+        }
     }
 
     @Override
