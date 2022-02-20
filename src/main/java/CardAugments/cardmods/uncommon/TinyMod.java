@@ -13,10 +13,10 @@ public class TinyMod extends AbstractAugment {
     @Override
     public void onInitialApplication(AbstractCard card) {
         if (card.baseDamage > 1) {
-            modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MODERATE_DEBUFF);
+            modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MAJOR_DEBUFF);
         }
         if (card.baseBlock > 1) {
-            modifyBaseStat(card, BuffType.BLOCK, BuffScale.MODERATE_DEBUFF);
+            modifyBaseStat(card, BuffType.BLOCK, BuffScale.MAJOR_DEBUFF);
         }
         card.cost = card.cost - 1;
         card.costForTurn = card.cost;
