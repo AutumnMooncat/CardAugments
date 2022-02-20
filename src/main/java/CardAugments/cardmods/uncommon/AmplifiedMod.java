@@ -12,7 +12,7 @@ public class AmplifiedMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        modifyBaseStat(card, BuffType.MAGIC, BuffScale.MODERATE_BUFF);
+        modifyBaseStat(card, BuffType.MAGIC, BuffScale.MAJOR_BUFF);
         card.cost = card.cost + 1;
         card.costForTurn = card.cost;
     }
