@@ -23,7 +23,7 @@ public class SearingMod extends AbstractAugment {
             upgradeCheck.upgraded = false;
             upgradeCheck.upgrade();
         }
-        return validCard(card) && (card.baseMagicNumber < upgradeCheck.baseMagicNumber || card.baseDamage < upgradeCheck.baseDamage || card.baseBlock < upgradeCheck.baseBlock);
+        return validCard(card) && ((card.baseMagicNumber < upgradeCheck.baseMagicNumber && usesMagic(upgradeCheck)) || card.baseDamage < upgradeCheck.baseDamage || card.baseBlock < upgradeCheck.baseBlock);
     }
 
     @Override
