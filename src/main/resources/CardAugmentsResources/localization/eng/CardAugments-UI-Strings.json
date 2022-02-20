@@ -80,11 +80,14 @@
   "CardAugments:MoxieMod": {
     "TEXT": ["Ritual ", "", " NL If Fatal, permanently increase this card's damage by %d. NL Exhaust."]
   },
+  "CardAugments:NoxiousMod": {
+    "TEXT": ["Noxious ", "", " NL Apply %d Poison to ALL enemies."]
+  },
   "CardAugments:NuclearMod": {
     "TEXT": ["Nuclear ", "", " NL Channel %d Plasma."]
   },
   "CardAugments:PiercingMod": {
-    "TEXT": ["Piercing ", "", " NL Ignores the target's Block."]
+    "TEXT": ["Piercing ", "", " NL Ignores Block."]
   },
   "CardAugments:PureMod": {
     "TEXT": ["Pure ", "", " NL Exhaust all Status and Curse cards in your hand."]
