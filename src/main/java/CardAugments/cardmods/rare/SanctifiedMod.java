@@ -1,4 +1,4 @@
-package CardAugments.cardmods.uncommon;
+package CardAugments.cardmods.rare;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
@@ -52,7 +52,7 @@ public class SanctifiedMod extends AbstractAugment {
 
     @Override
     public AbstractAugment.AugmentRarity getModRarity() {
-        return AbstractAugment.AugmentRarity.UNCOMMON;
+        return AbstractAugment.AugmentRarity.RARE;
     }
 
     @Override

@@ -1,20 +1,21 @@
-package CardAugments.cardmods.uncommon;
+package CardAugments.cardmods.common;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.orbs.Plasma;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.powers.EnergizedPower;
 
-public class NuclearMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID("NuclearMod");
+public class ChargedMod extends AbstractAugment {
+    public static final String ID = CardAugmentsMod.makeID("ChargedMod");
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
-    private static final int ORBS = 1;
+    private static final int NRG = 2;
 
     @Override
     public void onInitialApplication(AbstractCard card) {
@@ -31,7 +32,7 @@ public class NuclearMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return allowOrbMods() && isNormalCard(card) && card.rarity != AbstractCard.CardRarity.BASIC && card.rarity != AbstractCard.CardRarity.COMMON;
+        return card.cost >= 0 && isNormalCard(card);
     }
 
     @Override
@@ -41,22 +42,22 @@ public class NuclearMod extends AbstractAugment {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + String.format(TEXT[2], ORBS);
+        return rawDescription + TEXT[2];
     }
 
     @Override
     public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
-        this.addToBot(new ChannelAction(new Plasma()));
+        addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new EnergizedPower(AbstractDungeon.player, NRG)));
     }
 
     @Override
     public AugmentRarity getModRarity() {
-        return AugmentRarity.UNCOMMON;
+        return AugmentRarity.COMMON;
     }
 
     @Override
     public AbstractCardModifier makeCopy() {
-        return new NuclearMod();
+        return new ChargedMod();
     }
 
     @Override

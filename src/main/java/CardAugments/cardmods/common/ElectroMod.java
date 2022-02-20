@@ -1,23 +1,29 @@
-package CardAugments.cardmods.uncommon;
+package CardAugments.cardmods.common;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
+import com.megacrit.cardcrawl.actions.defect.ChannelAction;
+import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.orbs.Lightning;
 
-public class BootMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID("BootMod");
+public class ElectroMod extends AbstractAugment {
+    public static final String ID = CardAugmentsMod.makeID("ElectroMod");
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+
+    private static final int ORBS = 1;
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        card.isInnate = true;
+        modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MODERATE_DEBUFF);
     }
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return isNormalCard(card) && !card.isInnate;
+        return card.cost != -2 && allowOrbMods() && isNormalCard(card) && card.baseDamage > 0;
     }
 
     @Override
@@ -27,17 +33,22 @@ public class BootMod extends AbstractAugment {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return TEXT[2] + rawDescription;
+        return rawDescription + String.format(TEXT[2], ORBS);
+    }
+
+    @Override
+    public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
+        this.addToBot(new ChannelAction(new Lightning()));
     }
 
     @Override
     public AugmentRarity getModRarity() {
-        return AugmentRarity.UNCOMMON;
+        return AugmentRarity.COMMON;
     }
 
     @Override
     public AbstractCardModifier makeCopy() {
-        return new BootMod();
+        return new ElectroMod();
     }
 
     @Override

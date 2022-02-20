@@ -1,38 +1,29 @@
-package CardAugments.cardmods.uncommon;
+package CardAugments.cardmods.common;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.powers.EnergizedPower;
+import com.megacrit.cardcrawl.orbs.Frost;
 
-public class ChargedMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID("ChargedMod");
+public class FrostyMod extends AbstractAugment {
+    public static final String ID = CardAugmentsMod.makeID("FrostyMod");
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
-    private static final int NRG = 2;
+    private static final int ORBS = 1;
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        card.cost = card.cost + 1;
-        card.costForTurn = card.cost;
-    }
-
-    @Override
-    public boolean shouldApply(AbstractCard card) {
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
-        return card.cost == upgradeCheck.cost && validCard(card);
+        modifyBaseStat(card, BuffType.BLOCK, BuffScale.MODERATE_DEBUFF);
     }
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost >= 0 && isNormalCard(card);
+        return card.cost != -2 && allowOrbMods() && isNormalCard(card) && card.baseBlock > 0;
     }
 
     @Override
@@ -42,22 +33,22 @@ public class ChargedMod extends AbstractAugment {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + TEXT[2];
+        return rawDescription + String.format(TEXT[2], ORBS);
     }
 
     @Override
     public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
-        addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new EnergizedPower(AbstractDungeon.player, NRG)));
+        this.addToBot(new ChannelAction(new Frost()));
     }
 
     @Override
     public AugmentRarity getModRarity() {
-        return AugmentRarity.UNCOMMON;
+        return AugmentRarity.COMMON;
     }
 
     @Override
     public AbstractCardModifier makeCopy() {
-        return new ChargedMod();
+        return new FrostyMod();
     }
 
     @Override

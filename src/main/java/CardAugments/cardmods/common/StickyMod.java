@@ -1,4 +1,4 @@
-package CardAugments.cardmods.uncommon;
+package CardAugments.cardmods.common;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
@@ -6,19 +6,18 @@ import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 
-public class BrutalMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID("BrutalMod");
+public class StickyMod extends AbstractAugment {
+    public static final String ID = CardAugmentsMod.makeID("StickyMod");
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MAJOR_BUFF);
-        card.isEthereal = true;
+        card.selfRetain = true;
     }
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.baseDamage > 0 && !card.isEthereal && card.type != AbstractCard.CardType.POWER;
+        return isNormalCard(card) && !card.selfRetain;
     }
 
     @Override
@@ -33,12 +32,12 @@ public class BrutalMod extends AbstractAugment {
 
     @Override
     public AugmentRarity getModRarity() {
-        return AugmentRarity.UNCOMMON;
+        return AugmentRarity.COMMON;
     }
 
     @Override
     public AbstractCardModifier makeCopy() {
-        return new BrutalMod();
+        return new StickyMod();
     }
 
     @Override

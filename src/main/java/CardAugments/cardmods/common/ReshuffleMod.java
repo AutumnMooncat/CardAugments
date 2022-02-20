@@ -1,29 +1,23 @@
-package CardAugments.cardmods.uncommon;
+package CardAugments.cardmods.common;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
-import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.orbs.Frost;
 
-public class FrostyMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID("FrostyMod");
+public class ReshuffleMod extends AbstractAugment {
+    public static final String ID = CardAugmentsMod.makeID("ReshuffleMod");
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
-
-    private static final int ORBS = 1;
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        modifyBaseStat(card, BuffType.BLOCK, BuffScale.MODERATE_DEBUFF);
+        card.shuffleBackIntoDrawPile = true;
     }
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost != -2 && allowOrbMods() && isNormalCard(card) && card.baseBlock > 0;
+        return card.cost != -2 && isNormalCard(card) && !card.shuffleBackIntoDrawPile && cardDoesntExhaust(card);
     }
 
     @Override
@@ -33,22 +27,17 @@ public class FrostyMod extends AbstractAugment {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + String.format(TEXT[2], ORBS);
-    }
-
-    @Override
-    public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
-        this.addToBot(new ChannelAction(new Frost()));
+        return rawDescription + TEXT[2];
     }
 
     @Override
     public AugmentRarity getModRarity() {
-        return AugmentRarity.UNCOMMON;
+        return AugmentRarity.COMMON;
     }
 
     @Override
     public AbstractCardModifier makeCopy() {
-        return new FrostyMod();
+        return new ReshuffleMod();
     }
 
     @Override

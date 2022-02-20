@@ -1,4 +1,4 @@
-package CardAugments.cardmods.uncommon;
+package CardAugments.cardmods.rare;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
@@ -46,7 +46,7 @@ public class SearingMod extends AbstractAugment {
 
     @Override
     public AugmentRarity getModRarity() {
-        return AugmentRarity.UNCOMMON;
+        return AugmentRarity.RARE;
     }
 
     @Override

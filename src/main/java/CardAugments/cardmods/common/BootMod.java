@@ -1,4 +1,4 @@
-package CardAugments.cardmods.uncommon;
+package CardAugments.cardmods.common;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
@@ -6,18 +6,18 @@ import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 
-public class StickyMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID("StickyMod");
+public class BootMod extends AbstractAugment {
+    public static final String ID = CardAugmentsMod.makeID("BootMod");
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        card.selfRetain = true;
+        card.isInnate = true;
     }
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return isNormalCard(card) && !card.selfRetain;
+        return isNormalCard(card) && !card.isInnate;
     }
 
     @Override
@@ -32,12 +32,12 @@ public class StickyMod extends AbstractAugment {
 
     @Override
     public AugmentRarity getModRarity() {
-        return AugmentRarity.UNCOMMON;
+        return AugmentRarity.COMMON;
     }
 
     @Override
     public AbstractCardModifier makeCopy() {
-        return new StickyMod();
+        return new BootMod();
     }
 
     @Override

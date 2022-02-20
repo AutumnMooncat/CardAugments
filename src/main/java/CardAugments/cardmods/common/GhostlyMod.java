@@ -1,4 +1,4 @@
-package CardAugments.cardmods.uncommon;
+package CardAugments.cardmods.common;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
@@ -6,18 +6,19 @@ import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 
-public class ReshuffleMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID("ReshuffleMod");
+public class GhostlyMod extends AbstractAugment {
+    public static final String ID = CardAugmentsMod.makeID("GhostlyMod");
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        card.shuffleBackIntoDrawPile = true;
+        modifyBaseStat(card, BuffType.BLOCK, BuffScale.MAJOR_BUFF);
+        card.isEthereal = true;
     }
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost != -2 && isNormalCard(card) && !card.shuffleBackIntoDrawPile && cardDoesntExhaust(card);
+        return card.baseBlock > 0 && !card.isEthereal && card.type != AbstractCard.CardType.POWER;
     }
 
     @Override
@@ -27,17 +28,17 @@ public class ReshuffleMod extends AbstractAugment {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + TEXT[2];
+        return TEXT[2] + rawDescription;
     }
 
     @Override
     public AugmentRarity getModRarity() {
-        return AugmentRarity.UNCOMMON;
+        return AugmentRarity.COMMON;
     }
 
     @Override
     public AbstractCardModifier makeCopy() {
-        return new ReshuffleMod();
+        return new GhostlyMod();
     }
 
     @Override

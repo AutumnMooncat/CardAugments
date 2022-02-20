@@ -1,7 +1,7 @@
 package CardAugments;
 
 import CardAugments.cardmods.AbstractAugment;
-import CardAugments.cardmods.uncommon.SanctifiedMod;
+import CardAugments.cardmods.rare.SanctifiedMod;
 import CardAugments.patches.ModVar;
 import CardAugments.util.TextureLoader;
 import basemod.*;
@@ -20,7 +20,6 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.*;
 import org.apache.logging.log4j.LogManager;

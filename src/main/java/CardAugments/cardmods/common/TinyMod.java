@@ -1,21 +1,24 @@
-package CardAugments.cardmods.uncommon;
+package CardAugments.cardmods.common;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
-import com.megacrit.cardcrawl.actions.common.ReduceCostAction;
-import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 
-public class StreamlinedMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID("StreamlinedMod");
+public class TinyMod extends AbstractAugment {
+    public static final String ID = CardAugmentsMod.makeID("TinyMod");
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        card.cost = card.cost + 1;
+        if (card.baseDamage > 1) {
+            modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MAJOR_DEBUFF);
+        }
+        if (card.baseBlock > 1) {
+            modifyBaseStat(card, BuffType.BLOCK, BuffScale.MAJOR_DEBUFF);
+        }
+        card.cost = card.cost - 1;
         card.costForTurn = card.cost;
     }
 
@@ -28,7 +31,7 @@ public class StreamlinedMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost >= 1 && isNormalCard(card) && cardDoesntExhaust(card);
+        return card.cost > 0 && card.cost <= 3 && (card.baseDamage > 1 || card.baseBlock > 1);
     }
 
     @Override
@@ -37,23 +40,13 @@ public class StreamlinedMod extends AbstractAugment {
     }
 
     @Override
-    public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + TEXT[2];
-    }
-
-    @Override
-    public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
-        addToBot(new ReduceCostAction(card.uuid, 1));
-    }
-
-    @Override
     public AugmentRarity getModRarity() {
-        return AugmentRarity.UNCOMMON;
+        return AugmentRarity.COMMON;
     }
 
     @Override
     public AbstractCardModifier makeCopy() {
-        return new StreamlinedMod();
+        return new TinyMod();
     }
 
     @Override
