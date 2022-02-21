@@ -18,17 +18,17 @@ public class GloomMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        if (card.baseDamage > 0) {
+        if (card.baseDamage > 1) {
            modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MODERATE_DEBUFF);
         }
-        if (card.baseBlock > 0) {
+        if (card.baseBlock > 1) {
             modifyBaseStat(card, BuffType.BLOCK, BuffScale.MODERATE_DEBUFF);
         }
     }
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost != -2 && allowOrbMods() && isNormalCard(card) && (card.baseDamage > 0 || card.baseBlock > 0);
+        return card.cost != -2 && allowOrbMods() && (card.baseDamage > 1 || card.baseBlock > 1);
     }
 
     @Override

@@ -15,7 +15,7 @@ public class PureMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost != -2 && card.type != AbstractCard.CardType.POWER && isNormalCard(card);
+        return card.cost != -2;
     }
 
     @Override

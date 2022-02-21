@@ -12,11 +12,6 @@ public class SlipperyMod extends AbstractAugment {
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     @Override
-    public void onInitialApplication(AbstractCard card) {
-        card.isInnate = true;
-    }
-
-    @Override
     public boolean validCard(AbstractCard card) {
         return card.cost == -2;
     }

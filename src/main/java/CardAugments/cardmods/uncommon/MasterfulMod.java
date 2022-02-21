@@ -32,7 +32,7 @@ public class MasterfulMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost >= 2 && isNormalCard(card);
+        return card.cost >= 2;
     }
 
     @Override

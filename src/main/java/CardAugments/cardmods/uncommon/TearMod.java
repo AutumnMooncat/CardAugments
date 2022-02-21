@@ -23,10 +23,10 @@ public class TearMod extends AbstractAugment {
         super.onInitialApplication(card);
         ModVar.setVal(card, getAmount(card));
         ModVar.setBaseVal(card, getAmount(card));
-        if (card.baseDamage > 0) {
+        if (card.baseDamage > 1) {
             modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MAJOR_DEBUFF);
         }
-        if (card.baseBlock > 0) {
+        if (card.baseBlock > 1) {
             modifyBaseStat(card, BuffType.BLOCK, BuffScale.MODERATE_DEBUFF);
         }
     }
@@ -47,13 +47,6 @@ public class TearMod extends AbstractAugment {
     }
 
     @Override
-    public boolean shouldApply(AbstractCard card) {
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
-        return card.cost == upgradeCheck.cost && validCard(card);
-    }
-
-    @Override
     public void onApplyPowers(AbstractCard card) {
         ModVar.setBaseVal(card, getAmount(card));
         ModVar.setVal(card, CalcHelper.applyPowers(getAmount(card)));
@@ -62,7 +55,7 @@ public class TearMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost != -2 && isNormalCard(card) && (card.baseDamage > 1 || card.baseBlock > 1);
+        return card.cost != -2 && (card.baseDamage > 1 || card.baseBlock > 1);
     }
 
     @Override

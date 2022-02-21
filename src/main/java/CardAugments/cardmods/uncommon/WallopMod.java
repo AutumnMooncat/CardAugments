@@ -28,7 +28,7 @@ public class WallopMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.type == AbstractCard.CardType.ATTACK;
+        return card.cost >= 0 && card.type == AbstractCard.CardType.ATTACK;
     }
 
     @Override
