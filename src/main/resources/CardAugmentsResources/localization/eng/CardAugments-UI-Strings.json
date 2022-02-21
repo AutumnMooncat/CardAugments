@@ -128,7 +128,7 @@
   "CardAugments:StreamlinedMod": {
     "TEXT": ["Streamlined ", "", " NL Reduce this card's cost by 1 this combat."]
   },
-  "CardAugments:Supply": {
+  "CardAugments:SupplyMod": {
     "TEXT": ["Supplier ", "", " NL Next turn, gain [E] [E] ."]
   },
   "CardAugments:SurgeMod": {
