@@ -33,7 +33,7 @@
     "TEXT": ["Brutal ", "", "Ethereal. NL "]
   },
   "CardAugments:ChargedMod": {
-    "TEXT": ["Charged ", "", " NL Next turn, gain [E] [E] ."]
+    "TEXT": ["Charged ", "", " NL Next turn, gain [E] ."]
   },
   "CardAugments:ClashyMod": {
     "TEXT": ["Clashy ", "", "Can only be played if every card is your hand is an Attack. NL "]
@@ -46,6 +46,9 @@
   },
   "CardAugments:EndlessMod": {
     "TEXT": ["Endless ", "", " NL Whenever you draw this card, add a copy of it into your hand."]
+  },
+  "CardAugments:FlyingMod": {
+    "TEXT": ["Flying ", "", " NL Next turn, gain [E] ."]
   },
   "CardAugments:FrostyMod": {
     "TEXT": ["Frosty ", "", " NL Channel %d Frost."]
@@ -124,6 +127,9 @@
   },
   "CardAugments:StreamlinedMod": {
     "TEXT": ["Streamlined ", "", " NL Reduce this card's cost by 1 this combat."]
+  },
+  "CardAugments:Supply": {
+    "TEXT": ["Supplier ", "", " NL Next turn, gain [E] [E] ."]
   },
   "CardAugments:SurgeMod": {
     "TEXT": ["", " Surge", " NL Gain %d Artifact. NL Exhaust."]

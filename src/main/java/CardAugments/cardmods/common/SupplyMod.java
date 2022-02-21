@@ -11,22 +11,29 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.EnergizedBluePower;
 
-public class ChargedMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID("ChargedMod");
+public class SupplyMod extends AbstractAugment {
+    public static final String ID = CardAugmentsMod.makeID("SupplyMod");
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
-    private static final int NRG = 1;
+    private static final int NRG = 2;
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        modifyBaseStat(card, BuffType.BLOCK, BuffScale.MINOR_DEBUFF);
+        card.cost = card.cost + 1;
+        card.costForTurn = card.cost;
+    }
+
+    @Override
+    public boolean shouldApply(AbstractCard card) {
+        AbstractCard upgradeCheck = card.makeCopy();
+        upgradeCheck.upgrade();
+        return card.cost == upgradeCheck.cost && validCard(card);
     }
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost != -2 && card.baseBlock > 1;
+        return card.cost >= 0;
     }
-
     @Override
     public String modifyName(String cardName, AbstractCard card) {
         return TEXT[0] + cardName + TEXT[1];
@@ -49,7 +56,7 @@ public class ChargedMod extends AbstractAugment {
 
     @Override
     public AbstractCardModifier makeCopy() {
-        return new ChargedMod();
+        return new SupplyMod();
     }
 
     @Override
