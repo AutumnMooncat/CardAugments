@@ -23,7 +23,7 @@ public class EchoMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost != -2 && isNormalCard(card) && cardDoesntExhaust(card) && card.type != AbstractCard.CardType.POWER;
+        return card.cost != -2 && cardDoesntExhaust(card) && card.type != AbstractCard.CardType.POWER;
     }
 
     @Override

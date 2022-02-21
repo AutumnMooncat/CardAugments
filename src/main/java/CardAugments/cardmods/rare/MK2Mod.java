@@ -4,6 +4,7 @@ import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.colorless.PanicButton;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 
 public class MK2Mod extends AbstractAugment {
@@ -20,7 +21,7 @@ public class MK2Mod extends AbstractAugment {
         if (card.baseBlock > 0) {
             modifyBaseStat(card, BuffType.BLOCK, BuffScale.MINOR_BUFF);
         }
-        if (usesMagic(card) && card.baseMagicNumber <= upgradeCheck.baseMagicNumber) {
+        if (usesMagic(card) && card.baseMagicNumber <= upgradeCheck.baseMagicNumber && !(card instanceof PanicButton)) {
             modifyBaseStat(card, BuffType.MAGIC, BuffScale.MINOR_BUFF);
         }
 
@@ -35,7 +36,7 @@ public class MK2Mod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return (card.baseDamage > 0 || card.baseBlock > 0 || usesMagic(card)) && isNormalCard(card);
+        return (card.baseDamage > 0 || card.baseBlock > 0 || usesMagic(card));
     }
 
     @Override
