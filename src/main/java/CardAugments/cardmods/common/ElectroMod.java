@@ -23,7 +23,7 @@ public class ElectroMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost != -2 && allowOrbMods() && isNormalCard(card) && card.baseDamage > 0;
+        return card.cost != -2 && allowOrbMods() && card.baseDamage > 1;
     }
 
     @Override

@@ -32,7 +32,7 @@ public class ChargedMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost >= 0 && isNormalCard(card);
+        return card.cost >= 0;
     }
 
     @Override

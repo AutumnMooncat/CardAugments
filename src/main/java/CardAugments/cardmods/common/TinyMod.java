@@ -31,7 +31,7 @@ public class TinyMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost > 0 && card.cost <= 3 && (card.baseDamage > 1 || card.baseBlock > 1);
+        return card.cost > 0 && (card.baseDamage > 1 || card.baseBlock > 1);
     }
 
     @Override

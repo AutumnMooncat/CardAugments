@@ -57,7 +57,7 @@ public class RollMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost != -2 && isNormalCard(card) &&  card.baseBlock > 1;
+        return card.cost != -2 &&  card.baseBlock > 1;
     }
 
     @Override
