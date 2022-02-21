@@ -17,6 +17,9 @@
   "CardAugments:ExampleMod": {
     "TEXT": ["Prefix name", "Suffix name", "Description stuff"]
   },
+  "CardAugments:AllOutMod": {
+    "TEXT": ["All-Out ", "", " NL Discard %d card at random."]
+  },
   "CardAugments:AmplifiedMod": {
     "TEXT": ["Amplified ", ""]
   },
