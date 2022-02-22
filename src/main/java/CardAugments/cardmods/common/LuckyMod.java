@@ -6,6 +6,7 @@ import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.actions.utility.ScryAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.green.GrandFinale;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 
@@ -17,7 +18,7 @@ public class LuckyMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost != -2;
+        return card.cost != -2 && !(card instanceof GrandFinale);
     }
 
     @Override
