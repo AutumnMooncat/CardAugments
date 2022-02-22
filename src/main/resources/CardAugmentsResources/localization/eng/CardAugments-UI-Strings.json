@@ -18,7 +18,10 @@
     "TEXT": ["Prefix name", "Suffix name", "Description stuff"]
   },
   "CardAugments:AllOutMod": {
-    "TEXT": ["All-Out ", "", " NL Discard %d card at random."]
+    "TEXT": ["All-Out ", "", " NL Discard %d card at random.",
+      "Translator note: These strings are for replacing All-Out Attack's description. The first string is what to search for, the second string replaces it.",
+      " NL Discard 1 card at random.",
+      " NL Discard 2 cards at random."]
   },
   "CardAugments:AmplifiedMod": {
     "TEXT": ["Amplified ", ""]

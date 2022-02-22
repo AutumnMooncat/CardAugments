@@ -38,6 +38,9 @@ public class AllOutMod extends AbstractAugment {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
+        if (rawDescription.contains(TEXT[4])) {
+            return rawDescription.replace(TEXT[4], TEXT[5]);
+        }
         return rawDescription + String.format(TEXT[2], DISCARD);
     }
 
