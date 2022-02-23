@@ -27,7 +27,13 @@
     "TEXT": ["Amplified ", ""]
   },
   "CardAugments:AutoMod": {
-    "TEXT": ["Auto-", "","Autoplay. NL "," NL Draw %d card."]
+    "TEXT": ["Auto-", "", "Autoplay. NL "," NL Draw %d card."]
+  },
+  "CardAugments:BloodyMod": {
+    "TEXT": ["", " for Blood", "Costs 1 less [E] for each time you lost HP this combat. NL ",
+      "Translator note: These strings are for replacing Blood for Blood's description. The first string is what to search for, the second string replaces it.",
+      "Costs 1 less [R] NL for each time you lose HP this combat. NL ",
+      "Costs 2 less [R] NL for each time you lose HP this combat. NL "]
   },
   "CardAugments:BootMod": {
     "TEXT": ["Boot ", "", "Innate. NL "]
