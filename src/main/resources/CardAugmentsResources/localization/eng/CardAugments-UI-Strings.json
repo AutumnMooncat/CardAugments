@@ -95,6 +95,9 @@
   "CardAugments:NuclearMod": {
     "TEXT": ["Nuclear ", "", " NL Channel %d Plasma."]
   },
+  "CardAugments:PerniciousMod": {
+    "TEXT": ["Pernicious ", "", " NL Apply Poison equal to unblocked damage dealt."]
+  },
   "CardAugments:PiercingMod": {
     "TEXT": ["Piercing ", "", " NL Ignores Block."]
   },
