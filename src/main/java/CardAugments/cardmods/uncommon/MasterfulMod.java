@@ -10,8 +10,6 @@ public class MasterfulMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID("MasterfulMod");
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
-    private static final int NRG = 2;
-
     @Override
     public void onInitialApplication(AbstractCard card) {
         card.cost = 0;
