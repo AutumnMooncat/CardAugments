@@ -50,6 +50,9 @@
   "CardAugments:EndlessMod": {
     "TEXT": ["Endless ", "", " NL Whenever you draw this card, add a copy of it into your hand."]
   },
+  "CardAugments:ExplosiveMod": {
+    "TEXT": ["Explosive ", "", " NL At the end of 3 turns, deal %d damage to ALL enemies."]
+  },
   "CardAugments:FlyingMod": {
     "TEXT": ["Flying ", "", " NL Next turn, gain [E] ."]
   },
