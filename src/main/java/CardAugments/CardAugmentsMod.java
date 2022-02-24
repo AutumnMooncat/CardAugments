@@ -1,8 +1,9 @@
 package CardAugments;
 
 import CardAugments.cardmods.AbstractAugment;
+import CardAugments.cardmods.DynvarCarrier;
 import CardAugments.cardmods.rare.SanctifiedMod;
-import CardAugments.dynvars.ModVar;
+import CardAugments.dynvars.DynamicDynamicVariableManager;
 import CardAugments.util.TextureLoader;
 import basemod.*;
 import basemod.helpers.CardBorderGlowManager;
@@ -137,6 +138,9 @@ public class CardAugmentsMod implements
     }
 
     public static void registerAugment(AbstractAugment a) {
+        if (a instanceof DynvarCarrier) {
+            DynamicDynamicVariableManager.registerDynvarCarrier((DynvarCarrier) a);
+        }
         switch (a.getModRarity()) {
             case COMMON:
                 commonMods.add(a);
@@ -292,8 +296,7 @@ public class CardAugmentsMod implements
 
         logger.info("Setting up Dynamic Dynamic Variable Manager...");
 
-        //BaseMod.addDynamicVariable(new DynamicDynamicVariableManager());
-        BaseMod.addDynamicVariable(new ModVar());
+        BaseMod.addDynamicVariable(DynamicDynamicVariableManager.instance);
 
         CardBorderGlowManager.addGlowInfo(new CardBorderGlowManager.GlowInfo() {
             @Override

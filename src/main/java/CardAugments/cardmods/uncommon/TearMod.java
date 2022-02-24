@@ -3,7 +3,7 @@ package CardAugments.cardmods.uncommon;
 import CardAugments.CardAugmentsMod;
 import CardAugments.actions.AndTearAction;
 import CardAugments.cardmods.AbstractAugment;
-import CardAugments.dynvars.ModVar;
+import CardAugments.cardmods.DynvarCarrier;
 import CardAugments.util.CalcHelper;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
@@ -11,46 +11,47 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 
-public class TearMod extends AbstractAugment {
+public class TearMod extends AbstractAugment implements DynvarCarrier {
     public static final String ID = CardAugmentsMod.makeID("TearMod");
+    public static final String DESCRIPTION_KEY = "!"+ID+"!";
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     private static final int DAMAGE = 7;
     private static final int UPGRADE_DAMAGE = 9;
 
+    public int val;
+    public int baseVal;
+    public boolean modified;
+    public boolean upgraded;
+
+    public int getAmount(AbstractCard card) {
+        return card.upgraded ? UPGRADE_DAMAGE : DAMAGE;
+    }
+
     @Override
     public void onInitialApplication(AbstractCard card) {
-        super.onInitialApplication(card);
-        ModVar.setVal(card, getAmount(card));
-        ModVar.setBaseVal(card, getAmount(card));
         if (card.baseDamage > 1) {
             modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MAJOR_DEBUFF);
         }
         if (card.baseBlock > 1) {
             modifyBaseStat(card, BuffType.BLOCK, BuffScale.MODERATE_DEBUFF);
         }
-    }
-
-    @Override
-    public void onUpgradeCheck(AbstractCard card) {
-        ModVar.setVal(card, getAmount(card));
-        ModVar.setBaseVal(card, getAmount(card));
-        ModVar.setModified(card, card.upgraded);
-        ModVar.setUpgraded(card, card.upgraded);
+        val = getAmount(card);
+        baseVal = getAmount(card);
     }
 
     @Override
     public void updateDynvar(AbstractCard card) {
-        ModVar.setVal(card, getAmount(card));
-        ModVar.setBaseVal(card, getAmount(card));
-        ModVar.setModified(card, false);
+        val = getAmount(card);
+        baseVal = getAmount(card);
+        modified = false;
     }
 
     @Override
     public void onApplyPowers(AbstractCard card) {
-        ModVar.setBaseVal(card, getAmount(card));
-        ModVar.setVal(card, CalcHelper.applyPowers(getAmount(card)));
-        ModVar.updateModified(card);
+        baseVal = getAmount(card);
+        val = CalcHelper.applyPowers(baseVal);
+        modified = val != baseVal;
     }
 
     @Override
@@ -65,17 +66,17 @@ public class TearMod extends AbstractAugment {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + TEXT[2];
+        return rawDescription + String.format(TEXT[2], DESCRIPTION_KEY);
     }
 
     @Override
     public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
-        addToBot(new AndTearAction(ModVar.getBaseVal(card)));
+        addToBot(new AndTearAction(baseVal));
     }
 
     @Override
     public AugmentRarity getModRarity() {
-        return AugmentRarity.RARE;
+        return AugmentRarity.UNCOMMON;
     }
 
     @Override
@@ -88,7 +89,32 @@ public class TearMod extends AbstractAugment {
         return ID;
     }
 
-    public int getAmount(AbstractCard card) {
-        return card.upgraded ? UPGRADE_DAMAGE : DAMAGE;
+    @Override
+    public String key() {
+        return ID;
+    }
+
+    @Override
+    public int val(AbstractCard card) {
+        return val;
+    }
+
+    @Override
+    public int baseVal(AbstractCard card) {
+        return getAmount(card);
+    }
+
+    @Override
+    public boolean modified(AbstractCard card) {
+        return modified;
+    }
+
+    @Override
+    public boolean upgraded(AbstractCard card) {
+        val = getAmount(card);
+        baseVal = getAmount(card);
+        modified = card.upgraded;
+        upgraded = card.upgraded;
+        return upgraded;
     }
 }

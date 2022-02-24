@@ -138,7 +138,7 @@
     "TEXT": ["Sneaky ", "", " NL cardaugments:Reshuffle."]
   },
   "CardAugments:RollMod": {
-    "TEXT": ["", " and Roll", " NL Next turn, gain !CardAugments:V! Block."]
+    "TEXT": ["", " and Roll", " NL Next turn, gain %s Block."]
   },
   "CardAugments:SanctifiedMod": {
     "TEXT": ["Sanctified ", "", " NL If the last card played this combat was a Skill, draw %d cards."]
@@ -174,7 +174,7 @@
     "TEXT": ["Swivelled ", "", " NL The next Attack you play costs 0."]
   },
   "CardAugments:TearMod": {
-    "TEXT": ["", " and Tear", " NL Deal !CardAugments:V! damage to a random enemy."]
+    "TEXT": ["", " and Tear", " NL Deal %s damage to a random enemy."]
   },
   "CardAugments:TinyMod": {
     "TEXT": ["Tiny ", ""]

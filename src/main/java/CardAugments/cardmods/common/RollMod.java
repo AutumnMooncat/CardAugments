@@ -2,7 +2,7 @@ package CardAugments.cardmods.common;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
-import CardAugments.dynvars.ModVar;
+import CardAugments.cardmods.DynvarCarrier;
 import CardAugments.util.CalcHelper;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -13,12 +13,18 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.NextTurnBlockPower;
 
-public class RollMod extends AbstractAugment {
+public class RollMod extends AbstractAugment implements DynvarCarrier {
     public static final String ID = CardAugmentsMod.makeID("RollMod");
+    public static final String DESCRIPTION_KEY = "!"+ID+"!";
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     private static final int BLOCK = 4;
     private static final int UPGRADE_BLOCK = 6;
+
+    public int val;
+    public int baseVal;
+    public boolean modified;
+    public boolean upgraded;
 
     public int getAmount(AbstractCard card) {
         return card.upgraded ? UPGRADE_BLOCK : BLOCK;
@@ -26,32 +32,23 @@ public class RollMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        super.onInitialApplication(card);
-        ModVar.setVal(card, getAmount(card));
-        ModVar.setBaseVal(card, getAmount(card));
         modifyBaseStat(card, BuffType.BLOCK, BuffScale.MINOR_DEBUFF);
-    }
-
-    @Override
-    public void onUpgradeCheck(AbstractCard card) {
-        ModVar.setVal(card, getAmount(card));
-        ModVar.setBaseVal(card, getAmount(card));
-        ModVar.setModified(card, card.upgraded);
-        ModVar.setUpgraded(card, card.upgraded);
+        val = getAmount(card);
+        baseVal = getAmount(card);
     }
 
     @Override
     public void updateDynvar(AbstractCard card) {
-        ModVar.setVal(card, getAmount(card));
-        ModVar.setBaseVal(card, getAmount(card));
-        ModVar.setModified(card, false);
+        val = getAmount(card);
+        baseVal = getAmount(card);
+        modified = false;
     }
 
     @Override
     public void onApplyPowers(AbstractCard card) {
-        ModVar.setBaseVal(card, getAmount(card));
-        ModVar.setVal(card, CalcHelper.applyPowersToBlock(getAmount(card)));
-        ModVar.updateModified(card);
+        baseVal = getAmount(card);
+        val = CalcHelper.applyPowersToBlock(baseVal);
+        modified = val != baseVal;
     }
 
 
@@ -67,12 +64,12 @@ public class RollMod extends AbstractAugment {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + TEXT[2];
+        return rawDescription + String.format(TEXT[2], DESCRIPTION_KEY);
     }
 
     @Override
     public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
-        this.addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new NextTurnBlockPower(AbstractDungeon.player, ModVar.getVal(card))));
+        this.addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new NextTurnBlockPower(AbstractDungeon.player, val)));
     }
 
     @Override
@@ -88,5 +85,34 @@ public class RollMod extends AbstractAugment {
     @Override
     public String identifier(AbstractCard card) {
         return ID;
+    }
+
+    @Override
+    public String key() {
+        return ID;
+    }
+
+    @Override
+    public int val(AbstractCard card) {
+        return val;
+    }
+
+    @Override
+    public int baseVal(AbstractCard card) {
+        return getAmount(card);
+    }
+
+    @Override
+    public boolean modified(AbstractCard card) {
+        return modified;
+    }
+
+    @Override
+    public boolean upgraded(AbstractCard card) {
+        val = getAmount(card);
+        baseVal = getAmount(card);
+        modified = card.upgraded;
+        upgraded = card.upgraded;
+        return upgraded;
     }
 }
