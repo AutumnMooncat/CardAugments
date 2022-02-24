@@ -29,12 +29,7 @@ public class TearMod extends AbstractAugment implements DynvarCarrier {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        if (card.baseDamage > 1) {
-            modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MAJOR_DEBUFF);
-        }
-        if (card.baseBlock > 1) {
-            modifyBaseStat(card, BuffType.BLOCK, BuffScale.MODERATE_DEBUFF);
-        }
+        modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MAJOR_DEBUFF);
         val = getBaseVal(card);
     }
 
@@ -52,7 +47,7 @@ public class TearMod extends AbstractAugment implements DynvarCarrier {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost != -2 && (card.baseDamage > 1 || card.baseBlock > 1);
+        return card.cost != -2 && card.baseDamage > 1 && card.type == AbstractCard.CardType.ATTACK;
     }
 
     @Override
