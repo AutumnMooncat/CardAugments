@@ -3,7 +3,7 @@ package CardAugments.cardmods.uncommon;
 import CardAugments.CardAugmentsMod;
 import CardAugments.actions.AndTearAction;
 import CardAugments.cardmods.AbstractAugment;
-import CardAugments.patches.ModVar;
+import CardAugments.dynvars.ModVar;
 import CardAugments.util.CalcHelper;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;

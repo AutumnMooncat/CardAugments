@@ -1,4 +1,4 @@
-package CardAugments.patches;
+package CardAugments.dynvars;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;

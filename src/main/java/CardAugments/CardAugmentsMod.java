@@ -2,7 +2,7 @@ package CardAugments;
 
 import CardAugments.cardmods.AbstractAugment;
 import CardAugments.cardmods.rare.SanctifiedMod;
-import CardAugments.patches.ModVar;
+import CardAugments.dynvars.ModVar;
 import CardAugments.util.TextureLoader;
 import basemod.*;
 import basemod.helpers.CardBorderGlowManager;
