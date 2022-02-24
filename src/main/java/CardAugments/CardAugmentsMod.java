@@ -298,7 +298,7 @@ public class CardAugmentsMod implements
         CardBorderGlowManager.addGlowInfo(new CardBorderGlowManager.GlowInfo() {
             @Override
             public boolean test(AbstractCard card) {
-                return CardModifierManager.modifiers(card).stream().anyMatch(m -> m.identifier(card).equals(SanctifiedMod.ID)) && SanctifiedMod.glowCheck(card);
+                return CardModifierManager.modifiers(card).stream().anyMatch(m -> m instanceof AbstractAugment && ((AbstractAugment) m).glowCheck(card));
             }
 
             @Override

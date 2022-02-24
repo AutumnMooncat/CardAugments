@@ -7,6 +7,7 @@ import com.evacipated.cardcrawl.modthespire.Loader;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.colorless.PanicButton;
+import com.megacrit.cardcrawl.cards.purple.Sanctity;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.characters.Defect;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -53,6 +54,10 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     public void onUpgradeCheck(AbstractCard card) {}
 
     public void updateDynvar(AbstractCard card) {}
+
+    public boolean glowCheck(AbstractCard card) {
+        return false;
+    }
 
     @Override
     public boolean shouldApply(AbstractCard card) {

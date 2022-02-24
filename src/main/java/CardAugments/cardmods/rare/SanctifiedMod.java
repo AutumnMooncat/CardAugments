@@ -65,7 +65,7 @@ public class SanctifiedMod extends AbstractAugment {
         return ID;
     }
 
-    public static boolean glowCheck(AbstractCard card) {
+    public boolean glowCheck(AbstractCard card) {
         return !(card instanceof Sanctity) && (!AbstractDungeon.actionManager.cardsPlayedThisCombat.isEmpty() && (AbstractDungeon.actionManager.cardsPlayedThisCombat.get(AbstractDungeon.actionManager.cardsPlayedThisCombat.size() - 1)).type == AbstractCard.CardType.SKILL);
     }
 }
