@@ -22,35 +22,30 @@ public class RollMod extends AbstractAugment implements DynvarCarrier {
     private static final int UPGRADE_BLOCK = 6;
 
     public int val;
-    public int baseVal;
     public boolean modified;
     public boolean upgraded;
 
-    public int getAmount(AbstractCard card) {
+    public int getBaseVal(AbstractCard card) {
         return card.upgraded ? UPGRADE_BLOCK : BLOCK;
     }
 
     @Override
     public void onInitialApplication(AbstractCard card) {
         modifyBaseStat(card, BuffType.BLOCK, BuffScale.MINOR_DEBUFF);
-        val = getAmount(card);
-        baseVal = getAmount(card);
+        val = getBaseVal(card);
     }
 
     @Override
     public void updateDynvar(AbstractCard card) {
-        val = getAmount(card);
-        baseVal = getAmount(card);
+        val = getBaseVal(card);
         modified = false;
     }
 
     @Override
     public void onApplyPowers(AbstractCard card) {
-        baseVal = getAmount(card);
-        val = CalcHelper.applyPowersToBlock(baseVal);
-        modified = val != baseVal;
+        val = CalcHelper.applyPowersToBlock(getBaseVal(card));
+        modified = val != getBaseVal(card);
     }
-
 
     @Override
     public boolean validCard(AbstractCard card) {
@@ -99,7 +94,7 @@ public class RollMod extends AbstractAugment implements DynvarCarrier {
 
     @Override
     public int baseVal(AbstractCard card) {
-        return getAmount(card);
+        return getBaseVal(card);
     }
 
     @Override
@@ -109,8 +104,7 @@ public class RollMod extends AbstractAugment implements DynvarCarrier {
 
     @Override
     public boolean upgraded(AbstractCard card) {
-        val = getAmount(card);
-        baseVal = getAmount(card);
+        val = getBaseVal(card);
         modified = card.upgraded;
         upgraded = card.upgraded;
         return upgraded;

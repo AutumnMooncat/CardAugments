@@ -20,11 +20,10 @@ public class TearMod extends AbstractAugment implements DynvarCarrier {
     private static final int UPGRADE_DAMAGE = 9;
 
     public int val;
-    public int baseVal;
     public boolean modified;
     public boolean upgraded;
 
-    public int getAmount(AbstractCard card) {
+    public int getBaseVal(AbstractCard card) {
         return card.upgraded ? UPGRADE_DAMAGE : DAMAGE;
     }
 
@@ -36,22 +35,19 @@ public class TearMod extends AbstractAugment implements DynvarCarrier {
         if (card.baseBlock > 1) {
             modifyBaseStat(card, BuffType.BLOCK, BuffScale.MODERATE_DEBUFF);
         }
-        val = getAmount(card);
-        baseVal = getAmount(card);
+        val = getBaseVal(card);
     }
 
     @Override
     public void updateDynvar(AbstractCard card) {
-        val = getAmount(card);
-        baseVal = getAmount(card);
+        val = getBaseVal(card);
         modified = false;
     }
 
     @Override
     public void onApplyPowers(AbstractCard card) {
-        baseVal = getAmount(card);
-        val = CalcHelper.applyPowers(baseVal);
-        modified = val != baseVal;
+        val = CalcHelper.applyPowers(getBaseVal(card));
+        modified = val != getBaseVal(card);
     }
 
     @Override
@@ -71,7 +67,7 @@ public class TearMod extends AbstractAugment implements DynvarCarrier {
 
     @Override
     public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
-        addToBot(new AndTearAction(baseVal));
+        addToBot(new AndTearAction(getBaseVal(card)));
     }
 
     @Override
@@ -101,7 +97,7 @@ public class TearMod extends AbstractAugment implements DynvarCarrier {
 
     @Override
     public int baseVal(AbstractCard card) {
-        return getAmount(card);
+        return getBaseVal(card);
     }
 
     @Override
@@ -111,8 +107,7 @@ public class TearMod extends AbstractAugment implements DynvarCarrier {
 
     @Override
     public boolean upgraded(AbstractCard card) {
-        val = getAmount(card);
-        baseVal = getAmount(card);
+        val = getBaseVal(card);
         modified = card.upgraded;
         upgraded = card.upgraded;
         return upgraded;
