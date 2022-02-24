@@ -59,8 +59,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         return false;
     }
 
-    @Override
-    public boolean shouldApply(AbstractCard card) {
+    public boolean canRoll(AbstractCard card) {
         if (!validCard(card)) {
             return false;
         }

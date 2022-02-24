@@ -17,7 +17,7 @@ public class SearingMod extends AbstractAugment {
     }
 
     @Override
-    public boolean shouldApply(AbstractCard card) {
+    public boolean canRoll(AbstractCard card) {
         AbstractCard upgradeCheck = card.makeCopy();
         while (card.timesUpgraded >= upgradeCheck.timesUpgraded) {
             upgradeCheck.upgraded = false;

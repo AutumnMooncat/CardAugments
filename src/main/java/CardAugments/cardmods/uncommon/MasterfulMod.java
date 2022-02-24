@@ -17,7 +17,7 @@ public class MasterfulMod extends AbstractAugment {
     }
 
     @Override
-    public boolean shouldApply(AbstractCard card) {
+    public boolean canRoll(AbstractCard card) {
         AbstractCard upgradeCheck = card.makeCopy();
         upgradeCheck.upgrade();
         return card.cost == upgradeCheck.cost && validCard(card);

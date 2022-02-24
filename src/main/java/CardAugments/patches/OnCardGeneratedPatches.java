@@ -172,13 +172,13 @@ public class OnCardGeneratedPatches {
         ArrayList<AbstractAugment> validMods = new ArrayList<>();
         switch (rarity) {
             case COMMON:
-                validMods.addAll(CardAugmentsMod.commonMods.stream().filter(m -> m.shouldApply(c)).collect(Collectors.toCollection(ArrayList::new)));
+                validMods.addAll(CardAugmentsMod.commonMods.stream().filter(m -> m.canRoll(c)).collect(Collectors.toCollection(ArrayList::new)));
                 break;
             case UNCOMMON:
-                validMods.addAll(CardAugmentsMod.uncommonMods.stream().filter(m -> m.shouldApply(c)).collect(Collectors.toCollection(ArrayList::new)));
+                validMods.addAll(CardAugmentsMod.uncommonMods.stream().filter(m -> m.canRoll(c)).collect(Collectors.toCollection(ArrayList::new)));
                 break;
             case RARE:
-                validMods.addAll(CardAugmentsMod.rareMods.stream().filter(m -> m.shouldApply(c)).collect(Collectors.toCollection(ArrayList::new)));
+                validMods.addAll(CardAugmentsMod.rareMods.stream().filter(m -> m.canRoll(c)).collect(Collectors.toCollection(ArrayList::new)));
                 break;
         }
         if (!validMods.isEmpty()) {

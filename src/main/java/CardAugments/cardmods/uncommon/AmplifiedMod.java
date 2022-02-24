@@ -18,7 +18,7 @@ public class AmplifiedMod extends AbstractAugment {
     }
 
     @Override
-    public boolean shouldApply(AbstractCard card) {
+    public boolean canRoll(AbstractCard card) {
         AbstractCard upgradeCheck = card.makeCopy();
         upgradeCheck.upgrade();
         return card.cost == upgradeCheck.cost && card.baseMagicNumber <= upgradeCheck.baseMagicNumber && validCard(card);
