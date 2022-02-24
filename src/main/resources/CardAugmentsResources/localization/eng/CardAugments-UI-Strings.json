@@ -47,6 +47,9 @@
   "CardAugments:ClashyMod": {
     "TEXT": ["Clashy ", "", "Can only be played if every card is your hand is an Attack. NL "]
   },
+  "CardAugments:DoubtfulMod": {
+    "TEXT": ["Doubtful ", "", " NL Gain %d Weak."]
+  },
   "CardAugments:EchoMod": {
     "TEXT": ["Echoing ", "", " NL cardaugments:Echo. Purge."]
   },
@@ -58,6 +61,9 @@
   },
   "CardAugments:ExplosiveMod": {
     "TEXT": ["Explosive ", "", " NL At the end of 3 turns, deal %d damage to ALL enemies."]
+  },
+  "CardAugments:FearfulMod": {
+    "TEXT": ["Fearful ", "", " NL Gain %d Vulnerable."]
   },
   "CardAugments:FlyingMod": {
     "TEXT": ["Flying ", "", " NL Next turn, gain [E] ."]
@@ -136,6 +142,9 @@
   },
   "CardAugments:SanctifiedMod": {
     "TEXT": ["Sanctified ", "", " NL If the last card played this combat was a Skill, draw %d cards."]
+  },
+  "CardAugments:ShamefulMod": {
+    "TEXT": ["Shameful ", "", " NL Gain %d Frail."]
   },
   "CardAugments:SearingMod": {
     "TEXT": ["Searing ", "", " NL Can be Upgraded any number of times."]
