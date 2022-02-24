@@ -71,6 +71,12 @@
   "CardAugments:GhostlyMod": {
     "TEXT": ["Ghostly ", "", "Ethereal. NL "]
   },
+  "CardAugments:GlassMod": {
+    "TEXT": ["Glass ", "", " NL Decrease the damage of this card by 2 this combat.",
+      "Translator note: These strings are for replacing Glass Knife's description. The first string is what to search for, the second string replaces it.",
+      "Decrease the damage of this card by 2 this combat.",
+      "Decrease the damage of this card by 4 this combat."]
+  },
   "CardAugments:GloomMod": {
     "TEXT": ["", " and Gloom", " NL Channel %d Dark."]
   },
