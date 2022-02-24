@@ -65,6 +65,12 @@
   "CardAugments:FrostyMod": {
     "TEXT": ["Frosty ", "", " NL Channel %d Frost."]
   },
+  "CardAugments:FollowUpMod": {
+    "TEXT": ["Following ", "", " NL If the last card played this combat was an Attack, gain [E].",
+      "Translator note: These strings are for replacing Follow-Up's description. The first string is what to search for, the second string replaces it.",
+      "If the last card played this combat was an Attack, gain [W].",
+      "If the last card played this combat was an Attack, gain [W] [W]."]
+  },
   "CardAugments:ForOneMod": {
     "TEXT": ["", " for One", " NL Move a random cost 0 card from your discard pile to your hand."]
   },
