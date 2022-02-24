@@ -132,10 +132,11 @@ public class OnCardGeneratedPatches {
     }
 
     public static void rollCardAugment(AbstractCard c, int index) {
-        //Cards can only have one augment at a time
-        if (CardModifierManager.modifiers(c).stream().noneMatch(m -> m instanceof AbstractAugment) && AbstractDungeon.miscRng.random(99) < CardAugmentsMod.modProbabilityPercent) {
+        //Cards can only have one augment at a time && CardModifierManager.modifiers(c).stream().noneMatch(m -> m instanceof AbstractAugment)
+        if (!RolledModFieldPatches.RolledModField.rolled.get(c) && AbstractDungeon.miscRng.random(99) < CardAugmentsMod.modProbabilityPercent) {
             applyWeightedCardMod(c, rollRarity(), index);
         }
+        RolledModFieldPatches.RolledModField.rolled.set(c, true);
     }
 
     public static AbstractAugment.AugmentRarity rollRarity() {
