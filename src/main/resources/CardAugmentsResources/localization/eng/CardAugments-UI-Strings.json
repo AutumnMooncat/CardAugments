@@ -161,6 +161,9 @@
   "CardAugments:SlipperyMod": {
     "TEXT": ["Slippery ", "", " NL When drawn, discard this card."]
   },
+  "CardAugments:SneckoMod": {
+    "TEXT": ["Snecko ", "", "Snecko. NL "]
+  },
   "CardAugments:StickyMod": {
     "TEXT": ["Sticky ", "", "Retain. NL "]
   },
