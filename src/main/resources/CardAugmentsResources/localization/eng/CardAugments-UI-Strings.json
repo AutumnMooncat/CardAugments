@@ -159,7 +159,7 @@
     "TEXT": ["Signature ", "", "Can only be played if this is the only Attack in your hand. NL "]
   },
   "CardAugments:SlipperyMod": {
-    "TEXT": ["Slippery ", "", " NL When drawn, discard this card."]
+    "TEXT": ["Slippery ", "", " NL The first time this is drawn, discard this card."]
   },
   "CardAugments:SneckoMod": {
     "TEXT": ["Snecko ", "", "Snecko. NL "]
