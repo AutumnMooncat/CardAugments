@@ -32,6 +32,9 @@ public class SadisticMod extends AbstractAugment {
 
     @Override
     public float modifyDamage(float damage, DamageInfo.DamageType type, AbstractCard card, AbstractMonster target) {
+        if (target == null) {
+            return damage;
+        }
         return damage + (BOOST * target.powers.stream().filter(p -> p.type == AbstractPower.PowerType.DEBUFF).count());
     }
 
