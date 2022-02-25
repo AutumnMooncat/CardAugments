@@ -53,6 +53,9 @@
   "CardAugments:DoubtfulMod": {
     "TEXT": ["Doubtful ", "", " NL Gain %d Weak."]
   },
+  "CardAugments:DramaticMod": {
+    "TEXT": ["Dramatic ", "", "Innate. NL ", " NL Exhaust."]
+  },
   "CardAugments:EchoMod": {
     "TEXT": ["Echoing ", "", " NL cardaugments:Echo. Purge."]
   },
