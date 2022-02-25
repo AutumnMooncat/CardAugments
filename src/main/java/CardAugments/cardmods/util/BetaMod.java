@@ -41,7 +41,7 @@ public class BetaMod extends AbstractAugment {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return String.format(TEXT[2], FormatHelper.prefixWords(card.name, "*"));
+        return String.format(TEXT[2], FormatHelper.prefixWords(card.name, "*")) + (card.type == AbstractCard.CardType.POWER ? "" : TEXT[3]);
     }
 
     @Override

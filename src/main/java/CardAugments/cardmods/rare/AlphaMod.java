@@ -27,12 +27,18 @@ public class AlphaMod extends AbstractAugment {
         CardModifierManager.addModifier(preview, new BetaMod());
         MultiPreviewFieldPatches.addPreview(card, preview);
         InterruptUseCardFieldPatches.InterceptUseField.interceptUse.set(card, true);
-        card.exhaust = true;
+        card.isEthereal = false;
+        if (card.type != AbstractCard.CardType.POWER) {
+            card.exhaust = true;
+        }
     }
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return (card.baseDamage > 0 || card.baseBlock > 0 || usesMagic(card));
+        try {
+            return (card.baseDamage > 0 || card.baseBlock > 0 || usesMagic(card)) && card.getClass().getMethod("canUse").getDeclaringClass().equals(AbstractCard.class);
+        } catch (NoSuchMethodException ignored) {}
+        return false;
     }
 
     @Override
@@ -42,7 +48,7 @@ public class AlphaMod extends AbstractAugment {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return String.format(TEXT[2], FormatHelper.prefixWords(card.name, "*"));
+        return String.format(TEXT[2], FormatHelper.prefixWords(card.name, "*")) + (card.type == AbstractCard.CardType.POWER ? "" : TEXT[3]);
     }
 
     @Override

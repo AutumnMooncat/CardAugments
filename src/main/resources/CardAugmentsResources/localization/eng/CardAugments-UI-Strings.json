@@ -24,10 +24,10 @@
       " NL Discard 2 cards at random."]
   },
   "CardAugments:AlphaMod": {
-    "TEXT": ["Alpha ", "", "Shuffle a *Beta %s into your draw pile. NL Exhaust."]
+    "TEXT": ["Alpha ", "", "Shuffle a *Beta %s into your draw pile."," NL Exhaust."]
   },
   "CardAugments:BetaMod": {
-    "TEXT": ["Beta ", "", "Shuffle an *Omega %s into your draw pile. NL Exhaust."]
+    "TEXT": ["Beta ", "", "Shuffle an *Omega %s into your draw pile."," NL Exhaust."]
   },
   "CardAugments:OmegaMod": {
     "TEXT": ["Omega ", "", ""]
