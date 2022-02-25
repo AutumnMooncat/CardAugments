@@ -14,7 +14,6 @@ public class QuickMod extends AbstractAugment {
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     private static final int CARDS = 1;
-    private static final float DMG_MULTI = 0.8f;
 
     @Override
     public void onInitialApplication(AbstractCard card) {
