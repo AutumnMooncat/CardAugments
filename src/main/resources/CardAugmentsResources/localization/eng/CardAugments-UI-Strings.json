@@ -107,6 +107,9 @@
   "CardAugments:LuckyMod": {
     "TEXT": ["Lucky ", "", " NL Scry %d."]
   },
+  "CardAugments:MasochisticMod": {
+    "TEXT": ["Masochistic ", "", " NL Gains 3 additional Block per debuff you have."]
+  },
   "CardAugments:MassiveMod": {
     "TEXT": ["Massive ", ""]
   },
