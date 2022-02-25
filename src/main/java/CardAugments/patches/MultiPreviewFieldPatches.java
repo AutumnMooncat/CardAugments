@@ -19,16 +19,6 @@ public class MultiPreviewFieldPatches {
         public static SpireField<ArrayList<AbstractCard>> previews = new SpireField<>(ArrayList::new);
     }
 
-    @SpirePatch(clz = AbstractCard.class, method = "makeStatEquivalentCopy")
-    public static class MakeStatEquivalentCopy {
-        public static AbstractCard Postfix(AbstractCard result, AbstractCard self) {
-            for (AbstractCard c : ExtraPreviews.previews.get(self)) {
-                ExtraPreviews.previews.get(result).add(c);
-            }
-            return result;
-        }
-    }
-
     public static void addPreview(AbstractCard card, AbstractCard preview) {
         if (card != null && preview != null) {
             ExtraPreviews.previews.get(card).add(preview);
