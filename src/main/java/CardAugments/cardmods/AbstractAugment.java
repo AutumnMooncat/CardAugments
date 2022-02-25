@@ -30,14 +30,21 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     }
 
     public enum BuffScale {
-        HUGE_BUFF,
-        MAJOR_BUFF,
-        MODERATE_BUFF,
-        MINOR_BUFF,
-        MINOR_DEBUFF,
-        MODERATE_DEBUFF,
-        MAJOR_DEBUFF,
-        HUGE_DEBUFF,
+        HUGE_BUFF(3/2F),
+        MAJOR_BUFF(4/3F),
+        MODERATE_BUFF(5/4F),
+        MINOR_BUFF(6/5F),
+        MINOR_DEBUFF(-6/5F),
+        MODERATE_DEBUFF(-5/4F),
+        MAJOR_DEBUFF(-4/3F),
+        HUGE_DEBUFF(-3/2F);
+        private final float multi;
+        BuffScale(final float multi) {
+            this.multi = multi;
+        }
+        public float getMulti() {
+            return multi;
+        }
     }
 
     public abstract AugmentRarity getModRarity();
@@ -79,7 +86,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         return !card.exhaust && !card.purgeOnUse && ExhaustiveField.ExhaustiveFields.baseExhaustive.get(card) == -1 && ExhaustiveField.ExhaustiveFields.exhaustive.get(card) == -1;
     }
 
-    public static void modifyBaseStat(AbstractCard card, BuffType type, BuffScale scaling) {
+    public static void modifyBaseStat(AbstractCard card, BuffType type, float buffMulti) {
         AbstractCard deltaCheck = card.makeCopy();
         int delta = 0;
         switch (type) {
@@ -87,7 +94,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
                 delta -= deltaCheck.baseDamage;
                 deltaCheck.upgrade();
                 delta += deltaCheck.baseDamage;
-                card.baseDamage += getStatModification(Math.max(card.baseDamage, card.baseDamage + delta), scaling);
+                card.baseDamage += Math.ceil(Math.max(card.baseDamage, card.baseDamage + delta)*buffMulti);
                 if (card.baseDamage < 1) {
                     card.baseDamage = 1;
                 }
@@ -97,7 +104,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
                 delta -= deltaCheck.baseBlock;
                 deltaCheck.upgrade();
                 delta += deltaCheck.baseBlock;
-                card.baseBlock += getStatModification(Math.max(card.baseBlock, card.baseBlock + delta), scaling);
+                card.baseBlock += Math.ceil(Math.max(card.baseBlock, card.baseBlock + delta)*buffMulti);
                 if (card.baseBlock < 1) {
                     card.baseBlock = 1;
                 }
@@ -107,7 +114,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
                 delta -= deltaCheck.baseMagicNumber;
                 deltaCheck.upgrade();
                 delta += deltaCheck.baseMagicNumber;
-                card.baseMagicNumber += getStatModification(Math.max(card.baseMagicNumber, card.baseMagicNumber + delta), scaling);
+                card.baseMagicNumber += Math.ceil(Math.max(card.baseMagicNumber, card.baseMagicNumber + delta)*buffMulti);
                 if (card.baseMagicNumber < 1) {
                     card.baseMagicNumber = 1;
                 }
@@ -116,26 +123,8 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         }
     }
 
-    public static int getStatModification(int baseStat, BuffScale scaling) {
-        switch (scaling) {
-            case HUGE_BUFF:
-                return (int) Math.ceil(baseStat/2f);
-            case MAJOR_BUFF:
-                return (int) Math.ceil(baseStat/3f);
-            case MODERATE_BUFF:
-                return (int) Math.ceil(baseStat/4f);
-            case MINOR_BUFF:
-                return (int) Math.ceil(baseStat/5f);
-            case MINOR_DEBUFF:
-                return (int) -Math.ceil(baseStat/5f);
-            case MODERATE_DEBUFF:
-                return (int) -Math.ceil(baseStat/4f);
-            case MAJOR_DEBUFF:
-                return (int) -Math.ceil(baseStat/3f);
-            case HUGE_DEBUFF:
-                return (int) -Math.ceil(baseStat/2f);
-        }
-        return 0;
+    public static void modifyBaseStat(AbstractCard card, BuffType type, BuffScale scaling) {
+        modifyBaseStat(card, type, scaling.getMulti());
     }
 
     private static boolean usesMagic;

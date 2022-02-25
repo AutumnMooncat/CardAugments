@@ -17,22 +17,13 @@ public class OmegaMod extends AbstractAugment {
         AbstractCard upgradeCheck = card.makeCopy();
         upgradeCheck.upgrade();
         if (card.baseDamage > 0) {
-            modifyBaseStat(card, BuffType.DAMAGE, BuffScale.HUGE_BUFF);
-            modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MAJOR_BUFF);
-            modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MODERATE_BUFF);
-            modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MINOR_BUFF);
+            modifyBaseStat(card, BuffType.DAMAGE, 3F);
         }
         if (card.baseBlock > 0) {
-            modifyBaseStat(card, BuffType.BLOCK, BuffScale.HUGE_BUFF);
-            modifyBaseStat(card, BuffType.BLOCK, BuffScale.MAJOR_BUFF);
-            modifyBaseStat(card, BuffType.BLOCK, BuffScale.MODERATE_BUFF);
-            modifyBaseStat(card, BuffType.BLOCK, BuffScale.MINOR_BUFF);
+            modifyBaseStat(card, BuffType.BLOCK, 3F);
         }
         if (usesMagic(card) && card.baseMagicNumber <= upgradeCheck.baseMagicNumber && !(card instanceof PanicButton)) {
-            modifyBaseStat(card, BuffType.MAGIC, BuffScale.HUGE_BUFF);
-            modifyBaseStat(card, BuffType.MAGIC, BuffScale.MAJOR_BUFF);
-            modifyBaseStat(card, BuffType.MAGIC, BuffScale.MODERATE_BUFF);
-            modifyBaseStat(card, BuffType.MAGIC, BuffScale.MINOR_BUFF);
+            modifyBaseStat(card, BuffType.MAGIC, 3F);
         }
         InterruptUseCardFieldPatches.InterceptUseField.interceptUse.set(card, false);
     }
