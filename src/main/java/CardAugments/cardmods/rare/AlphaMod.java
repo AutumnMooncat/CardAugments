@@ -3,7 +3,6 @@ package CardAugments.cardmods.rare;
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import CardAugments.cardmods.util.BetaMod;
-import CardAugments.cardmods.util.OmegaMod;
 import CardAugments.patches.InterruptUseCardFieldPatches;
 import CardAugments.patches.MultiPreviewFieldPatches;
 import CardAugments.util.FormatHelper;
@@ -24,12 +23,9 @@ public class AlphaMod extends AbstractAugment {
     @Override
     public void onInitialApplication(AbstractCard card) {
         AbstractCard preview = card.makeStatEquivalentCopy();
-        //AbstractCard preview2 = card.makeStatEquivalentCopy();
         inherentHack = false;
         CardModifierManager.addModifier(preview, new BetaMod());
-        //CardModifierManager.addModifier(preview2, new OmegaMod());
         MultiPreviewFieldPatches.addPreview(card, preview);
-        //MultiPreviewFieldPatches.addPreview(card, preview2);
         InterruptUseCardFieldPatches.InterceptUseField.interceptUse.set(card, true);
         card.exhaust = true;
     }
