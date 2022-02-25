@@ -19,7 +19,8 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     public enum AugmentRarity {
         COMMON,
         UNCOMMON,
-        RARE
+        RARE,
+        SPECIAL
     }
 
     public enum BuffType {
