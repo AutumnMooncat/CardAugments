@@ -80,25 +80,34 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     }
 
     public static void modifyBaseStat(AbstractCard card, BuffType type, BuffScale scaling) {
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
+        AbstractCard deltaCheck = card.makeCopy();
+        int delta = 0;
         switch (type) {
             case DAMAGE:
-                card.baseDamage += getStatModification(Math.max(card.baseDamage, upgradeCheck.baseDamage), scaling);
+                delta -= deltaCheck.baseDamage;
+                deltaCheck.upgrade();
+                delta += deltaCheck.baseDamage;
+                card.baseDamage += getStatModification(Math.max(card.baseDamage, card.baseDamage + delta), scaling);
                 if (card.baseDamage < 1) {
                     card.baseDamage = 1;
                 }
                 card.damage = card.baseDamage;
                 break;
             case BLOCK:
-                card.baseBlock += getStatModification(Math.max(card.baseBlock, upgradeCheck.baseBlock), scaling);
+                delta -= deltaCheck.baseBlock;
+                deltaCheck.upgrade();
+                delta += deltaCheck.baseBlock;
+                card.baseBlock += getStatModification(Math.max(card.baseBlock, card.baseBlock + delta), scaling);
                 if (card.baseBlock < 1) {
                     card.baseBlock = 1;
                 }
                 card.block = card.baseBlock;
                 break;
             case MAGIC:
-                card.baseMagicNumber += getStatModification(Math.max(card.baseMagicNumber, upgradeCheck.baseMagicNumber), scaling);
+                delta -= deltaCheck.baseMagicNumber;
+                deltaCheck.upgrade();
+                delta += deltaCheck.baseMagicNumber;
+                card.baseMagicNumber += getStatModification(Math.max(card.baseMagicNumber, card.baseMagicNumber + delta), scaling);
                 if (card.baseMagicNumber < 1) {
                     card.baseMagicNumber = 1;
                 }
