@@ -47,6 +47,9 @@
   "CardAugments:ClashyMod": {
     "TEXT": ["Clashy ", "", "Can only be played if every card is your hand is an Attack. NL "]
   },
+  "CardAugments:CultistMod": {
+    "TEXT": ["Cultist's ", "", " NL Gain Strength equal to the cost of the last card played this combat."]
+  },
   "CardAugments:DoubtfulMod": {
     "TEXT": ["Doubtful ", "", " NL Gain %d Weak."]
   },
