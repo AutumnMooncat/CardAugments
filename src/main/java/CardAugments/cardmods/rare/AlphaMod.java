@@ -11,8 +11,10 @@ import basemod.helpers.CardModifierManager;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class AlphaMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID("AlphaMod");
@@ -36,7 +38,7 @@ public class AlphaMod extends AbstractAugment {
     @Override
     public boolean validCard(AbstractCard card) {
         try {
-            return (card.baseDamage > 0 || card.baseBlock > 0 || usesMagic(card)) && card.getClass().getMethod("canUse").getDeclaringClass().equals(AbstractCard.class);
+            return (card.baseDamage > 0 || card.baseBlock > 0 || usesMagic(card)) && card.getClass().getMethod("canUse", AbstractPlayer.class, AbstractMonster.class).getDeclaringClass().equals(AbstractCard.class);
         } catch (NoSuchMethodException ignored) {}
         return false;
     }
