@@ -26,7 +26,10 @@ public class BetaMod extends AbstractAugment {
         CardModifierManager.addModifier(preview, new OmegaMod());
         MultiPreviewFieldPatches.addPreview(card, preview);
         InterruptUseCardFieldPatches.InterceptUseField.interceptUse.set(card, true);
-        card.exhaust = true;
+        card.isEthereal = false;
+        if (card.type != AbstractCard.CardType.POWER) {
+            card.exhaust = true;
+        }
     }
 
     @Override
