@@ -81,7 +81,7 @@
     "TEXT": ["", " for One", " NL Move a random cost 0 card from your discard pile to your hand."]
   },
   "CardAugments:FusedMod": {
-    "TEXT": ["Fused ", "", " NL Cannot be upgraded."]
+    "TEXT": ["Fused ", "", " NL Cannot be Upgraded."]
   },
   "CardAugments:GhostlyMod": {
     "TEXT": ["Ghostly ", "", "Ethereal. NL "]
