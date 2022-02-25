@@ -143,6 +143,9 @@
   "CardAugments:RollMod": {
     "TEXT": ["", " and Roll", " NL Next turn, gain %s Block."]
   },
+  "CardAugments:SadisticMod": {
+    "TEXT": ["Sadistic ", "", " NL Deals %d additional damage per debuff on the enemy."]
+  },
   "CardAugments:SanctifiedMod": {
     "TEXT": ["Sanctified ", "", " NL If the last card played this combat was a Skill, draw %d cards."]
   },
