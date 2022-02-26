@@ -102,11 +102,11 @@ public abstract class AbstractAugment extends AbstractCardModifier {
                     deltaCheck.upgrade();
                 }
                 discrepancy = card.baseDamage - deltaCheck.baseDamage; //Determine the difference in damage. This can be caused by calling modifyBaseStat more than once
-                baseVal += discrepancy; //Add this discrepancy to our base val. This now stores what an upgraded proper copy of our card would have
+                baseVal += discrepancy; //Add this discrepancy to our base val. This now stores what a non-upgraded proper copy of our card would have
                 if (deltaCheck.timesUpgraded == 0) { //If we didn't actually upgrade the card, we need to do so to see its upgraded value
                     deltaCheck.upgrade();
                 }
-                upgradeVal = deltaCheck.baseDamage + discrepancy; //Determine what the upgraded value of our proper copy would be. We again add the discrepancy with our real card
+                upgradeVal = deltaCheck.baseDamage + discrepancy; //Determine what the upgraded value of a proper copy would be. We again add the discrepancy with our real card
                 card.baseDamage += Math.ceil(Math.max(baseVal, upgradeVal)*buffMulti); //We need to compare upgraded and not upgraded in case someone makes a card that lowers the value on upgrade
                 if (card.baseDamage < 1) {
                     card.baseDamage = 1;
