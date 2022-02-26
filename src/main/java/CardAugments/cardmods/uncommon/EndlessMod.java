@@ -11,6 +11,8 @@ public class EndlessMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID("EndlessMod");
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
+    private boolean setExhaust;
+
     @Override
     public void onInitialApplication(AbstractCard card) {
         if (card.baseDamage > 0) {
@@ -19,6 +21,17 @@ public class EndlessMod extends AbstractAugment {
         if (card.baseBlock > 0) {
             modifyBaseStat(card, BuffType.BLOCK, BuffScale.MINOR_DEBUFF);
         }
+        if (card.type != AbstractCard.CardType.POWER && !card.exhaust) {
+            card.exhaust = true;
+            setExhaust = true;
+        }
+    }
+
+    @Override
+    public boolean canRoll(AbstractCard card) {
+        AbstractCard upgradeCheck = card.makeCopy();
+        upgradeCheck.upgrade();
+        return card.exhaust == upgradeCheck.exhaust && validCard(card);
     }
 
     @Override
@@ -33,7 +46,10 @@ public class EndlessMod extends AbstractAugment {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + TEXT[2];
+        if (rawDescription.contains(TEXT[5])) {
+            return rawDescription.replace(TEXT[5], TEXT[6]);
+        }
+        return rawDescription + TEXT[2] + (setExhaust ? TEXT[3] : "");
     }
 
     @Override

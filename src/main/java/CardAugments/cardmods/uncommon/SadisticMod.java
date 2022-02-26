@@ -1,21 +1,19 @@
-package CardAugments.cardmods.rare;
+package CardAugments.cardmods.uncommon;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.red.Clash;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 
-public class ClashyMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID("ClashyMod");
+public class SadisticMod extends AbstractAugment {
+    public static final String ID = CardAugmentsMod.makeID("SadisticMod");
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
-    @Override
-    public void onInitialApplication(AbstractCard card) {
-        modifyBaseStat(card, BuffType.DAMAGE, 1F);
-    }
+    private static final int BOOST = 3;
 
     @Override
     public boolean validCard(AbstractCard card) {
@@ -29,34 +27,30 @@ public class ClashyMod extends AbstractAugment {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        if (card instanceof Clash) {
-            return rawDescription;
-        }
-        return TEXT[2] + rawDescription;
+        return rawDescription + String.format(TEXT[2], BOOST);
     }
 
     @Override
-    public boolean canPlayCard(AbstractCard card) {
-        for (AbstractCard c : AbstractDungeon.player.hand.group) {
-            if (c.type != AbstractCard.CardType.ATTACK) {
-                return false;
-            }
+    public float modifyDamage(float damage, DamageInfo.DamageType type, AbstractCard card, AbstractMonster target) {
+        if (target == null) {
+            return damage;
         }
-        return true;
+        return damage + (BOOST * target.powers.stream().filter(p -> p.type == AbstractPower.PowerType.DEBUFF).count());
     }
 
     @Override
-    public AbstractAugment.AugmentRarity getModRarity() {
-        return AbstractAugment.AugmentRarity.RARE;
+    public AugmentRarity getModRarity() {
+        return AugmentRarity.UNCOMMON;
     }
 
     @Override
     public AbstractCardModifier makeCopy() {
-        return new ClashyMod();
+        return new SadisticMod();
     }
 
     @Override
     public String identifier(AbstractCard card) {
         return ID;
     }
+
 }

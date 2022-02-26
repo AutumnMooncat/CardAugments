@@ -28,7 +28,7 @@ public class StreamlinedMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost >= 1 && cardDoesntExhaust(card);
+        return card.cost >= 1 && cardDoesntExhaust(card) && card.type != AbstractCard.CardType.POWER;
     }
 
     @Override

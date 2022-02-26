@@ -1,28 +1,30 @@
-package CardAugments.cardmods.common;
+package CardAugments.cardmods.uncommon;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 
-public class QuickMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID("QuickMod");
+public class DramaticMod extends AbstractAugment {
+    public static final String ID = CardAugmentsMod.makeID("DramaticMod");
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
-
-    private static final int CARDS = 1;
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MINOR_DEBUFF);
+        if (card.baseDamage > 0) {
+            modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MAJOR_BUFF);
+        }
+        if (card.baseBlock > 0) {
+            modifyBaseStat(card, BuffType.BLOCK, BuffScale.MAJOR_BUFF);
+        }
+        card.exhaust = true;
+        card.isInnate = true;
     }
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.baseDamage > 1;
+        return !card.isInnate && cardDoesntExhaust(card) && (card.baseDamage > 0 || card.baseBlock > 0) && card.type != AbstractCard.CardType.POWER;
     }
 
     @Override
@@ -32,22 +34,17 @@ public class QuickMod extends AbstractAugment {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + String.format(TEXT[2], CARDS);
+        return TEXT[2] + rawDescription + TEXT[3];
     }
 
     @Override
-    public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
-        addToBot(new DrawCardAction(CARDS));
-    }
-
-    @Override
-    public AugmentRarity getModRarity() {
-        return AugmentRarity.COMMON;
+    public AbstractAugment.AugmentRarity getModRarity() {
+        return AugmentRarity.UNCOMMON;
     }
 
     @Override
     public AbstractCardModifier makeCopy() {
-        return new QuickMod();
+        return new DramaticMod();
     }
 
     @Override

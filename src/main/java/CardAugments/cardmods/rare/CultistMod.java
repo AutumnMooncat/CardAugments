@@ -1,16 +1,16 @@
-package CardAugments.cardmods.common;
+package CardAugments.cardmods.rare;
 
 import CardAugments.CardAugmentsMod;
+import CardAugments.actions.CultistAction;
 import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 
-public class QuickMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID("QuickMod");
+public class CultistMod extends AbstractAugment {
+    public static final String ID = CardAugmentsMod.makeID("CultistMod");
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     private static final int CARDS = 1;
@@ -22,7 +22,7 @@ public class QuickMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.baseDamage > 1;
+        return card.baseDamage > 1 && card.type == AbstractCard.CardType.ATTACK;
     }
 
     @Override
@@ -37,17 +37,17 @@ public class QuickMod extends AbstractAugment {
 
     @Override
     public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
-        addToBot(new DrawCardAction(CARDS));
+        addToBot(new CultistAction());
     }
 
     @Override
     public AugmentRarity getModRarity() {
-        return AugmentRarity.COMMON;
+        return AugmentRarity.RARE;
     }
 
     @Override
     public AbstractCardModifier makeCopy() {
-        return new QuickMod();
+        return new CultistMod();
     }
 
     @Override
