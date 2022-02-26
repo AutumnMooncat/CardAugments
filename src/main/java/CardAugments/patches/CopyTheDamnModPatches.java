@@ -54,7 +54,7 @@ public class CopyTheDamnModPatches {
                     CardModifierManager.addModifier(c, m.makeCopy());
                 }
             }
-            RolledModFieldPatches.RolledModField.rolled.set(c, RolledModFieldPatches.RolledModField.rolled.get(CardModifierManager.modifiers(AbstractDungeon.gridSelectScreen.selectedCards.get(0))));
+            RolledModFieldPatches.RolledModField.rolled.set(c, RolledModFieldPatches.RolledModField.rolled.get(AbstractDungeon.gridSelectScreen.selectedCards.get(0)));
         }
         private static class Locator extends SpireInsertLocator {
             @Override
