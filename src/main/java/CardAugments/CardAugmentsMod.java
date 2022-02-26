@@ -354,6 +354,10 @@ public class CardAugmentsMod implements
         BaseMod.loadCustomStringsFile(UIStrings.class,
                 getModID() + "Resources/localization/"+loadLocalizationIfAvailable("CardAugments-UI-Strings.json"));
 
+        // PowerStrings
+        BaseMod.loadCustomStringsFile(PowerStrings.class,
+                getModID() + "Resources/localization/"+loadLocalizationIfAvailable("CardAugments-Power-Strings.json"));
+
         logger.info("Done editing strings");
     }
     
