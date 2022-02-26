@@ -193,5 +193,34 @@
   },
   "CardAugments:WallopMod": {
     "TEXT": ["Walloping ", "", " NL Gain Block equal to unblocked damage dealt."]
+  },
+  "CardAugments:DevotedMod": {
+    "TEXT": ["Devoted ", "", " NL Gain %d Mantra."]
+  },
+  "CardAugments:EruptingMod": {
+    "TEXT": ["Erupting ", "", " NL Enter Wrath."]
+  },
+  "CardAugments:SpotMod": {
+    "TEXT": ["Spot ", "", "If the enemy intends to attack: NL ",
+      " NL Exhaust.", "",
+      "That target does not intend to attack."]
+  },
+  "CardAugments:PhilosophersMod": {
+    "TEXT": ["Philosopher's ", "", " NL ALL enemies gain 1 Strength."]
+  },
+  "CardAugments:HolyMod": {
+    "TEXT": ["Holy ", "", " NL Add a Miracle to your hand."]
+  },
+  "CardAugments:InfiniteMod": {
+    "TEXT": ["Infinite ", "s", "At the start of your turn, add a *%s to your hand."]
+  },
+  "CardAugments:InfiniteGeneratedMod": {
+    "TEXT": ["Ethereal. NL ", " NL Exhaust."]
+  },
+  "CardAugments:IcizeMod": {
+    "TEXT": ["", "icize", "At the start of your turn: NL "]
+  },
+  "CardAugments:BiasedMod": {
+    "TEXT": ["Biased ", "", "%d times, ", " NL Exhaust.", "At the start of your turn, ", "At the end of your turn, "]
   }
 }
