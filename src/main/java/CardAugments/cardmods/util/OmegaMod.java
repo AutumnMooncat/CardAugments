@@ -17,13 +17,13 @@ public class OmegaMod extends AbstractAugment {
         AbstractCard upgradeCheck = card.makeCopy();
         upgradeCheck.upgrade();
         if (card.baseDamage > 0) {
-            modifyBaseStat(card, BuffType.DAMAGE, 3F);
+            modifyBaseStat(card, BuffType.DAMAGE, 2F);
         }
         if (card.baseBlock > 0) {
-            modifyBaseStat(card, BuffType.BLOCK, 3F);
+            modifyBaseStat(card, BuffType.BLOCK, 2F);
         }
         if (usesMagic(card) && card.baseMagicNumber <= upgradeCheck.baseMagicNumber && !(card instanceof PanicButton)) {
-            modifyBaseStat(card, BuffType.MAGIC, 3F);
+            modifyBaseStat(card, BuffType.MAGIC, 2F);
         }
         InterruptUseCardFieldPatches.InterceptUseField.interceptUse.set(card, false);
     }

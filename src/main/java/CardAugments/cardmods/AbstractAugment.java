@@ -30,14 +30,14 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     }
 
     public enum BuffScale {
-        HUGE_BUFF(3/2F),
-        MAJOR_BUFF(4/3F),
-        MODERATE_BUFF(5/4F),
-        MINOR_BUFF(6/5F),
-        MINOR_DEBUFF(-6/5F),
-        MODERATE_DEBUFF(-5/4F),
-        MAJOR_DEBUFF(-4/3F),
-        HUGE_DEBUFF(-3/2F);
+        HUGE_BUFF(1/2F),
+        MAJOR_BUFF(1/3F),
+        MODERATE_BUFF(1/4F),
+        MINOR_BUFF(1/5F),
+        MINOR_DEBUFF(-1/5F),
+        MODERATE_DEBUFF(-1/4F),
+        MAJOR_DEBUFF(-1/3F),
+        HUGE_DEBUFF(-1/2F);
         private final float multi;
         BuffScale(final float multi) {
             this.multi = multi;

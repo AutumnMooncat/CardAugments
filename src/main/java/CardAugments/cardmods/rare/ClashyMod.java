@@ -14,7 +14,7 @@ public class ClashyMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        modifyBaseStat(card, BuffType.DAMAGE, 2F);
+        modifyBaseStat(card, BuffType.DAMAGE, 1F);
     }
 
     @Override
