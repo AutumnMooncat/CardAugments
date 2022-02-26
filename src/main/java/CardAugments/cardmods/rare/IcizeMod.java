@@ -2,6 +2,7 @@ package CardAugments.cardmods.rare;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
+import CardAugments.patches.InterruptUseCardFieldPatches;
 import CardAugments.powers.IcizePower;
 import CardAugments.util.PortraitHelper;
 import basemod.AutoAdd;
@@ -35,6 +36,7 @@ public class IcizeMod extends AbstractAugment {
         card.type = AbstractCard.CardType.POWER;
 //        card.target = AbstractCard.CardTarget.SELF;  // this breaks certain cards (because use() is still called for now)
         PortraitHelper.setMaskedPortrait(card);
+        InterruptUseCardFieldPatches.InterceptUseField.interceptUse.set(card, true);
     }
 
     @Override
@@ -51,7 +53,6 @@ public class IcizeMod extends AbstractAugment {
 
     @Override
     public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
-        AbstractDungeon.actionManager.actions.clear();
         addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new IcizePower(AbstractDungeon.player, card)));
     }
 
