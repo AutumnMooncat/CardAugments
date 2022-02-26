@@ -1,6 +1,7 @@
 package CardAugments.cardmods;
 
 import CardAugments.CardAugmentsMod;
+import CardAugments.patches.InfiniteUpgradesPatches;
 import basemod.abstracts.AbstractCardModifier;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.ExhaustiveField;
 import com.evacipated.cardcrawl.modthespire.Loader;
@@ -88,33 +89,59 @@ public abstract class AbstractAugment extends AbstractCardModifier {
 
     public static void modifyBaseStat(AbstractCard card, BuffType type, float buffMulti) {
         AbstractCard deltaCheck = card.makeCopy();
-        int delta = 0;
+        if (InfiniteUpgradesPatches.InfUpgradeField.inf.get(card)) {
+            InfiniteUpgradesPatches.InfUpgradeField.inf.set(deltaCheck, true); // Needed for while upgrading check to not explode
+        }
+        int discrepancy; //Stores a discrepancy with the new card (from previous damage modifications)
+        int baseVal;
+        int upgradeVal;
         switch (type) {
             case DAMAGE:
-                delta -= deltaCheck.baseDamage;
-                deltaCheck.upgrade();
-                delta += deltaCheck.baseDamage;
-                card.baseDamage += Math.ceil(Math.max(card.baseDamage, card.baseDamage + delta)*buffMulti);
+                baseVal = deltaCheck.baseDamage; //Store the original unedited base value of a fresh copy
+                while (deltaCheck.timesUpgraded < card.timesUpgraded) { //Make our new copy as many times upgraded as our actual card
+                    deltaCheck.upgrade();
+                }
+                discrepancy = card.baseDamage - deltaCheck.baseDamage; //Determine the difference in damage. This can be caused by calling modifyBaseStat more than once
+                baseVal += discrepancy; //Add this discrepancy to our base val. This now stores what an upgraded proper copy of our card would have
+                if (deltaCheck.timesUpgraded == 0) { //If we didn't actually upgrade the card, we need to do so to see its upgraded value
+                    deltaCheck.upgrade();
+                }
+                upgradeVal = deltaCheck.baseDamage + discrepancy; //Determine what the upgraded value of our proper copy would be. We again add the discrepancy with our real card
+                card.baseDamage += Math.ceil(Math.max(baseVal, upgradeVal)*buffMulti); //We need to compare upgraded and not upgraded in case someone makes a card that lowers the value on upgrade
                 if (card.baseDamage < 1) {
                     card.baseDamage = 1;
                 }
                 card.damage = card.baseDamage;
                 break;
             case BLOCK:
-                delta -= deltaCheck.baseBlock;
-                deltaCheck.upgrade();
-                delta += deltaCheck.baseBlock;
-                card.baseBlock += Math.ceil(Math.max(card.baseBlock, card.baseBlock + delta)*buffMulti);
+                baseVal = deltaCheck.baseBlock;
+                while (deltaCheck.timesUpgraded < card.timesUpgraded) {
+                    deltaCheck.upgrade();
+                }
+                discrepancy = card.baseBlock - deltaCheck.baseBlock;
+                baseVal += discrepancy;
+                if (deltaCheck.timesUpgraded == 0) {
+                    deltaCheck.upgrade();
+                }
+                upgradeVal = deltaCheck.baseBlock + discrepancy;
+                card.baseBlock += Math.ceil(Math.max(baseVal, upgradeVal)*buffMulti);
                 if (card.baseBlock < 1) {
                     card.baseBlock = 1;
                 }
                 card.block = card.baseBlock;
                 break;
             case MAGIC:
-                delta -= deltaCheck.baseMagicNumber;
-                deltaCheck.upgrade();
-                delta += deltaCheck.baseMagicNumber;
-                card.baseMagicNumber += Math.ceil(Math.max(card.baseMagicNumber, card.baseMagicNumber + delta)*buffMulti);
+                baseVal = deltaCheck.baseMagicNumber;
+                while (deltaCheck.timesUpgraded < card.timesUpgraded) {
+                    deltaCheck.upgrade();
+                }
+                discrepancy = card.baseMagicNumber - deltaCheck.baseMagicNumber;
+                baseVal += discrepancy;
+                if (deltaCheck.timesUpgraded == 0) {
+                    deltaCheck.upgrade();
+                }
+                upgradeVal = deltaCheck.baseMagicNumber + discrepancy;
+                card.baseMagicNumber += Math.ceil(Math.max(baseVal, upgradeVal)*buffMulti);
                 if (card.baseMagicNumber < 1) {
                     card.baseMagicNumber = 1;
                 }
