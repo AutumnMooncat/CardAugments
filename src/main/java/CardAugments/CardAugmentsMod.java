@@ -2,7 +2,7 @@ package CardAugments;
 
 import CardAugments.cardmods.AbstractAugment;
 import CardAugments.cardmods.DynvarCarrier;
-import CardAugments.cardmods.rare.LoadedMod;
+import CardAugments.cardmods.uncommon.LoadedMod;
 import CardAugments.cardmods.rare.SanctifiedMod;
 import CardAugments.dynvars.DynamicDynamicVariableManager;
 import CardAugments.util.TextureLoader;
