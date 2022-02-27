@@ -62,7 +62,7 @@ public class PhilosophersMod extends AbstractAugment {
 
     @Override
     public AugmentRarity getModRarity() {
-        return AugmentRarity.UNCOMMON;
+        return AugmentRarity.RARE;
     }
 
     @Override
