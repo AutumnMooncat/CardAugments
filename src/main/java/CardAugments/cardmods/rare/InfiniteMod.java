@@ -3,6 +3,7 @@ package CardAugments.cardmods.rare;
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import CardAugments.cardmods.util.InfiniteGeneratedMod;
+import CardAugments.patches.InterruptUseCardFieldPatches;
 import CardAugments.powers.InfinitePower;
 import CardAugments.util.PortraitHelper;
 import basemod.abstracts.AbstractCardModifier;
@@ -29,6 +30,7 @@ public class InfiniteMod extends AbstractAugment {
         card.cost = card.costForTurn = 1;
         card.type = AbstractCard.CardType.POWER;
         card.target = AbstractCard.CardTarget.SELF;
+        InterruptUseCardFieldPatches.InterceptUseField.interceptUse.set(card, true);
         PortraitHelper.setMaskedPortrait(card);
     }
 
@@ -39,7 +41,6 @@ public class InfiniteMod extends AbstractAugment {
 
     @Override
     public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
-        AbstractDungeon.actionManager.actions.clear();
         addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new InfinitePower(AbstractDungeon.player, card.cardsToPreview)));
     }
 
