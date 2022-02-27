@@ -250,7 +250,9 @@
   "CardAugments:IcizeMod": {
     "TEXT": ["", "icize", "At the start of your turn: NL "]
   },
-  "CardAugments:BiasedMod": {
-    "TEXT": ["Biased ", "", "%d times, ", " NL Exhaust.", "At the start of your turn, ", "At the end of your turn, "]
+  "CardAugments:LoadedMod": {
+    "TEXT": ["Loaded ", "", " NL Exhaust.",
+      "%d times, ", "At the start of your turn, ", "At the start of each turn, ", "At the end of your turn, ", "At the end of each turn, ",
+      " %d times.", " at the start of each turn.", " at the end of each turn."]
   }
 }
