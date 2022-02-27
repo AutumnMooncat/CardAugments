@@ -1,4 +1,4 @@
-package CardAugments.cardmods.rare;
+package CardAugments.cardmods.uncommon;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
@@ -183,7 +183,7 @@ public class LoadedMod extends AbstractAugment {
 
     @Override
     public AugmentRarity getModRarity() {
-        return AugmentRarity.RARE;
+        return AugmentRarity.UNCOMMON;
     }
 
     @Override
