@@ -254,5 +254,8 @@
     "TEXT": ["Loaded ", "", " NL Exhaust.",
       "%d times, ", "At the start of your turn, ", "At the start of each turn, ", "At the end of your turn, ", "At the end of each turn, ",
       " %d times.", " at the start of each turn.", " at the end of each turn."]
+  },
+  "CardAugments:BiasedMod": {
+    "TEXT": ["Biased ", "", " NL At the start of your turn, reduce this by %d."]
   }
 }
