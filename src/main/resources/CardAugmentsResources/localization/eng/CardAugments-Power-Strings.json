@@ -10,5 +10,9 @@
   "CardAugments:BiasPower": {
     "NAME": "Biased",
     "DESCRIPTIONS": ["At the start of your turn, lose %d #y%s."]
+  },
+  "CardAugments:RunicPower": {
+    "NAME": "Obscuring Runes",
+    "DESCRIPTIONS": ["You cannot see enemy intents."]
   }
 }

@@ -257,5 +257,8 @@
   },
   "CardAugments:BiasedMod": {
     "TEXT": ["Biased ", "", " NL At the start of your turn, reduce this by %d."]
+  },
+  "CardAugments:RunicMod": {
+    "TEXT": ["Runic ", "", " NL You cannot see enemy intents for %d turns."]
   }
 }
