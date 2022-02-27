@@ -250,7 +250,15 @@
   "CardAugments:IcizeMod": {
     "TEXT": ["", "icize", "At the start of your turn: NL "]
   },
+  "CardAugments:LoadedMod": {
+    "TEXT": ["Loaded ", "", " NL Exhaust.",
+      "%d times, ", "At the start of your turn, ", "At the start of each turn, ", "At the end of your turn, ", "At the end of each turn, ",
+      " %d times.", " at the start of each turn.", " at the end of each turn."]
+  },
   "CardAugments:BiasedMod": {
-    "TEXT": ["Biased ", "", "%d times, ", " NL Exhaust.", "At the start of your turn, ", "At the end of your turn, "]
+    "TEXT": ["Biased ", "", " NL At the start of your turn, reduce this by %d."]
+  },
+  "CardAugments:RunicMod": {
+    "TEXT": ["Runic ", "", " NL You cannot see enemy intents for %d turns."]
   }
 }

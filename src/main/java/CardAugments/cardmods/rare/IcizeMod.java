@@ -34,7 +34,8 @@ public class IcizeMod extends AbstractAugment {
             modifyBaseStat(card, BuffType.MAGIC, BuffScale.MAJOR_DEBUFF);
         }
         card.type = AbstractCard.CardType.POWER;
-//        card.target = AbstractCard.CardTarget.SELF;  // this breaks certain cards (because use() is still called for now)
+        card.target = AbstractCard.CardTarget.SELF;
+        InterruptUseCardFieldPatches.InterceptUseField.interceptUse.set(card, true);
         PortraitHelper.setMaskedPortrait(card);
         InterruptUseCardFieldPatches.InterceptUseField.interceptUse.set(card, true);
     }

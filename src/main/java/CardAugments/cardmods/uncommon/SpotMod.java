@@ -1,10 +1,9 @@
-package CardAugments.cardmods.rare;
+package CardAugments.cardmods.uncommon;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
-import basemod.AutoAdd;
+import CardAugments.patches.InterruptUseCardFieldPatches;
 import basemod.abstracts.AbstractCardModifier;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.actions.watcher.ChangeStanceAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -13,41 +12,41 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.stances.WrathStance;
+import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class PhilosophersMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID(PhilosophersMod.class.getSimpleName());
+public class SpotMod extends AbstractAugment {
+    public static final String ID = CardAugmentsMod.makeID(SpotMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
-
-    public static final int STRENGTH = 1;
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        card.cost = card.cost - 1;
-        card.costForTurn = card.cost;
-    }
-
-    @Override
-    public boolean canRoll(AbstractCard card) {
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
-        return card.cost == upgradeCheck.cost && validCard(card);
+        card.exhaust = false;
+        if (card.target == AbstractCard.CardTarget.SELF)
+            card.target = AbstractCard.CardTarget.SELF_AND_ENEMY;
+        if (card.target == AbstractCard.CardTarget.NONE)
+            card.target = AbstractCard.CardTarget.ENEMY;
+        InterruptUseCardFieldPatches.InterceptUseField.interceptUse.set(card, true);
     }
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost > 0;
+        return card.exhaust &&
+                card.target != AbstractCard.CardTarget.ALL &&
+                card.target != AbstractCard.CardTarget.ALL_ENEMY &&
+                ! card.tags.contains(AbstractCard.CardTags.HEALING);
     }
 
     @Override
     public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
-        for (AbstractMonster m: AbstractDungeon.getMonsters().monsters)
-            if (!m.isDeadOrEscaped())
-                addToBot(new ApplyPowerAction(m, AbstractDungeon.player, new StrengthPower(m, STRENGTH), STRENGTH));
+        if ( !(target instanceof AbstractMonster && ((AbstractMonster)target).getIntentBaseDmg() >= 0)) {
+            AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, TEXT[5], true));
+        } else {
+            card.use(AbstractDungeon.player, (AbstractMonster) target);
+        }
     }
 
     @Override
@@ -57,17 +56,18 @@ public class PhilosophersMod extends AbstractAugment {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + TEXT[2];
+        rawDescription = rawDescription.replace(TEXT[3], TEXT[4]);
+        return TEXT[2] + rawDescription;
     }
 
     @Override
     public AugmentRarity getModRarity() {
-        return AugmentRarity.RARE;
+        return AugmentRarity.UNCOMMON;
     }
 
     @Override
     public AbstractCardModifier makeCopy() {
-        return new PhilosophersMod();
+        return new SpotMod();
     }
 
     @Override

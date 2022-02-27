@@ -6,5 +6,13 @@
   "CardAugments:InfinitePower": {
     "NAME": "Infinite ",
     "DESCRIPTIONS": ["s","At the start of your turn, add a a #y%s to your hand."]
+  },
+  "CardAugments:BiasPower": {
+    "NAME": "Biased",
+    "DESCRIPTIONS": ["At the start of your turn, lose %d #y%s."]
+  },
+  "CardAugments:RunicPower": {
+    "NAME": "Obscuring Runes",
+    "DESCRIPTIONS": ["You cannot see enemy intents."]
   }
 }

@@ -2,28 +2,22 @@ package CardAugments.cardmods.rare;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
-import basemod.AutoAdd;
+import CardAugments.powers.RunicPower;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
-import com.megacrit.cardcrawl.actions.watcher.ChangeStanceAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.purple.*;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.StrengthPower;
-import com.megacrit.cardcrawl.stances.WrathStance;
 
-import java.util.Arrays;
-import java.util.List;
-
-public class PhilosophersMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID(PhilosophersMod.class.getSimpleName());
+public class RunicMod extends AbstractAugment {
+    public static final String ID = CardAugmentsMod.makeID(RunicMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
-    public static final int STRENGTH = 1;
+    public static final int DURATION = 2;
 
     @Override
     public void onInitialApplication(AbstractCard card) {
@@ -45,9 +39,7 @@ public class PhilosophersMod extends AbstractAugment {
 
     @Override
     public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
-        for (AbstractMonster m: AbstractDungeon.getMonsters().monsters)
-            if (!m.isDeadOrEscaped())
-                addToBot(new ApplyPowerAction(m, AbstractDungeon.player, new StrengthPower(m, STRENGTH), STRENGTH));
+        addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new RunicPower(AbstractDungeon.player, DURATION), DURATION));
     }
 
     @Override
@@ -57,7 +49,7 @@ public class PhilosophersMod extends AbstractAugment {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + TEXT[2];
+        return rawDescription + String.format(TEXT[2], DURATION);
     }
 
     @Override
@@ -67,7 +59,7 @@ public class PhilosophersMod extends AbstractAugment {
 
     @Override
     public AbstractCardModifier makeCopy() {
-        return new PhilosophersMod();
+        return new RunicMod();
     }
 
     @Override

@@ -30,6 +30,7 @@ public class InfiniteMod extends AbstractAugment {
         card.cost = card.costForTurn = 1;
         card.type = AbstractCard.CardType.POWER;
         card.target = AbstractCard.CardTarget.SELF;
+        InterruptUseCardFieldPatches.InterceptUseField.interceptUse.set(card, true);
         PortraitHelper.setMaskedPortrait(card);
         InterruptUseCardFieldPatches.InterceptUseField.interceptUse.set(card, true);
     }
