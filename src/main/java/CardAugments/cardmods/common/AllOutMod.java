@@ -23,7 +23,7 @@ public class AllOutMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.baseDamage > 0;
+        return card.cost != -2 && card.baseDamage > 0;
     }
 
     @Override

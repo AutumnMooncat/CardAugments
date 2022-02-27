@@ -2,6 +2,7 @@ package CardAugments.cardmods.common;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
+import CardAugments.patches.MultiPreviewFieldPatches;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
@@ -16,8 +17,7 @@ public class HolyMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        if (card.cardsToPreview == null)
-            card.cardsToPreview = new Miracle();
+        MultiPreviewFieldPatches.addPreview(card, new Miracle());
         card.cost = card.cost + 1;
         card.costForTurn = card.cost;
     }

@@ -83,7 +83,7 @@ public class MultiPreviewFieldPatches {
                 if (AbstractDungeon.player != null && AbstractDungeon.player.isDraggingCard) {
                     return;
                 }
-                boolean rightSide = __instance.current_x > Settings.WIDTH * 0.75F;
+                boolean rightSide = __instance.current_x < Settings.WIDTH * 0.25F;
                 if (cardTipPad == null) {
                     cardTipPad = ReflectionHacks.getPrivateStatic(AbstractCard.class, "CARD_TIP_PAD");
                 }

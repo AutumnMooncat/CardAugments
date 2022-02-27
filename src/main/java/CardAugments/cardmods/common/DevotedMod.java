@@ -4,7 +4,6 @@ import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.DiscardAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -20,9 +19,12 @@ public class DevotedMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
+        AbstractCard costCheck = card.makeCopy();
+        int preUp = costCheck.cost;
+        costCheck.upgrade();
         modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MODERATE_DEBUFF);
         modifyBaseStat(card, BuffType.BLOCK, BuffScale.MODERATE_DEBUFF);
-        mantra = card.cost + 2;
+        mantra = Math.max(preUp, costCheck.cost) + 2;
     }
 
     @Override
