@@ -165,7 +165,7 @@
     "TEXT": ["Quick ", "", " NL Draw %d card."]
   },
   "CardAugments:ReshuffleMod": {
-    "TEXT": ["Sneaky ", "", " NL cardaugments:Reshuffle."]
+    "TEXT": ["Recalling ", "", " NL cardaugments:Reshuffle."]
   },
   "CardAugments:RollMod": {
     "TEXT": ["", " and Roll", " NL Next turn, gain %s Block."]
