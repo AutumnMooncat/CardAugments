@@ -37,10 +37,7 @@ public class AlphaMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        try {
-            return (card.baseDamage > 0 || card.baseBlock > 0 || usesMagic(card)) && card.getClass().getMethod("canUse", AbstractPlayer.class, AbstractMonster.class).getDeclaringClass().equals(AbstractCard.class);
-        } catch (NoSuchMethodException ignored) {}
-        return false;
+        return (card.baseDamage > 0 || card.baseBlock > 0 || usesMagic(card)) && doesntOverride(card, "canUse", AbstractPlayer.class, AbstractMonster.class);
     }
 
     @Override

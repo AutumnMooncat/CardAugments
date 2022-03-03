@@ -28,10 +28,7 @@ public class SearingMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        try {
-            return isNormalCard(card) && card.getClass().getMethod("canUpgrade").getDeclaringClass().equals(AbstractCard.class);
-        } catch (NoSuchMethodException ignored) {}
-        return false;
+        return isNormalCard(card) && doesntOverride(card, "canUpgrade");
     }
 
     @Override

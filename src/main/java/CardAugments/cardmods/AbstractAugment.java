@@ -8,7 +8,9 @@ import com.evacipated.cardcrawl.modthespire.Loader;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.colorless.PanicButton;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.PrismaticShard;
 import javassist.ClassPool;
 import javassist.CtMethod;
@@ -85,6 +87,13 @@ public abstract class AbstractAugment extends AbstractCardModifier {
 
     public static boolean cardDoesntExhaust(AbstractCard card) {
         return !card.exhaust && !card.purgeOnUse && ExhaustiveField.ExhaustiveFields.baseExhaustive.get(card) == -1 && ExhaustiveField.ExhaustiveFields.exhaustive.get(card) == -1;
+    }
+
+    public static boolean doesntOverride(AbstractCard card, String method, Class<?>... paramtypez) {
+        try {
+            return card.getClass().getMethod(method, paramtypez).getDeclaringClass().equals(AbstractCard.class);
+        } catch (NoSuchMethodException ignored) {}
+        return false;
     }
 
     public static void modifyBaseStat(AbstractCard card, BuffType type, float buffMulti) {
