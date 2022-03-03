@@ -24,19 +24,19 @@
       " NL Discard 2 cards at random."]
   },
   "CardAugments:AlphaMod": {
-    "TEXT": ["Alpha ", "", "Shuffle a *Beta %s into your draw pile."," NL Exhaust."]
-  },
-  "CardAugments:AngryMod": {
-    "TEXT": ["Angry ", "", " NL Add a copy of this card into your discard pile.",
-      "Translator note: These strings are for replacing Anger's description. The first string is what to search for, the second string replaces it.",
-      " NL Add a copy of this card into your discard pile.",
-      " NL Add 2 copies of this card into your discard pile."]
+    "TEXT": ["Alpha ", "", "Shuffle a *Beta %s into your draw pile."," NL Exhaust.", "Innate. NL "]
   },
   "CardAugments:BetaMod": {
     "TEXT": ["Beta ", "", "Shuffle an *Omega %s into your draw pile."," NL Exhaust."]
   },
   "CardAugments:OmegaMod": {
     "TEXT": ["Omega ", "", ""]
+  },
+  "CardAugments:AngryMod": {
+    "TEXT": ["Angry ", "", " NL Add a copy of this card into your discard pile.",
+      "Translator note: These strings are for replacing Anger's description. The first string is what to search for, the second string replaces it.",
+      " NL Add a copy of this card into your discard pile.",
+      " NL Add 2 copies of this card into your discard pile."]
   },
   "CardAugments:AmplifiedMod": {
     "TEXT": ["Amplified ", ""]
