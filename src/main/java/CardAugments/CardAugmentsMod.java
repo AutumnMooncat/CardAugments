@@ -2,14 +2,16 @@ package CardAugments;
 
 import CardAugments.cardmods.AbstractAugment;
 import CardAugments.cardmods.DynvarCarrier;
-import CardAugments.cardmods.uncommon.LoadedMod;
 import CardAugments.cardmods.rare.SanctifiedMod;
 import CardAugments.dynvars.DynamicDynamicVariableManager;
 import CardAugments.util.TextureLoader;
 import basemod.*;
 import basemod.helpers.CardBorderGlowManager;
 import basemod.helpers.CardModifierManager;
-import basemod.interfaces.*;
+import basemod.interfaces.EditKeywordsSubscriber;
+import basemod.interfaces.EditStringsSubscriber;
+import basemod.interfaces.PostCreateStartingDeckSubscriber;
+import basemod.interfaces.PostInitializeSubscriber;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -24,7 +26,8 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.FontHelper;
-import com.megacrit.cardcrawl.localization.*;
+import com.megacrit.cardcrawl.localization.PowerStrings;
+import com.megacrit.cardcrawl.localization.UIStrings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -399,11 +402,13 @@ public class CardAugmentsMod implements
         AbstractCard[] cardsToTest = {
 
         };
-        AbstractAugment modToTest = new LoadedMod();
-        for (AbstractCard c: cardsToTest) {
-            if (modToTest.canRoll(c)) {
-                CardModifierManager.addModifier(c, modToTest.makeCopy());
-                deck.addToBottom(c);
+        AbstractAugment modToTest = null;
+        if (modToTest != null) {
+            for (AbstractCard c : cardsToTest) {
+                if (modToTest.canRoll(c)) {
+                    CardModifierManager.addModifier(c, modToTest.makeCopy());
+                    deck.addToBottom(c);
+                }
             }
         }
     }
