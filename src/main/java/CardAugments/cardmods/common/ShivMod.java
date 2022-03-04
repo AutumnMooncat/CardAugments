@@ -2,10 +2,12 @@ package CardAugments.cardmods.common;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
+import CardAugments.patches.MultiPreviewFieldPatches;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.tempCards.Miracle;
 import com.megacrit.cardcrawl.cards.tempCards.Shiv;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -26,9 +28,7 @@ public class ShivMod extends AbstractAugment {
         if (card.baseBlock > 1) {
             modifyBaseStat(card, BuffType.BLOCK, BuffScale.MINOR_DEBUFF);
         }
-        if (card.cardsToPreview == null) {
-            card.cardsToPreview = new Shiv();
-        }
+        MultiPreviewFieldPatches.addPreview(card, new Shiv());
     }
 
     @Override
