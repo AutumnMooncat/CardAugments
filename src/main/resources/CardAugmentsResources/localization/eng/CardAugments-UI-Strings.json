@@ -239,7 +239,7 @@
     "TEXT": ["Philosopher's ", "", " NL ALL enemies gain 1 Strength."]
   },
   "CardAugments:HolyMod": {
-    "TEXT": ["Holy ", "", " NL Add a Miracle to your hand."]
+    "TEXT": ["Holy ", "", " NL Add a *Miracle to your hand."]
   },
   "CardAugments:InfiniteMod": {
     "TEXT": ["Infinite ", "s", "At the start of your turn, add a *%s to your hand."]
