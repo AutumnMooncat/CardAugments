@@ -3,7 +3,10 @@ package CardAugments.patches;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
+import javassist.CannotCompileException;
 import javassist.CtBehavior;
+import javassist.expr.ExprEditor;
+import javassist.expr.FieldAccess;
 
 public class InfiniteUpgradesPatches {
     @SpirePatch(clz = AbstractCard.class, method = "<class>")
@@ -81,6 +84,27 @@ public class InfiniteUpgradesPatches {
                 ret[0]++;
                 return ret;
             }
+        }
+    }
+
+    public static boolean renderCheck(AbstractCard card) {
+        return InfUpgradeField.inf.get(card) && card.timesUpgraded > 0;
+    }
+
+    @SpirePatch2(clz = AbstractCard.class, method = "renderTitle")
+    public static class FixRenderColor {
+        @SpireInstrumentPatch
+        public static ExprEditor patch() {
+            return new ExprEditor() {
+                @Override
+                //Method call is basically the equivalent of a methodcallmatcher of an insert patch, checks the edit method against every method call in the function you#re patching
+                public void edit(FieldAccess m) throws CannotCompileException {
+                    //If the method is from the class AnimationState and the method is called update
+                    if (m.getClassName().equals(AbstractCard.class.getName()) && m.getFieldName().equals("upgraded")) {
+                        m.replace("$_ = CardAugments.patches.InfiniteUpgradesPatches.renderCheck($0) || $proceed($$);");
+                    }
+                }
+            };
         }
     }
 }
