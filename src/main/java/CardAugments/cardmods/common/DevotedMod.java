@@ -22,14 +22,18 @@ public class DevotedMod extends AbstractAugment {
         AbstractCard costCheck = card.makeCopy();
         int preUp = costCheck.cost;
         costCheck.upgrade();
-        modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MODERATE_DEBUFF);
-        modifyBaseStat(card, BuffType.BLOCK, BuffScale.MODERATE_DEBUFF);
+        if (card.baseDamage > 1) {
+            modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MODERATE_DEBUFF);
+        }
+        if (card.baseBlock > 1) {
+            modifyBaseStat(card, BuffType.BLOCK, BuffScale.MODERATE_DEBUFF);
+        }
         mantra = Math.max(preUp, costCheck.cost) + 2;
     }
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return (card.baseDamage > 0 || card.baseBlock > 0) && card.color == AbstractCard.CardColor.PURPLE;
+        return (card.baseDamage > 1 || card.baseBlock > 1) && card.color == AbstractCard.CardColor.PURPLE;
     }
 
     @Override
