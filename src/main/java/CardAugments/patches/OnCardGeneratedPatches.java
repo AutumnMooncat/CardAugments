@@ -152,16 +152,31 @@ public class OnCardGeneratedPatches {
     public static void rollCardAugment(AbstractCard c, int index) {
         //Cards can only have one augment at a time && CardModifierManager.modifiers(c).stream().noneMatch(m -> m instanceof AbstractAugment)
         if (!RolledModFieldPatches.RolledModField.rolled.get(c) && AbstractDungeon.miscRng.random(99) < CardAugmentsMod.modProbabilityPercent) {
-            applyWeightedCardMod(c, rollRarity(), index);
+            applyWeightedCardMod(c, rollRarity(c.rarity), index);
         }
         RolledModFieldPatches.RolledModField.rolled.set(c, true);
     }
 
-    public static AbstractAugment.AugmentRarity rollRarity() {
-        int roll = AbstractDungeon.miscRng.random(CardAugmentsMod.commonWeight + CardAugmentsMod.uncommonWeight + CardAugmentsMod.rareWeight - 1);
-        if (roll < CardAugmentsMod.commonWeight) {
+    public static AbstractAugment.AugmentRarity rollRarity(AbstractCard.CardRarity rarity) {
+        int c = CardAugmentsMod.commonWeight;
+        int u = CardAugmentsMod.uncommonWeight;
+        int r = CardAugmentsMod.rareWeight;
+        switch (rarity) {
+            case BASIC:
+            case COMMON:
+                c += CardAugmentsMod.rarityBias;
+                break;
+            case UNCOMMON:
+                u += CardAugmentsMod.rarityBias;
+                break;
+            case RARE:
+                r += CardAugmentsMod.rarityBias;
+                break;
+        }
+        int roll = AbstractDungeon.miscRng.random(c + u + r - 1); //StS adds +1 to random call, so subtract 1
+        if ((roll -= c) < 0) {
             return AbstractAugment.AugmentRarity.COMMON;
-        } else if (roll < CardAugmentsMod.commonWeight + CardAugmentsMod.uncommonWeight) {
+        } else if (roll - u < 0) {
             return AbstractAugment.AugmentRarity.UNCOMMON;
         } else {
             return AbstractAugment.AugmentRarity.RARE;

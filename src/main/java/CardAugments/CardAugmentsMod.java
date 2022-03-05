@@ -73,6 +73,9 @@ public class CardAugmentsMod implements
     public static final String ALLOW_ORBS = "allowOrbs";
     public static boolean allowOrbs = false;
 
+    public static final String RARITY_BIAS = "rarityBias";
+    public static int rarityBias = 0;
+
     //Cardmod Lists
     public static final ArrayList<AbstractAugment> commonMods = new ArrayList<>();
     public static final ArrayList<AbstractAugment> uncommonMods = new ArrayList<>();
@@ -120,6 +123,7 @@ public class CardAugmentsMod implements
         cardAugmentsDefaultSettings.setProperty(RARE_WEIGHT, String.valueOf(rareWeight));
         cardAugmentsDefaultSettings.setProperty(MODIFY_STARTERS, Boolean.toString(modifyStarters));
         cardAugmentsDefaultSettings.setProperty(ALLOW_ORBS, Boolean.toString(allowOrbs));
+        cardAugmentsDefaultSettings.setProperty(RARITY_BIAS, String.valueOf(rarityBias));
         try {
             cardAugmentsConfig = new SpireConfig(modID, FILE_NAME, cardAugmentsDefaultSettings);
             enableMods = cardAugmentsConfig.getBool(ENABLE_MODS_SETTING);
@@ -129,6 +133,7 @@ public class CardAugmentsMod implements
             rareWeight = cardAugmentsConfig.getInt(RARE_WEIGHT);
             modifyStarters = cardAugmentsConfig.getBool(MODIFY_STARTERS);
             allowOrbs = cardAugmentsConfig.getBool(ALLOW_ORBS);
+            rarityBias = cardAugmentsConfig.getInt(RARITY_BIAS);
         } catch (IOException e) {
             logger.error("Card Augments SpireConfig initialization failed:");
             e.printStackTrace();
@@ -260,6 +265,18 @@ public class CardAugmentsMod implements
         });
         currentYposition -= spacingY;
 
+        //Used for bias weight
+        ModLabel biasLabel = new ModLabel(TEXT[7], 400f, currentYposition, Settings.CREAM_COLOR, FontHelper.charDescFont, settingsPanel, modLabel -> {});
+        ModMinMaxSlider biasSlider = new ModMinMaxSlider("",
+                400f + sliderOffset,
+                currentYposition + 7f,
+                0, 5, cardAugmentsConfig.getInt(RARITY_BIAS), "%.0f", settingsPanel, slider -> {
+            cardAugmentsConfig.setInt(RARITY_BIAS, Math.round(slider.getValue()));
+            rarityBias = Math.round(slider.getValue());
+            try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
+        });
+        currentYposition -= spacingY;
+
         //Used to modify starter cards
         ModLabeledToggleButton enableStarterModificationButton = new ModLabeledToggleButton(TEXT[5],400.0f - 40f, currentYposition - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
                 cardAugmentsConfig.getBool(MODIFY_STARTERS), settingsPanel, (label) -> {}, (button) -> {
@@ -289,6 +306,8 @@ public class CardAugmentsMod implements
         settingsPanel.addUIElement(rareSlider);
         settingsPanel.addUIElement(enableStarterModificationButton);
         settingsPanel.addUIElement(enableAllowOrbsButton);
+        settingsPanel.addUIElement(biasLabel);
+        settingsPanel.addUIElement(biasSlider);
 
         logger.info("Done loading badge Image and mod options");
 

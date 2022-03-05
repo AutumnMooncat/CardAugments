@@ -7,7 +7,8 @@
       "Uncommon Mod Weight (3):",
       "Rare Mod Weight (1):",
       "Modify Starter Cards",
-      "Allow Orb Mods Without Prismatic Shard"
+      "Allow Orb Mods Without Prismatic Shard",
+      "Card Rarity Weight Bias (0):"
     ],
     "EXTRA_TEXT": [
       "Card Augments",
@@ -189,7 +190,7 @@
     "TEXT": ["Signature ", "", "Can only be played if this is the only Attack in your hand. NL "]
   },
   "CardAugments:SlipperyMod": {
-    "TEXT": ["Slippery ", "", " NL The first time this is drawn, discard this card."]
+    "TEXT": ["Slippery ", "", " NL Discard this card the first time it is drawn each combat."]
   },
   "CardAugments:SneckoMod": {
     "TEXT": ["Snecko ", "", "Snecko. NL "]
