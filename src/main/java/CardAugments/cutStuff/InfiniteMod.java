@@ -1,38 +1,33 @@
-package CardAugments.cardmods.rare;
+package CardAugments.cutStuff;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
+import CardAugments.cardmods.util.InfiniteGeneratedMod;
 import CardAugments.patches.InterruptUseCardFieldPatches;
-import CardAugments.powers.IcizePower;
+import CardAugments.powers.InfinitePower;
 import CardAugments.util.PortraitHelper;
-import basemod.AutoAdd;
 import basemod.abstracts.AbstractCardModifier;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Pixmap;
+import basemod.helpers.CardModifierManager;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public class IcizeMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID(IcizeMod.class.getSimpleName());
+public class InfiniteMod extends AbstractAugment {
+    public static final String ID = CardAugmentsMod.makeID(InfiniteMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        if (card.baseDamage > 1) {
-            modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MAJOR_DEBUFF);
-        }
-        if (card.baseBlock > 1) {
-            modifyBaseStat(card, BuffType.BLOCK, BuffScale.MAJOR_DEBUFF);
-        }
-        if (card.baseMagicNumber > 1) {
-            modifyBaseStat(card, BuffType.MAGIC, BuffScale.MAJOR_DEBUFF);
-        }
+        card.cardsToPreview = card.makeCopy();
+        CardModifierManager.addModifier(card.cardsToPreview, new InfiniteGeneratedMod());
+        for (int i=0; i<card.timesUpgraded; i++)
+            card.cardsToPreview.upgrade();
+        card.cardsToPreview.misc = card.misc;
+
+        card.cost = card.costForTurn = 1;
         card.type = AbstractCard.CardType.POWER;
         card.target = AbstractCard.CardTarget.SELF;
         InterruptUseCardFieldPatches.InterceptUseField.interceptUse.set(card, true);
@@ -42,19 +37,17 @@ public class IcizeMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        try {
-            card.getClass().getDeclaredMethod("canUse", AbstractPlayer.class, AbstractMonster.class);
-        } catch (NoSuchMethodException ignored) {
-            return card.cost >= 0 &&
-                    card.type != AbstractCard.CardType.POWER &&
-                    !card.exhaust;
-        }
-        return false;
+        return cardDoesntExhaust(card);
     }
 
     @Override
     public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
-        addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new IcizePower(AbstractDungeon.player, card)));
+        addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new InfinitePower(AbstractDungeon.player, card.cardsToPreview)));
+    }
+
+    @Override
+    public void onUpgradeCheck(AbstractCard card) {
+        card.cardsToPreview.upgrade();
     }
 
     @Override
@@ -64,7 +57,7 @@ public class IcizeMod extends AbstractAugment {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return TEXT[2] + rawDescription;
+        return String.format(TEXT[2], card.name);
     }
 
     @Override
@@ -74,7 +67,7 @@ public class IcizeMod extends AbstractAugment {
 
     @Override
     public AbstractCardModifier makeCopy() {
-        return new IcizeMod();
+        return new InfiniteMod();
     }
 
     @Override
