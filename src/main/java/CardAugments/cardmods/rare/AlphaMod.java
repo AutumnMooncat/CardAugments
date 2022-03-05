@@ -27,6 +27,7 @@ public class AlphaMod extends AbstractAugment {
         AbstractCard preview = card.makeStatEquivalentCopy();
         inherentHack = false;
         CardModifierManager.addModifier(preview, new BetaMod());
+        card.cardsToPreview = null;
         MultiPreviewFieldPatches.addPreview(card, preview);
         InterruptUseCardFieldPatches.InterceptUseField.interceptUse.set(card, true);
         card.isEthereal = false;
