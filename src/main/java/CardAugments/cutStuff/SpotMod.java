@@ -1,22 +1,16 @@
-package CardAugments.cardmods.uncommon;
+package CardAugments.cutStuff;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import CardAugments.patches.InterruptUseCardFieldPatches;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
-import com.megacrit.cardcrawl.actions.watcher.ChangeStanceAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.purple.*;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.stances.WrathStance;
 import com.megacrit.cardcrawl.vfx.ThoughtBubble;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class SpotMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(SpotMod.class.getSimpleName());
