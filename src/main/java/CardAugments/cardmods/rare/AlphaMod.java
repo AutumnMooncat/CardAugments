@@ -3,6 +3,7 @@ package CardAugments.cardmods.rare;
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import CardAugments.cardmods.util.BetaMod;
+import CardAugments.cardmods.util.OmegaMod;
 import CardAugments.patches.InterruptUseCardFieldPatches;
 import CardAugments.patches.MultiPreviewFieldPatches;
 import CardAugments.util.FormatHelper;
@@ -49,6 +50,15 @@ public class AlphaMod extends AbstractAugment {
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
         return (card.isInnate ? TEXT[4] : "") + String.format(TEXT[2], FormatHelper.prefixWords(card.name, "*")) + (card.type == AbstractCard.CardType.POWER ? "" : TEXT[3]);
+    }
+
+    @Override
+    public void onUpgradeCheck(AbstractCard card) {
+        for (AbstractCard c : MultiPreviewFieldPatches.ExtraPreviews.previews.get(card)) {
+            if (CardModifierManager.hasModifier(c, BetaMod.ID) || CardModifierManager.hasModifier(c, OmegaMod.ID)) {
+                c.upgrade();
+            }
+        }
     }
 
     @Override
