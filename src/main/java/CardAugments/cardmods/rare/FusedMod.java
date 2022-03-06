@@ -23,27 +23,14 @@ public class FusedMod extends AbstractAugment {
         if (card.baseBlock > 0) {
             modifyBaseStat(card, BuffType.BLOCK, BuffScale.MAJOR_BUFF);
         }
-        if (usesMagic(card) && card.baseMagicNumber <= upgradeCheck.baseMagicNumber && !(card instanceof PanicButton)) {
+        if (doesntDowngradeMagic(card) && !(card instanceof PanicButton)) {
             modifyBaseStat(card, BuffType.MAGIC, BuffScale.MAJOR_BUFF);
         }
     }
 
     @Override
-    public boolean canRoll(AbstractCard card) {
-        AbstractCard upgradeCheck = card.makeCopy();
-        while (card.timesUpgraded >= upgradeCheck.timesUpgraded) {
-            upgradeCheck.upgraded = false;
-            upgradeCheck.upgrade();
-        }
-        return validCard(card) && ((card.baseMagicNumber < upgradeCheck.baseMagicNumber && usesMagic(upgradeCheck) && usesMagic(card)) || card.baseDamage < upgradeCheck.baseDamage || card.baseBlock < upgradeCheck.baseBlock);
-    }
-
-    @Override
     public boolean validCard(AbstractCard card) {
-        try {
-            return card.canUpgrade() && !card.upgraded && card.getClass().getMethod("canUpgrade").getDeclaringClass().equals(AbstractCard.class);
-        } catch (NoSuchMethodException ignored) {}
-        return false;
+        return !card.upgraded && card.canUpgrade() && upgradesAVariable(card) && doesntOverride(card, "canUpgrade");
     }
 
     @Override

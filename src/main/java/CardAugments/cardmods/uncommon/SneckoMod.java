@@ -17,15 +17,8 @@ public class SneckoMod extends AbstractAugment {
     }
 
     @Override
-    public boolean canRoll(AbstractCard card) {
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
-        return card.cost == upgradeCheck.cost && validCard(card);
-    }
-
-    @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost == 1 || card.cost == 2;
+        return (card.cost == 1 || card.cost == 2) && doesntUpgradeCost(card);
     }
     @Override
     public String modifyName(String cardName, AbstractCard card) {

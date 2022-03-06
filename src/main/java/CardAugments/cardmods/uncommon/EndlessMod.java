@@ -28,15 +28,8 @@ public class EndlessMod extends AbstractAugment {
     }
 
     @Override
-    public boolean canRoll(AbstractCard card) {
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
-        return card.exhaust == upgradeCheck.exhaust && validCard(card);
-    }
-
-    @Override
     public boolean validCard(AbstractCard card) {
-        return isNormalCard(card);
+        return isNormalCard(card) && doesntUpgradeExhaust(card);
     }
 
     @Override

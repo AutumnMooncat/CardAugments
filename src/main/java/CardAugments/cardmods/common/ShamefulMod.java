@@ -24,15 +24,8 @@ public class ShamefulMod extends AbstractAugment {
     }
 
     @Override
-    public boolean canRoll(AbstractCard card) {
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
-        return card.cost == upgradeCheck.cost && validCard(card) && AbstractDungeon.player.isCursed();
-    }
-
-    @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost > 0;
+        return card.cost > 0 && doesntUpgradeCost(card) && AbstractDungeon.player.isCursed();
     }
 
     @Override

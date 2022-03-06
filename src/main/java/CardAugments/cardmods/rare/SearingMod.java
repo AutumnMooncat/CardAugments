@@ -18,16 +18,8 @@ public class SearingMod extends AbstractAugment {
     }
 
     @Override
-    public boolean canRoll(AbstractCard card) {
-        AbstractCard base = card.makeCopy();
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
-        return validCard(card) && ((base.baseMagicNumber < upgradeCheck.baseMagicNumber && usesMagic(upgradeCheck)) || base.baseDamage < upgradeCheck.baseDamage || base.baseBlock < upgradeCheck.baseBlock);
-    }
-
-    @Override
     public boolean validCard(AbstractCard card) {
-        return isNormalCard(card) && doesntOverride(card, "canUpgrade") && !(card instanceof BranchingUpgradesCard);
+        return isNormalCard(card) && card.canUpgrade() && upgradesAVariable(card) && doesntOverride(card, "canUpgrade") && !(card instanceof BranchingUpgradesCard);
     }
 
     @Override

@@ -37,7 +37,7 @@ public class InfiniteMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return cardDoesntExhaust(card);
+        return doesntExhaust(card);
     }
 
     @Override

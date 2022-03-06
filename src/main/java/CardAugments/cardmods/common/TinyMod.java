@@ -23,15 +23,8 @@ public class TinyMod extends AbstractAugment {
     }
 
     @Override
-    public boolean canRoll(AbstractCard card) {
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
-        return card.cost == upgradeCheck.cost && validCard(card);
-    }
-
-    @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost > 0 && (card.baseDamage > 1 || card.baseBlock > 1);
+        return card.cost > 0 && doesntUpgradeCost(card) && (card.baseDamage > 1 || card.baseBlock > 1);
     }
 
     @Override

@@ -23,15 +23,8 @@ public class HolyMod extends AbstractAugment {
     }
 
     @Override
-    public boolean canRoll(AbstractCard card) {
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
-        return card.cost == upgradeCheck.cost && validCard(card);
-    }
-
-    @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost >= 0 && card.type != AbstractCard.CardType.POWER;
+        return card.cost >= 0 && doesntUpgradeCost(card) && card.type != AbstractCard.CardType.POWER;
     }
 
     @Override

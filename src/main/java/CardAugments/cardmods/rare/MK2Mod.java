@@ -21,22 +21,15 @@ public class MK2Mod extends AbstractAugment {
         if (card.baseBlock > 0) {
             modifyBaseStat(card, BuffType.BLOCK, BuffScale.MINOR_BUFF);
         }
-        if (usesMagic(card) && card.baseMagicNumber <= upgradeCheck.baseMagicNumber && !(card instanceof PanicButton)) {
+        if (doesntDowngradeMagic(card) && !(card instanceof PanicButton)) {
             modifyBaseStat(card, BuffType.MAGIC, BuffScale.MINOR_BUFF);
         }
 
     }
 
     @Override
-    public boolean canRoll(AbstractCard card) {
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
-        return card.baseMagicNumber <= upgradeCheck.baseMagicNumber && validCard(card);
-    }
-
-    @Override
     public boolean validCard(AbstractCard card) {
-        return (card.baseDamage > 0 || card.baseBlock > 0 || usesMagic(card));
+        return card.baseDamage > 0 || card.baseBlock > 0 || doesntDowngradeMagic(card);
     }
 
     @Override

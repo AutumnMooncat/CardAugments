@@ -18,11 +18,6 @@ public class VoidMod extends AbstractAugment {
     private static final int VOIDS = 1;
 
     @Override
-    public boolean validCard(AbstractCard card) {
-        return card.cost > 0;
-    }
-
-    @Override
     public void onInitialApplication(AbstractCard card) {
         if (card.cardsToPreview == null) {
             card.cardsToPreview = new VoidCard();
@@ -32,10 +27,8 @@ public class VoidMod extends AbstractAugment {
     }
 
     @Override
-    public boolean canRoll(AbstractCard card) {
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
-        return card.cost == upgradeCheck.cost && validCard(card);
+    public boolean validCard(AbstractCard card) {
+        return card.cost > 0 && doesntUpgradeCost(card);
     }
 
     @Override

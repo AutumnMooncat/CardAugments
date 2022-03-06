@@ -4,6 +4,7 @@ import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.colorless.PanicButton;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 
 public class AmplifiedMod extends AbstractAugment {
@@ -18,15 +19,8 @@ public class AmplifiedMod extends AbstractAugment {
     }
 
     @Override
-    public boolean canRoll(AbstractCard card) {
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
-        return card.cost == upgradeCheck.cost && card.baseMagicNumber <= upgradeCheck.baseMagicNumber && validCard(card);
-    }
-
-    @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost >= 0 && usesMagic(card);
+        return card.cost >= 0 && doesntUpgradeCost(card) && doesntDowngradeMagic(card) && !(card instanceof PanicButton);
     }
 
     @Override

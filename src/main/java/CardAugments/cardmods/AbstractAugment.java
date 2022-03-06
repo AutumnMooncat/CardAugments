@@ -8,9 +8,7 @@ import com.evacipated.cardcrawl.modthespire.Loader;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.colorless.PanicButton;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.PrismaticShard;
 import javassist.ClassPool;
 import javassist.CtMethod;
@@ -65,12 +63,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     }
 
     public boolean canRoll(AbstractCard card) {
-        if (!validCard(card)) {
-            return false;
-        }
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
-        return validCard(upgradeCheck);
+        return validCard(card);
     }
 
     protected void addToBot(AbstractGameAction action) {
@@ -79,21 +72,6 @@ public abstract class AbstractAugment extends AbstractCardModifier {
 
     protected void addToTop(AbstractGameAction action) {
         AbstractDungeon.actionManager.addToTop(action);
-    }
-
-    public static boolean isNormalCard(AbstractCard card) {
-        return card.type != AbstractCard.CardType.CURSE && card.type != AbstractCard.CardType.STATUS;
-    }
-
-    public static boolean cardDoesntExhaust(AbstractCard card) {
-        return !card.exhaust && !card.purgeOnUse && ExhaustiveField.ExhaustiveFields.baseExhaustive.get(card) == -1 && ExhaustiveField.ExhaustiveFields.exhaustive.get(card) == -1;
-    }
-
-    public static boolean doesntOverride(AbstractCard card, String method, Class<?>... paramtypez) {
-        try {
-            return card.getClass().getMethod(method, paramtypez).getDeclaringClass().equals(AbstractCard.class);
-        } catch (NoSuchMethodException ignored) {}
-        return false;
     }
 
     public static void modifyBaseStat(AbstractCard card, BuffType type, float buffMulti) {
@@ -188,7 +166,71 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         return usesMagic;
     }
 
+    public static boolean upgradesAVariable(AbstractCard card) {
+        AbstractCard base = card.makeCopy();
+        AbstractCard upgradeCheck = card.makeCopy();
+        upgradeCheck.upgrade();
+        return ((base.baseMagicNumber < upgradeCheck.baseMagicNumber && usesMagic(upgradeCheck)) || base.baseDamage < upgradeCheck.baseDamage || base.baseBlock < upgradeCheck.baseBlock);
+    }
+
+    public static boolean upgradesDamage(AbstractCard card) {
+        AbstractCard base = card.makeCopy();
+        AbstractCard upgradeCheck = card.makeCopy();
+        upgradeCheck.upgrade();
+        return base.baseDamage < upgradeCheck.baseDamage;
+    }
+
+    public static boolean upgradesBlock(AbstractCard card) {
+        AbstractCard base = card.makeCopy();
+        AbstractCard upgradeCheck = card.makeCopy();
+        upgradeCheck.upgrade();
+        return base.baseBlock < upgradeCheck.baseBlock;
+    }
+
+    public static boolean upgradesMagic(AbstractCard card) {
+        AbstractCard base = card.makeCopy();
+        AbstractCard upgradeCheck = card.makeCopy();
+        upgradeCheck.upgrade();
+        return (base.baseMagicNumber < upgradeCheck.baseMagicNumber) && usesMagic(upgradeCheck);
+    }
+
     public static boolean allowOrbMods() {
         return CardAugmentsMod.allowOrbs || AbstractDungeon.player.hasRelic(PrismaticShard.ID) || CardAugmentsMod.ORB_CHARS.contains(AbstractDungeon.player.chosenClass);
+    }
+
+    public static boolean isNormalCard(AbstractCard card) {
+        return card.type != AbstractCard.CardType.CURSE && card.type != AbstractCard.CardType.STATUS;
+    }
+
+    public static boolean doesntExhaust(AbstractCard card) {
+        return !card.exhaust && !card.purgeOnUse && ExhaustiveField.ExhaustiveFields.baseExhaustive.get(card) == -1 && ExhaustiveField.ExhaustiveFields.exhaustive.get(card) == -1;
+    }
+
+    public static boolean doesntUpgradeExhaust(AbstractCard card) {
+        AbstractCard base = card.makeCopy();
+        AbstractCard upgradeCheck = card.makeCopy();
+        upgradeCheck.upgrade();
+        return base.exhaust == upgradeCheck.exhaust;
+    }
+
+    public static boolean doesntUpgradeCost(AbstractCard card) {
+        AbstractCard base = card.makeCopy();
+        AbstractCard upgradeCheck = card.makeCopy();
+        upgradeCheck.upgrade();
+        return base.cost < upgradeCheck.cost;
+    }
+
+    public static boolean doesntDowngradeMagic(AbstractCard card) {
+        AbstractCard base = card.makeCopy();
+        AbstractCard upgradeCheck = card.makeCopy();
+        upgradeCheck.upgrade();
+        return (base.baseMagicNumber <= upgradeCheck.baseMagicNumber) && usesMagic(upgradeCheck);
+    }
+
+    public static boolean doesntOverride(AbstractCard card, String method, Class<?>... paramtypez) {
+        try {
+            return card.getClass().getMethod(method, paramtypez).getDeclaringClass().equals(AbstractCard.class);
+        } catch (NoSuchMethodException ignored) {}
+        return false;
     }
 }

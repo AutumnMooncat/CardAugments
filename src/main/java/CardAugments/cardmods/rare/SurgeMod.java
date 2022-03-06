@@ -3,7 +3,6 @@ package CardAugments.cardmods.rare;
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
-import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.ExhaustiveField;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -25,7 +24,7 @@ public class SurgeMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.rarity != AbstractCard.CardRarity.BASIC && card.rarity != AbstractCard.CardRarity.COMMON && card.cost != -2 && card.type != AbstractCard.CardType.POWER && cardDoesntExhaust(card);
+        return card.rarity != AbstractCard.CardRarity.BASIC && card.rarity != AbstractCard.CardRarity.COMMON && card.cost != -2 && card.type != AbstractCard.CardType.POWER && doesntExhaust(card);
     }
 
     @Override
