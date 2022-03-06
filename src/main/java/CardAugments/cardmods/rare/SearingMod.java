@@ -4,6 +4,7 @@ import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import CardAugments.patches.InfiniteUpgradesPatches;
 import basemod.abstracts.AbstractCardModifier;
+import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.BranchingUpgradesCard;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 
@@ -18,17 +19,15 @@ public class SearingMod extends AbstractAugment {
 
     @Override
     public boolean canRoll(AbstractCard card) {
+        AbstractCard base = card.makeCopy();
         AbstractCard upgradeCheck = card.makeCopy();
-        while (card.timesUpgraded >= upgradeCheck.timesUpgraded) {
-            upgradeCheck.upgraded = false;
-            upgradeCheck.upgrade();
-        }
-        return validCard(card) && ((card.baseMagicNumber < upgradeCheck.baseMagicNumber && usesMagic(upgradeCheck)) || card.baseDamage < upgradeCheck.baseDamage || card.baseBlock < upgradeCheck.baseBlock);
+        upgradeCheck.upgrade();
+        return validCard(card) && ((base.baseMagicNumber < upgradeCheck.baseMagicNumber && usesMagic(upgradeCheck)) || base.baseDamage < upgradeCheck.baseDamage || base.baseBlock < upgradeCheck.baseBlock);
     }
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return isNormalCard(card) && doesntOverride(card, "canUpgrade");
+        return isNormalCard(card) && doesntOverride(card, "canUpgrade") && !(card instanceof BranchingUpgradesCard);
     }
 
     @Override
