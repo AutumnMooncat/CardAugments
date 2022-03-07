@@ -42,6 +42,9 @@
   "CardAugments:AmplifiedMod": {
     "TEXT": ["Amplified ", ""]
   },
+  "CardAugments:AugerMod": {
+    "TEXT": ["Auger ", "", " NL If this breaks a target's Block, apply %d Vulnerable."]
+  },
   "CardAugments:AutoMod": {
     "TEXT": ["Auto-", "", "Autoplay. NL "," NL Draw %d card."]
   },
