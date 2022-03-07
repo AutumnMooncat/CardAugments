@@ -15,6 +15,7 @@ import com.megacrit.cardcrawl.events.shrines.GremlinMatchGame;
 import com.megacrit.cardcrawl.neow.NeowReward;
 import com.megacrit.cardcrawl.relics.PandorasBox;
 import com.megacrit.cardcrawl.screens.select.GridCardSelectScreen;
+import com.megacrit.cardcrawl.vfx.FastCardObtainEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 import javassist.CtBehavior;
 import mintySpire.patches.cards.betterUpdatePreview.CardFields;
@@ -199,7 +200,9 @@ public class OnCardGeneratedPatches {
             AbstractCardModifier m = validMods.get(AbstractDungeon.miscRng.random(validMods.size()-1)).makeCopy();
             CardModifierManager.addModifier(c, m);
             if (index != -1 && CardAugmentsMod.isMintyLoaded) {
-                CardModifierManager.addModifier(CardFields.SCVPopup.unupgradedCardRewards.get(CardCrawlGame.cardPopup).get(index), m);
+                if (index < CardFields.SCVPopup.unupgradedCardRewards.get(CardCrawlGame.cardPopup).size()) {
+                    CardModifierManager.addModifier(CardFields.SCVPopup.unupgradedCardRewards.get(CardCrawlGame.cardPopup).get(index), m);
+                }
             }
         }
     }
