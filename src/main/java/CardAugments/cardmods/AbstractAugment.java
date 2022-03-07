@@ -77,7 +77,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     public static void modifyBaseStat(AbstractCard card, BuffType type, float buffMulti) {
         AbstractCard deltaCheck = card.makeCopy();
         if (InfiniteUpgradesPatches.InfUpgradeField.inf.get(card)) {
-            InfiniteUpgradesPatches.InfUpgradeField.inf.set(deltaCheck, true); // Needed for while upgrading check to not explode
+            InfiniteUpgradesPatches.InfUpgradeField.inf.set(deltaCheck, true); // Needed for loop upgrading to work properly
         }
         int discrepancy; //Stores a discrepancy with the new card (from previous damage modifications)
         int baseVal;
@@ -85,7 +85,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         switch (type) {
             case DAMAGE:
                 baseVal = deltaCheck.baseDamage; //Store the original unedited base value of a fresh copy
-                while (deltaCheck.timesUpgraded < card.timesUpgraded) { //Make our new copy as many times upgraded as our actual card
+                for (int i = 0 ; i < Math.abs(card.timesUpgraded) ; i++) {
                     deltaCheck.upgrade();
                 }
                 discrepancy = card.baseDamage - deltaCheck.baseDamage; //Determine the difference in damage. This can be caused by calling modifyBaseStat more than once
@@ -102,7 +102,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
                 break;
             case BLOCK:
                 baseVal = deltaCheck.baseBlock;
-                while (deltaCheck.timesUpgraded < card.timesUpgraded) {
+                for (int i = 0 ; i < Math.abs(card.timesUpgraded) ; i++) {
                     deltaCheck.upgrade();
                 }
                 discrepancy = card.baseBlock - deltaCheck.baseBlock;
@@ -119,7 +119,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
                 break;
             case MAGIC:
                 baseVal = deltaCheck.baseMagicNumber;
-                while (deltaCheck.timesUpgraded < card.timesUpgraded) {
+                for (int i = 0 ; i < Math.abs(card.timesUpgraded) ; i++) {
                     deltaCheck.upgrade();
                 }
                 discrepancy = card.baseMagicNumber - deltaCheck.baseMagicNumber;
