@@ -28,12 +28,12 @@ public class LuckyMod extends AbstractAugment {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + String.format(TEXT[2], SCRY);
+        return String.format(TEXT[2], SCRY) + rawDescription;
     }
 
     @Override
     public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
-        this.addToBot(new ScryAction(SCRY));
+        this.addToTop(new ScryAction(SCRY));
     }
 
     @Override

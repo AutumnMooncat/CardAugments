@@ -133,7 +133,7 @@
     "TEXT": ["Heavy ", "", " NL Strength affects this card %d times."]
   },
   "CardAugments:LuckyMod": {
-    "TEXT": ["Lucky ", "", " NL Scry %d."]
+    "TEXT": ["Lucky ", "", "Scry %d. NL "]
   },
   "CardAugments:MasochisticMod": {
     "TEXT": ["Masochistic ", "", " NL Gains 3 additional Block per debuff you have."]
