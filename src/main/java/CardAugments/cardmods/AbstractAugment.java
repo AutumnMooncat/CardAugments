@@ -220,7 +220,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         AbstractCard base = card.makeCopy();
         AbstractCard upgradeCheck = card.makeCopy();
         upgradeCheck.upgrade();
-        return base.cost < upgradeCheck.cost;
+        return base.cost == upgradeCheck.cost;
     }
 
     public static boolean doesntDowngradeMagic(AbstractCard card) {
