@@ -252,7 +252,7 @@
     "TEXT": ["Holy ", "", " NL Add a *Miracle to your hand."]
   },
   "CardAugments:InfiniteMod": {
-    "TEXT": ["Infinite ", "s", "At the start of your turn, add a *%s to your hand."]
+    "TEXT": ["Infinite ", "s", "At the start of your turn, add a %s to your hand."]
   },
   "CardAugments:InfiniteGeneratedMod": {
     "TEXT": ["Ethereal. NL ", " NL Exhaust."]
