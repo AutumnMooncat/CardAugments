@@ -233,4 +233,26 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         } catch (NoSuchMethodException ignored) {}
         return false;
     }
+
+    public static String[] removeUpgradeText(String rawDescription) {
+        //Set up the return Strings
+        String[] ret = new String[]{"", rawDescription};
+        //If it ends in a single + and *, remove it
+        if (rawDescription.endsWith("+") || rawDescription.endsWith("*")) {
+            ret[1] = rawDescription.substring(rawDescription.length()-1);
+            ret[0] = rawDescription.substring(0, rawDescription.length()-1);
+        } else {
+            //See if it has a +
+            int index = rawDescription.lastIndexOf("+");
+            if (index == -1) { //Failing that try a *
+                index = rawDescription.lastIndexOf("*");
+            }
+            //If everything after the + or * is a number, this is our upgrade text
+            if (index != -1 && rawDescription.substring(index).chars().allMatch(Character::isDigit)) {
+                ret[1] = rawDescription.substring(index);
+                ret[0] = rawDescription.substring(0, index);
+            }
+        }
+        return ret;
+    }
 }
