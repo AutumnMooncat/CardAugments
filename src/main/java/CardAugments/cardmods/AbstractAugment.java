@@ -6,14 +6,18 @@ import basemod.abstracts.AbstractCardModifier;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.ExhaustiveField;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.colorless.PanicButton;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.PrismaticShard;
+import javassist.CannotCompileException;
 import javassist.ClassPool;
 import javassist.CtMethod;
 import javassist.expr.ExprEditor;
 import javassist.expr.FieldAccess;
+import javassist.expr.MethodCall;
+import javassist.expr.NewExpr;
 import org.apache.commons.lang3.StringUtils;
 
 public abstract class AbstractAugment extends AbstractCardModifier {
@@ -142,7 +146,6 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     }
 
     private static boolean usesMagic;
-
     public static boolean usesMagic(AbstractCard card) {
         usesMagic = false;
         if (card.baseMagicNumber > 0 && StringUtils.containsIgnoreCase(card.rawDescription, "!M!") && !(card instanceof PanicButton)) {
@@ -234,23 +237,23 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         return false;
     }
 
-    public static String[] removeUpgradeText(String rawDescription) {
+    public static String[] removeUpgradeText(String name) {
         //Set up the return Strings
-        String[] ret = new String[]{"", rawDescription};
+        String[] ret = new String[]{name, ""};
         //If it ends in a single + and *, remove it
-        if (rawDescription.endsWith("+") || rawDescription.endsWith("*")) {
-            ret[1] = rawDescription.substring(rawDescription.length()-1);
-            ret[0] = rawDescription.substring(0, rawDescription.length()-1);
+        if (name.endsWith("+") || name.endsWith("*")) {
+            ret[1] = name.substring(name.length()-1);
+            ret[0] = name.substring(0, name.length()-1);
         } else {
             //See if it has a +
-            int index = rawDescription.lastIndexOf("+");
+            int index = name.lastIndexOf("+");
             if (index == -1) { //Failing that try a *
-                index = rawDescription.lastIndexOf("*");
+                index = name.lastIndexOf("*");
             }
             //If everything after the + or * is a number, this is our upgrade text
-            if (index != -1 && rawDescription.substring(index).chars().allMatch(Character::isDigit)) {
-                ret[1] = rawDescription.substring(index);
-                ret[0] = rawDescription.substring(0, index);
+            if (index != -1 && name.substring(index+1).chars().allMatch(Character::isDigit)) {
+                ret[1] = name.substring(index);
+                ret[0] = name.substring(0, index);
             }
         }
         return ret;

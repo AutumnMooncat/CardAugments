@@ -54,7 +54,8 @@ public class RollMod extends AbstractAugment implements DynvarCarrier {
 
     @Override
     public String modifyName(String cardName, AbstractCard card) {
-        return TEXT[0] + cardName + TEXT[1];
+        String[] nameParts = removeUpgradeText(cardName);
+        return TEXT[0] + nameParts[0] + TEXT[1] + nameParts[1];
     }
 
     @Override
