@@ -231,6 +231,9 @@
   "CardAugments:WallopMod": {
     "TEXT": ["Walloping ", "", " NL Gain Block equal to unblocked damage dealt."]
   },
+  "CardAugments:XMod": {
+    "TEXT": ["", " X", " NL Performed X times."]
+  },
   "CardAugments:DevotedMod": {
     "TEXT": ["Devoted ", "", " NL Gain %d Mantra."]
   },
