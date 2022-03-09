@@ -98,7 +98,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
                     deltaCheck.upgrade();
                 }
                 upgradeVal = deltaCheck.baseDamage + discrepancy; //Determine what the upgraded value of a proper copy would be. We again add the discrepancy with our real card
-                card.baseDamage += Math.ceil(Math.max(baseVal, upgradeVal)*buffMulti); //We need to compare upgraded and not upgraded in case someone makes a card that lowers the value on upgrade
+                card.baseDamage += roundHelper(Math.max(baseVal, upgradeVal)*buffMulti); //We need to compare upgraded and not upgraded in case someone makes a card that lowers the value on upgrade
                 if (card.baseDamage < 1) {
                     card.baseDamage = 1;
                 }
@@ -115,7 +115,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
                     deltaCheck.upgrade();
                 }
                 upgradeVal = deltaCheck.baseBlock + discrepancy;
-                card.baseBlock += Math.ceil(Math.max(baseVal, upgradeVal)*buffMulti);
+                card.baseBlock += roundHelper(Math.max(baseVal, upgradeVal)*buffMulti);
                 if (card.baseBlock < 1) {
                     card.baseBlock = 1;
                 }
@@ -132,7 +132,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
                     deltaCheck.upgrade();
                 }
                 upgradeVal = deltaCheck.baseMagicNumber + discrepancy;
-                card.baseMagicNumber += Math.ceil(Math.max(baseVal, upgradeVal)*buffMulti);
+                card.baseMagicNumber += roundHelper(Math.max(baseVal, upgradeVal)*buffMulti);
                 if (card.baseMagicNumber < 1) {
                     card.baseMagicNumber = 1;
                 }
@@ -143,6 +143,10 @@ public abstract class AbstractAugment extends AbstractCardModifier {
 
     public static void modifyBaseStat(AbstractCard card, BuffType type, BuffScale scaling) {
         modifyBaseStat(card, type, scaling.getMulti());
+    }
+
+    private static double roundHelper(float val) {
+        return val >= 0 ? Math.ceil(val) : Math.floor(val);
     }
 
     private static boolean usesMagic;
