@@ -19,6 +19,7 @@ public class ElectroMod extends AbstractAugment {
     @Override
     public void onInitialApplication(AbstractCard card) {
         modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MODERATE_DEBUFF);
+        card.showEvokeValue = true;
     }
 
     @Override

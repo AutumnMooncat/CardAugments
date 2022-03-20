@@ -24,6 +24,7 @@ public class GloomMod extends AbstractAugment {
         if (card.baseBlock > 1) {
             modifyBaseStat(card, BuffType.BLOCK, BuffScale.MODERATE_DEBUFF);
         }
+        card.showEvokeValue = true;
     }
 
     @Override

@@ -20,6 +20,7 @@ public class NuclearMod extends AbstractAugment {
     public void onInitialApplication(AbstractCard card) {
         card.cost = card.cost + 1;
         card.costForTurn = card.cost;
+        card.showEvokeValue = true;
     }
 
     @Override
