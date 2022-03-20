@@ -6,18 +6,17 @@ import basemod.abstracts.AbstractCardModifier;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.ExhaustiveField;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.colorless.PanicButton;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.PrismaticShard;
-import javassist.CannotCompileException;
+import com.megacrit.cardcrawl.stances.AbstractStance;
 import javassist.ClassPool;
 import javassist.CtMethod;
 import javassist.expr.ExprEditor;
 import javassist.expr.FieldAccess;
-import javassist.expr.MethodCall;
-import javassist.expr.NewExpr;
 import org.apache.commons.lang3.StringUtils;
 
 public abstract class AbstractAugment extends AbstractCardModifier {
@@ -239,6 +238,30 @@ public abstract class AbstractAugment extends AbstractCardModifier {
             return card.getClass().getMethod(method, paramtypez).getDeclaringClass().equals(AbstractCard.class);
         } catch (NoSuchMethodException ignored) {}
         return false;
+    }
+
+    public static boolean noShenanigans(AbstractCard card) {
+        return doesntOverride(card, "canUse", AbstractPlayer.class, AbstractMonster.class)
+                && doesntOverride(card, "tookDamage")
+                && doesntOverride(card, "didDiscard")
+                && doesntOverride(card, "switchedStance")
+                && doesntOverride(card, "triggerWhenDrawn")
+                && doesntOverride(card, "triggerWhenCopied")
+                && doesntOverride(card, "triggerOnEndOfTurnForPlayingCard")
+                && doesntOverride(card, "triggerOnOtherCardPlayed", AbstractCard.class)
+                && doesntOverride(card, "triggerOnGainEnergy", int.class, boolean.class)
+                && doesntOverride(card, "switchedStance")
+                && doesntOverride(card, "triggerOnManualDiscard")
+                && doesntOverride(card, "triggerOnCardPlayed", AbstractCard.class)
+                && doesntOverride(card, "triggerOnScry")
+                && doesntOverride(card, "triggerExhaustedCardsOnStanceChange", AbstractStance.class)
+                && doesntOverride(card, "triggerAtStartOfTurn")
+                && doesntOverride(card, "onPlayCard", AbstractCard.class, AbstractMonster.class)
+                && doesntOverride(card, "atTurnStart")
+                && doesntOverride(card, "atTurnStartPreDraw")
+                && doesntOverride(card, "onChoseThisOption")
+                && doesntOverride(card, "onRetained")
+                && doesntOverride(card, "triggerOnExhaust");
     }
 
     public static String[] removeUpgradeText(String name) {
