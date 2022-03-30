@@ -18,6 +18,11 @@
   "CardAugments:ExampleMod": {
     "TEXT": ["Prefix name", "Suffix name", "Description stuff"]
   },
+  "CardAugments:AbsoluteMod": {
+    "TEXT": ["Absolute ", "", " NL Absolute cards must be played before other cards in your hand.",
+            "Translator note: This is the cant use message that will appear",
+            "The "," is Absolute!"]
+  },
   "CardAugments:AllOutMod": {
     "TEXT": ["All-Out ", "", " NL Discard %d card at random.",
       "Translator note: These strings are for replacing All-Out Attack's description. The first string is what to search for, the second string replaces it.",
