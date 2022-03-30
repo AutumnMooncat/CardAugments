@@ -72,7 +72,7 @@ public class SanctifiedMod extends AbstractAugment {
         return new CardBorderGlowManager.GlowInfo() {
             @Override
             public boolean test(AbstractCard abstractCard) {
-                return !(abstractCard instanceof Sanctity) && (!AbstractDungeon.actionManager.cardsPlayedThisCombat.isEmpty() && (AbstractDungeon.actionManager.cardsPlayedThisCombat.get(AbstractDungeon.actionManager.cardsPlayedThisCombat.size() - 1)).type == AbstractCard.CardType.SKILL);
+                return !(abstractCard instanceof Sanctity) && hasThisMod(abstractCard) && lastCardPlayedCheck(c -> c.type == AbstractCard.CardType.SKILL);
             }
 
             @Override

@@ -4,6 +4,7 @@ import CardAugments.CardAugmentsMod;
 import CardAugments.patches.InfiniteUpgradesPatches;
 import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardBorderGlowManager;
+import basemod.helpers.CardModifierManager;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.ExhaustiveField;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -19,6 +20,8 @@ import javassist.CtMethod;
 import javassist.expr.ExprEditor;
 import javassist.expr.FieldAccess;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.function.Predicate;
 
 public abstract class AbstractAugment extends AbstractCardModifier {
     public enum AugmentRarity {
@@ -58,6 +61,17 @@ public abstract class AbstractAugment extends AbstractCardModifier {
 
     public CardBorderGlowManager.GlowInfo getGlowInfo() {
         return null;
+    }
+
+    public boolean hasThisMod(AbstractCard card) {
+        return CardModifierManager.modifiers(card).stream().anyMatch(m -> m.identifier(card).equals(identifier(card)));
+    }
+
+    public boolean lastCardPlayedCheck(Predicate<AbstractCard> p) {
+        if (AbstractDungeon.actionManager.cardsPlayedThisCombat.isEmpty()) {
+            return false;
+        }
+        return p.test(AbstractDungeon.actionManager.cardsPlayedThisCombat.get(AbstractDungeon.actionManager.cardsPlayedThisCombat.size() - 1));
     }
 
     public void onDamaged(AbstractCard c) {}

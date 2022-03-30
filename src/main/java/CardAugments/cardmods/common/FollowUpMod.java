@@ -64,7 +64,7 @@ public class FollowUpMod extends AbstractAugment {
         return new CardBorderGlowManager.GlowInfo() {
             @Override
             public boolean test(AbstractCard abstractCard) {
-                return !AbstractDungeon.actionManager.cardsPlayedThisCombat.isEmpty() && (AbstractDungeon.actionManager.cardsPlayedThisCombat.get(AbstractDungeon.actionManager.cardsPlayedThisCombat.size() - 1)).type == AbstractCard.CardType.ATTACK;
+                return hasThisMod(abstractCard) && lastCardPlayedCheck(c -> c.type == AbstractCard.CardType.ATTACK);
             }
 
             @Override
