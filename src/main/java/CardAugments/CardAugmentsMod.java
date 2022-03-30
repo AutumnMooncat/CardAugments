@@ -163,6 +163,10 @@ public class CardAugmentsMod implements
                 rareMods.add(a);
                 break;
         }
+        CardBorderGlowManager.GlowInfo i = a.getGlowInfo();
+        if (i != null) {
+            CardBorderGlowManager.addGlowInfo(i);
+        }
     }
 
     public static void setModID(String ID) {
@@ -322,23 +326,6 @@ public class CardAugmentsMod implements
         logger.info("Setting up Dynamic Dynamic Variable Manager...");
 
         BaseMod.addDynamicVariable(DynamicDynamicVariableManager.instance);
-
-        CardBorderGlowManager.addGlowInfo(new CardBorderGlowManager.GlowInfo() {
-            @Override
-            public boolean test(AbstractCard card) {
-                return CardModifierManager.modifiers(card).stream().anyMatch(m -> m instanceof AbstractAugment && ((AbstractAugment) m).glowCheck(card));
-            }
-
-            @Override
-            public Color getColor(AbstractCard card) {
-                return Color.GOLD.cpy();
-            }
-
-            @Override
-            public String glowID() {
-                return SanctifiedMod.ID;
-            }
-        });
 
         logger.info("Done");
 

@@ -3,6 +3,8 @@ package CardAugments.cardmods.common;
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
+import basemod.helpers.CardBorderGlowManager;
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.actions.watcher.FollowUpAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -58,7 +60,22 @@ public class FollowUpMod extends AbstractAugment {
     }
 
     @Override
-    public boolean glowCheck(AbstractCard card) {
-        return !AbstractDungeon.actionManager.cardsPlayedThisCombat.isEmpty() && (AbstractDungeon.actionManager.cardsPlayedThisCombat.get(AbstractDungeon.actionManager.cardsPlayedThisCombat.size() - 1)).type == AbstractCard.CardType.ATTACK;
+    public CardBorderGlowManager.GlowInfo getGlowInfo() {
+        return new CardBorderGlowManager.GlowInfo() {
+            @Override
+            public boolean test(AbstractCard abstractCard) {
+                return !AbstractDungeon.actionManager.cardsPlayedThisCombat.isEmpty() && (AbstractDungeon.actionManager.cardsPlayedThisCombat.get(AbstractDungeon.actionManager.cardsPlayedThisCombat.size() - 1)).type == AbstractCard.CardType.ATTACK;
+            }
+
+            @Override
+            public Color getColor(AbstractCard abstractCard) {
+                return Color.GOLD.cpy();
+            }
+
+            @Override
+            public String glowID() {
+                return ID+"Glow";
+            }
+        };
     }
 }

@@ -3,6 +3,8 @@ package CardAugments.cardmods.rare;
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
+import basemod.helpers.CardBorderGlowManager;
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.actions.watcher.SanctityAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -65,7 +67,23 @@ public class SanctifiedMod extends AbstractAugment {
         return ID;
     }
 
-    public boolean glowCheck(AbstractCard card) {
-        return !(card instanceof Sanctity) && (!AbstractDungeon.actionManager.cardsPlayedThisCombat.isEmpty() && (AbstractDungeon.actionManager.cardsPlayedThisCombat.get(AbstractDungeon.actionManager.cardsPlayedThisCombat.size() - 1)).type == AbstractCard.CardType.SKILL);
+    @Override
+    public CardBorderGlowManager.GlowInfo getGlowInfo() {
+        return new CardBorderGlowManager.GlowInfo() {
+            @Override
+            public boolean test(AbstractCard abstractCard) {
+                return !(abstractCard instanceof Sanctity) && (!AbstractDungeon.actionManager.cardsPlayedThisCombat.isEmpty() && (AbstractDungeon.actionManager.cardsPlayedThisCombat.get(AbstractDungeon.actionManager.cardsPlayedThisCombat.size() - 1)).type == AbstractCard.CardType.SKILL);
+            }
+
+            @Override
+            public Color getColor(AbstractCard abstractCard) {
+                return Color.GOLD.cpy();
+            }
+
+            @Override
+            public String glowID() {
+                return ID+"Glow";
+            }
+        };
     }
 }

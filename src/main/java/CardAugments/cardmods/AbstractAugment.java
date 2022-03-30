@@ -3,6 +3,7 @@ package CardAugments.cardmods;
 import CardAugments.CardAugmentsMod;
 import CardAugments.patches.InfiniteUpgradesPatches;
 import basemod.abstracts.AbstractCardModifier;
+import basemod.helpers.CardBorderGlowManager;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.ExhaustiveField;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -55,15 +56,15 @@ public abstract class AbstractAugment extends AbstractCardModifier {
 
     public abstract boolean validCard(AbstractCard card);
 
+    public CardBorderGlowManager.GlowInfo getGlowInfo() {
+        return null;
+    }
+
     public void onDamaged(AbstractCard c) {}
 
     public void onUpgradeCheck(AbstractCard card) {}
 
     public void updateDynvar(AbstractCard card) {}
-
-    public boolean glowCheck(AbstractCard card) {
-        return false;
-    }
 
     public boolean canRoll(AbstractCard card) {
         return validCard(card);
