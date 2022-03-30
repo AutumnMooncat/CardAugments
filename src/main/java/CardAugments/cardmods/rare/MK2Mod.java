@@ -5,6 +5,7 @@ import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.colorless.PanicButton;
+import com.megacrit.cardcrawl.cards.purple.Halt;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 
 public class MK2Mod extends AbstractAugment {
@@ -13,18 +14,15 @@ public class MK2Mod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
         if (card.baseDamage > 0) {
             modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MINOR_BUFF);
         }
         if (card.baseBlock > 0) {
             modifyBaseStat(card, BuffType.BLOCK, BuffScale.MINOR_BUFF);
         }
-        if (doesntDowngradeMagic(card) && !(card instanceof PanicButton)) {
+        if (doesntDowngradeMagic(card) && !(card instanceof PanicButton) && !(card instanceof Halt)) {
             modifyBaseStat(card, BuffType.MAGIC, BuffScale.MINOR_BUFF);
         }
-
     }
 
     @Override
