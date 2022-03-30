@@ -19,8 +19,12 @@ public class HemoMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        modifyBaseStat(card, BuffType.DAMAGE, BuffScale.HUGE_BUFF);
-        modifyBaseStat(card, BuffType.BLOCK, BuffScale.HUGE_BUFF);
+        if (card.baseDamage > 0) {
+            modifyBaseStat(card, BuffType.DAMAGE, BuffScale.HUGE_BUFF);
+        }
+        if (card.baseBlock > 0) {
+            modifyBaseStat(card, BuffType.BLOCK, BuffScale.HUGE_BUFF);
+        }
     }
 
     @Override
