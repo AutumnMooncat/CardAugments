@@ -15,7 +15,7 @@ public class CanPlayPatches {
             for (AbstractCard c : AbstractDungeon.player.hand.group) {
                 for (AbstractCardModifier m : CardModifierManager.modifiers(c)) {
                     if (m instanceof AbstractAugment) {
-                        if (!((AbstractAugment) m).betterCanPlay(__instance)) {
+                        if (!((AbstractAugment) m).betterCanPlay(c, __instance)) {
                             return SpireReturn.Return(false);
                         }
                     }
