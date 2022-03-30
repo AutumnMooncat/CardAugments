@@ -74,6 +74,10 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         return p.test(AbstractDungeon.actionManager.cardsPlayedThisCombat.get(AbstractDungeon.actionManager.cardsPlayedThisCombat.size() - 1));
     }
 
+    public boolean betterCanPlay(AbstractCard c) {
+        return true;
+    }
+
     public void onDamaged(AbstractCard c) {}
 
     public void onUpgradeCheck(AbstractCard card) {}
