@@ -20,8 +20,8 @@
   },
   "CardAugments:AbsoluteMod": {
     "TEXT": ["Absolute ", "", " NL Absolute cards must be played before other cards in your hand.",
-            "Translator note: This is the cant use message that will appear",
-            "The "," is Absolute!"]
+      "Translator note: This is the cant use message that will appear",
+      "The "," is Absolute!"]
   },
   "CardAugments:AllOutMod": {
     "TEXT": ["All-Out ", "", " NL Discard %d card at random.",

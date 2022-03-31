@@ -4,28 +4,30 @@ import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.colorless.PanicButton;
+import com.megacrit.cardcrawl.cards.purple.Halt;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
 public class AbsoluteMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID("AbsoluteMod");
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
-    private static final int LOSS = 2;
-
     @Override
     public void onInitialApplication(AbstractCard card) {
         if (card.baseDamage > 0) {
-            modifyBaseStat(card, BuffType.DAMAGE, BuffScale.HUGE_BUFF);
+            modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MAJOR_BUFF);
         }
         if (card.baseBlock > 0) {
-            modifyBaseStat(card, BuffType.BLOCK, BuffScale.HUGE_BUFF);
+            modifyBaseStat(card, BuffType.BLOCK, BuffScale.MAJOR_BUFF);
+        }
+        if (doesntDowngradeMagic(card) && !(card instanceof PanicButton) && !(card instanceof Halt)) {
+            modifyBaseStat(card, BuffType.MAGIC, BuffScale.MAJOR_BUFF);
         }
     }
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return (card.cost > 0 || card.cost == -1) && (card.baseDamage > 0 || card.baseBlock > 0);
+        return (card.cost > 0 || card.cost == -1) && (card.baseDamage > 0 || card.baseBlock > 0 || doesntDowngradeMagic(card)) && card.rarity != AbstractCard.CardRarity.BASIC;
     }
 
     @Override
