@@ -15,7 +15,7 @@ public class SlayerMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MINOR_DEBUFF);
+        modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MODERATE_DEBUFF);
     }
 
     @Override
@@ -30,7 +30,10 @@ public class SlayerMod extends AbstractAugment {
 
     @Override
     public float modifyDamageFinal(float damage, DamageInfo.DamageType type, AbstractCard card, AbstractMonster target) {
-        return AbstractDungeon.getMonsters().monsters.stream().noneMatch(m -> m.currentHealth < target.currentHealth) ? damage*1.5F : damage;
+        if (target == null) {
+            return damage;
+        }
+        return AbstractDungeon.getMonsters().monsters.stream().noneMatch(m -> !m.isDeadOrEscaped() && m.currentHealth < target.currentHealth) ? damage*2 : damage;
     }
 
     @Override

@@ -201,7 +201,7 @@
     "TEXT": ["Signature ", "", "Can only be played if this is the only Attack in your hand. NL "]
   },
   "CardAugments:SlayerMod": {
-    "TEXT": ["Slayer's ", "", " NL Deals 50% more damage to the enemy with the lowest HP."]
+    "TEXT": ["Slayer's ", "", " NL Deals double damage to the enemy with the lowest HP."]
   },
   "CardAugments:SlipperyMod": {
     "TEXT": ["Slippery ", "", " NL Discard this card the first time it is drawn each combat."]
