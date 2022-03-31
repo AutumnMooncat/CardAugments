@@ -18,7 +18,7 @@ public class GhostlyMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.baseBlock > 0 && !card.isEthereal;
+        return card.baseBlock > 0 && !card.isEthereal && !card.selfRetain;
     }
 
     @Override
