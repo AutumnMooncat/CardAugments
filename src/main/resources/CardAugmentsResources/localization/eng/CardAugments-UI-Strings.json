@@ -74,6 +74,9 @@
   "CardAugments:CultistMod": {
     "TEXT": ["Cultist's ", "", " NL Gain Strength equal to the cost of the last card played this combat."]
   },
+  "CardAugments:DoomedMod": {
+    "TEXT": ["Doomed ", "", " NL Deals %d additional damage for each Curse in your deck."]
+  },
   "CardAugments:DoubtfulMod": {
     "TEXT": ["Doubtful ", "", " NL Gain %d Weak."]
   },
