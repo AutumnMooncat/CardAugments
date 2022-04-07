@@ -3,9 +3,11 @@ package CardAugments;
 import CardAugments.cardmods.AbstractAugment;
 import CardAugments.cardmods.DynvarCarrier;
 import CardAugments.cardmods.rare.SanctifiedMod;
+import CardAugments.commands.Chimera;
 import CardAugments.dynvars.DynamicDynamicVariableManager;
 import CardAugments.util.TextureLoader;
 import basemod.*;
+import basemod.devcommands.ConsoleCommand;
 import basemod.helpers.CardBorderGlowManager;
 import basemod.helpers.CardModifierManager;
 import basemod.interfaces.EditKeywordsSubscriber;
@@ -86,6 +88,7 @@ public class CardAugmentsMod implements
     public static final ArrayList<AbstractAugment> commonMods = new ArrayList<>();
     public static final ArrayList<AbstractAugment> uncommonMods = new ArrayList<>();
     public static final ArrayList<AbstractAugment> rareMods = new ArrayList<>();
+    public static final HashMap<String, AbstractAugment> modMap = new HashMap<>();
 
     //List of orbies
     public static final ArrayList<AbstractPlayer.PlayerClass> ORB_CHARS = new ArrayList<>(Collections.singletonList(AbstractPlayer.PlayerClass.DEFECT));
@@ -161,6 +164,11 @@ public class CardAugmentsMod implements
     public static void registerAugment(AbstractAugment a) {
         if (a instanceof DynvarCarrier) {
             DynamicDynamicVariableManager.registerDynvarCarrier((DynvarCarrier) a);
+        }
+        if (!a.identifier(null).equals("")) {
+            modMap.put(a.identifier(null), a);
+        } else {
+            logger.warn("Augment "+ a +" does not set an identifier!");
         }
         switch (a.getModRarity()) {
             case COMMON:
@@ -352,6 +360,12 @@ public class CardAugmentsMod implements
                 .any(AbstractAugment.class, (info, abstractAugment) -> {registerAugment(abstractAugment);});
 
         logger.info("Done loading card mods");
+
+        logger.info("Setting up dev commands");
+
+        ConsoleCommand.addCommand("chimera", Chimera.class);
+
+        logger.info("Done setting up dev commands");
 
         logger.info("Setting up Dynamic Dynamic Variable Manager...");
 
