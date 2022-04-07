@@ -25,7 +25,7 @@ public class DoubtfulMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost > 0 && doesntUpgradeCost(card) && AbstractDungeon.player.isCursed();
+        return card.cost > 0 && doesntUpgradeCost(card) && hasACurse();
     }
 
     @Override

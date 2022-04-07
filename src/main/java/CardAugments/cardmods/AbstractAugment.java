@@ -219,6 +219,10 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         return (base.baseMagicNumber < upgradeCheck.baseMagicNumber) && usesMagic(upgradeCheck);
     }
 
+    public static boolean hasACurse() {
+        return AbstractDungeon.player.masterDeck.group.stream().anyMatch(c -> c.type == AbstractCard.CardType.CURSE);
+    }
+
     public static boolean allowOrbMods() {
         return CardAugmentsMod.allowOrbs || AbstractDungeon.player.hasRelic(PrismaticShard.ID) || CardAugmentsMod.ORB_CHARS.contains(AbstractDungeon.player.chosenClass);
     }
