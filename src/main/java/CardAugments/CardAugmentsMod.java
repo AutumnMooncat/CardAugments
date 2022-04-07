@@ -70,6 +70,12 @@ public class CardAugmentsMod implements
     public static final String MODIFY_STARTERS = "modifyStarters";
     public static boolean modifyStarters = false;
 
+    public static final String MODIFY_INSTANT_OBTAIN = "modifyInstantObtain";
+    public static boolean modifyInstantObtain = false;
+
+    public static final String MODIFY_SHOP = "modifyShop";
+    public static boolean modifyShop = false;
+
     public static final String ALLOW_ORBS = "allowOrbs";
     public static boolean allowOrbs = false;
 
@@ -124,6 +130,8 @@ public class CardAugmentsMod implements
         cardAugmentsDefaultSettings.setProperty(MODIFY_STARTERS, Boolean.toString(modifyStarters));
         cardAugmentsDefaultSettings.setProperty(ALLOW_ORBS, Boolean.toString(allowOrbs));
         cardAugmentsDefaultSettings.setProperty(RARITY_BIAS, String.valueOf(rarityBias));
+        cardAugmentsDefaultSettings.setProperty(MODIFY_INSTANT_OBTAIN, Boolean.toString(modifyInstantObtain));
+        cardAugmentsDefaultSettings.setProperty(MODIFY_SHOP, Boolean.toString(modifyShop));
         try {
             cardAugmentsConfig = new SpireConfig(modID, FILE_NAME, cardAugmentsDefaultSettings);
             enableMods = cardAugmentsConfig.getBool(ENABLE_MODS_SETTING);
@@ -134,6 +142,8 @@ public class CardAugmentsMod implements
             modifyStarters = cardAugmentsConfig.getBool(MODIFY_STARTERS);
             allowOrbs = cardAugmentsConfig.getBool(ALLOW_ORBS);
             rarityBias = cardAugmentsConfig.getInt(RARITY_BIAS);
+            modifyInstantObtain = cardAugmentsConfig.getBool(MODIFY_STARTERS);
+            modifyShop = cardAugmentsConfig.getBool(MODIFY_SHOP);
         } catch (IOException e) {
             logger.error("Card Augments SpireConfig initialization failed:");
             e.printStackTrace();
@@ -290,6 +300,24 @@ public class CardAugmentsMod implements
         });
         currentYposition -= spacingY;
 
+        //Used to modify starter cards
+        ModLabeledToggleButton enableInstantObtainModificationButton = new ModLabeledToggleButton(TEXT[8],400.0f - 40f, currentYposition - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
+                cardAugmentsConfig.getBool(MODIFY_INSTANT_OBTAIN), settingsPanel, (label) -> {}, (button) -> {
+            cardAugmentsConfig.setBool(MODIFY_INSTANT_OBTAIN, button.enabled);
+            modifyInstantObtain = button.enabled;
+            try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
+        });
+        currentYposition -= spacingY;
+
+        //Used to modify starter cards
+        ModLabeledToggleButton enableShopButton = new ModLabeledToggleButton(TEXT[9],400.0f - 40f, currentYposition - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
+                cardAugmentsConfig.getBool(MODIFY_SHOP), settingsPanel, (label) -> {}, (button) -> {
+            cardAugmentsConfig.setBool(MODIFY_SHOP, button.enabled);
+            modifyShop = button.enabled;
+            try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
+        });
+        currentYposition -= spacingY;
+
         //Used to allow orbs without prismatic shard
         ModLabeledToggleButton enableAllowOrbsButton = new ModLabeledToggleButton(TEXT[6],400.0f - 40f, currentYposition - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
                 cardAugmentsConfig.getBool(ALLOW_ORBS), settingsPanel, (label) -> {}, (button) -> {
@@ -308,10 +336,12 @@ public class CardAugmentsMod implements
         settingsPanel.addUIElement(uncommonSlider);
         settingsPanel.addUIElement(rareLabel);
         settingsPanel.addUIElement(rareSlider);
-        settingsPanel.addUIElement(enableStarterModificationButton);
-        settingsPanel.addUIElement(enableAllowOrbsButton);
         settingsPanel.addUIElement(biasLabel);
         settingsPanel.addUIElement(biasSlider);
+        settingsPanel.addUIElement(enableStarterModificationButton);
+        settingsPanel.addUIElement(enableInstantObtainModificationButton);
+        settingsPanel.addUIElement(enableShopButton);
+        settingsPanel.addUIElement(enableAllowOrbsButton);
 
         logger.info("Done loading badge Image and mod options");
 

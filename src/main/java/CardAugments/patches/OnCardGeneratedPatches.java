@@ -15,6 +15,8 @@ import com.megacrit.cardcrawl.events.shrines.GremlinMatchGame;
 import com.megacrit.cardcrawl.neow.NeowReward;
 import com.megacrit.cardcrawl.relics.PandorasBox;
 import com.megacrit.cardcrawl.screens.select.GridCardSelectScreen;
+import com.megacrit.cardcrawl.shop.Merchant;
+import com.megacrit.cardcrawl.shop.ShopScreen;
 import com.megacrit.cardcrawl.vfx.FastCardObtainEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 import javassist.CtBehavior;
@@ -49,8 +51,10 @@ public class OnCardGeneratedPatches {
     public static class ModifyConfirmScreenCards {
         @SpirePostfixPatch
         public static void patch(CardGroup group) {
-            for (AbstractCard c : group.group) {
-                rollCardAugment(c);
+            if (CardAugmentsMod.modifyInstantObtain) {
+                for (AbstractCard c : group.group) {
+                    rollCardAugment(c);
+                }
             }
         }
     }
@@ -108,8 +112,10 @@ public class OnCardGeneratedPatches {
     public static class ModifyPandoraCards {
         @SpireInsertPatch(locator = Locator.class, localvars = "group")
         public static void patch(CardGroup group) {
-            for (AbstractCard c : group.group) {
-                rollCardAugment(c);
+            if (CardAugmentsMod.modifyInstantObtain) {
+                for (AbstractCard c : group.group) {
+                    rollCardAugment(c);
+                }
             }
         }
         private static class Locator extends SpireInsertLocator {
@@ -142,7 +148,31 @@ public class OnCardGeneratedPatches {
     public static class ModifySpawnedMasterDeckCards {
         @SpirePostfixPatch
         public static void patch(AbstractCard ___card) {
-            rollCardAugment(___card);
+            if (CardAugmentsMod.modifyInstantObtain) {
+                rollCardAugment(___card);
+            }
+        }
+    }
+
+    @SpirePatch2(clz = Merchant.class, method = SpirePatch.CONSTRUCTOR, paramtypez = {float.class, float.class, int.class})
+    public static class ModifyShopCards {
+        @SpireInsertPatch(locator = Locator.class)
+        public static void patch(Merchant __instance, ArrayList<AbstractCard> ___cards1, ArrayList<AbstractCard> ___cards2) {
+            if (CardAugmentsMod.modifyShop) {
+                for (AbstractCard c : ___cards1) {
+                    rollCardAugment(c);
+                }
+                for (AbstractCard c : ___cards2) {
+                    rollCardAugment(c);
+                }
+            }
+        }
+        private static class Locator extends SpireInsertLocator {
+            @Override
+            public int[] Locate(CtBehavior ctMethodToPatch) throws Exception {
+                Matcher finalMatcher = new Matcher.MethodCallMatcher(ShopScreen.class, "init");
+                return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
+            }
         }
     }
 
