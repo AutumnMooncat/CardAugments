@@ -2,6 +2,7 @@ package CardAugments.commands;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
+import CardAugments.patches.RolledModFieldPatches;
 import basemod.DevConsole;
 import basemod.devcommands.ConsoleCommand;
 import basemod.helpers.CardModifierManager;
@@ -37,17 +38,18 @@ public class ChimeraHandAdd extends ConsoleCommand {
                     if (tokens.length > depth + 3 && ConvertHelper.tryParseInt(tokens[depth + 3]) != null) {
                         upgradeCount = ConvertHelper.tryParseInt(tokens[depth + 3], 0);
                     }
-                    DevConsole.log("adding " + count + (count == 1 ? " copy of " : " copies of ") + cardName + " with " + a + " and " + upgradeCount + " upgrade(s)");
+                    DevConsole.log("adding " + count + (count == 1 ? " copy of " : " copies of ") + cardName + " with " + a.getClass().getSimpleName() + " and " + upgradeCount + " upgrade(s)");
                     for (int i = 0 ; i < count ; i++) {
                         AbstractCard copy = c.makeCopy();
                         CardModifierManager.addModifier(copy, a.makeCopy());
                         for (int j = 0 ; j < upgradeCount ; j++) {
                             copy.upgrade();
                         }
+                        RolledModFieldPatches.RolledModField.rolled.set(copy, true);
                         AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(copy, true));
                     }
                 } else {
-                    DevConsole.log(a+ " cannot be applied to " + cardName);
+                    DevConsole.log(a.getClass().getSimpleName() + " cannot be applied to " + cardName);
                 }
             } else {
                 DevConsole.log("could not find card " + cardName);// 48

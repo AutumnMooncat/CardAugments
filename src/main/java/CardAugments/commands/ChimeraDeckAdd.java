@@ -41,7 +41,7 @@ public class ChimeraDeckAdd extends ConsoleCommand {
                     if (tokens.length > depth + 3 && ConvertHelper.tryParseInt(tokens[depth + 3]) != null) {
                         upgradeCount = ConvertHelper.tryParseInt(tokens[depth + 3], 0);
                     }
-                    DevConsole.log("adding " + count + (count == 1 ? " copy of " : " copies of ") + cardName + " with " + a + " and " + upgradeCount + " upgrade(s)");
+                    DevConsole.log("adding " + count + (count == 1 ? " copy of " : " copies of ") + cardName + " with " + a.getClass().getSimpleName() + " and " + upgradeCount + " upgrade(s)");
                     for (int i = 0 ; i < count ; i++) {
                         AbstractCard copy = c.makeCopy();
                         CardModifierManager.addModifier(copy, a.makeCopy());
@@ -49,10 +49,11 @@ public class ChimeraDeckAdd extends ConsoleCommand {
                             copy.upgrade();
                         }
                         UnlockTracker.markCardAsSeen(copy.cardID);
+                        RolledModFieldPatches.RolledModField.rolled.set(copy, true);
                         AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(copy, (float) Settings.WIDTH / 2.0F, (float)Settings.HEIGHT / 2.0F));
                     }
                 } else {
-                    DevConsole.log(a+ " cannot be applied to " + cardName);
+                    DevConsole.log(a.getClass().getSimpleName() + " cannot be applied to " + cardName);
                 }
             } else {
                 DevConsole.log("could not find card " + cardName);// 48
