@@ -256,11 +256,27 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         return (base.baseMagicNumber <= upgradeCheck.baseMagicNumber) && usesMagic(upgradeCheck);
     }
 
+    public static boolean doesntUpgradeTarget(AbstractCard card) {
+        AbstractCard base = card.makeCopy();
+        AbstractCard upgradeCheck = card.makeCopy();
+        upgradeCheck.upgrade();
+        return base.target == upgradeCheck.target;
+    }
+
     public static boolean doesntOverride(AbstractCard card, String method, Class<?>... paramtypez) {
         try {
             return card.getClass().getMethod(method, paramtypez).getDeclaringClass().equals(AbstractCard.class);
         } catch (NoSuchMethodException ignored) {}
         return false;
+    }
+
+    public static boolean nonModifiedAiming(AbstractCard card) {
+        return (card.target == AbstractCard.CardTarget.ENEMY
+                || card.target == AbstractCard.CardTarget.ALL_ENEMY
+                || card.target == AbstractCard.CardTarget.SELF
+                || card.target == AbstractCard.CardTarget.NONE
+                || card.target == AbstractCard.CardTarget.SELF_AND_ENEMY
+                || card.target == AbstractCard.CardTarget.ALL) && doesntUpgradeTarget(card);
     }
 
     public static boolean noShenanigans(AbstractCard card) {
