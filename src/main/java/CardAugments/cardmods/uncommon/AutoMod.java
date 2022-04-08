@@ -29,7 +29,7 @@ public class AutoMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return !AutoplayField.autoplay.get(card) && card.cost != -2;
+        return !AutoplayField.autoplay.get(card) && card.cost != -2 && !card.selfRetain && doesntUpgradeRetain(card);
     }
 
     @Override

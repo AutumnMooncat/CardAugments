@@ -263,6 +263,13 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         return base.target == upgradeCheck.target;
     }
 
+    public static boolean doesntUpgradeRetain(AbstractCard card) {
+        AbstractCard base = card.makeCopy();
+        AbstractCard upgradeCheck = card.makeCopy();
+        upgradeCheck.upgrade();
+        return base.selfRetain == upgradeCheck.selfRetain;
+    }
+
     public static boolean doesntOverride(AbstractCard card, String method, Class<?>... paramtypez) {
         try {
             return card.getClass().getMethod(method, paramtypez).getDeclaringClass().equals(AbstractCard.class);
