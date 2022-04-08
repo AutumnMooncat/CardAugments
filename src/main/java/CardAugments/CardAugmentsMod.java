@@ -41,8 +41,7 @@ import java.util.*;
 public class CardAugmentsMod implements
         EditStringsSubscriber,
         PostInitializeSubscriber,
-        EditKeywordsSubscriber,
-        PostCreateStartingDeckSubscriber {
+        EditKeywordsSubscriber {
     // Make sure to implement the subscribers *you* are using (read basemod wiki). Editing cards? EditCardsSubscriber.
     // Making relics? EditRelicsSubscriber. etc., etc., for a full list and how to make your own, visit the basemod wiki.
     public static final Logger logger = LogManager.getLogger(CardAugmentsMod.class.getName());
@@ -357,7 +356,7 @@ public class CardAugmentsMod implements
 
         new AutoAdd(modID)
                 .packageFilter("CardAugments.cardmods")
-                .any(AbstractAugment.class, (info, abstractAugment) -> {registerAugment(abstractAugment);});
+                .any(AbstractAugment.class, (info, abstractAugment) -> registerAugment(abstractAugment));
 
         logger.info("Done loading card mods");
 
@@ -443,22 +442,6 @@ public class CardAugmentsMod implements
             for (Keyword keyword : keywords) {
                 BaseMod.addKeyword(getModID().toLowerCase(), keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
                 //  getModID().toLowerCase() makes your keyword mod specific (it won't show up in other cards that use that word)
-            }
-        }
-    }
-
-    @Override
-    public void receivePostCreateStartingDeck(AbstractPlayer.PlayerClass playerClass, CardGroup deck) {
-        AbstractCard[] cardsToTest = {
-
-        };
-        AbstractAugment modToTest = null;
-        if (modToTest != null) {
-            for (AbstractCard c : cardsToTest) {
-                if (modToTest.canRoll(c)) {
-                    CardModifierManager.addModifier(c, modToTest.makeCopy());
-                    deck.addToBottom(c);
-                }
             }
         }
     }
