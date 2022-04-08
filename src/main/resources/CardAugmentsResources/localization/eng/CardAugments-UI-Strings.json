@@ -55,6 +55,9 @@
   "CardAugments:AutoMod": {
     "TEXT": ["Auto-", "", "Autoplay. NL "," NL Draw %d card."]
   },
+  "CardAugments:BerserkMod": {
+    "TEXT": ["Berserk ", "", " NL Deals 50% more damage if your HP is at or under 50%."]
+  },
   "CardAugments:BloodyMod": {
     "TEXT": ["", " for Blood", "Costs 1 less [E] for each time you lost HP this combat. NL ",
       "Translator note: These strings are for replacing Blood for Blood's description. The first string is what to search for, the second string replaces it.",
