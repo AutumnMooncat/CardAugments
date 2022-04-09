@@ -17,7 +17,7 @@ public class BootMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return isNormalCard(card) && !card.isInnate;
+        return isNormalCard(card) && !card.isInnate && doesntUpgradeInnate(card);
     }
 
     @Override

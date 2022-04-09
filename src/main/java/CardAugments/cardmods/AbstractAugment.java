@@ -270,6 +270,13 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         return base.selfRetain == upgradeCheck.selfRetain;
     }
 
+    public static boolean doesntUpgradeInnate(AbstractCard card) {
+        AbstractCard base = card.makeCopy();
+        AbstractCard upgradeCheck = card.makeCopy();
+        upgradeCheck.upgrade();
+        return base.selfRetain == upgradeCheck.selfRetain;
+    }
+
     public static boolean doesntOverride(AbstractCard card, String method, Class<?>... paramtypez) {
         try {
             return card.getClass().getMethod(method, paramtypez).getDeclaringClass().equals(AbstractCard.class);
@@ -277,7 +284,15 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         return false;
     }
 
-    public static boolean nonModifiedAiming(AbstractCard card) {
+    public static boolean targetedAiming(AbstractCard card) {
+        AbstractCard base = card.makeCopy();
+        AbstractCard upgradeCheck = card.makeCopy();
+        upgradeCheck.upgrade();
+        return (base.target == AbstractCard.CardTarget.ENEMY || base.target == AbstractCard.CardTarget.SELF_AND_ENEMY)
+                && (upgradeCheck.target == AbstractCard.CardTarget.ENEMY || upgradeCheck.target == AbstractCard.CardTarget.SELF_AND_ENEMY);
+    }
+
+    public static boolean overrideableAiming(AbstractCard card) {
         return (card.target == AbstractCard.CardTarget.ENEMY
                 || card.target == AbstractCard.CardTarget.ALL_ENEMY
                 || card.target == AbstractCard.CardTarget.SELF
