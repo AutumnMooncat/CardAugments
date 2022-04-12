@@ -42,13 +42,14 @@ public class MementoMod extends AbstractAugment {
     @Override
     public void onExhausted(AbstractCard card) {
         card.flash(Color.RED.cpy());
-        for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
+        this.addToBot(new DrawCardAction(AMOUNT));
+        /*for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
             if (!m.isDeadOrEscaped()) {
                 VulnerablePower v = new VulnerablePower(m, AMOUNT, true);
                 ReflectionHacks.setPrivate(v, VulnerablePower.class, "justApplied", true);
                 this.addToBot(new ApplyPowerAction(m, AbstractDungeon.player, v, AMOUNT, true));
             }
-        }
+        }*/
     }
 
     @Override

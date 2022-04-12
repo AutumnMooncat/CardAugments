@@ -158,7 +158,7 @@
     "TEXT": ["Masterful ", "", " NL Costs 1 additional [E] for each time you lose HP this combat."]
   },
   "CardAugments:MementoMod": {
-    "TEXT": ["", "'s Memento", "Ethereal. NL "," NL When Exhausted, apply %d Vulnerable to ALL enemies."]
+    "TEXT": ["", "'s Memento", "Ethereal. NL "," NL When Exhausted, draw %d cards."]
   },
   "CardAugments:MK2Mod": {
     "TEXT": ["", " MK2"]
