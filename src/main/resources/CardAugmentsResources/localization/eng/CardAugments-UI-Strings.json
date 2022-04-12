@@ -77,7 +77,7 @@
     "TEXT": ["Clashy ", "", "Can only be played if every card is your hand is an Attack. NL "]
   },
   "CardAugments:CultistMod": {
-    "TEXT": ["Cultist's ", "", " NL Gain Strength equal to the cost of the last card played this combat."]
+    "TEXT": ["Cultist's ", "", " NL Gain %d Strength."]
   },
   "CardAugments:DoomedMod": {
     "TEXT": ["Doomed ", "", " NL Deals %d additional damage for each Curse in your deck."]
