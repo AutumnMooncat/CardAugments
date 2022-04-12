@@ -25,7 +25,7 @@ public class SupplyMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost >= 0 && doesntUpgradeCost(card);
+        return card.cost >= 0 && cardCheck(card, c -> doesntUpgradeCost());
     }
     @Override
     public String modifyName(String cardName, AbstractCard card) {

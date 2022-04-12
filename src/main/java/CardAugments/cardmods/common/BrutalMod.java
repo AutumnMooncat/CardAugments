@@ -18,7 +18,7 @@ public class BrutalMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.baseDamage > 0 && !card.isEthereal;
+        return card.baseDamage > 0 && cardCheck(card, AbstractAugment::notEthereal);
     }
 
     @Override

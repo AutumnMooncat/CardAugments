@@ -24,7 +24,7 @@ public class HolyMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost >= 0 && doesntUpgradeCost(card) && card.type != AbstractCard.CardType.POWER;
+        return card.cost >= 0 && card.type != AbstractCard.CardType.POWER && cardCheck(card, c -> doesntUpgradeCost());
     }
 
     @Override

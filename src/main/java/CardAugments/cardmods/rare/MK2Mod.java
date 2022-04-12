@@ -20,14 +20,14 @@ public class MK2Mod extends AbstractAugment {
         if (card.baseBlock > 0) {
             modifyBaseStat(card, BuffType.BLOCK, BuffScale.MINOR_BUFF);
         }
-        if (doesntDowngradeMagic(card) && !(card instanceof PanicButton) && !(card instanceof Halt)) {
+        if (cardCheck(card, c -> doesntDowngradeMagic())) {
             modifyBaseStat(card, BuffType.MAGIC, BuffScale.MINOR_BUFF);
         }
     }
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.baseDamage > 0 || card.baseBlock > 0 || doesntDowngradeMagic(card);
+        return card.baseDamage > 0 || card.baseBlock > 0 || cardCheck(card, c -> doesntDowngradeMagic());
     }
 
     @Override

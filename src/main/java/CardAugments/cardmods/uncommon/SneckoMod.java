@@ -18,7 +18,7 @@ public class SneckoMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return (card.cost == 1 || card.cost == 2) && doesntUpgradeCost(card);
+        return (card.cost == 1 || card.cost == 2) && cardCheck(card, c -> doesntUpgradeCost());
     }
     @Override
     public String modifyName(String cardName, AbstractCard card) {

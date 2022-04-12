@@ -25,7 +25,7 @@ public class XMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return (card.cost == 0 || card.cost == 1) && doesntUpgradeCost(card) && isNormalCard(card);
+        return (card.cost == 0 || card.cost == 1) && isNormalCard(card) && cardCheck(card, c -> doesntUpgradeCost());
     }
 
     @Override

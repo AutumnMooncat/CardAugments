@@ -20,14 +20,14 @@ public class AbsoluteMod extends AbstractAugment {
         if (card.baseBlock > 0) {
             modifyBaseStat(card, BuffType.BLOCK, BuffScale.MAJOR_BUFF);
         }
-        if (doesntDowngradeMagic(card) && !(card instanceof PanicButton) && !(card instanceof Halt)) {
+        if (cardCheck(card, c -> doesntDowngradeMagic())) {
             modifyBaseStat(card, BuffType.MAGIC, BuffScale.MAJOR_BUFF);
         }
     }
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return (card.cost > 0 || card.cost == -1) && (card.baseDamage > 0 || card.baseBlock > 0 || doesntDowngradeMagic(card)) && card.rarity != AbstractCard.CardRarity.BASIC;
+        return (card.cost > 0 || card.cost == -1) && (card.baseDamage > 0 || card.baseBlock > 0 || cardCheck(card, c -> doesntDowngradeMagic())) && card.rarity != AbstractCard.CardRarity.BASIC;
     }
 
     @Override

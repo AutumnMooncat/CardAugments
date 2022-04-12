@@ -17,7 +17,7 @@ public class ReshuffleMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost != -2 && !card.shuffleBackIntoDrawPile && doesntExhaust(card) && card.type != AbstractCard.CardType.POWER;
+        return card.cost != -2 && card.type != AbstractCard.CardType.POWER && cardCheck(card, c -> notReshuffle(c) && notExhaust(c));
     }
 
     @Override

@@ -2,15 +2,11 @@ package CardAugments.cardmods.uncommon;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
-import basemod.ReflectionHacks;
 import basemod.abstracts.AbstractCardModifier;
 import com.badlogic.gdx.graphics.Color;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.VulnerablePower;
 
 public class MementoMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID("MementoMod");
@@ -25,7 +21,7 @@ public class MementoMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return doesntExhaust(card) && !card.isEthereal && card.cost != -2 && card.rarity != AbstractCard.CardRarity.BASIC;
+        return card.cost != -2 && card.rarity != AbstractCard.CardRarity.BASIC && cardCheck(card, c -> notExhaust(c) && notEthereal(c));
     }
 
     @Override

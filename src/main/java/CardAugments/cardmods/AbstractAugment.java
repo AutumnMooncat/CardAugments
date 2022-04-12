@@ -5,11 +5,13 @@ import CardAugments.patches.InfiniteUpgradesPatches;
 import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardBorderGlowManager;
 import basemod.helpers.CardModifierManager;
+import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.BranchingUpgradesCard;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.ExhaustiveField;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.colorless.PanicButton;
+import com.megacrit.cardcrawl.cards.purple.Halt;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -21,9 +23,14 @@ import javassist.expr.ExprEditor;
 import javassist.expr.FieldAccess;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Objects;
 import java.util.function.Predicate;
 
 public abstract class AbstractAugment extends AbstractCardModifier {
+    private static AbstractCard baseCheck;
+    private static AbstractCard upgradeCheck;
+    private static AbstractCard branchingCheck;
+
     public enum AugmentRarity {
         COMMON,
         UNCOMMON,
@@ -86,6 +93,23 @@ public abstract class AbstractAugment extends AbstractCardModifier {
 
     public boolean canRoll(AbstractCard card) {
         return validCard(card);
+    }
+
+    private static void setCardChecks(AbstractCard card) {
+        baseCheck = card.makeCopy();
+        upgradeCheck = card.makeCopy();
+        branchingCheck = card.makeCopy();
+        if (upgradeCheck instanceof BranchingUpgradesCard) {
+            ((BranchingUpgradesCard) upgradeCheck).setUpgradeType(BranchingUpgradesCard.UpgradeType.NORMAL_UPGRADE);
+            ((BranchingUpgradesCard) branchingCheck).setUpgradeType(BranchingUpgradesCard.UpgradeType.BRANCH_UPGRADE);
+        }
+        upgradeCheck.upgrade();
+        branchingCheck.upgrade();
+    }
+
+    public static boolean cardCheck(AbstractCard card, Predicate<AbstractCard> p) {
+        setCardChecks(card);
+        return p.test(card);
     }
 
     protected void addToBot(AbstractGameAction action) {
@@ -167,10 +191,125 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         return val >= 0 ? Math.ceil(val) : Math.floor(val);
     }
 
-    private static boolean usesMagic;
+    public static boolean upgradesAVariable() {
+        return upgradesDamage() || upgradesBlock() || upgradesMagic();
+    }
+
+    public static boolean upgradesDamage() {
+        return upgradeCheck.baseDamage > baseCheck.baseDamage || branchingCheck.baseDamage > baseCheck.baseDamage;
+    }
+
+    public static boolean upgradesBlock() {
+        return upgradeCheck.baseBlock > baseCheck.baseBlock || branchingCheck.baseBlock > baseCheck.baseBlock;
+    }
+
+    public static boolean upgradesMagic() {
+        return (upgradeCheck.baseMagicNumber > baseCheck.baseMagicNumber || branchingCheck.baseMagicNumber > baseCheck.baseMagicNumber) && usesMagic(baseCheck);
+    }
+
+    public static boolean doesntDowngradeMagic() {
+        return baseCheck.baseMagicNumber >= upgradeCheck.baseMagicNumber && baseCheck.baseMagicNumber >= branchingCheck.baseMagicNumber && usesMagic(baseCheck);
+    }
+
+    public static boolean reachesDamage(int amount) {
+        return baseCheck.baseDamage >= amount || upgradeCheck.baseDamage >= amount || branchingCheck.baseDamage >= amount;
+    }
+
+    public static boolean reachesBlock(int amount) {
+        return baseCheck.baseBlock >= amount || upgradeCheck.baseBlock >= amount || branchingCheck.baseBlock >= amount;
+    }
+
+    public static boolean reachesMagic(int amount) {
+        return (baseCheck.baseMagicNumber >= amount || upgradeCheck.baseMagicNumber >= amount || branchingCheck.baseMagicNumber >= amount) && usesMagic(baseCheck);
+    }
+
+    public static boolean doesntUpgradeCost() {
+        return baseCheck.cost == upgradeCheck.cost  && baseCheck.cost == branchingCheck.cost;
+    }
+
+    public static boolean notExhaust(AbstractCard card) {
+        return doesntExhaust(card) && doesntUpgradeExhaust();
+    }
+
+    public static boolean doesntUpgradeExhaust() {
+        return baseCheck.exhaust == upgradeCheck.exhaust && baseCheck.exhaust == branchingCheck.exhaust
+                && baseCheck.purgeOnUse == upgradeCheck.purgeOnUse && baseCheck.purgeOnUse == branchingCheck.purgeOnUse
+                && Objects.equals(ExhaustiveField.ExhaustiveFields.baseExhaustive.get(baseCheck), ExhaustiveField.ExhaustiveFields.baseExhaustive.get(upgradeCheck))
+                && Objects.equals(ExhaustiveField.ExhaustiveFields.baseExhaustive.get(baseCheck), ExhaustiveField.ExhaustiveFields.baseExhaustive.get(branchingCheck))
+                && Objects.equals(ExhaustiveField.ExhaustiveFields.exhaustive.get(baseCheck), ExhaustiveField.ExhaustiveFields.exhaustive.get(upgradeCheck))
+                && Objects.equals(ExhaustiveField.ExhaustiveFields.exhaustive.get(baseCheck), ExhaustiveField.ExhaustiveFields.exhaustive.get(branchingCheck));
+    }
+
+    public static boolean notEthereal(AbstractCard card) {
+        return !card.isEthereal && doesntUpgradeEthereal();
+    }
+
+    public static boolean doesntUpgradeEthereal() {
+        return baseCheck.isEthereal == upgradeCheck.isEthereal && baseCheck.isEthereal == branchingCheck.isEthereal;
+    }
+
+    public static boolean notInnate(AbstractCard card) {
+        return !card.isInnate && doesntUpgradeInnate();
+    }
+
+    public static boolean doesntUpgradeInnate() {
+        return baseCheck.isInnate == upgradeCheck.isInnate && baseCheck.isInnate == branchingCheck.isInnate;
+    }
+
+    public static boolean notRetain(AbstractCard card) {
+        return !card.selfRetain && doesntUpgradeRetain();
+    }
+
+    public static boolean doesntUpgradeRetain() {
+        return baseCheck.selfRetain == upgradeCheck.selfRetain && baseCheck.selfRetain == branchingCheck.selfRetain;
+    }
+
+    public static boolean notReshuffle(AbstractCard card) {
+        return !card.shuffleBackIntoDrawPile && doesntUpgradeReshuffle();
+    }
+
+    public static boolean doesntUpgradeReshuffle() {
+        return baseCheck.shuffleBackIntoDrawPile == upgradeCheck.shuffleBackIntoDrawPile && baseCheck.shuffleBackIntoDrawPile == branchingCheck.shuffleBackIntoDrawPile;
+    }
+
+    public static boolean doesntUpgradeTargeting() {
+        return baseCheck.target == upgradeCheck.target && baseCheck.target == branchingCheck.target;
+    }
+
+    public static boolean usesEnemyTargeting(AbstractCard card) {
+        return usesTargetedAiming(card) && usesTargetedAiming(baseCheck) && usesTargetedAiming(upgradeCheck) && usesTargetedAiming(branchingCheck);
+    }
+
+    public static boolean canOverrideTargeting(AbstractCard card, AbstractCard.CardTarget desiredType) {
+        if (desiredType == card.target || card.target == AbstractCard.CardTarget.NONE) {
+            return true;
+        }
+        switch (desiredType) {
+            case SELF_AND_ENEMY:
+                return card.target == AbstractCard.CardTarget.ENEMY || card.target == AbstractCard.CardTarget.SELF;
+            case ALL:
+                return card.target == AbstractCard.CardTarget.ALL_ENEMY || card.target == AbstractCard.CardTarget.SELF;
+        }
+        return false;
+    }
+
+    public static boolean usesTargetedAiming(AbstractCard card) {
+        return card.target == AbstractCard.CardTarget.ENEMY || card.target == AbstractCard.CardTarget.SELF_AND_ENEMY;
+    }
+
+    public static boolean usesVanillaTargeting(AbstractCard card) {
+        return (card.target == AbstractCard.CardTarget.ENEMY
+                || card.target == AbstractCard.CardTarget.ALL_ENEMY
+                || card.target == AbstractCard.CardTarget.SELF
+                || card.target == AbstractCard.CardTarget.NONE
+                || card.target == AbstractCard.CardTarget.SELF_AND_ENEMY
+                || card.target == AbstractCard.CardTarget.ALL);
+    }
+
+    private static boolean usesMagicBool;
     public static boolean usesMagic(AbstractCard card) {
-        usesMagic = false;
-        if (card.baseMagicNumber > 0 && StringUtils.containsIgnoreCase(card.rawDescription, "!M!") && !(card instanceof PanicButton)) {
+        usesMagicBool = false;
+        if (card.baseMagicNumber > 0 && StringUtils.containsIgnoreCase(card.rawDescription, "!M!") && !(card instanceof PanicButton) && !(card instanceof Halt)) {
             try {
                 ClassPool pool = Loader.getClassPool();
                 CtMethod ctClass = pool.get(card.getClass().getName()).getDeclaredMethod("use");
@@ -180,7 +319,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
                     public void edit(FieldAccess f) {
 
                         if (f.getFieldName().equals("magicNumber") && !f.isWriter()) {
-                            usesMagic = true;
+                            usesMagicBool = true;
                         }
 
                     }
@@ -188,35 +327,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
 
             } catch (Exception ignored) { }
         }
-        return usesMagic;
-    }
-
-    public static boolean upgradesAVariable(AbstractCard card) {
-        AbstractCard base = card.makeCopy();
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
-        return ((base.baseMagicNumber < upgradeCheck.baseMagicNumber && usesMagic(upgradeCheck)) || base.baseDamage < upgradeCheck.baseDamage || base.baseBlock < upgradeCheck.baseBlock);
-    }
-
-    public static boolean upgradesDamage(AbstractCard card) {
-        AbstractCard base = card.makeCopy();
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
-        return base.baseDamage < upgradeCheck.baseDamage;
-    }
-
-    public static boolean upgradesBlock(AbstractCard card) {
-        AbstractCard base = card.makeCopy();
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
-        return base.baseBlock < upgradeCheck.baseBlock;
-    }
-
-    public static boolean upgradesMagic(AbstractCard card) {
-        AbstractCard base = card.makeCopy();
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
-        return (base.baseMagicNumber < upgradeCheck.baseMagicNumber) && usesMagic(upgradeCheck);
+        return usesMagicBool;
     }
 
     public static boolean hasACurse() {
@@ -235,70 +346,11 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         return !card.exhaust && !card.purgeOnUse && ExhaustiveField.ExhaustiveFields.baseExhaustive.get(card) == -1 && ExhaustiveField.ExhaustiveFields.exhaustive.get(card) == -1;
     }
 
-    public static boolean doesntUpgradeExhaust(AbstractCard card) {
-        AbstractCard base = card.makeCopy();
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
-        return base.exhaust == upgradeCheck.exhaust;
-    }
-
-    public static boolean doesntUpgradeCost(AbstractCard card) {
-        AbstractCard base = card.makeCopy();
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
-        return base.cost == upgradeCheck.cost;
-    }
-
-    public static boolean doesntDowngradeMagic(AbstractCard card) {
-        AbstractCard base = card.makeCopy();
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
-        return (base.baseMagicNumber <= upgradeCheck.baseMagicNumber) && usesMagic(upgradeCheck);
-    }
-
-    public static boolean doesntUpgradeTarget(AbstractCard card) {
-        AbstractCard base = card.makeCopy();
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
-        return base.target == upgradeCheck.target;
-    }
-
-    public static boolean doesntUpgradeRetain(AbstractCard card) {
-        AbstractCard base = card.makeCopy();
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
-        return base.selfRetain == upgradeCheck.selfRetain;
-    }
-
-    public static boolean doesntUpgradeInnate(AbstractCard card) {
-        AbstractCard base = card.makeCopy();
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
-        return base.selfRetain == upgradeCheck.selfRetain;
-    }
-
     public static boolean doesntOverride(AbstractCard card, String method, Class<?>... paramtypez) {
         try {
             return card.getClass().getMethod(method, paramtypez).getDeclaringClass().equals(AbstractCard.class);
         } catch (NoSuchMethodException ignored) {}
         return false;
-    }
-
-    public static boolean targetedAiming(AbstractCard card) {
-        AbstractCard base = card.makeCopy();
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
-        return (base.target == AbstractCard.CardTarget.ENEMY || base.target == AbstractCard.CardTarget.SELF_AND_ENEMY)
-                && (upgradeCheck.target == AbstractCard.CardTarget.ENEMY || upgradeCheck.target == AbstractCard.CardTarget.SELF_AND_ENEMY);
-    }
-
-    public static boolean overrideableAiming(AbstractCard card) {
-        return (card.target == AbstractCard.CardTarget.ENEMY
-                || card.target == AbstractCard.CardTarget.ALL_ENEMY
-                || card.target == AbstractCard.CardTarget.SELF
-                || card.target == AbstractCard.CardTarget.NONE
-                || card.target == AbstractCard.CardTarget.SELF_AND_ENEMY
-                || card.target == AbstractCard.CardTarget.ALL) && doesntUpgradeTarget(card);
     }
 
     public static boolean noShenanigans(AbstractCard card) {

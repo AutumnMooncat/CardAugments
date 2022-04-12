@@ -24,7 +24,7 @@ public class DramaticMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return !card.isInnate && doesntExhaust(card) && (card.baseDamage > 0 || card.baseBlock > 0) && card.type != AbstractCard.CardType.POWER;
+        return (card.baseDamage > 0 || card.baseBlock > 0) && card.type != AbstractCard.CardType.POWER && cardCheck(card, c -> notInnate(c) && notExhaust(c));
     }
 
     @Override

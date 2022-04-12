@@ -6,6 +6,7 @@ import CardAugments.patches.CantUpgradeFieldPatches;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.colorless.PanicButton;
+import com.megacrit.cardcrawl.cards.purple.Halt;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 
 public class FusedMod extends AbstractAugment {
@@ -23,14 +24,14 @@ public class FusedMod extends AbstractAugment {
         if (card.baseBlock > 0) {
             modifyBaseStat(card, BuffType.BLOCK, BuffScale.MAJOR_BUFF);
         }
-        if (doesntDowngradeMagic(card) && !(card instanceof PanicButton)) {
+        if (cardCheck(card, c -> doesntDowngradeMagic())) {
             modifyBaseStat(card, BuffType.MAGIC, BuffScale.MAJOR_BUFF);
         }
     }
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return !card.upgraded && card.canUpgrade() && upgradesAVariable(card) && doesntOverride(card, "canUpgrade");
+        return !card.upgraded && card.canUpgrade() && doesntOverride(card, "canUpgrade") && cardCheck(card, c -> upgradesAVariable());
     }
 
     @Override

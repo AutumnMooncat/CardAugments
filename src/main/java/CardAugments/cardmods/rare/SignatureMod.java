@@ -5,8 +5,10 @@ import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.purple.SignatureMove;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class SignatureMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID("SignatureMod");
@@ -19,7 +21,7 @@ public class SignatureMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.type == AbstractCard.CardType.ATTACK && card.baseDamage > 0;
+        return card.type == AbstractCard.CardType.ATTACK && card.baseDamage > 0 && doesntOverride(card, "canUse", AbstractPlayer.class, AbstractMonster.class);
     }
 
     @Override

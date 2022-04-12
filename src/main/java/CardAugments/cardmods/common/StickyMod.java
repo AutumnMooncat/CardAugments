@@ -17,7 +17,7 @@ public class StickyMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return !card.selfRetain && doesntUpgradeRetain(card);
+        return cardCheck(card, AbstractAugment::notRetain);
     }
 
     @Override

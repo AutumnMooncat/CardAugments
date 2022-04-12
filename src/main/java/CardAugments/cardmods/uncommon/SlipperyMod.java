@@ -16,22 +16,20 @@ public class SlipperyMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
         if (card.baseDamage > 0) {
             modifyBaseStat(card, BuffType.DAMAGE, BuffScale.HUGE_BUFF);
         }
         if (card.baseBlock > 0) {
             modifyBaseStat(card, BuffType.BLOCK, BuffScale.HUGE_BUFF);
         }
-        if (usesMagic(card) && card.baseMagicNumber <= upgradeCheck.baseMagicNumber && !(card instanceof PanicButton)) {
+        if (cardCheck(card, c -> doesntDowngradeMagic())) {
             modifyBaseStat(card, BuffType.MAGIC, BuffScale.HUGE_BUFF);
         }
     }
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost == -2 || card.baseDamage > 0 || card.baseBlock > 0 || usesMagic(card);
+        return card.cost == -2 || card.baseDamage > 0 || card.baseBlock > 0 || cardCheck(card, c -> doesntDowngradeMagic());
     }
 
     @Override

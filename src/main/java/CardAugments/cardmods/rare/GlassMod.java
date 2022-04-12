@@ -22,7 +22,7 @@ public class GlassMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.type == AbstractCard.CardType.ATTACK && card.baseDamage > 0 && doesntExhaust(card);
+        return card.type == AbstractCard.CardType.ATTACK && card.baseDamage > 0 && cardCheck(card, AbstractAugment::notExhaust);
     }
 
     @Override

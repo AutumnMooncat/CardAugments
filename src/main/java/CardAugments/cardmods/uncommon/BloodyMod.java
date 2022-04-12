@@ -23,7 +23,7 @@ public class BloodyMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost >= 1 && doesntUpgradeCost(card);
+        return card.cost >= 1 && cardCheck(card, c -> doesntUpgradeCost());
     }
 
     @Override

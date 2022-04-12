@@ -29,7 +29,7 @@ public class HemoMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost != -2 && (card.baseDamage > 0 || card.baseBlock > 0) && !card.isInnate;
+        return card.cost != -2 && (card.baseDamage > 0 || card.baseBlock > 0) && cardCheck(card, AbstractAugment::notInnate);
     }
 
     @Override

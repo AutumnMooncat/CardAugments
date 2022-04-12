@@ -29,7 +29,7 @@ public class ExplosiveMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost >= 0 && doesntUpgradeCost(card) && card.rarity != AbstractCard.CardRarity.BASIC && card.rarity != AbstractCard.CardRarity.COMMON;
+        return card.cost >= 0 && card.rarity != AbstractCard.CardRarity.BASIC && card.rarity != AbstractCard.CardRarity.COMMON && cardCheck(card, c -> doesntUpgradeCost());
     }
 
     @Override

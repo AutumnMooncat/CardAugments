@@ -24,7 +24,7 @@ public class MassiveMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost >= 0 && doesntUpgradeCost(card) && (card.baseDamage > 0 || card.baseBlock > 0);
+        return card.cost >= 0 && (card.baseDamage > 0 || card.baseBlock > 0) && cardCheck(card, c -> doesntUpgradeCost());
     }
 
     @Override
