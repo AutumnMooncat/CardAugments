@@ -277,7 +277,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     }
 
     public static boolean usesEnemyTargeting(AbstractCard card) {
-        return usesTargetedAiming(card) && usesTargetedAiming(baseCheck) && usesTargetedAiming(upgradeCheck) && usesTargetedAiming(branchingCheck);
+        return targetsEnemy(card) && targetsEnemy(baseCheck) && targetsEnemy(upgradeCheck) && targetsEnemy(branchingCheck);
     }
 
     public static boolean canOverrideTargeting(AbstractCard card, AbstractCard.CardTarget desiredType) {
@@ -293,7 +293,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         return false;
     }
 
-    public static boolean usesTargetedAiming(AbstractCard card) {
+    public static boolean targetsEnemy(AbstractCard card) {
         return card.target == AbstractCard.CardTarget.ENEMY || card.target == AbstractCard.CardTarget.SELF_AND_ENEMY;
     }
 
