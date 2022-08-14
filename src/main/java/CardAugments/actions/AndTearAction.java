@@ -17,6 +17,7 @@ public class AndTearAction extends AbstractGameAction {
 
     public AndTearAction(int baseDamage) {
         this.amount = baseDamage;
+        this.source = AbstractDungeon.player;
         this.actionType = ActionType.DAMAGE;
     }
 
