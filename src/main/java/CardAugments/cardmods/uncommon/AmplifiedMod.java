@@ -14,14 +14,19 @@ public class AmplifiedMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        modifyBaseStat(card, BuffType.MAGIC, BuffScale.MAJOR_BUFF);
+        //modifyBaseStat(card, BuffType.MAGIC, BuffScale.MAJOR_BUFF);
         card.cost = card.cost + 1;
         card.costForTurn = card.cost;
     }
 
     @Override
+    public float modifyBaseMagic(float magic, AbstractCard card) {
+        return magic * HUGE_BUFF;
+    }
+
+    @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost >= 0 && cardCheck(card, c -> doesntUpgradeCost() && doesntDowngradeMagic());
+        return card.cost >= 0 && cardCheck(card, c -> doesntUpgradeCost() && doesntDowngradeMagic() && c.baseMagicNumber >= 2);
     }
 
     @Override

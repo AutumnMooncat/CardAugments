@@ -6,7 +6,9 @@ import CardAugments.damagemods.PerniciousDamage;
 import basemod.abstracts.AbstractCardModifier;
 import com.evacipated.cardcrawl.mod.stslib.damagemods.DamageModifierManager;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class PerniciousMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID("PerniciousMod");
@@ -14,8 +16,12 @@ public class PerniciousMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        modifyBaseStat(card, BuffType.DAMAGE, BuffScale.HUGE_DEBUFF);
         DamageModifierManager.addModifier(card, new PerniciousDamage());
+    }
+
+    @Override
+    public float modifyBaseDamage(float damage, DamageInfo.DamageType type, AbstractCard card, AbstractMonster target) {
+        return damage * HUGE_DEBUFF;
     }
 
     @Override

@@ -27,6 +27,14 @@ import java.util.Objects;
 import java.util.function.Predicate;
 
 public abstract class AbstractAugment extends AbstractCardModifier {
+    public static final float HUGE_BUFF = 3/2f;
+    public static final float MAJOR_BUFF = 4/3f;
+    public static final float MODERATE_BUFF = 5/4f;
+    public static final float MINOR_BUFF = 6/5f;
+    public static final float HUGE_DEBUFF = 1/2f;
+    public static final float MAJOR_DEBUFF = 2/3f;
+    public static final float MODERATE_DEBUFF = 3/4f;
+    public static final float MINOR_DEBUFF = 4/5f;
     private static AbstractCard baseCheck;
     private static AbstractCard upgradeCheck;
     private static AbstractCard branchingCheck;
@@ -38,21 +46,21 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         SPECIAL
     }
 
-    public enum BuffType {
+    /*public enum BuffType {
         DAMAGE,
         BLOCK,
         MAGIC
     }
 
     public enum BuffScale {
-        HUGE_BUFF(1/2F),
-        MAJOR_BUFF(1/3F),
-        MODERATE_BUFF(1/4F),
-        MINOR_BUFF(1/5F),
-        MINOR_DEBUFF(-1/5F),
-        MODERATE_DEBUFF(-1/4F),
-        MAJOR_DEBUFF(-1/3F),
-        HUGE_DEBUFF(-1/2F);
+        HUGE_BUFF(3/2F),
+        MAJOR_BUFF(4/3F),
+        MODERATE_BUFF(5/4F),
+        MINOR_BUFF(6/5F),
+        MINOR_DEBUFF(4/5F),
+        MODERATE_DEBUFF(3/4F),
+        MAJOR_DEBUFF(2/3F),
+        HUGE_DEBUFF(1/2F);
         private final float multi;
         BuffScale(final float multi) {
             this.multi = multi;
@@ -60,7 +68,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         public float getMulti() {
             return multi;
         }
-    }
+    }*/
 
     public abstract AugmentRarity getModRarity();
 
@@ -120,7 +128,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         AbstractDungeon.actionManager.addToTop(action);
     }
 
-    public static void modifyBaseStat(AbstractCard card, BuffType type, float buffMulti) {
+    /*public static void modifyBaseStat(AbstractCard card, BuffType type, float buffMulti) {
         AbstractCard deltaCheck = card.makeCopy();
         if (InfiniteUpgradesPatches.InfUpgradeField.inf.get(card)) {
             InfiniteUpgradesPatches.InfUpgradeField.inf.set(deltaCheck, true); // Needed for loop upgrading to work properly
@@ -189,7 +197,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
 
     private static double roundHelper(float val) {
         return val >= 0 ? Math.ceil(val) : Math.floor(val);
-    }
+    }*/
 
     public static boolean upgradesAVariable() {
         return upgradesDamage() || upgradesBlock() || upgradesMagic();
@@ -208,7 +216,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     }
 
     public static boolean doesntDowngradeMagic() {
-        return baseCheck.baseMagicNumber >= upgradeCheck.baseMagicNumber && baseCheck.baseMagicNumber >= branchingCheck.baseMagicNumber && usesMagic(baseCheck);
+        return baseCheck.baseMagicNumber <= upgradeCheck.baseMagicNumber && baseCheck.baseMagicNumber <= branchingCheck.baseMagicNumber && usesMagic(baseCheck);
     }
 
     public static boolean reachesDamage(int amount) {

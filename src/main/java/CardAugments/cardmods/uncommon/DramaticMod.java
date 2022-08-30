@@ -4,7 +4,9 @@ import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class DramaticMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID("DramaticMod");
@@ -12,14 +14,24 @@ public class DramaticMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        if (card.baseDamage > 0) {
-            modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MAJOR_BUFF);
-        }
-        if (card.baseBlock > 0) {
-            modifyBaseStat(card, BuffType.BLOCK, BuffScale.MAJOR_BUFF);
-        }
         card.exhaust = true;
         card.isInnate = true;
+    }
+
+    @Override
+    public float modifyBaseDamage(float damage, DamageInfo.DamageType type, AbstractCard card, AbstractMonster target) {
+        if (card.baseDamage > 0) {
+            return damage * MAJOR_BUFF;
+        }
+        return damage;
+    }
+
+    @Override
+    public float modifyBaseBlock(float block, AbstractCard card) {
+        if (card.baseBlock > 0) {
+            return block * MAJOR_BUFF;
+        }
+        return block;
     }
 
     @Override

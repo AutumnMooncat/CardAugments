@@ -7,9 +7,11 @@ import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class HemoMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID("HemoMod");
@@ -18,18 +20,24 @@ public class HemoMod extends AbstractAugment {
     private static final int LOSS = 2;
 
     @Override
-    public void onInitialApplication(AbstractCard card) {
+    public float modifyBaseDamage(float damage, DamageInfo.DamageType type, AbstractCard card, AbstractMonster target) {
         if (card.baseDamage > 0) {
-            modifyBaseStat(card, BuffType.DAMAGE, BuffScale.HUGE_BUFF);
+            return damage * HUGE_BUFF;
         }
+        return damage;
+    }
+
+    @Override
+    public float modifyBaseBlock(float block, AbstractCard card) {
         if (card.baseBlock > 0) {
-            modifyBaseStat(card, BuffType.BLOCK, BuffScale.HUGE_BUFF);
+            return block * HUGE_BUFF;
         }
+        return block;
     }
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost != -2 && (card.baseDamage > 0 || card.baseBlock > 0) && cardCheck(card, AbstractAugment::notInnate);
+        return card.rarity != AbstractCard.CardRarity.BASIC && card.cost != -2 && (card.baseDamage > 0 || card.baseBlock > 0) && cardCheck(card, AbstractAugment::notInnate);
     }
 
     @Override

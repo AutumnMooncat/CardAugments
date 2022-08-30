@@ -5,27 +5,47 @@ import CardAugments.cardmods.AbstractAugment;
 import CardAugments.patches.InterruptUseCardFieldPatches;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.colorless.PanicButton;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class OmegaMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID("OmegaMod");
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
+    boolean modMagic;
+
     @Override
     public void onInitialApplication(AbstractCard card) {
-        AbstractCard upgradeCheck = card.makeCopy();
-        upgradeCheck.upgrade();
-        if (card.baseDamage > 0) {
-            modifyBaseStat(card, BuffType.DAMAGE, 2F);
-        }
-        if (card.baseBlock > 0) {
-            modifyBaseStat(card, BuffType.BLOCK, 2F);
-        }
-        if (usesMagic(card) && card.baseMagicNumber <= upgradeCheck.baseMagicNumber && !(card instanceof PanicButton)) {
-            modifyBaseStat(card, BuffType.MAGIC, 2F);
+        if (cardCheck(card, c -> doesntDowngradeMagic())) {
+            modMagic = true;
         }
         InterruptUseCardFieldPatches.InterceptUseField.interceptUse.set(card, false);
+    }
+
+    @Override
+    public float modifyBaseDamage(float damage, DamageInfo.DamageType type, AbstractCard card, AbstractMonster target) {
+        if (card.baseDamage > 0) {
+            return damage * 3f;
+        }
+        return damage;
+    }
+
+    @Override
+    public float modifyBaseBlock(float block, AbstractCard card) {
+        if (card.baseBlock > 0) {
+            return block * 3f;
+        }
+        return block;
+    }
+
+    @Override
+    public float modifyBaseMagic(float magic, AbstractCard card) {
+        if (modMagic) {
+            return magic * 3f;
+        }
+        return magic;
     }
 
     @Override

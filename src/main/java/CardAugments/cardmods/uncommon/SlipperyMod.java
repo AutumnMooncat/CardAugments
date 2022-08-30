@@ -5,31 +5,52 @@ import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.actions.common.DiscardSpecificCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.colorless.PanicButton;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class SlipperyMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID("SlipperyMod");
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     private boolean discarded;
+    boolean modMagic;
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        if (card.baseDamage > 0) {
-            modifyBaseStat(card, BuffType.DAMAGE, BuffScale.HUGE_BUFF);
-        }
-        if (card.baseBlock > 0) {
-            modifyBaseStat(card, BuffType.BLOCK, BuffScale.HUGE_BUFF);
-        }
-        if (cardCheck(card, c -> doesntDowngradeMagic())) {
-            modifyBaseStat(card, BuffType.MAGIC, BuffScale.HUGE_BUFF);
+        if (cardCheck(card, c -> doesntDowngradeMagic() && c.baseMagicNumber >= 2)) {
+            modMagic = true;
         }
     }
 
     @Override
+    public float modifyBaseDamage(float damage, DamageInfo.DamageType type, AbstractCard card, AbstractMonster target) {
+        if (card.baseDamage > 0) {
+            return damage * HUGE_BUFF;
+        }
+        return damage;
+    }
+
+    @Override
+    public float modifyBaseBlock(float block, AbstractCard card) {
+        if (card.baseBlock > 0) {
+            return block * HUGE_BUFF;
+        }
+        return block;
+    }
+
+    @Override
+    public float modifyBaseMagic(float magic, AbstractCard card) {
+        if (modMagic) {
+            return magic * HUGE_BUFF;
+        }
+        return magic;
+    }
+
+    @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost == -2 || card.baseDamage > 0 || card.baseBlock > 0 || cardCheck(card, c -> doesntDowngradeMagic());
+        return card.cost == -2 || card.baseDamage > 0 || card.baseBlock > 0 || cardCheck(card, c -> doesntDowngradeMagic() && c.baseMagicNumber >= 2);
     }
 
     @Override

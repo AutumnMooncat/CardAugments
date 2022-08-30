@@ -41,8 +41,8 @@
             <artifactId>basemod</artifactId>
             <version>5.27.0</version>
             <scope>system</scope>
-            <systemPath>${Steam.path}/workshop/content/646570/1605833019/BaseMod.jar</systemPath>
-            <!--<systemPath>${Steam.path}/common/SlayTheSpire/mods/BaseMod.jar</systemPath>-->
+            <!--<systemPath>${Steam.path}/workshop/content/646570/1605833019/BaseMod.jar</systemPath>-->
+            <systemPath>${Steam.path}/common/SlayTheSpire/mods/BaseMod.jar</systemPath>
             <!--<systemPath>${basedir}/../lib/BaseMod.jar</systemPath>-->
         </dependency>
         <dependency>

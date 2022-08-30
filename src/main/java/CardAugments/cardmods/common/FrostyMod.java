@@ -18,8 +18,12 @@ public class FrostyMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        modifyBaseStat(card, BuffType.BLOCK, BuffScale.MODERATE_DEBUFF);
         card.showEvokeValue = true;
+    }
+
+    @Override
+    public float modifyBaseBlock(float block, AbstractCard card) {
+        return block * MODERATE_DEBUFF;
     }
 
     @Override

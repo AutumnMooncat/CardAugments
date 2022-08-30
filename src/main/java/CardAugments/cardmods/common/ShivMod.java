@@ -25,10 +25,15 @@ public class ShivMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        if (card.baseBlock > 1) {
-            modifyBaseStat(card, BuffType.BLOCK, BuffScale.MINOR_DEBUFF);
-        }
         MultiPreviewFieldPatches.addPreview(card, new Shiv());
+    }
+
+    @Override
+    public float modifyBaseBlock(float block, AbstractCard card) {
+        if (card.baseBlock > 1) {
+            return block * MINOR_DEBUFF;
+        }
+        return block;
     }
 
     @Override

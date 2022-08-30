@@ -31,8 +31,12 @@ public class RollMod extends AbstractAugment implements DynvarCarrier {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        modifyBaseStat(card, BuffType.BLOCK, BuffScale.MINOR_DEBUFF);
         val = getBaseVal(card);
+    }
+
+    @Override
+    public float modifyBaseBlock(float block, AbstractCard card) {
+        return block * MINOR_DEBUFF;
     }
 
     @Override

@@ -16,7 +16,7 @@ public class AutoplayOnRandomEnemyAction extends AbstractGameAction {
     public void update() {
         if (card != null && AbstractDungeon.actionManager.cardQueue.stream().noneMatch(i -> i.card == card)) {
             card.targetAngle = 0.0F;
-            AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(this.card, AbstractDungeon.getRandomMonster()));
+            AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(this.card, AbstractDungeon.getRandomMonster())); //TODO null safety on cards that need a target for vfx but no alive monsters?
         }
 
         this.isDone = true;

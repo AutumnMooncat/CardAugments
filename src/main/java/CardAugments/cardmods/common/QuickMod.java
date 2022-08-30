@@ -6,8 +6,10 @@ import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class QuickMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID("QuickMod");
@@ -16,8 +18,8 @@ public class QuickMod extends AbstractAugment {
     private static final int CARDS = 1;
 
     @Override
-    public void onInitialApplication(AbstractCard card) {
-        modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MINOR_DEBUFF);
+    public float modifyBaseDamage(float damage, DamageInfo.DamageType type, AbstractCard card, AbstractMonster target) {
+        return damage * MINOR_DEBUFF;
     }
 
     @Override

@@ -8,8 +8,10 @@ import CardAugments.util.CalcHelper;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class TearMod extends AbstractAugment implements DynvarCarrier {
     public static final String ID = CardAugmentsMod.makeID("TearMod");
@@ -29,8 +31,12 @@ public class TearMod extends AbstractAugment implements DynvarCarrier {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MAJOR_DEBUFF);
         val = getBaseVal(card);
+    }
+
+    @Override
+    public float modifyBaseDamage(float damage, DamageInfo.DamageType type, AbstractCard card, AbstractMonster target) {
+        return damage * MAJOR_DEBUFF;
     }
 
     @Override

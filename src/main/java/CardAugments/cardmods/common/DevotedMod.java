@@ -6,9 +6,11 @@ import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.watcher.MantraPower;
 
 public class DevotedMod extends AbstractAugment {
@@ -22,13 +24,23 @@ public class DevotedMod extends AbstractAugment {
         AbstractCard costCheck = card.makeCopy();
         int preUp = costCheck.cost;
         costCheck.upgrade();
-        if (card.baseDamage > 1) {
-            modifyBaseStat(card, BuffType.DAMAGE, BuffScale.MODERATE_DEBUFF);
-        }
-        if (card.baseBlock > 1) {
-            modifyBaseStat(card, BuffType.BLOCK, BuffScale.MODERATE_DEBUFF);
-        }
         mantra = Math.max(preUp, costCheck.cost) + 2;
+    }
+
+    @Override
+    public float modifyBaseDamage(float damage, DamageInfo.DamageType type, AbstractCard card, AbstractMonster target) {
+        if (card.baseDamage > 1) {
+            return damage * MODERATE_DEBUFF;
+        }
+        return damage;
+    }
+
+    @Override
+    public float modifyBaseBlock(float block, AbstractCard card) {
+        if (card.baseBlock > 1) {
+            return block * MODERATE_DEBUFF;
+        }
+        return block;
     }
 
     @Override

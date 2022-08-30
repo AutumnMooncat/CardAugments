@@ -18,8 +18,8 @@ public class ChargedMod extends AbstractAugment {
     private static final int NRG = 1;
 
     @Override
-    public void onInitialApplication(AbstractCard card) {
-        modifyBaseStat(card, BuffType.BLOCK, BuffScale.MINOR_DEBUFF);
+    public float modifyBaseBlock(float block, AbstractCard card) {
+        return block * MINOR_DEBUFF;
     }
 
     @Override
