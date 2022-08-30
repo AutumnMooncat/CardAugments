@@ -18,7 +18,9 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.PrismaticShard;
 import com.megacrit.cardcrawl.stances.AbstractStance;
 import javassist.ClassPool;
+import javassist.CtClass;
 import javassist.CtMethod;
+import javassist.NotFoundException;
 import javassist.expr.ExprEditor;
 import javassist.expr.FieldAccess;
 import org.apache.commons.lang3.StringUtils;
@@ -361,8 +363,18 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         return false;
     }
 
+    public static boolean noInterfaces(AbstractCard card) {
+        try {
+            ClassPool pool = Loader.getClassPool();
+            CtClass ctClass = pool.get(card.getClass().getName());
+            return ctClass.getInterfaces().length == 0;
+        } catch (NotFoundException ignored) {}
+        return false;
+    }
+
     public static boolean noShenanigans(AbstractCard card) {
-        return doesntOverride(card, "canUse", AbstractPlayer.class, AbstractMonster.class)
+        return noInterfaces(card)
+                && doesntOverride(card, "canUse", AbstractPlayer.class, AbstractMonster.class)
                 && doesntOverride(card, "tookDamage")
                 && doesntOverride(card, "didDiscard")
                 && doesntOverride(card, "switchedStance")
