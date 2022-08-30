@@ -12,8 +12,11 @@ public class MassiveMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID("MassiveMod");
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
+    private int baseCost;
+
     @Override
     public void onInitialApplication(AbstractCard card) {
+        baseCost = Math.max(1, card.cost);
         card.cost = card.cost + 1;
         card.costForTurn = card.cost;
     }
@@ -21,7 +24,7 @@ public class MassiveMod extends AbstractAugment {
     @Override
     public float modifyBaseDamage(float damage, DamageInfo.DamageType type, AbstractCard card, AbstractMonster target) {
         if (card.baseDamage > 0) {
-            return damage * MAJOR_BUFF;
+            return damage * (baseCost+1f)/baseCost;
         }
         return damage;
     }
@@ -29,7 +32,7 @@ public class MassiveMod extends AbstractAugment {
     @Override
     public float modifyBaseBlock(float block, AbstractCard card) {
         if (card.baseBlock > 0) {
-            return block * MAJOR_BUFF;
+            return block * (baseCost+1f)/baseCost;
         }
         return block;
     }
