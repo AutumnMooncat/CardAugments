@@ -1,7 +1,6 @@
 package CardAugments.cardmods;
 
 import CardAugments.CardAugmentsMod;
-import CardAugments.patches.InfiniteUpgradesPatches;
 import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardBorderGlowManager;
 import basemod.helpers.CardModifierManager;
