@@ -34,6 +34,16 @@ public class InfiniteUpgradesPatches {
         }
     }
 
+    @SpirePatch2(clz = AbstractCard.class, method = "upgradeDamage")
+    @SpirePatch2(clz = AbstractCard.class, method = "upgradeBlock")
+    @SpirePatch2(clz = AbstractCard.class, method = "upgradeMagicNumber")
+    public static class ScaleStats {
+        @SpirePrefixPatch
+        public static void boost(AbstractCard __instance, @ByRef int[] amount) {
+            amount[0] += Math.max(0, __instance.timesUpgraded-1);
+        }
+    }
+
     @SpirePatch2(clz = AbstractCard.class, method = "upgradeName")
     public static class FixStackOfPlusSymbols {
         @SpireInsertPatch(locator = Locator.class)
