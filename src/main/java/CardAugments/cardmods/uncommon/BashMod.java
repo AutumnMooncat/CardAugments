@@ -39,10 +39,7 @@ public class BashMod extends AbstractAugment {
 
     @Override
     public float modifyBaseDamage(float damage, DamageInfo.DamageType type, AbstractCard card, AbstractMonster target) {
-        if (card.baseDamage > 1) {
-            return damage * MODERATE_DEBUFF;
-        }
-        return damage;
+        return damage * MODERATE_DEBUFF;
     }
 
     @Override

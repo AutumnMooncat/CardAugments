@@ -40,10 +40,7 @@ public class SuckerMod extends AbstractAugment {
 
     @Override
     public float modifyBaseDamage(float damage, DamageInfo.DamageType type, AbstractCard card, AbstractMonster target) {
-        if (card.baseDamage > 1) {
-            return damage * MINOR_DEBUFF;
-        }
-        return damage;
+        return damage * MINOR_DEBUFF;
     }
 
     @Override
