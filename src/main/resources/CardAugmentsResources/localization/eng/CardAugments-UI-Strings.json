@@ -55,6 +55,9 @@
   "CardAugments:AutoMod": {
     "TEXT": ["Auto-", "", "Autoplay. NL "," NL Draw %d card."]
   },
+  "CardAugments:BashMod": {
+    "TEXT": ["Bashing ", "", " NL Apply %d Vulnerable."]
+  },
   "CardAugments:BerserkMod": {
     "TEXT": ["Berserk ", "", " NL Deals 50% more damage if your HP is at or under 50%."]
   },
@@ -231,6 +234,9 @@
   },
   "CardAugments:StreamlinedMod": {
     "TEXT": ["Streamlined ", "", " NL Reduce this card's cost by 1 this combat."]
+  },
+  "CardAugments:SuckerMod": {
+    "TEXT": ["Sucker ", "", " NL Apply %d Weak."]
   },
   "CardAugments:SupplyMod": {
     "TEXT": ["Supplier ", "", " NL Next turn, gain [E] [E] ."]
