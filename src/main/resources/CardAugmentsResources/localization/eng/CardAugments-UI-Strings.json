@@ -184,6 +184,9 @@
       "Next turn, draw 2 additional cards.",
       "Next turn, draw 4 additional cards."]
   },
+  "CardAugments:PreparedMod": {
+    "TEXT": ["Prepared ", "", " NL Draw %d card. NL Discard %d card."]
+  },
   "CardAugments:PureMod": {
     "TEXT": ["Pure ", "", " NL Exhaust all Status and Curse cards in your hand."]
   },
