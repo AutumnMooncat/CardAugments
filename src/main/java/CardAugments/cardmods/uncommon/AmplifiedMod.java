@@ -12,21 +12,23 @@ public class AmplifiedMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID("AmplifiedMod");
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
+    private int baseCost;
+
     @Override
     public void onInitialApplication(AbstractCard card) {
-        //modifyBaseStat(card, BuffType.MAGIC, BuffScale.MAJOR_BUFF);
+        baseCost = Math.max(1, card.cost);
         card.cost = card.cost + 1;
         card.costForTurn = card.cost;
     }
 
     @Override
     public float modifyBaseMagic(float magic, AbstractCard card) {
-        return magic * HUGE_BUFF;
+        return magic * (baseCost+1f)/baseCost;
     }
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost >= 0 && cardCheck(card, c -> doesntUpgradeCost() && doesntDowngradeMagic() && c.baseMagicNumber >= 2);
+        return card.cost >= 0 && cardCheck(card, c -> doesntUpgradeCost() && doesntDowngradeMagic() && c.baseMagicNumber > 0 && card.cost <= c.baseMagicNumber);
     }
 
     @Override
