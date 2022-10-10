@@ -22,6 +22,7 @@ public class AlphaMod extends AbstractAugment {
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     private boolean inherentHack = true;
+    private AbstractCard.CardTarget originalTarget;
 
     @Override
     public void onInitialApplication(AbstractCard card) {
@@ -32,9 +33,11 @@ public class AlphaMod extends AbstractAugment {
         MultiPreviewFieldPatches.addPreview(card, preview);
         InterruptUseCardFieldPatches.InterceptUseField.interceptUse.set(card, true);
         card.isEthereal = false;
-        if (card.type != AbstractCard.CardType.POWER) {
+        originalTarget = card.target;
+        card.target = AbstractCard.CardTarget.NONE;
+        /*if (card.type != AbstractCard.CardType.POWER) {
             card.exhaust = true;
-        }
+        }*/
     }
 
     @Override
@@ -68,7 +71,9 @@ public class AlphaMod extends AbstractAugment {
     public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
         inherentHack = true;
         AbstractCard copy = card.makeStatEquivalentCopy();
+        copy.target = originalTarget;
         inherentHack = false;
+        action.exhaustCard = true;
         CardModifierManager.addModifier(copy, new BetaMod());
         this.addToBot(new MakeTempCardInDrawPileAction(copy, 1, true, true));
     }
