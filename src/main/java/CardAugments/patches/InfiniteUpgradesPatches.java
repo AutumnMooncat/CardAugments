@@ -40,7 +40,9 @@ public class InfiniteUpgradesPatches {
     public static class ScaleStats {
         @SpirePrefixPatch
         public static void boost(AbstractCard __instance, @ByRef int[] amount) {
-            amount[0] += Math.max(0, __instance.timesUpgraded-1);
+            if (InfUpgradeField.inf.get(__instance)) {
+                amount[0] += Math.max(0, __instance.timesUpgraded-1);
+            }
         }
     }
 
