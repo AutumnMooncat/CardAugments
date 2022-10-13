@@ -81,7 +81,7 @@ public class CardAugmentsMod implements
     public static boolean allowOrbs = false;
 
     public static final String RARITY_BIAS = "rarityBias";
-    public static int rarityBias = 0;
+    public static int rarityBias = 1;
 
     //Cardmod Lists
     public static final ArrayList<AbstractAugment> commonMods = new ArrayList<>();
