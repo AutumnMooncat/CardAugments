@@ -59,7 +59,7 @@ public class AlphaMod extends AbstractAugment {
 
     @Override
     public void onUpgradeCheck(AbstractCard card) {
-        for (AbstractCard c : MultiPreviewFieldPatches.ExtraPreviews.previews.get(card)) {
+        for (AbstractCard c : MultiCardPreview.multiCardPreview.get(card)) {
             if (CardModifierManager.hasModifier(c, BetaMod.ID) || CardModifierManager.hasModifier(c, OmegaMod.ID)) {
                 c.upgrade();
                 CardModifierManager.testBaseValues(c);

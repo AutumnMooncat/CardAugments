@@ -52,6 +52,18 @@ public class BetaMod extends AbstractAugment {
     }
 
     @Override
+    public void onUpgradeCheck(AbstractCard card) {
+        for (AbstractCard c : MultiCardPreview.multiCardPreview.get(card)) {
+            if (CardModifierManager.hasModifier(c, OmegaMod.ID)) {
+                c.upgrade();
+                CardModifierManager.testBaseValues(c);
+                c.initializeDescription();
+            }
+        }
+        card.initializeDescription();
+    }
+
+    @Override
     public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
         inherentHack = true;
         AbstractCard copy = card.makeStatEquivalentCopy();
