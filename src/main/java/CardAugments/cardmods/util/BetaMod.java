@@ -7,6 +7,7 @@ import CardAugments.patches.MultiPreviewFieldPatches;
 import CardAugments.util.FormatHelper;
 import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardModifierManager;
+import basemod.patches.com.megacrit.cardcrawl.cards.AbstractCard.MultiCardPreview;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -25,8 +26,7 @@ public class BetaMod extends AbstractAugment {
         AbstractCard preview = card.makeStatEquivalentCopy();
         inherentHack = false;
         CardModifierManager.addModifier(preview, new OmegaMod());
-        card.cardsToPreview = null;
-        MultiPreviewFieldPatches.addPreview(card, preview);
+        MultiCardPreview.add(card, preview);
         InterruptUseCardFieldPatches.InterceptUseField.interceptUse.set(card, true);
         card.isEthereal = false;
         originalTarget = card.target;
