@@ -6,8 +6,10 @@ import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.actions.common.ReduceCostAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class StreamlinedMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID("StreamlinedMod");
@@ -20,8 +22,24 @@ public class StreamlinedMod extends AbstractAugment {
     }
 
     @Override
+    public float modifyBaseDamage(float damage, DamageInfo.DamageType type, AbstractCard card, AbstractMonster target) {
+        if (card.baseDamage > 0) {
+            return damage * MAJOR_BUFF;
+        }
+        return damage;
+    }
+
+    @Override
+    public float modifyBaseBlock(float block, AbstractCard card) {
+        if (card.baseBlock > 0) {
+            return block * MAJOR_BUFF;
+        }
+        return block;
+    }
+
+    @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost >= 1 && card.type != AbstractCard.CardType.POWER && cardCheck(card, c -> doesntUpgradeCost() & notExhaust(card));
+        return (card.baseDamage > 0 || card.baseBlock > 0) && card.cost >= 1 && card.type != AbstractCard.CardType.POWER && cardCheck(card, c -> doesntUpgradeCost() & notExhaust(card));
     }
 
     @Override
