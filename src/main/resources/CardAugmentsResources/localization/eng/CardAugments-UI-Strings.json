@@ -67,6 +67,9 @@
       "Costs 1 less [R] NL for each time you lose HP this combat. NL ",
       "Costs 2 less [R] NL for each time you lose HP this combat. NL "]
   },
+  "CardAugments:BludgeonMod": {
+    "TEXT": ["Bludgeoning ", ""]
+  },
   "CardAugments:BootMod": {
     "TEXT": ["Boot ", "", "Innate. NL "]
   },
