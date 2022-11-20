@@ -1,5 +1,6 @@
 package CardAugments.patches;
 
+import basemod.abstracts.CustomMonster;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -32,10 +33,8 @@ public class RunicPatch {
         }
     }
 
-    @SpirePatch(
-            clz = AbstractMonster.class,
-            method = "render"
-    )
+    @SpirePatch(clz = AbstractMonster.class, method = "render")
+    @SpirePatch(clz = CustomMonster.class, method = "render")
     public static class IntentPatch {
         @SpireInstrumentPatch
         public static ExprEditor Instrument() {
