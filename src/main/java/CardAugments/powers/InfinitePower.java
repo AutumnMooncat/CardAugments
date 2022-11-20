@@ -2,7 +2,7 @@ package CardAugments.powers;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cutStuff.InfiniteMod;
-import CardAugments.cardmods.util.InfiniteGeneratedMod;
+import CardAugments.cutStuff.InfiniteGeneratedMod;
 import CardAugments.util.TextureLoader;
 import basemod.helpers.CardModifierManager;
 import basemod.interfaces.CloneablePowerInterface;

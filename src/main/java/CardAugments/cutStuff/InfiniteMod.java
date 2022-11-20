@@ -2,7 +2,6 @@ package CardAugments.cutStuff;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
-import CardAugments.cardmods.util.InfiniteGeneratedMod;
 import CardAugments.patches.InterruptUseCardFieldPatches;
 import CardAugments.patches.MultiPreviewFieldPatches;
 import CardAugments.powers.InfinitePower;
