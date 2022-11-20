@@ -7,6 +7,7 @@ public class ChimeraDeck extends ConsoleCommand {
     public ChimeraDeck() {
         followup.put("mod", ChimeraDeckMod.class);
         followup.put("add", ChimeraDeckAdd.class);
+        followup.put("force", ChimeraDeckForce.class);
         requiresPlayer = true;
         simpleCheck = true;
     }

@@ -7,6 +7,7 @@ public class ChimeraHand extends ConsoleCommand {
     public ChimeraHand() {
         followup.put("mod", ChimeraHandMod.class);
         followup.put("add", ChimeraHandAdd.class);
+        followup.put("force", ChimeraHandForce.class);
         requiresPlayer = true;
         simpleCheck = true;
     }
