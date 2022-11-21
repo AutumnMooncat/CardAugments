@@ -14,7 +14,7 @@ import javassist.CtBehavior;
 import java.util.ArrayList;
 
 public class CopyTheDamnModPatches {
-    private static final ArrayList<AbstractCardModifier> modsToCopy = new ArrayList<>();
+    public static final ArrayList<AbstractCardModifier> modsToCopy = new ArrayList<>();
 
     @SpirePatch2(clz = GremlinMatchGame.class, method = "updateMatchGameLogic")
     public static class ModifyMatchGameCards {
@@ -41,6 +41,7 @@ public class CopyTheDamnModPatches {
             for (AbstractCardModifier m : modsToCopy) {
                 CardModifierManager.addModifier(card, m.makeCopy());
             }
+            RolledModFieldPatches.RolledModField.rolled.set(card, true);
             modsToCopy.clear();
         }
     }
