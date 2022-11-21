@@ -115,6 +115,9 @@
   "CardAugments:FlyingMod": {
     "TEXT": ["Flying ", "", " NL Next turn, gain [E] ."]
   },
+  "CardAugments:FragileMod": {
+    "TEXT": ["Fragile ", "", " NL Exhaust."]
+  },
   "CardAugments:FrostyMod": {
     "TEXT": ["Frosty ", "", " NL Channel %d Frost."]
   },
