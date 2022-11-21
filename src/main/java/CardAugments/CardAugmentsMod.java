@@ -57,7 +57,7 @@ public class CardAugmentsMod implements
     public static boolean enableMods = true; // The boolean we'll be setting on/off (true/false)
 
     public static final String MOD_PROBABILITY = "modChance";
-    public static int modProbabilityPercent = 50;
+    public static int modProbabilityPercent = 10;
 
     public static final String COMMON_WEIGHT = "commonWeight";
     public static int commonWeight = 5;
