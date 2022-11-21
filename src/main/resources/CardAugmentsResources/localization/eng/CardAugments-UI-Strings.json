@@ -247,6 +247,12 @@
   "CardAugments:SurgeMod": {
     "TEXT": ["", " Surge", " NL Gain %d Artifact. NL Exhaust."]
   },
+  "CardAugments:SurvivorMod": {
+    "TEXT": ["Survivor's ", "", " NL Discard %d card.",
+      "Translator note: These strings are for replacing Survivor's description. The first string is what to search for, the second string replaces it.",
+      " NL Discard 1 card.",
+      " NL Discard 2 cards."]
+  },
   "CardAugments:SwivelMod": {
     "TEXT": ["Swivelled ", "", " NL The next Attack you play costs 0."]
   },
