@@ -14,10 +14,11 @@ import com.megacrit.cardcrawl.events.city.TheLibrary;
 import com.megacrit.cardcrawl.events.shrines.GremlinMatchGame;
 import com.megacrit.cardcrawl.neow.NeowReward;
 import com.megacrit.cardcrawl.relics.PandorasBox;
+import com.megacrit.cardcrawl.rewards.RewardItem;
+import com.megacrit.cardcrawl.screens.CombatRewardScreen;
 import com.megacrit.cardcrawl.screens.select.GridCardSelectScreen;
 import com.megacrit.cardcrawl.shop.Merchant;
 import com.megacrit.cardcrawl.shop.ShopScreen;
-import com.megacrit.cardcrawl.vfx.FastCardObtainEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 import javassist.CtBehavior;
 import mintySpire.patches.cards.betterUpdatePreview.CardFields;
@@ -26,6 +27,20 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class OnCardGeneratedPatches {
+
+    @SpirePatch2(clz = CombatRewardScreen.class, method = "setupItemReward")
+    public static class ModifyRewardScreenStuff {
+        @SpirePostfixPatch
+        public static void patch(CombatRewardScreen __instance) {
+            for (RewardItem r : __instance.rewards) {
+                if (r.cards != null) {
+                    for (AbstractCard c : r.cards) {
+                        rollCardAugment(c);
+                    }
+                }
+            }
+        }
+    }
 
     @SpirePatch2(clz = AbstractDungeon.class, method = "getRewardCards")
     public static class ModifySpawnedCardsPatch {
@@ -148,7 +163,7 @@ public class OnCardGeneratedPatches {
     public static class ModifySpawnedMasterDeckCards {
         @SpirePostfixPatch
         public static void patch(AbstractCard ___card) {
-            if (CardAugmentsMod.modifyInstantObtain) {
+            if (CardAugmentsMod.modifyInstantObtain && CopyTheDamnModPatches.modsToCopy.isEmpty()) {
                 rollCardAugment(___card);
             }
         }
