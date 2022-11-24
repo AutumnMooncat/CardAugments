@@ -85,6 +85,9 @@
   "CardAugments:CultistMod": {
     "TEXT": ["Cultist's ", "", " NL Gain %d Strength."]
   },
+  "CardAugments:DisposableMod": {
+    "TEXT": ["Disposable ", ""]
+  },
   "CardAugments:DoomedMod": {
     "TEXT": ["Doomed ", "", " NL Deals %d additional damage for each Curse in your deck."]
   },
@@ -205,6 +208,9 @@
   "CardAugments:ReshuffleMod": {
     "TEXT": ["Recalling ", "", " NL cardaugments:Reshuffle."]
   },
+  "CardAugments:ReturningMod": {
+    "TEXT": ["Returning ", "", " NL cardaugments:Reshuffle."]
+  },
   "CardAugments:RollMod": {
     "TEXT": ["", " and Roll", " NL Next turn, gain %s Block."]
   },
@@ -267,6 +273,9 @@
   },
   "CardAugments:VoidMod": {
     "TEXT": ["Void ", "", " NL Shuffle %d *Void into your draw pile."]
+  },
+  "CardAugments:VoidingMod": {
+    "TEXT": ["Voiding ", "", "Ethereal. NL ", " NL Whenever this card is drawn, lose 1 Energy."]
   },
   "CardAugments:WallopMod": {
     "TEXT": ["Walloping ", "", " NL Gain Block equal to unblocked damage dealt."]
