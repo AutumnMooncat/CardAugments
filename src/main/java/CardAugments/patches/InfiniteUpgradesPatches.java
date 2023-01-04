@@ -16,9 +16,18 @@ public class InfiniteUpgradesPatches {
 
     @SpirePatch(clz = AbstractCard.class, method = "makeStatEquivalentCopy")
     public static class MakeStatEquivalentCopy {
-        public static AbstractCard Postfix(AbstractCard result, AbstractCard self) {
-            InfUpgradeField.inf.set(result, InfUpgradeField.inf.get(self));
-            return result;
+        @SpireInsertPatch(locator = Locator.class, localvars = {"card"})
+        public static AbstractCard copyField(AbstractCard __instance, AbstractCard card) {
+            InfUpgradeField.inf.set(card, InfUpgradeField.inf.get(__instance));
+            return card;
+        }
+
+        public static class Locator extends SpireInsertLocator {
+            @Override
+            public int[] Locate(CtBehavior ctBehavior) throws Exception {
+                Matcher m = new Matcher.FieldAccessMatcher(AbstractCard.class, "timesUpgraded");
+                return LineFinder.findInOrder(ctBehavior, m);
+            }
         }
     }
 
