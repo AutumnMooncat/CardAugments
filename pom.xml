@@ -6,7 +6,7 @@
     <groupId>CardAugments</groupId>
     <artifactId>CardAugments</artifactId> <!--Keep a note of this one: this is the ID used in the "auto add cards" method-->
     <name>Chimera Cards</name>
-    <version>0.1.2</version>
+    <version>0.1.3</version>
     <description>Adds random modifiers to card rewards.</description>
 
     <properties>
@@ -16,7 +16,7 @@
         <ModTheSpire.version>3.20.0</ModTheSpire.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--CHANGE THIS TO YOUR STEAM INSTALLATION-->
-        <Steam.path>D:\Steam\steamapps</Steam.path>
+        <Steam.path>E:\SteamLibrary\steamapps</Steam.path>
     </properties>
 
     <dependencies>
