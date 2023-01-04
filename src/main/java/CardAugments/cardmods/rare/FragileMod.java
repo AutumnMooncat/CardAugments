@@ -3,14 +3,8 @@ package CardAugments.cardmods.rare;
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.StrengthPower;
 
 public class FragileMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(FragileMod.class.getSimpleName());
@@ -25,7 +19,7 @@ public class FragileMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost > 0 && cardCheck(card, c -> doesntUpgradeCost() && doesntExhaust(c));
+        return card.cost > 0 && card.type != AbstractCard.CardType.POWER && card.type != AbstractCard.CardType.CURSE && cardCheck(card, c -> doesntUpgradeCost() && doesntExhaust(c));
     }
 
     @Override
