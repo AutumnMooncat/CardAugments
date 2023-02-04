@@ -5,6 +5,7 @@ import CardAugments.cardmods.DynvarCarrier;
 import CardAugments.commands.Chimera;
 import CardAugments.dynvars.DynamicDynamicVariableManager;
 import CardAugments.patches.RolledModFieldPatches;
+import CardAugments.ui.BiggerModButton;
 import CardAugments.ui.CenteredModLabel;
 import CardAugments.util.TextureLoader;
 import basemod.*;
@@ -387,12 +388,12 @@ public class CardAugmentsMod implements
         CenteredModLabel pageLabel = new CenteredModLabel(crossoverUIStrings.TEXT[1], Settings.WIDTH/2f/Settings.xScale, 830f, settingsPanel, l -> {
             l.text = crossoverUIStrings.TEXT[1] + " " + (currentPage + 1) + "/" + (pages.size());
         });
-        ModButton leftButton = new ModButton(Settings.WIDTH/2F/Settings.xScale - 100f - ImageMaster.CF_LEFT_ARROW.getWidth()/2F, 805f, ImageMaster.CF_LEFT_ARROW, settingsPanel, b -> {
+        BiggerModButton leftButton = new BiggerModButton(Settings.WIDTH/2F/Settings.xScale - 100f - ImageMaster.CF_LEFT_ARROW.getWidth()/2F, 805f, -5f, ImageMaster.CF_LEFT_ARROW, settingsPanel, b -> {
             if (currentPage > 0) {
                 previousPage();
             }
         });
-        ModButton rightButton = new ModButton(Settings.WIDTH/2F/Settings.xScale + 100f - ImageMaster.CF_LEFT_ARROW.getWidth()/2F, 805f, ImageMaster.CF_RIGHT_ARROW, settingsPanel, b -> {
+        BiggerModButton rightButton = new BiggerModButton(Settings.WIDTH/2F/Settings.xScale + 100f - ImageMaster.CF_LEFT_ARROW.getWidth()/2F, 805f, -5f, ImageMaster.CF_RIGHT_ARROW, settingsPanel, b -> {
             if (currentPage < pages.size()-1) {
                 nextPage();
             }
