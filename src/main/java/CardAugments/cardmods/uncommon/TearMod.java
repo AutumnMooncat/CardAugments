@@ -19,14 +19,20 @@ public class TearMod extends AbstractAugment implements DynvarCarrier {
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     private static final int DAMAGE = 7;
-    private static final int UPGRADE_DAMAGE = 9;
+    private static final int UPGRADE_DAMAGE = 2;
 
     public int val;
     public boolean modified;
     public boolean upgraded;
 
     public int getBaseVal(AbstractCard card) {
-        return card.upgraded ? UPGRADE_DAMAGE : DAMAGE;
+        int upgrades = card.timesUpgraded;
+        if (upgrades == 0) {
+            return DAMAGE;
+        } else if (upgrades < 0) {
+            upgrades *= -1;
+        }
+        return DAMAGE + upgrades * UPGRADE_DAMAGE;
     }
 
     @Override

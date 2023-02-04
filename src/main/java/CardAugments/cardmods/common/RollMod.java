@@ -19,14 +19,20 @@ public class RollMod extends AbstractAugment implements DynvarCarrier {
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     private static final int BLOCK = 4;
-    private static final int UPGRADE_BLOCK = 6;
+    private static final int UPGRADE_BLOCK = 2;
 
     public int val;
     public boolean modified;
     public boolean upgraded;
 
     public int getBaseVal(AbstractCard card) {
-        return card.upgraded ? UPGRADE_BLOCK : BLOCK;
+        int upgrades = card.timesUpgraded;
+        if (upgrades == 0) {
+            return BLOCK;
+        } else if (upgrades < 0) {
+            upgrades *= -1;
+        }
+        return BLOCK + upgrades * UPGRADE_BLOCK;
     }
 
     @Override
