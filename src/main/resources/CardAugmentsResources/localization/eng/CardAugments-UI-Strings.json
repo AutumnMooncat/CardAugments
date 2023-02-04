@@ -17,6 +17,13 @@
       "Adds randomly rolled card modifiers to card rewards. See the Mod Options if you would like to change any configurations!"
     ]
   },
+  "CardAugments:CrossoverConfig": {
+    "TEXT": [
+      "Enable Base Chimera Cards Content",
+      "Page",
+      "modifiers"
+    ]
+  },
   "CardAugments:ExampleMod": {
     "TEXT": ["Prefix name", "Suffix name", "Description stuff"]
   },
@@ -147,6 +154,9 @@
   },
   "CardAugments:GloomMod": {
     "TEXT": ["", " and Gloom", " NL Channel %d Dark."]
+  },
+  "CardAugments:GoForTheMod": {
+    "TEXT": ["Go for the ", "", "Deal %s damage. NL If the enemy intends to attack, "]
   },
   "CardAugments:GreedMod": {
     "TEXT": ["", " of Greed", " NL If Fatal, gain %d Gold. NL Exhaust."]

@@ -1,14 +1,10 @@
 package CardAugments.patches;
 
 import CardAugments.CardAugmentsMod;
-import CardAugments.cardmods.AbstractAugment;
-import basemod.abstracts.AbstractCardModifier;
-import basemod.helpers.CardModifierManager;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.events.city.TheLibrary;
 import com.megacrit.cardcrawl.events.shrines.GremlinMatchGame;
@@ -21,10 +17,10 @@ import com.megacrit.cardcrawl.shop.Merchant;
 import com.megacrit.cardcrawl.shop.ShopScreen;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 import javassist.CtBehavior;
-import mintySpire.patches.cards.betterUpdatePreview.CardFields;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
+
+import static CardAugments.CardAugmentsMod.rollCardAugment;
 
 public class OnCardGeneratedPatches {
 
@@ -187,67 +183,6 @@ public class OnCardGeneratedPatches {
             public int[] Locate(CtBehavior ctMethodToPatch) throws Exception {
                 Matcher finalMatcher = new Matcher.MethodCallMatcher(ShopScreen.class, "init");
                 return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
-            }
-        }
-    }
-
-    public static void rollCardAugment(AbstractCard c) {
-        rollCardAugment(c, -1);
-    }
-
-    public static void rollCardAugment(AbstractCard c, int index) {
-        if (CardAugmentsMod.enableMods && !RolledModFieldPatches.RolledModField.rolled.get(c) && AbstractDungeon.miscRng.random(99) < CardAugmentsMod.modProbabilityPercent) {
-            applyWeightedCardMod(c, rollRarity(c.rarity), index);
-        }
-        RolledModFieldPatches.RolledModField.rolled.set(c, true);
-    }
-
-    public static AbstractAugment.AugmentRarity rollRarity(AbstractCard.CardRarity rarity) {
-        int c = CardAugmentsMod.commonWeight;
-        int u = CardAugmentsMod.uncommonWeight;
-        int r = CardAugmentsMod.rareWeight;
-        switch (rarity) {
-            case BASIC:
-            case COMMON:
-                c += CardAugmentsMod.rarityBias;
-                break;
-            case UNCOMMON:
-                u += CardAugmentsMod.rarityBias;
-                break;
-            case RARE:
-                r += CardAugmentsMod.rarityBias;
-                break;
-        }
-        int roll = AbstractDungeon.miscRng.random(c + u + r - 1); //StS adds +1 to random call, so subtract 1
-        if ((roll -= c) < 0) {
-            return AbstractAugment.AugmentRarity.COMMON;
-        } else if (roll - u < 0) {
-            return AbstractAugment.AugmentRarity.UNCOMMON;
-        } else {
-            return AbstractAugment.AugmentRarity.RARE;
-        }
-    }
-
-    public static void applyWeightedCardMod(AbstractCard c, AbstractAugment.AugmentRarity rarity, int index) {
-        ArrayList<AbstractAugment> validMods = new ArrayList<>();
-        switch (rarity) {
-            case COMMON:
-                validMods.addAll(CardAugmentsMod.commonMods.stream().filter(m -> m.canRoll(c)).collect(Collectors.toCollection(ArrayList::new)));
-                break;
-            case UNCOMMON:
-                validMods.addAll(CardAugmentsMod.uncommonMods.stream().filter(m -> m.canRoll(c)).collect(Collectors.toCollection(ArrayList::new)));
-                break;
-            case RARE:
-                validMods.addAll(CardAugmentsMod.rareMods.stream().filter(m -> m.canRoll(c)).collect(Collectors.toCollection(ArrayList::new)));
-                break;
-        }
-        if (!validMods.isEmpty()) {
-            AbstractCardModifier m = validMods.get(AbstractDungeon.miscRng.random(validMods.size()-1)).makeCopy();
-            CardModifierManager.addModifier(c, m);
-            if (index != -1 && CardAugmentsMod.isMintyLoaded) {
-                if (index < CardFields.SCVPopup.unupgradedCardRewards.get(CardCrawlGame.cardPopup).size()) {
-                    CardModifierManager.addModifier(CardFields.SCVPopup.unupgradedCardRewards.get(CardCrawlGame.cardPopup).get(index), m);
-                }
             }
         }
     }

@@ -2,20 +2,20 @@ package CardAugments;
 
 import CardAugments.cardmods.AbstractAugment;
 import CardAugments.cardmods.DynvarCarrier;
-import CardAugments.cardmods.rare.SanctifiedMod;
 import CardAugments.commands.Chimera;
 import CardAugments.dynvars.DynamicDynamicVariableManager;
+import CardAugments.patches.RolledModFieldPatches;
+import CardAugments.ui.CenteredModLabel;
 import CardAugments.util.TextureLoader;
 import basemod.*;
+import basemod.abstracts.AbstractCardModifier;
 import basemod.devcommands.ConsoleCommand;
 import basemod.helpers.CardBorderGlowManager;
 import basemod.helpers.CardModifierManager;
 import basemod.interfaces.EditKeywordsSubscriber;
 import basemod.interfaces.EditStringsSubscriber;
-import basemod.interfaces.PostCreateStartingDeckSubscriber;
 import basemod.interfaces.PostInitializeSubscriber;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.stslib.Keyword;
 import com.evacipated.cardcrawl.modthespire.Loader;
@@ -23,38 +23,40 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
+import mintySpire.patches.cards.betterUpdatePreview.CardFields;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @SpireInitializer
 public class CardAugmentsMod implements
         EditStringsSubscriber,
         PostInitializeSubscriber,
         EditKeywordsSubscriber {
-    // Make sure to implement the subscribers *you* are using (read basemod wiki). Editing cards? EditCardsSubscriber.
-    // Making relics? EditRelicsSubscriber. etc., etc., for a full list and how to make your own, visit the basemod wiki.
     public static final Logger logger = LogManager.getLogger(CardAugmentsMod.class.getName());
     private static String modID;
 
     public static boolean isMintyLoaded;
 
-    // Mod-settings settings. This is if you want an on/off savable button
     public static SpireConfig cardAugmentsConfig;
+    public static SpireConfig cardAugmentsCrossoverConfig;
     public static String FILE_NAME = "CardsAugmentsConfig";
+    public static String CROSSOVER_FILE_NAME = "CardsAugmentsCrossoverConfig";
 
     public static final String ENABLE_MODS_SETTING = "enableMods";
-    public static boolean enableMods = true; // The boolean we'll be setting on/off (true/false)
+    public static boolean enableMods = true;
 
     public static final String MOD_PROBABILITY = "modChance";
     public static int modProbabilityPercent = 10;
@@ -88,6 +90,10 @@ public class CardAugmentsMod implements
     public static final ArrayList<AbstractAugment> uncommonMods = new ArrayList<>();
     public static final ArrayList<AbstractAugment> rareMods = new ArrayList<>();
     public static final HashMap<String, AbstractAugment> modMap = new HashMap<>();
+    public static final HashMap<AbstractAugment, String> crossoverMap = new HashMap<>();
+    public static final HashMap<String, String> crossoverLabelMap = new HashMap<>();
+    public static final HashMap<String, Integer> crossoverSizeMap = new HashMap<>();
+    public static final HashMap<String, Boolean> crossoverEnableMap = new HashMap<>();
 
     //List of orbies
     public static final ArrayList<AbstractPlayer.PlayerClass> ORB_CHARS = new ArrayList<>(Collections.singletonList(AbstractPlayer.PlayerClass.DEFECT));
@@ -95,9 +101,20 @@ public class CardAugmentsMod implements
 
     //This is for the in-game mod settings panel.
     public static UIStrings uiStrings;
+    public static UIStrings crossoverUIStrings;
     public static String[] TEXT;
     public static String[] EXTRA_TEXT;
     private static final String AUTHOR = "Mistress Alison";
+
+    public static ModPanel settingsPanel = new ModPanel();
+    public static ModLabel noCrossoverLabel;
+    public static HashMap<Integer, ArrayList<IUIElement>> pages = new HashMap<>();
+    public static final float LAYOUT_Y = 740f;
+    public static final float LAYOUT_X = 400f;
+    public static final float SPACING_Y = 55f;
+    public static final float FULL_PAGE_Y = (SPACING_Y * 9);
+    public static float deltaY = 0;
+    public static int currentPage = 0;
     
     // =============== INPUT TEXTURE LOCATION =================
     
@@ -107,7 +124,7 @@ public class CardAugmentsMod implements
     // =============== /INPUT TEXTURE LOCATION/ =================
     
     
-    // =============== SUBSCRIBE, CREATE THE COLOR_GRAY, INITIALIZE =================
+    // =============== SUBSCRIBE, INITIALIZE =================
     
     public CardAugmentsMod() {
         logger.info("Subscribe to BaseMod hooks");
@@ -118,11 +135,7 @@ public class CardAugmentsMod implements
         
         logger.info("Done subscribing");
 
-        // This loads the mod settings.
-        // The actual mod Button is added below in receivePostInitialize()
         logger.info("Adding mod settings");
-        // This loads the mod settings.
-        // The actual mod Button is added below in receivePostInitialize()
         Properties cardAugmentsDefaultSettings = new Properties();
         cardAugmentsDefaultSettings.setProperty(ENABLE_MODS_SETTING, Boolean.toString(enableMods));
         cardAugmentsDefaultSettings.setProperty(MOD_PROBABILITY, String.valueOf(modProbabilityPercent));
@@ -136,6 +149,7 @@ public class CardAugmentsMod implements
         cardAugmentsDefaultSettings.setProperty(MODIFY_SHOP, Boolean.toString(modifyShop));
         try {
             cardAugmentsConfig = new SpireConfig(modID, FILE_NAME, cardAugmentsDefaultSettings);
+            cardAugmentsCrossoverConfig = new SpireConfig(modID, CROSSOVER_FILE_NAME);
             enableMods = cardAugmentsConfig.getBool(ENABLE_MODS_SETTING);
             modProbabilityPercent = cardAugmentsConfig.getInt(MOD_PROBABILITY);
             commonWeight = cardAugmentsConfig.getInt(COMMON_WEIGHT);
@@ -156,11 +170,32 @@ public class CardAugmentsMod implements
         
     }
 
+    public static void registerMod(String modID, String labelText) {
+        if (!cardAugmentsCrossoverConfig.has(modID)) {
+            cardAugmentsCrossoverConfig.setBool(modID, true);
+        }
+        crossoverEnableMap.put(modID, cardAugmentsCrossoverConfig.getBool(modID));
+        crossoverLabelMap.put(modID, labelText);
+        ModLabeledToggleButton enableCrossoverButton = new ModLabeledToggleButton(labelText,LAYOUT_X - 40f, LAYOUT_Y - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
+                cardAugmentsCrossoverConfig.getBool(modID), settingsPanel,
+                (label) -> {
+                    label.text = crossoverLabelMap.get(modID) + " (" + crossoverSizeMap.get(modID) + " " + crossoverUIStrings.TEXT[2] + ")";
+                },
+                (button) -> {
+                    cardAugmentsCrossoverConfig.setBool(modID, button.enabled);
+                    crossoverEnableMap.put(modID, button.enabled);
+                    try {cardAugmentsCrossoverConfig.save();} catch (IOException e) {e.printStackTrace();}
+                });
+        registerUIElement(enableCrossoverButton);
+    }
+
     public static void registerOrbCharacter(AbstractPlayer.PlayerClass clz) {
         ORB_CHARS.add(clz);
     }
 
-    public static void registerAugment(AbstractAugment a) {
+    public static void registerAugment(AbstractAugment a, String modID) {
+        crossoverMap.put(a, modID);
+        crossoverSizeMap.merge(modID, 1, Integer::sum);
         if (a instanceof DynvarCarrier) {
             DynamicDynamicVariableManager.registerDynvarCarrier((DynvarCarrier) a);
         }
@@ -213,10 +248,10 @@ public class CardAugmentsMod implements
 
         //Grab the strings
         uiStrings = CardCrawlGame.languagePack.getUIString(makeID("ModConfigs"));
+        crossoverUIStrings = CardCrawlGame.languagePack.getUIString(makeID("CrossoverConfig"));
         EXTRA_TEXT = uiStrings.EXTRA_TEXT;
         TEXT = uiStrings.TEXT;
         // Create the Mod Menu
-        ModPanel settingsPanel = new ModPanel();
 
         // Load the Mod Badge
         Texture badgeTexture = TextureLoader.getTexture(BADGE_IMAGE);
@@ -226,137 +261,144 @@ public class CardAugmentsMod implements
         ArrayList<String> labelStrings = new ArrayList<>(Arrays.asList(TEXT));
         float sliderOffset = getSliderPosition(labelStrings.subList(1,5));
         labelStrings.clear();
-        float currentYposition = 740f;
-        float spacingY = 55f;
 
-        //Used to set the unused self damage setting.
-        ModLabeledToggleButton enableModsButton = new ModLabeledToggleButton(TEXT[0],400.0f - 40f, currentYposition - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
+        //Enable or disable the mod entirely.
+        ModLabeledToggleButton enableModsButton = new ModLabeledToggleButton(TEXT[0],LAYOUT_X - 40f, LAYOUT_Y - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
                 cardAugmentsConfig.getBool(ENABLE_MODS_SETTING), settingsPanel, (label) -> {}, (button) -> {
             cardAugmentsConfig.setBool(ENABLE_MODS_SETTING, button.enabled);
             enableMods = button.enabled;
             try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
         });
-        currentYposition -= spacingY;
 
         //Used for probability of a mod being applied
-        ModLabel probabilityLabel = new ModLabel(TEXT[1], 400f, currentYposition, Settings.CREAM_COLOR, FontHelper.charDescFont, settingsPanel, modLabel -> {});
+        ModLabel probabilityLabel = new ModLabel(TEXT[1], LAYOUT_X, LAYOUT_Y, Settings.CREAM_COLOR, FontHelper.charDescFont, settingsPanel, modLabel -> {});
         ModMinMaxSlider probabilitySlider = new ModMinMaxSlider("",
-                400f + sliderOffset,
-                currentYposition + 7f,
+                LAYOUT_X + sliderOffset,
+                LAYOUT_Y + 7f,
                 0, 100, cardAugmentsConfig.getInt(MOD_PROBABILITY), "%.0f", settingsPanel, slider -> {
             cardAugmentsConfig.setInt(MOD_PROBABILITY, Math.round(slider.getValue()));
             modProbabilityPercent = Math.round(slider.getValue());
             try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
         });
-        currentYposition -= spacingY;
 
         //Used for common mod weight
-        ModLabel commonLabel = new ModLabel(TEXT[2], 400f, currentYposition, Settings.CREAM_COLOR, FontHelper.charDescFont, settingsPanel, modLabel -> {});
+        ModLabel commonLabel = new ModLabel(TEXT[2], LAYOUT_X, LAYOUT_Y, Settings.CREAM_COLOR, FontHelper.charDescFont, settingsPanel, modLabel -> {});
         ModMinMaxSlider commonSlider = new ModMinMaxSlider("",
-                400f + sliderOffset,
-                currentYposition + 7f,
+                LAYOUT_X + sliderOffset,
+                LAYOUT_Y + 7f,
                 1, 10, cardAugmentsConfig.getInt(COMMON_WEIGHT), "%.0f", settingsPanel, slider -> {
             cardAugmentsConfig.setInt(COMMON_WEIGHT, Math.round(slider.getValue()));
             commonWeight = Math.round(slider.getValue());
             try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
         });
-        currentYposition -= spacingY;
 
         //Used for uncommon mod weight
-        ModLabel uncommonLabel = new ModLabel(TEXT[3], 400f, currentYposition, Settings.CREAM_COLOR, FontHelper.charDescFont, settingsPanel, modLabel -> {});
+        ModLabel uncommonLabel = new ModLabel(TEXT[3], LAYOUT_X, LAYOUT_Y, Settings.CREAM_COLOR, FontHelper.charDescFont, settingsPanel, modLabel -> {});
         ModMinMaxSlider uncommonSlider = new ModMinMaxSlider("",
-                400f + sliderOffset,
-                currentYposition + 7f,
+                LAYOUT_X + sliderOffset,
+                LAYOUT_Y + 7f,
                 1, 10, cardAugmentsConfig.getInt(UNCOMMON_WEIGHT), "%.0f", settingsPanel, slider -> {
             cardAugmentsConfig.setInt(UNCOMMON_WEIGHT, Math.round(slider.getValue()));
             uncommonWeight = Math.round(slider.getValue());
             try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
         });
-        currentYposition -= spacingY;
 
         //Used for rare mod weight
-        ModLabel rareLabel = new ModLabel(TEXT[4], 400f, currentYposition, Settings.CREAM_COLOR, FontHelper.charDescFont, settingsPanel, modLabel -> {});
+        ModLabel rareLabel = new ModLabel(TEXT[4], LAYOUT_X, LAYOUT_Y, Settings.CREAM_COLOR, FontHelper.charDescFont, settingsPanel, modLabel -> {});
         ModMinMaxSlider rareSlider = new ModMinMaxSlider("",
-                400f + sliderOffset,
-                currentYposition + 7f,
+                LAYOUT_X + sliderOffset,
+                LAYOUT_Y + 7f,
                 1, 10, cardAugmentsConfig.getInt(RARE_WEIGHT), "%.0f", settingsPanel, slider -> {
             cardAugmentsConfig.setInt(RARE_WEIGHT, Math.round(slider.getValue()));
             rareWeight = Math.round(slider.getValue());
             try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
         });
-        currentYposition -= spacingY;
 
         //Used for bias weight
-        ModLabel biasLabel = new ModLabel(TEXT[7], 400f, currentYposition, Settings.CREAM_COLOR, FontHelper.charDescFont, settingsPanel, modLabel -> {});
+        ModLabel biasLabel = new ModLabel(TEXT[7], LAYOUT_X, LAYOUT_Y, Settings.CREAM_COLOR, FontHelper.charDescFont, settingsPanel, modLabel -> {});
         ModMinMaxSlider biasSlider = new ModMinMaxSlider("",
-                400f + sliderOffset,
-                currentYposition + 7f,
+                LAYOUT_X + sliderOffset,
+                LAYOUT_Y + 7f,
                 0, 5, cardAugmentsConfig.getInt(RARITY_BIAS), "%.0f", settingsPanel, slider -> {
             cardAugmentsConfig.setInt(RARITY_BIAS, Math.round(slider.getValue()));
             rarityBias = Math.round(slider.getValue());
             try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
         });
-        currentYposition -= spacingY;
 
         //Used to modify starter cards
-        ModLabeledToggleButton enableStarterModificationButton = new ModLabeledToggleButton(TEXT[5],400.0f - 40f, currentYposition - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
+        ModLabeledToggleButton enableStarterModificationButton = new ModLabeledToggleButton(TEXT[5],LAYOUT_X - 40f, LAYOUT_Y - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
                 cardAugmentsConfig.getBool(MODIFY_STARTERS), settingsPanel, (label) -> {}, (button) -> {
             cardAugmentsConfig.setBool(MODIFY_STARTERS, button.enabled);
             modifyStarters = button.enabled;
             try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
         });
-        currentYposition -= spacingY;
 
         //Used to modify starter cards
-        ModLabeledToggleButton enableInstantObtainModificationButton = new ModLabeledToggleButton(TEXT[8],400.0f - 40f, currentYposition - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
+        ModLabeledToggleButton enableInstantObtainModificationButton = new ModLabeledToggleButton(TEXT[8],LAYOUT_X - 40f, LAYOUT_Y - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
                 cardAugmentsConfig.getBool(MODIFY_INSTANT_OBTAIN), settingsPanel, (label) -> {}, (button) -> {
             cardAugmentsConfig.setBool(MODIFY_INSTANT_OBTAIN, button.enabled);
             modifyInstantObtain = button.enabled;
             try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
         });
-        currentYposition -= spacingY;
 
         //Used to modify starter cards
-        ModLabeledToggleButton enableShopButton = new ModLabeledToggleButton(TEXT[9],400.0f - 40f, currentYposition - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
+        ModLabeledToggleButton enableShopButton = new ModLabeledToggleButton(TEXT[9],LAYOUT_X - 40f, LAYOUT_Y - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
                 cardAugmentsConfig.getBool(MODIFY_SHOP), settingsPanel, (label) -> {}, (button) -> {
             cardAugmentsConfig.setBool(MODIFY_SHOP, button.enabled);
             modifyShop = button.enabled;
             try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
         });
-        currentYposition -= spacingY;
 
         //Used to allow orbs without prismatic shard
-        ModLabeledToggleButton enableAllowOrbsButton = new ModLabeledToggleButton(TEXT[6],400.0f - 40f, currentYposition - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
+        ModLabeledToggleButton enableAllowOrbsButton = new ModLabeledToggleButton(TEXT[6],LAYOUT_X - 40f, LAYOUT_Y - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
                 cardAugmentsConfig.getBool(ALLOW_ORBS), settingsPanel, (label) -> {}, (button) -> {
             cardAugmentsConfig.setBool(ALLOW_ORBS, button.enabled);
             allowOrbs = button.enabled;
             try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
         });
-        currentYposition -= spacingY;
 
-        settingsPanel.addUIElement(enableModsButton);
-        settingsPanel.addUIElement(probabilityLabel);
-        settingsPanel.addUIElement(probabilitySlider);
-        settingsPanel.addUIElement(commonLabel);
-        settingsPanel.addUIElement(commonSlider);
-        settingsPanel.addUIElement(uncommonLabel);
-        settingsPanel.addUIElement(uncommonSlider);
-        settingsPanel.addUIElement(rareLabel);
-        settingsPanel.addUIElement(rareSlider);
-        settingsPanel.addUIElement(biasLabel);
-        settingsPanel.addUIElement(biasSlider);
-        settingsPanel.addUIElement(enableStarterModificationButton);
-        settingsPanel.addUIElement(enableInstantObtainModificationButton);
-        settingsPanel.addUIElement(enableShopButton);
-        settingsPanel.addUIElement(enableAllowOrbsButton);
+        registerUIElement(enableModsButton);
+        registerUIElement(probabilityLabel, false);
+        registerUIElement(probabilitySlider);
+        registerUIElement(commonLabel, false);
+        registerUIElement(commonSlider);
+        registerUIElement(uncommonLabel, false);
+        registerUIElement(uncommonSlider);
+        registerUIElement(rareLabel, false);
+        registerUIElement(rareSlider);
+        registerUIElement(biasLabel, false);
+        registerUIElement(biasSlider);
+        registerUIElement(enableStarterModificationButton);
+        registerUIElement(enableInstantObtainModificationButton);
+        registerUIElement(enableShopButton);
+        registerUIElement(enableAllowOrbsButton);
+
+        CenteredModLabel pageLabel = new CenteredModLabel(crossoverUIStrings.TEXT[1], Settings.WIDTH/2f/Settings.xScale, 830f, settingsPanel, l -> {
+            l.text = crossoverUIStrings.TEXT[1] + " " + (currentPage + 1) + "/" + (pages.size());
+        });
+        ModButton leftButton = new ModButton(Settings.WIDTH/2F/Settings.xScale - 100f - ImageMaster.CF_LEFT_ARROW.getWidth()/2F, 805f, ImageMaster.CF_LEFT_ARROW, settingsPanel, b -> {
+            if (currentPage > 0) {
+                previousPage();
+            }
+        });
+        ModButton rightButton = new ModButton(Settings.WIDTH/2F/Settings.xScale + 100f - ImageMaster.CF_LEFT_ARROW.getWidth()/2F, 805f, ImageMaster.CF_RIGHT_ARROW, settingsPanel, b -> {
+            if (currentPage < pages.size()-1) {
+                nextPage();
+            }
+        });
+
+        settingsPanel.addUIElement(pageLabel);
+        settingsPanel.addUIElement(leftButton);
+        settingsPanel.addUIElement(rightButton);
 
         logger.info("Done loading badge Image and mod options");
 
         logger.info("Loading card mods...");
 
+        registerMod(modID, crossoverUIStrings.TEXT[0]);
         new AutoAdd(modID)
                 .packageFilter("CardAugments.cardmods")
-                .any(AbstractAugment.class, (info, abstractAugment) -> registerAugment(abstractAugment));
+                .any(AbstractAugment.class, (info, abstractAugment) -> registerAugment(abstractAugment, modID));
 
         logger.info("Done loading card mods");
 
@@ -372,6 +414,46 @@ public class CardAugmentsMod implements
 
         logger.info("Done");
 
+    }
+
+    private static void registerUIElement(IUIElement elem) {
+        registerUIElement(elem, true);
+    }
+
+    private static void registerUIElement(IUIElement elem, boolean decrement) {
+        settingsPanel.addUIElement(elem);
+        if (pages.isEmpty()) {
+            pages.put(0, new ArrayList<>());
+        }
+        int page = pages.size()-1;
+        pages.get(page).add(elem);
+        elem.setY(elem.getY() - deltaY);
+        elem.setX(elem.getX() + (page * Settings.WIDTH));
+        if (decrement) {
+            deltaY += SPACING_Y;
+            if (deltaY > FULL_PAGE_Y) {
+                deltaY = 0;
+                pages.put(page+1, new ArrayList<>());
+            }
+        }
+    }
+
+    private static void nextPage() {
+        for (ArrayList<IUIElement> elems : pages.values()) {
+            for (IUIElement elem : elems) {
+                elem.setX(elem.getX() - Settings.WIDTH);
+            }
+        }
+        currentPage++;
+    }
+
+    private static void previousPage() {
+        for (ArrayList<IUIElement> elems : pages.values()) {
+            for (IUIElement elem : elems) {
+                elem.setX(elem.getX() + Settings.WIDTH);
+            }
+        }
+        currentPage--;
     }
 
     //Get the longest text so all sliders are centered
@@ -442,6 +524,71 @@ public class CardAugmentsMod implements
             for (Keyword keyword : keywords) {
                 BaseMod.addKeyword(getModID().toLowerCase(), keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
                 //  getModID().toLowerCase() makes your keyword mod specific (it won't show up in other cards that use that word)
+            }
+        }
+    }
+
+    public static boolean isCrossOverEnabled(AbstractAugment m) {
+        return crossoverEnableMap.get(crossoverMap.get(m));
+    }
+
+    public static void rollCardAugment(AbstractCard c) {
+        rollCardAugment(c, -1);
+    }
+
+    public static void rollCardAugment(AbstractCard c, int index) {
+        if (enableMods && !RolledModFieldPatches.RolledModField.rolled.get(c) && AbstractDungeon.miscRng.random(99) < modProbabilityPercent) {
+            applyWeightedCardMod(c, rollRarity(c.rarity), index);
+        }
+        RolledModFieldPatches.RolledModField.rolled.set(c, true);
+    }
+
+    public static AbstractAugment.AugmentRarity rollRarity(AbstractCard.CardRarity rarity) {
+        int c = commonWeight;
+        int u = uncommonWeight;
+        int r = rareWeight;
+        switch (rarity) {
+            case BASIC:
+            case COMMON:
+                c += rarityBias;
+                break;
+            case UNCOMMON:
+                u += rarityBias;
+                break;
+            case RARE:
+                r += rarityBias;
+                break;
+        }
+        int roll = AbstractDungeon.miscRng.random(c + u + r - 1); //StS adds +1 to random call, so subtract 1
+        if ((roll -= c) < 0) {
+            return AbstractAugment.AugmentRarity.COMMON;
+        } else if (roll - u < 0) {
+            return AbstractAugment.AugmentRarity.UNCOMMON;
+        } else {
+            return AbstractAugment.AugmentRarity.RARE;
+        }
+    }
+
+    public static void applyWeightedCardMod(AbstractCard c, AbstractAugment.AugmentRarity rarity, int index) {
+        ArrayList<AbstractAugment> validMods = new ArrayList<>();
+        switch (rarity) {
+            case COMMON:
+                validMods.addAll(commonMods.stream().filter(m -> m.canRoll(c) && isCrossOverEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
+                break;
+            case UNCOMMON:
+                validMods.addAll(uncommonMods.stream().filter(m -> m.canRoll(c) && isCrossOverEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
+                break;
+            case RARE:
+                validMods.addAll(rareMods.stream().filter(m -> m.canRoll(c) && isCrossOverEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
+                break;
+        }
+        if (!validMods.isEmpty()) {
+            AbstractCardModifier m = validMods.get(AbstractDungeon.miscRng.random(validMods.size()-1)).makeCopy();
+            CardModifierManager.addModifier(c, m);
+            if (index != -1 && isMintyLoaded) {
+                if (index < CardFields.SCVPopup.unupgradedCardRewards.get(CardCrawlGame.cardPopup).size()) {
+                    CardModifierManager.addModifier(CardFields.SCVPopup.unupgradedCardRewards.get(CardCrawlGame.cardPopup).get(index), m);
+                }
             }
         }
     }
