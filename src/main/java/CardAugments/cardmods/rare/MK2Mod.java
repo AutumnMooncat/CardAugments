@@ -5,13 +5,11 @@ import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.cards.colorless.PanicButton;
-import com.megacrit.cardcrawl.cards.purple.Halt;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class MK2Mod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID("MK2Mod");
+    public static final String ID = CardAugmentsMod.makeID(MK2Mod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     boolean modMagic;
@@ -53,9 +51,13 @@ public class MK2Mod extends AbstractAugment {
     }
 
     @Override
-    public String modifyName(String cardName, AbstractCard card) {
-        String[] nameParts = removeUpgradeText(cardName);
-        return TEXT[0] + nameParts[0] + TEXT[1] + nameParts[1];
+    public String getPrefix() {
+        return TEXT[0];
+    }
+
+    @Override
+    public String getSufix() {
+        return TEXT[1];
     }
 
     @Override

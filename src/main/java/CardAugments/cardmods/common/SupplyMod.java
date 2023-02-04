@@ -12,7 +12,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.EnergizedBluePower;
 
 public class SupplyMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID("SupplyMod");
+    public static final String ID = CardAugmentsMod.makeID(SupplyMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     private static final int NRG = 2;
@@ -27,9 +27,15 @@ public class SupplyMod extends AbstractAugment {
     public boolean validCard(AbstractCard card) {
         return card.cost >= 0 && cardCheck(card, c -> doesntUpgradeCost());
     }
+
     @Override
-    public String modifyName(String cardName, AbstractCard card) {
-        return TEXT[0] + cardName + TEXT[1];
+    public String getPrefix() {
+        return TEXT[0];
+    }
+
+    @Override
+    public String getSufix() {
+        return TEXT[1];
     }
 
     @Override

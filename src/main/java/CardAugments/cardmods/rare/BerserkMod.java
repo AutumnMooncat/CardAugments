@@ -2,7 +2,6 @@ package CardAugments.cardmods.rare;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
-import CardAugments.cardmods.common.SlayerMod;
 import basemod.abstracts.AbstractCardModifier;
 import com.badlogic.gdx.Gdx;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -14,7 +13,7 @@ import com.megacrit.cardcrawl.vfx.ExhaustEmberEffect;
 import com.megacrit.cardcrawl.vfx.combat.FlameParticleEffect;
 
 public class BerserkMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID("BerserkMod");
+    public static final String ID = CardAugmentsMod.makeID(BerserkMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
     private static final float VFX_RATE = 0.1F;
     private float vfxTimer = 0F;
@@ -25,8 +24,13 @@ public class BerserkMod extends AbstractAugment {
     }
 
     @Override
-    public String modifyName(String cardName, AbstractCard card) {
-        return TEXT[0] + cardName + TEXT[1];
+    public String getPrefix() {
+        return TEXT[0];
+    }
+
+    @Override
+    public String getSufix() {
+        return TEXT[1];
     }
 
     @Override

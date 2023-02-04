@@ -7,7 +7,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 
 public class MasterfulMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID("MasterfulMod");
+    public static final String ID = CardAugmentsMod.makeID(MasterfulMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     @Override
@@ -27,8 +27,13 @@ public class MasterfulMod extends AbstractAugment {
     }
 
     @Override
-    public String modifyName(String cardName, AbstractCard card) {
-        return TEXT[0] + cardName + TEXT[1];
+    public String getPrefix() {
+        return TEXT[0];
+    }
+
+    @Override
+    public String getSufix() {
+        return TEXT[1];
     }
 
     @Override

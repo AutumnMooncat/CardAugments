@@ -5,7 +5,6 @@ import CardAugments.cardmods.AbstractAugment;
 import CardAugments.cardmods.util.BetaMod;
 import CardAugments.cardmods.util.OmegaMod;
 import CardAugments.patches.InterruptUseCardFieldPatches;
-import CardAugments.patches.MultiPreviewFieldPatches;
 import CardAugments.util.FormatHelper;
 import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardModifierManager;
@@ -13,13 +12,11 @@ import basemod.patches.com.megacrit.cardcrawl.cards.AbstractCard.MultiCardPrevie
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class AlphaMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID("AlphaMod");
+    public static final String ID = CardAugmentsMod.makeID(AlphaMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     private boolean inherentHack = true;
@@ -48,8 +45,13 @@ public class AlphaMod extends AbstractAugment {
     }
 
     @Override
-    public String modifyName(String cardName, AbstractCard card) {
-        return TEXT[0] + cardName + TEXT[1];
+    public String getPrefix() {
+        return TEXT[0];
+    }
+
+    @Override
+    public String getSufix() {
+        return TEXT[1];
     }
 
     @Override

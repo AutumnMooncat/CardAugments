@@ -17,6 +17,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.DrawPower;
+import com.megacrit.cardcrawl.powers.RepairPower;
 import javassist.*;
 import javassist.expr.ExprEditor;
 import javassist.expr.NewExpr;
@@ -106,7 +107,7 @@ public class BiasedMod extends AbstractAugment {
         // up only to crush them a room, or several, later. Uncommenting this line should be considered, or even
         // blacklisting Self-Repair from the mod entirely.
         // Alternatively, one could patch RepairPower to function properly when negative.
-//        if (!(powerApplied instanceof RepairPower))
+        if (!(powerApplied instanceof RepairPower))
             powerApplied.canGoNegative = true;
 
         addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player,
@@ -114,8 +115,13 @@ public class BiasedMod extends AbstractAugment {
     }
 
     @Override
-    public String modifyName(String cardName, AbstractCard card) {
-        return TEXT[0] + cardName + TEXT[1];
+    public String getPrefix() {
+        return TEXT[0];
+    }
+
+    @Override
+    public String getSufix() {
+        return TEXT[1];
     }
 
     @Override

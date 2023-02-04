@@ -1,11 +1,9 @@
 package CardAugments.cardmods.uncommon;
 
 import CardAugments.CardAugmentsMod;
-import CardAugments.actions.AutoplayOnRandomEnemyAction;
 import CardAugments.cardmods.AbstractAugment;
 import basemod.ReflectionHacks;
 import basemod.abstracts.AbstractCardModifier;
-import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.AutoplayField;
 import com.megacrit.cardcrawl.actions.common.DiscardAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
@@ -17,7 +15,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 
 public class PreparedMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID("PreparedMod");
+    public static final String ID = CardAugmentsMod.makeID(PreparedMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     public static final int DRAW = 1;
@@ -50,8 +48,13 @@ public class PreparedMod extends AbstractAugment {
     }
 
     @Override
-    public String modifyName(String cardName, AbstractCard card) {
-        return TEXT[0] + cardName + TEXT[1];
+    public String getPrefix() {
+        return TEXT[0];
+    }
+
+    @Override
+    public String getSufix() {
+        return TEXT[1];
     }
 
     @Override

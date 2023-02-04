@@ -13,7 +13,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.Dark;
 
 public class GloomMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID("GloomMod");
+    public static final String ID = CardAugmentsMod.makeID(GloomMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     private static final int ORBS = 1;
@@ -45,9 +45,13 @@ public class GloomMod extends AbstractAugment {
     }
 
     @Override
-    public String modifyName(String cardName, AbstractCard card) {
-        String[] nameParts = removeUpgradeText(cardName);
-        return TEXT[0] + nameParts[0] + TEXT[1] + nameParts[1];
+    public String getPrefix() {
+        return TEXT[0];
+    }
+
+    @Override
+    public String getSufix() {
+        return TEXT[1];
     }
 
     @Override

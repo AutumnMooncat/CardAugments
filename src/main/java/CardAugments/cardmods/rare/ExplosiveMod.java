@@ -13,7 +13,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.TheBombPower;
 
 public class ExplosiveMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID("ExplosiveMod");
+    public static final String ID = CardAugmentsMod.makeID(ExplosiveMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     private static final int EFFECT = 20;
@@ -33,8 +33,13 @@ public class ExplosiveMod extends AbstractAugment {
     }
 
     @Override
-    public String modifyName(String cardName, AbstractCard card) {
-        return TEXT[0] + cardName + TEXT[1];
+    public String getPrefix() {
+        return TEXT[0];
+    }
+
+    @Override
+    public String getSufix() {
+        return TEXT[1];
     }
 
     @Override

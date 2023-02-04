@@ -10,7 +10,7 @@ import com.megacrit.cardcrawl.helpers.GameDictionary;
 import com.megacrit.cardcrawl.localization.LocalizedStrings;
 
 public class DisposableMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID("DisposableMod");
+    public static final String ID = CardAugmentsMod.makeID(DisposableMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     @Override
@@ -24,8 +24,13 @@ public class DisposableMod extends AbstractAugment {
         return card.type == AbstractCard.CardType.CURSE && card.cost == -2 && cardCheck(card, c -> doesntUpgradeCost() && notEthereal(c));
     }
     @Override
-    public String modifyName(String cardName, AbstractCard card) {
-        return TEXT[0] + cardName + TEXT[1];
+    public String getPrefix() {
+        return TEXT[0];
+    }
+
+    @Override
+    public String getSufix() {
+        return TEXT[1];
     }
 
     @Override

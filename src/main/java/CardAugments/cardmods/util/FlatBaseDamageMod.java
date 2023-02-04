@@ -6,7 +6,7 @@ import basemod.helpers.CardModifierManager;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 
 public class FlatBaseDamageMod extends AbstractCardModifier {
-    public static final String ID = CardAugmentsMod.makeID("FlatBaseDamageMod");
+    public static final String ID = CardAugmentsMod.makeID(FlatBaseDamageMod.class.getSimpleName());
     int amount;
 
     public FlatBaseDamageMod(int amount) {

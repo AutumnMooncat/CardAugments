@@ -3,7 +3,6 @@ package CardAugments.cardmods.util;
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import CardAugments.patches.InterruptUseCardFieldPatches;
-import CardAugments.patches.MultiPreviewFieldPatches;
 import CardAugments.util.FormatHelper;
 import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardModifierManager;
@@ -15,7 +14,7 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 
 public class BetaMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID("BetaMod");
+    public static final String ID = CardAugmentsMod.makeID(BetaMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     private boolean inherentHack = true;
@@ -42,8 +41,13 @@ public class BetaMod extends AbstractAugment {
     }
 
     @Override
-    public String modifyName(String cardName, AbstractCard card) {
-        return TEXT[0] + cardName + TEXT[1];
+    public String getPrefix() {
+        return TEXT[0];
+    }
+
+    @Override
+    public String getSufix() {
+        return TEXT[1];
     }
 
     @Override

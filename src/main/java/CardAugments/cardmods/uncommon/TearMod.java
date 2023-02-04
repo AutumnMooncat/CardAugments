@@ -14,7 +14,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class TearMod extends AbstractAugment implements DynvarCarrier {
-    public static final String ID = CardAugmentsMod.makeID("TearMod");
+    public static final String ID = CardAugmentsMod.makeID(TearMod.class.getSimpleName());
     public static final String DESCRIPTION_KEY = "!"+ID+"!";
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
@@ -63,9 +63,13 @@ public class TearMod extends AbstractAugment implements DynvarCarrier {
     }
 
     @Override
-    public String modifyName(String cardName, AbstractCard card) {
-        String[] nameParts = removeUpgradeText(cardName);
-        return TEXT[0] + nameParts[0] + TEXT[1] + nameParts[1];
+    public String getPrefix() {
+        return TEXT[0];
+    }
+
+    @Override
+    public String getSufix() {
+        return TEXT[1];
     }
 
     @Override
@@ -116,8 +120,8 @@ public class TearMod extends AbstractAugment implements DynvarCarrier {
     @Override
     public boolean upgraded(AbstractCard card) {
         val = getBaseVal(card);
-        modified = card.upgraded;
-        upgraded = card.upgraded;
+        modified = card.timesUpgraded != 0 || card.upgraded;
+        upgraded = card.timesUpgraded != 0 || card.upgraded;
         return upgraded;
     }
 }

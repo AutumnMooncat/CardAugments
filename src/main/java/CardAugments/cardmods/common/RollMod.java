@@ -14,7 +14,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.NextTurnBlockPower;
 
 public class RollMod extends AbstractAugment implements DynvarCarrier {
-    public static final String ID = CardAugmentsMod.makeID("RollMod");
+    public static final String ID = CardAugmentsMod.makeID(RollMod.class.getSimpleName());
     public static final String DESCRIPTION_KEY = "!"+ID+"!";
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
@@ -63,9 +63,13 @@ public class RollMod extends AbstractAugment implements DynvarCarrier {
     }
 
     @Override
-    public String modifyName(String cardName, AbstractCard card) {
-        String[] nameParts = removeUpgradeText(cardName);
-        return TEXT[0] + nameParts[0] + TEXT[1] + nameParts[1];
+    public String getPrefix() {
+        return TEXT[0];
+    }
+
+    @Override
+    public String getSufix() {
+        return TEXT[1];
     }
 
     @Override

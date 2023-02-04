@@ -9,9 +9,9 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 
 public class EchoMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID("EchoMod");
+    public static final String ID = CardAugmentsMod.makeID(EchoMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
-    public static String purgeName = CommonKeywordIconsPatches.purgeName;
+    //public static String purgeName = CommonKeywordIconsPatches.purgeName;
 
     private static final int AMOUNT = 1;
 
@@ -27,8 +27,13 @@ public class EchoMod extends AbstractAugment {
     }
 
     @Override
-    public String modifyName(String cardName, AbstractCard card) {
-        return TEXT[0] + cardName + TEXT[1];
+    public String getPrefix() {
+        return TEXT[0];
+    }
+
+    @Override
+    public String getSufix() {
+        return TEXT[1];
     }
 
     @Override
