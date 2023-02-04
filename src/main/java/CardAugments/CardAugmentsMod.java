@@ -94,7 +94,7 @@ public class CardAugmentsMod implements
     public static final HashMap<String, String> crossoverLabelMap = new HashMap<>();
     public static final HashMap<String, Integer> crossoverSizeMap = new HashMap<>();
     public static final HashMap<String, Boolean> crossoverEnableMap = new HashMap<>();
-
+    public static final String UNMANAGED_ID = "UnmanagedChimeraID";
     //List of orbies
     public static final ArrayList<AbstractPlayer.PlayerClass> ORB_CHARS = new ArrayList<>(Collections.singletonList(AbstractPlayer.PlayerClass.DEFECT));
 
@@ -172,6 +172,7 @@ public class CardAugmentsMod implements
 
     public static void registerMod(String modID, String labelText) {
         if (!cardAugmentsCrossoverConfig.has(modID)) {
+            logger.info("Created config for modID: "+modID);
             cardAugmentsCrossoverConfig.setBool(modID, true);
         }
         crossoverEnableMap.put(modID, cardAugmentsCrossoverConfig.getBool(modID));
@@ -187,13 +188,23 @@ public class CardAugmentsMod implements
                     try {cardAugmentsCrossoverConfig.save();} catch (IOException e) {e.printStackTrace();}
                 });
         registerUIElement(enableCrossoverButton);
+        logger.info("Loaded config for modID: "+modID);
     }
 
     public static void registerOrbCharacter(AbstractPlayer.PlayerClass clz) {
         ORB_CHARS.add(clz);
     }
 
+    @Deprecated
+    public static void registerAugment(AbstractAugment a) {
+        logger.warn("Augment "+ a +" does not include a modID, Chimera Cards can not manage the spawning of this mod! Please call registerMod then pass your modID when registering augments.");
+        registerAugment(a, UNMANAGED_ID);
+    }
+
     public static void registerAugment(AbstractAugment a, String modID) {
+        if (!Objects.equals(modID, UNMANAGED_ID) && !crossoverEnableMap.containsKey(modID)) {
+            logger.warn("Augment "+a+" with modID "+modID+" does not match any registered configs, Chimera Cards can not manage the spawning of this mod! Please call registerMod with your ID to set up a config.");
+        }
         crossoverMap.put(a, modID);
         crossoverSizeMap.merge(modID, 1, Integer::sum);
         if (a instanceof DynvarCarrier) {
@@ -202,7 +213,7 @@ public class CardAugmentsMod implements
         if (!a.identifier(null).equals("")) {
             modMap.put(a.identifier(null), a);
         } else {
-            logger.warn("Augment "+ a +" does not set an identifier!");
+            logger.warn("Augment "+ a +" does not set an identifier, Chimera Cards can not add this mod via console commands!");
         }
         switch (a.getModRarity()) {
             case COMMON:
@@ -529,7 +540,7 @@ public class CardAugmentsMod implements
     }
 
     public static boolean isCrossOverEnabled(AbstractAugment m) {
-        return crossoverEnableMap.get(crossoverMap.get(m));
+        return crossoverEnableMap.getOrDefault(crossoverMap.getOrDefault(m, UNMANAGED_ID), true);
     }
 
     public static void rollCardAugment(AbstractCard c) {
