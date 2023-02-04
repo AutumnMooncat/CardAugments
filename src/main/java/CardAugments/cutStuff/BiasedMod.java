@@ -1,3 +1,4 @@
+/*
 package CardAugments.cutStuff;
 
 import CardAugments.CardAugmentsMod;
@@ -38,11 +39,13 @@ public class BiasedMod extends AbstractAugment {
         card.magicNumber = card.baseMagicNumber = baseAmount * MULTIPLIER;
     }
 
-      /**
+      */
+/**
       * Checks if the card is a power that uses magic and applies only a single power with its use() function.
       * If more than one power is applied, or if any other action is taken (besides vfx or sfx actions) then the card
       * is disqualified.
-      **/
+      **//*
+
     @Override
     public boolean validCard(AbstractCard card) {
         if (card.type == AbstractCard.CardType.POWER && usesMagic(card)) {
@@ -144,3 +147,7 @@ public class BiasedMod extends AbstractAugment {
         return ID;
     }
 }
+  "CardAugments:BiasedMod": {
+    "TEXT": ["Biased ", "", " NL At the start of your turn, reduce this by %d."]
+  },
+*/

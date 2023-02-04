@@ -1,3 +1,4 @@
+/*
 package CardAugments.powers;
 
 import CardAugments.CardAugmentsMod;
@@ -49,3 +50,4 @@ public class IcizePower extends AbstractPower implements CloneablePowerInterface
         return new IcizePower(owner, card);
     }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package CardAugments.cutStuff;
 
 import CardAugments.CardAugmentsMod;
@@ -96,3 +97,7 @@ public class InfiniteMod extends AbstractAugment {
         return inherentHack;
     }
 }
+  "CardAugments:InfiniteMod": {
+    "TEXT": ["Infinite ", "s", "At the start of your turn, add a %s to your hand."]
+  },
+*/

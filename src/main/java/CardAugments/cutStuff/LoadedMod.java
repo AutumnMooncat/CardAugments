@@ -1,3 +1,4 @@
+/*
 package CardAugments.cutStuff;
 
 import CardAugments.CardAugmentsMod;
@@ -85,7 +86,8 @@ public class LoadedMod extends AbstractAugment {
 
     private static boolean validPower(CtClass pow) {
         boolean[] retVal = {false};
-        /***********************************************************************************************
+        */
+/***********************************************************************************************
          This block checks all start/end turn methods, and checks to see if they add an action other
          than reducepower (making an assumption that the power would be reducing itself) or
          removepower (making the same assumption). As far as I know, this filters out all basegame
@@ -95,7 +97,8 @@ public class LoadedMod extends AbstractAugment {
          -Checking to see if the constructor sets isTurnBased to true. I can't figure out how to
          do this with javassist.
          -Filtering against a manual blacklist. Obviously borks mod compatibility.
-         **********************************************************************************************/
+         **********************************************************************************************//*
+
         pow.defrost();
         for (String method: startAndEndTurnMethods) {
             try {
@@ -201,3 +204,9 @@ public class LoadedMod extends AbstractAugment {
         return ID;
     }
 }
+  "CardAugments:LoadedMod": {
+    "TEXT": ["Loaded ", "", " NL Exhaust.",
+      "%d times, ", "At the start of your turn, ", "At the start of each turn, ", "At the end of your turn, ", "At the end of each turn, ",
+      " %d times.", " at the start of each turn.", " at the end of each turn."]
+  },
+*/

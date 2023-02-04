@@ -80,4 +80,7 @@ public class IcizeMod extends AbstractAugment {
         return ID;
     }
 }
+  "CardAugments:IcizeMod": {
+    "TEXT": ["", "icize", "At the start of your turn: NL "]
+  },
 */

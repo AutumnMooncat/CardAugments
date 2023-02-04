@@ -1,3 +1,4 @@
+/*
 package CardAugments.cutStuff;
 
 import CardAugments.CardAugmentsMod;
@@ -8,7 +9,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 
 public class UnrestrictedMod extends AbstractAugment {
-    public static final String ID = CardAugmentsMod.makeID("UnrestrictedMod");
+    public static final String ID = CardAugmentsMod.makeID(UnrestrictedMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
 
@@ -52,3 +53,7 @@ public class UnrestrictedMod extends AbstractAugment {
         return ID;
     }
 }
+  "CardAugments:UnrestrictedMod": {
+    "TEXT": ["Unrestricted ", "", "cardaugments:Unrestricted. NL "]
+  },
+*/

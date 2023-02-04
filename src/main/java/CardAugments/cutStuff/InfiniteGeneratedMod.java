@@ -1,3 +1,4 @@
+/*
 package CardAugments.cutStuff;
 
 import CardAugments.CardAugmentsMod;
@@ -48,3 +49,7 @@ public class InfiniteGeneratedMod extends AbstractAugment {
         return ID;
     }
 }
+  "CardAugments:InfiniteGeneratedMod": {
+    "TEXT": ["Ethereal. NL ", " NL Exhaust."]
+  },
+*/

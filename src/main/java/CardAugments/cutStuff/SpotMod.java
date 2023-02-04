@@ -1,3 +1,4 @@
+/*
 package CardAugments.cutStuff;
 
 import CardAugments.CardAugmentsMod;
@@ -74,3 +75,10 @@ public class SpotMod extends AbstractAugment {
         return ID;
     }
 }
+
+  "CardAugments:SpotMod": {
+    "TEXT": ["Spot ", "", "If the enemy intends to attack: NL ",
+      " NL Exhaust.", "",
+      "That target does not intend to attack."]
+  },
+*/

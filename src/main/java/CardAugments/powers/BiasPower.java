@@ -1,3 +1,4 @@
+/*
 package CardAugments.powers;
 
 import CardAugments.CardAugmentsMod;
@@ -75,3 +76,4 @@ public class BiasPower extends AbstractPower implements CloneablePowerInterface,
         return new BiasPower(owner, amount, targetID, targetName, targetClass, canGoNegative);
     }
 }
+*/

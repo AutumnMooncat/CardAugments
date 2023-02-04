@@ -92,6 +92,9 @@
   "CardAugments:CultistMod": {
     "TEXT": ["Cultist's ", "", " NL Gain %d Strength."]
   },
+  "CardAugments:DevotedMod": {
+    "TEXT": ["Devoted ", "", " NL Gain %d Mantra."]
+  },
   "CardAugments:DisposableMod": {
     "TEXT": ["Disposable ", ""]
   },
@@ -115,6 +118,9 @@
       "Translator note: These strings are for replacing Endless Agony's description. The first string is what to search for, the second string replaces it.",
       " NL Whenever you draw this card, add a copy of it into your hand.",
       " NL Whenever you draw this card, add 2 copies of it into your hand."]
+  },
+  "CardAugments:EruptingMod": {
+    "TEXT": ["Erupting ", "", " NL Enter Wrath."]
   },
   "CardAugments:ExplosiveMod": {
     "TEXT": ["Explosive ", "", " NL At the end of 3 turns, deal %d damage to ALL enemies."]
@@ -167,6 +173,9 @@
   "CardAugments:HeavyMod": {
     "TEXT": ["Heavy ", "", " NL Strength affects this card %d times."]
   },
+  "CardAugments:HolyMod": {
+    "TEXT": ["Holy ", "", " NL Add a *Miracle to your hand."]
+  },
   "CardAugments:LuckyMod": {
     "TEXT": ["Lucky ", "", "Scry %d. NL "]
   },
@@ -197,6 +206,9 @@
   "CardAugments:PerniciousMod": {
     "TEXT": ["Pernicious ", "", " NL Apply Poison equal to unblocked damage dealt."]
   },
+  "CardAugments:PhilosophersMod": {
+    "TEXT": ["Philosopher's ", "", " NL ALL enemies gain 1 Strength."]
+  },
   "CardAugments:PiercingMod": {
     "TEXT": ["Piercing ", "", " NL Ignores Block."]
   },
@@ -223,6 +235,9 @@
   },
   "CardAugments:RollMod": {
     "TEXT": ["", " and Roll", " NL Next turn, gain %s Block."]
+  },
+  "CardAugments:RunicMod": {
+    "TEXT": ["Runic ", "", " NL You cannot see enemy intents for %d turns."]
   },
   "CardAugments:SadisticMod": {
     "TEXT": ["Sadistic ", "", " NL Deals %d additional damage per debuff on the enemy."]
@@ -278,9 +293,6 @@
   "CardAugments:TinyMod": {
     "TEXT": ["Tiny ", ""]
   },
-  "CardAugments:UnrestrictedMod": {
-    "TEXT": ["Unrestricted ", "", "cardaugments:Unrestricted. NL "]
-  },
   "CardAugments:VoidMod": {
     "TEXT": ["Void ", "", " NL Shuffle %d *Void into your draw pile."]
   },
@@ -292,42 +304,5 @@
   },
   "CardAugments:XMod": {
     "TEXT": ["", " X", " NL Performed X times."]
-  },
-  "CardAugments:DevotedMod": {
-    "TEXT": ["Devoted ", "", " NL Gain %d Mantra."]
-  },
-  "CardAugments:EruptingMod": {
-    "TEXT": ["Erupting ", "", " NL Enter Wrath."]
-  },
-  "CardAugments:SpotMod": {
-    "TEXT": ["Spot ", "", "If the enemy intends to attack: NL ",
-      " NL Exhaust.", "",
-      "That target does not intend to attack."]
-  },
-  "CardAugments:PhilosophersMod": {
-    "TEXT": ["Philosopher's ", "", " NL ALL enemies gain 1 Strength."]
-  },
-  "CardAugments:HolyMod": {
-    "TEXT": ["Holy ", "", " NL Add a *Miracle to your hand."]
-  },
-  "CardAugments:InfiniteMod": {
-    "TEXT": ["Infinite ", "s", "At the start of your turn, add a %s to your hand."]
-  },
-  "CardAugments:InfiniteGeneratedMod": {
-    "TEXT": ["Ethereal. NL ", " NL Exhaust."]
-  },
-  "CardAugments:IcizeMod": {
-    "TEXT": ["", "icize", "At the start of your turn: NL "]
-  },
-  "CardAugments:LoadedMod": {
-    "TEXT": ["Loaded ", "", " NL Exhaust.",
-      "%d times, ", "At the start of your turn, ", "At the start of each turn, ", "At the end of your turn, ", "At the end of each turn, ",
-      " %d times.", " at the start of each turn.", " at the end of each turn."]
-  },
-  "CardAugments:BiasedMod": {
-    "TEXT": ["Biased ", "", " NL At the start of your turn, reduce this by %d."]
-  },
-  "CardAugments:RunicMod": {
-    "TEXT": ["Runic ", "", " NL You cannot see enemy intents for %d turns."]
   }
 }

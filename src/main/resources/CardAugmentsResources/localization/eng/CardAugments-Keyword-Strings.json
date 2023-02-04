@@ -14,13 +14,6 @@
     "DESCRIPTION": "Shuffle this card into your draw pile when it is played."
   },
   {
-    "PROPER_NAME": "Returning",
-    "NAMES": [
-      "returning"
-    ],
-    "DESCRIPTION": "This card returns to your hand when played."
-  },
-  {
     "PROPER_NAME": "Unrestricted",
     "NAMES": [
       "unrestricted"
