@@ -1,8 +1,8 @@
 {
   "modid": "${project.artifactId}",
   "name": "${project.name}",
-  "author_list": ["MistressAlison"],
-  "credits": "Beta Testing - Spookalon, Sandtag",
+  "author_list": ["Mistress Alison"],
+  "credits": "Beta Testing - Sandtag",
   "description": "${project.description}",
   "version": "${project.version}",
   "sts_version": "${SlayTheSpire.version}",
