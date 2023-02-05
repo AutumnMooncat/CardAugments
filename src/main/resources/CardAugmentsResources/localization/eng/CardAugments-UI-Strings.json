@@ -176,6 +176,9 @@
   "CardAugments:HolyMod": {
     "TEXT": ["Holy ", "", " NL Add a *Miracle to your hand."]
   },
+  "CardAugments:LockingMod": {
+    "TEXT": ["Locking ", "", " NL Apply %d Lock-On."]
+  },
   "CardAugments:LuckyMod": {
     "TEXT": ["Lucky ", "", "Scry %d. NL "]
   },
@@ -211,6 +214,9 @@
   },
   "CardAugments:PiercingMod": {
     "TEXT": ["Piercing ", "", " NL Ignores Block."]
+  },
+  "CardAugments:PoisonedMod": {
+    "TEXT": ["Poisoned ", "", " NL Apply %s Poison."]
   },
   "CardAugments:PredatoryMod": {
     "TEXT": ["Predatory ", "", " NL Next turn, draw %d additional cards.",
