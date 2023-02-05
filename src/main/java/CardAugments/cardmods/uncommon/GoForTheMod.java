@@ -120,7 +120,7 @@ public class GoForTheMod extends AbstractAugment implements DynvarCarrier {
         return new CardBorderGlowManager.GlowInfo() {
             @Override
             public boolean test(AbstractCard abstractCard) {
-                return AbstractDungeon.getMonsters().monsters.stream().anyMatch(m -> !m.isDeadOrEscaped() && m.getIntentBaseDmg() >= 0);
+                return hasThisMod(abstractCard) && AbstractDungeon.getMonsters().monsters.stream().anyMatch(m -> !m.isDeadOrEscaped() && m.getIntentBaseDmg() >= 0);
             }
 
             @Override
