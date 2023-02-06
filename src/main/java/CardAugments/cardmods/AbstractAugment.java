@@ -25,7 +25,7 @@ import javassist.expr.ExprEditor;
 import javassist.expr.FieldAccess;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Objects;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 public abstract class AbstractAugment extends AbstractCardModifier {
@@ -38,8 +38,8 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     public static final float MODERATE_DEBUFF = 3/4f;
     public static final float MINOR_DEBUFF = 4/5f;
     private static AbstractCard baseCheck;
-    private static AbstractCard upgradeCheck;
-    private static AbstractCard branchingCheck;
+
+    private static final ArrayList<AbstractCard> cardsToCheck = new ArrayList<>();
 
     public enum AugmentRarity {
         COMMON,
@@ -107,15 +107,35 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     }
 
     private static void setCardChecks(AbstractCard card) {
+        //Clear the check array
+        cardsToCheck.clear();
+        //Grab an unmodified copy of the card. Yes Searing Blow is jank but that's fine.
         baseCheck = card.makeCopy();
-        upgradeCheck = card.makeCopy();
-        branchingCheck = card.makeCopy();
-        if (upgradeCheck instanceof BranchingUpgradesCard) {
-            ((BranchingUpgradesCard) upgradeCheck).setUpgradeType(BranchingUpgradesCard.UpgradeType.NORMAL_UPGRADE);
-            ((BranchingUpgradesCard) branchingCheck).setUpgradeType(BranchingUpgradesCard.UpgradeType.BRANCH_UPGRADE);
+        if (card instanceof BranchingUpgradesCard) {
+            //If this is branching upgrade card we need both the upgrade paths
+            AbstractCard normalCheck = card.makeCopy();
+            ((BranchingUpgradesCard) normalCheck).setUpgradeType(BranchingUpgradesCard.UpgradeType.NORMAL_UPGRADE);
+            normalCheck.upgrade();
+            cardsToCheck.add(normalCheck);
+            AbstractCard branchCheck = card.makeCopy();
+            ((BranchingUpgradesCard) branchCheck).setUpgradeType(BranchingUpgradesCard.UpgradeType.BRANCH_UPGRADE);
+            branchCheck.upgrade();
+            cardsToCheck.add(branchCheck);
+        } else if (card instanceof MultiUpgradeCard) {
+            //Else if this is a multi upgrade card we need to check each individual upgrade.
+            //We cant use the normal method of upgrading as upgrades can have dependencies, but we can force each upgrade index and test that way
+            //Notably, we need to check the upgrades of the baseCheck in case something modified the amount of upgrades of the main card
+            for (int i = 0 ; i < ((MultiUpgradeCard) baseCheck).getUpgrades().size() ; i++) {
+                AbstractCard upgradeTest = card.makeCopy();
+                ((MultiUpgradeCard)upgradeTest).getUpgrades().get(i).upgrade();
+                cardsToCheck.add(upgradeTest);
+            }
+        } else {
+            //Else its very simple
+            AbstractCard upgradeCheck = card.makeCopy();
+            upgradeCheck.upgrade();
+            cardsToCheck.add(upgradeCheck);
         }
-        upgradeCheck.upgrade();
-        branchingCheck.upgrade();
     }
 
     public static boolean cardCheck(AbstractCard card, Predicate<AbstractCard> p) {
@@ -136,35 +156,35 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     }
 
     public static boolean upgradesDamage() {
-        return upgradeCheck.baseDamage > baseCheck.baseDamage || branchingCheck.baseDamage > baseCheck.baseDamage;
+        return cardsToCheck.stream().anyMatch(c -> c.baseDamage > baseCheck.baseDamage);
     }
 
     public static boolean upgradesBlock() {
-        return upgradeCheck.baseBlock > baseCheck.baseBlock || branchingCheck.baseBlock > baseCheck.baseBlock;
+        return cardsToCheck.stream().anyMatch(c -> c.baseBlock > baseCheck.baseBlock);
     }
 
     public static boolean upgradesMagic() {
-        return (upgradeCheck.baseMagicNumber > baseCheck.baseMagicNumber || branchingCheck.baseMagicNumber > baseCheck.baseMagicNumber) && usesMagic(baseCheck);
+        return cardsToCheck.stream().anyMatch(c -> c.baseMagicNumber > baseCheck.baseMagicNumber) && usesMagic(baseCheck);
     }
 
     public static boolean doesntDowngradeMagic() {
-        return baseCheck.baseMagicNumber <= upgradeCheck.baseMagicNumber && baseCheck.baseMagicNumber <= branchingCheck.baseMagicNumber && usesMagic(baseCheck);
+        return cardsToCheck.stream().allMatch(c -> c.baseMagicNumber >= baseCheck.baseMagicNumber) && usesMagic(baseCheck);
     }
 
     public static boolean reachesDamage(int amount) {
-        return baseCheck.baseDamage >= amount || upgradeCheck.baseDamage >= amount || branchingCheck.baseDamage >= amount;
+        return baseCheck.baseDamage >= amount || cardsToCheck.stream().anyMatch(c -> c.baseDamage >= amount);
     }
 
     public static boolean reachesBlock(int amount) {
-        return baseCheck.baseBlock >= amount || upgradeCheck.baseBlock >= amount || branchingCheck.baseBlock >= amount;
+        return baseCheck.baseBlock >= amount || cardsToCheck.stream().anyMatch(c -> c.baseBlock >= amount);
     }
 
     public static boolean reachesMagic(int amount) {
-        return (baseCheck.baseMagicNumber >= amount || upgradeCheck.baseMagicNumber >= amount || branchingCheck.baseMagicNumber >= amount) && usesMagic(baseCheck);
+        return (baseCheck.baseMagicNumber >= amount || cardsToCheck.stream().anyMatch(c -> c.baseMagicNumber >= amount)) && usesMagic(baseCheck);
     }
 
     public static boolean doesntUpgradeCost() {
-        return baseCheck.cost == upgradeCheck.cost  && baseCheck.cost == branchingCheck.cost;
+        return cardsToCheck.stream().allMatch(c -> c.cost == baseCheck.cost);
     }
 
     public static boolean notExhaust(AbstractCard card) {
@@ -172,12 +192,9 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     }
 
     public static boolean doesntUpgradeExhaust() {
-        return baseCheck.exhaust == upgradeCheck.exhaust && baseCheck.exhaust == branchingCheck.exhaust
-                && baseCheck.purgeOnUse == upgradeCheck.purgeOnUse && baseCheck.purgeOnUse == branchingCheck.purgeOnUse
-                && Objects.equals(ExhaustiveField.ExhaustiveFields.baseExhaustive.get(baseCheck), ExhaustiveField.ExhaustiveFields.baseExhaustive.get(upgradeCheck))
-                && Objects.equals(ExhaustiveField.ExhaustiveFields.baseExhaustive.get(baseCheck), ExhaustiveField.ExhaustiveFields.baseExhaustive.get(branchingCheck))
-                && Objects.equals(ExhaustiveField.ExhaustiveFields.exhaustive.get(baseCheck), ExhaustiveField.ExhaustiveFields.exhaustive.get(upgradeCheck))
-                && Objects.equals(ExhaustiveField.ExhaustiveFields.exhaustive.get(baseCheck), ExhaustiveField.ExhaustiveFields.exhaustive.get(branchingCheck));
+        return cardsToCheck.stream().allMatch(c -> c.exhaust == baseCheck.exhaust && c.purgeOnUse == baseCheck.purgeOnUse
+                && ExhaustiveField.ExhaustiveFields.baseExhaustive.get(c) == ExhaustiveField.ExhaustiveFields.baseExhaustive.get(baseCheck)
+                && ExhaustiveField.ExhaustiveFields.exhaustive.get(c) == ExhaustiveField.ExhaustiveFields.exhaustive.get(baseCheck));
     }
 
     public static boolean notEthereal(AbstractCard card) {
@@ -185,7 +202,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     }
 
     public static boolean doesntUpgradeEthereal() {
-        return baseCheck.isEthereal == upgradeCheck.isEthereal && baseCheck.isEthereal == branchingCheck.isEthereal;
+        return cardsToCheck.stream().anyMatch(c -> c.isEthereal == baseCheck.isEthereal);
     }
 
     public static boolean notInnate(AbstractCard card) {
@@ -193,7 +210,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     }
 
     public static boolean doesntUpgradeInnate() {
-        return baseCheck.isInnate == upgradeCheck.isInnate && baseCheck.isInnate == branchingCheck.isInnate;
+        return cardsToCheck.stream().allMatch(c -> c.isInnate == baseCheck.isInnate);
     }
 
     public static boolean notRetain(AbstractCard card) {
@@ -201,7 +218,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     }
 
     public static boolean doesntUpgradeRetain() {
-        return baseCheck.selfRetain == upgradeCheck.selfRetain && baseCheck.selfRetain == branchingCheck.selfRetain;
+        return cardsToCheck.stream().allMatch(c -> c.selfRetain == baseCheck.selfRetain);
     }
 
     public static boolean notReshuffle(AbstractCard card) {
@@ -209,15 +226,15 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     }
 
     public static boolean doesntUpgradeReshuffle() {
-        return baseCheck.shuffleBackIntoDrawPile == upgradeCheck.shuffleBackIntoDrawPile && baseCheck.shuffleBackIntoDrawPile == branchingCheck.shuffleBackIntoDrawPile;
+        return cardsToCheck.stream().allMatch(c -> c.shuffleBackIntoDrawPile == baseCheck.shuffleBackIntoDrawPile);
     }
 
     public static boolean doesntUpgradeTargeting() {
-        return baseCheck.target == upgradeCheck.target && baseCheck.target == branchingCheck.target;
+        return cardsToCheck.stream().allMatch(c -> c.target == baseCheck.target);
     }
 
     public static boolean usesEnemyTargeting(AbstractCard card) {
-        return targetsEnemy(card) && targetsEnemy(baseCheck) && targetsEnemy(upgradeCheck) && targetsEnemy(branchingCheck);
+        return targetsEnemy(card) && targetsEnemy(baseCheck) && cardsToCheck.stream().allMatch(AbstractAugment::targetsEnemy);
     }
 
     public static boolean canOverrideTargeting(AbstractCard card, AbstractCard.CardTarget desiredType) {
