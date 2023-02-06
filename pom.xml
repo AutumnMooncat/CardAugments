@@ -77,6 +77,15 @@
             <systemPath>${Steam.path}/workshop/content/646570/2862448454/SpireLocations.jar</systemPath>
             <!--<systemPath>${basedir}/../lib/StSLib.jar</systemPath>-->
         </dependency>
+        <dependency>
+            <groupId>autumn</groupId>
+            <artifactId>Starlight</artifactId>
+            <version>0.8.9</version>
+            <scope>system</scope>
+            <!--<systemPath>${Steam.path}/workshop/content/646570/1605833019/BaseMod.jar</systemPath>-->
+            <systemPath>${Steam.path}/common/SlayTheSpire/mods/Starlight.jar</systemPath>
+            <!--<systemPath>${basedir}/../lib/BaseMod.jar</systemPath>-->
+        </dependency>
     </dependencies>
 
 

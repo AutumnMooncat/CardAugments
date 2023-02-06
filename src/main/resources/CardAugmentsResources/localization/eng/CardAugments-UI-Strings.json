@@ -89,6 +89,12 @@
   "CardAugments:ClashyMod": {
     "TEXT": ["Clashy ", "", "Can only be played if every card is your hand is an Attack. NL "]
   },
+  "CardAugments:ClawfulMod": {
+    "TEXT": ["Clawful ", "",
+            "Strikeful ", "",
+            " NL Increase the damage of ALL %s cards by %s this combat.",
+            " NL Increase the damage of ALL your cards containing \"Strike\" by %s this combat."]
+  },
   "CardAugments:CultistMod": {
     "TEXT": ["Cultist's ", "", " NL Gain %d Strength."]
   },
