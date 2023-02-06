@@ -27,13 +27,7 @@ public class PoisonedMod extends AbstractAugment implements DynvarCarrier {
     public boolean upgraded;
 
     public int getBaseVal(AbstractCard card) {
-        int upgrades = card.timesUpgraded;
-        if (upgrades == 0) {
-            return EFFECT;
-        } else if (upgrades < 0) {
-            upgrades *= -1;
-        }
-        return EFFECT + upgrades * UPGRADE_EFFECT;
+        return EFFECT + getEffectiveUpgrades(card) * UPGRADE_EFFECT;
     }
 
     @Override

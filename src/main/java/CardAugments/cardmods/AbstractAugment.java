@@ -5,6 +5,7 @@ import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardBorderGlowManager;
 import basemod.helpers.CardModifierManager;
 import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.BranchingUpgradesCard;
+import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.MultiUpgradeCard;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.ExhaustiveField;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -78,6 +79,17 @@ public abstract class AbstractAugment extends AbstractCardModifier {
             return false;
         }
         return p.test(AbstractDungeon.actionManager.cardsPlayedThisCombat.get(AbstractDungeon.actionManager.cardsPlayedThisCombat.size() - 1));
+    }
+
+    public int getEffectiveUpgrades(AbstractCard card) {
+        int upgrades = card.timesUpgraded;
+        if (card instanceof MultiUpgradeCard) {
+            upgrades = ((MultiUpgradeCard) card).upgradesPerformed();
+        }
+        if (upgrades < 0) {
+            upgrades *= -1;
+        }
+        return upgrades;
     }
 
     public boolean betterCanPlay(AbstractCard cardWithThisMod, AbstractCard cardToCheck) {

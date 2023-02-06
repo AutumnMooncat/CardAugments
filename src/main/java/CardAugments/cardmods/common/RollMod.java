@@ -26,13 +26,7 @@ public class RollMod extends AbstractAugment implements DynvarCarrier {
     public boolean upgraded;
 
     public int getBaseVal(AbstractCard card) {
-        int upgrades = card.timesUpgraded;
-        if (upgrades == 0) {
-            return BLOCK;
-        } else if (upgrades < 0) {
-            upgrades *= -1;
-        }
-        return BLOCK + upgrades * UPGRADE_BLOCK;
+        return BLOCK + getEffectiveUpgrades(card) * UPGRADE_BLOCK;
     }
 
     @Override

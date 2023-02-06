@@ -5,14 +5,12 @@ import CardAugments.cardmods.AbstractAugment;
 import CardAugments.cardmods.DynvarCarrier;
 import CardAugments.util.CalcHelper;
 import basemod.abstracts.AbstractCardModifier;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.powers.NextTurnBlockPower;
 
 public class ShieldedMod extends AbstractAugment implements DynvarCarrier {
     public static final String ID = CardAugmentsMod.makeID(ShieldedMod.class.getSimpleName());
@@ -27,13 +25,7 @@ public class ShieldedMod extends AbstractAugment implements DynvarCarrier {
     public boolean upgraded;
 
     public int getBaseVal(AbstractCard card) {
-        int upgrades = card.timesUpgraded;
-        if (upgrades == 0) {
-            return BLOCK;
-        } else if (upgrades < 0) {
-            upgrades *= -1;
-        }
-        return BLOCK + upgrades * UPGRADE_BLOCK;
+        return BLOCK + getEffectiveUpgrades(card) * UPGRADE_BLOCK;
     }
 
     @Override

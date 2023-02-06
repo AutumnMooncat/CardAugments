@@ -32,13 +32,7 @@ public class GoForTheMod extends AbstractAugment implements DynvarCarrier {
     public boolean upgraded;
 
     public int getBaseVal(AbstractCard card) {
-        int upgrades = card.timesUpgraded;
-        if (upgrades == 0) {
-            return DAMAGE;
-        } else if (upgrades < 0) {
-            upgrades *= -1;
-        }
-        return DAMAGE + upgrades * UPGRADE_DAMAGE;
+        return DAMAGE + getEffectiveUpgrades(card) * UPGRADE_DAMAGE;
     }
 
     @Override
