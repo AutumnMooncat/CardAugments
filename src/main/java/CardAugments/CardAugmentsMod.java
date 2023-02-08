@@ -20,8 +20,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.stslib.Keyword;
 import com.evacipated.cardcrawl.modthespire.Loader;
-import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
-import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
+import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -32,6 +31,7 @@ import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
+import javassist.CtBehavior;
 import mintySpire.patches.cards.betterUpdatePreview.CardFields;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -107,7 +107,9 @@ public class CardAugmentsMod implements
     public static String[] EXTRA_TEXT;
     private static final String AUTHOR = "Mistress Alison";
 
-    public static ModPanel settingsPanel = new ModPanel();
+    public static ModPanel settingsPanel = new ModPanel(m -> {
+        setDefaults(m);
+    });
     public static ModLabel noCrossoverLabel;
     public static HashMap<Integer, ArrayList<IUIElement>> pages = new HashMap<>();
     public static final float LAYOUT_Y = 740f;
@@ -250,13 +252,32 @@ public class CardAugmentsMod implements
     // ============== /SUBSCRIBE, CREATE THE COLOR_GRAY, INITIALIZE/ =================
     
     // =============== POST-INITIALIZE =================
+
+    public static void setDefaults(ModPanel mp) {
+
+    }
     
     @Override
     public void receivePostInitialize() {
-        logger.info("Loading badge image and mod options");
-
         //Minty be messing with my stuff
         isMintyLoaded = Loader.isModLoaded("mintyspire");
+
+        logger.info("Setting up dev commands");
+
+        ConsoleCommand.addCommand("chimera", Chimera.class);
+
+        logger.info("Done setting up dev commands");
+
+        logger.info("Setting up Dynamic Dynamic Variable Manager...");
+
+        BaseMod.addDynamicVariable(DynamicDynamicVariableManager.instance);
+
+        logger.info("Done");
+
+    }
+
+    private static void setupSettingsPanel() {
+        logger.info("Loading badge image and mod options");
 
         //Grab the strings
         uiStrings = CardCrawlGame.languagePack.getUIString(makeID("ModConfigs"));
@@ -413,19 +434,6 @@ public class CardAugmentsMod implements
                 .any(AbstractAugment.class, (info, abstractAugment) -> registerAugment(abstractAugment, modID));
 
         logger.info("Done loading card mods");
-
-        logger.info("Setting up dev commands");
-
-        ConsoleCommand.addCommand("chimera", Chimera.class);
-
-        logger.info("Done setting up dev commands");
-
-        logger.info("Setting up Dynamic Dynamic Variable Manager...");
-
-        BaseMod.addDynamicVariable(DynamicDynamicVariableManager.instance);
-
-        logger.info("Done");
-
     }
 
     private static void registerUIElement(IUIElement elem) {
@@ -469,7 +477,7 @@ public class CardAugmentsMod implements
     }
 
     //Get the longest text so all sliders are centered
-    private float getSliderPosition (List<String> stringsToCompare) {
+    private static float getSliderPosition(List<String> stringsToCompare) {
         float longest = 0;
         for (String s : stringsToCompare) {
             longest = Math.max(longest, FontHelper.getWidth(FontHelper.charDescFont, s, 1f /Settings.scale));
@@ -491,6 +499,19 @@ public class CardAugmentsMod implements
         }
     }
 
+    private void loadLocalizedStrings(Class<?> stringClass, String fileName) {
+        //Load English first
+        BaseMod.loadCustomStringsFile(stringClass, modID + "Resources/localization/eng/"+fileName+".json");
+
+        //Attempt loading localization
+        if (!Settings.language.toString().equalsIgnoreCase("eng")) {
+            String path = modID + "Resources/localization/" + Settings.language.toString().toLowerCase() + "/" + fileName + ".json";
+            if (Gdx.files.internal(path).exists()) {
+                BaseMod.loadCustomStringsFile(stringClass, path);
+            }
+        }
+    }
+
     // ================ /LOAD THE LOCALIZATION/ ===================
 
     // ================ LOAD THE TEXT ===================
@@ -498,15 +519,8 @@ public class CardAugmentsMod implements
     @Override
     public void receiveEditStrings() {
         logger.info("Beginning to edit strings for mod with ID: " + getModID());
-
-        // UIStrings
-        BaseMod.loadCustomStringsFile(UIStrings.class,
-                getModID() + "Resources/localization/"+loadLocalizationIfAvailable("CardAugments-UI-Strings.json"));
-
-        // PowerStrings
-        BaseMod.loadCustomStringsFile(PowerStrings.class,
-                getModID() + "Resources/localization/"+loadLocalizationIfAvailable("CardAugments-Power-Strings.json"));
-
+        loadLocalizedStrings(UIStrings.class, "CardAugments-UI-Strings");
+        loadLocalizedStrings(PowerStrings.class, "CardAugments-Power-Strings");
         logger.info("Done editing strings");
     }
     
@@ -520,14 +534,6 @@ public class CardAugmentsMod implements
 
     @Override
     public void receiveEditKeywords() {
-        // Keywords on cards are supposed to be Capitalized, while in Keyword-String.json they're lowercase
-        //
-        // Multiword keywords on cards are done With_Underscores
-        //
-        // If you're using multiword keywords, the first element in your NAMES array in your keywords-strings.json has to be the same as the PROPER_NAME.
-        // That is, in Card-Strings.json you would have #yA_Long_Keyword (#y highlights the keyword in yellow).
-        // In Keyword-Strings.json you would have PROPER_NAME as A Long Keyword and the first element in NAMES be a long keyword, and the second element be a_long_keyword
-
         Gson gson = new Gson();
         String json = Gdx.files.internal(getModID()+"Resources/localization/"+loadLocalizationIfAvailable("CardAugments-Keyword-Strings.json")).readString(String.valueOf(StandardCharsets.UTF_8));
         com.evacipated.cardcrawl.mod.stslib.Keyword[] keywords = gson.fromJson(json, com.evacipated.cardcrawl.mod.stslib.Keyword[].class);
@@ -535,7 +541,6 @@ public class CardAugmentsMod implements
         if (keywords != null) {
             for (Keyword keyword : keywords) {
                 BaseMod.addKeyword(getModID().toLowerCase(), keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
-                //  getModID().toLowerCase() makes your keyword mod specific (it won't show up in other cards that use that word)
             }
         }
     }
@@ -601,6 +606,22 @@ public class CardAugmentsMod implements
                 if (index < CardFields.SCVPopup.unupgradedCardRewards.get(CardCrawlGame.cardPopup).size()) {
                     CardModifierManager.addModifier(CardFields.SCVPopup.unupgradedCardRewards.get(CardCrawlGame.cardPopup).get(index), m);
                 }
+            }
+        }
+    }
+
+    @SpirePatch2(clz = CardCrawlGame.class, method = "create")
+    public static class PostLoadFontsPatch {
+        @SpireInsertPatch(locator = Locator.class)
+        public static void load() {
+            setupSettingsPanel();
+        }
+
+        public static class Locator extends SpireInsertLocator {
+            @Override
+            public int[] Locate(CtBehavior ctBehavior) throws Exception {
+                Matcher m = new Matcher.MethodCallMatcher(AbstractCard.class, "initializeDynamicFrameWidths");
+                return LineFinder.findInOrder(ctBehavior, m);
             }
         }
     }
