@@ -90,7 +90,7 @@
     "TEXT": ["Charged ", "", " NL Next turn, gain [E] ."]
   },
   "CardAugments:ClashyMod": {
-    "TEXT": ["Clashy ", "", "Can only be played if every card is your hand is an Attack. NL "]
+    "TEXT": ["Clashy ", "", "Can only be played if every card in your hand is an Attack. NL "]
   },
   "CardAugments:ClawfulMod": {
     "TEXT": ["Clawful ", "",
