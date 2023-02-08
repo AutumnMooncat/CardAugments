@@ -106,6 +106,14 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         return validCard(card);
     }
 
+    public static AbstractCard makeNewInstance(AbstractCard card) {
+        try {
+            return card.getClass().newInstance();
+        } catch (IllegalAccessException | InstantiationException ignored) {
+            return null;
+        }
+    }
+
     private static void setCardChecks(AbstractCard card) {
         //Clear the check array
         cardsToCheck.clear();
@@ -267,18 +275,37 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     public static boolean usesMagic(AbstractCard card) {
         usesMagicBool = false;
         if (card.baseMagicNumber > 0 && StringUtils.containsIgnoreCase(card.rawDescription, "!M!") && !(card instanceof PanicButton) && !(card instanceof Halt)) {
+            ClassPool pool = Loader.getClassPool();
             try {
-                ClassPool pool = Loader.getClassPool();
-                CtMethod ctClass = pool.get(card.getClass().getName()).getDeclaredMethod("use");
-
-                ctClass.instrument(new ExprEditor() {
+                CtMethod ctUse = pool.get(card.getClass().getName()).getDeclaredMethod("use");
+                ctUse.instrument(new ExprEditor() {
                     @Override
                     public void edit(FieldAccess f) {
-
                         if (f.getFieldName().equals("magicNumber") && !f.isWriter()) {
                             usesMagicBool = true;
                         }
-
+                    }
+                });
+            } catch (Exception ignored) { }
+            try {
+                CtMethod ctApplyPowers = pool.get(card.getClass().getName()).getDeclaredMethod("applyPowers");
+                ctApplyPowers.instrument(new ExprEditor() {
+                    @Override
+                    public void edit(FieldAccess f) {
+                        if (f.getFieldName().equals("magicNumber") && !f.isWriter()) {
+                            usesMagicBool = true;
+                        }
+                    }
+                });
+            } catch (Exception ignored) { }
+            try {
+                CtMethod ctCalcCardDamage = pool.get(card.getClass().getName()).getDeclaredMethod("calculateCardDamage", new CtClass[]{pool.get(AbstractMonster.class.getName())});
+                ctCalcCardDamage.instrument(new ExprEditor() {
+                    @Override
+                    public void edit(FieldAccess f) {
+                        if (f.getFieldName().equals("magicNumber") && !f.isWriter()) {
+                            usesMagicBool = true;
+                        }
                     }
                 });
 
