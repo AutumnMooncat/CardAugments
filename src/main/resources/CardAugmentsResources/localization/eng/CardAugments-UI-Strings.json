@@ -80,6 +80,9 @@
   "CardAugments:BootMod": {
     "TEXT": ["Boot ", "", "Innate. NL "]
   },
+  "CardAugments:BracedMod": {
+    "TEXT": ["Braced ", "", " NL Increase this card's Block by %s this combat."]
+  },
   "CardAugments:BrutalMod": {
     "TEXT": ["Brutal ", "", "Ethereal. NL "]
   },
@@ -238,6 +241,9 @@
   },
   "CardAugments:QuickMod": {
     "TEXT": ["Quick ", "", " NL Draw %d card."]
+  },
+  "CardAugments:RampedMod": {
+    "TEXT": ["Ramped ", "", " NL Increase this card's damage by %s this combat."]
   },
   "CardAugments:ReshuffleMod": {
     "TEXT": ["Recalling ", "", " NL cardaugments:Reshuffle."]
