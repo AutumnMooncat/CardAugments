@@ -101,6 +101,9 @@
   "CardAugments:CultistMod": {
     "TEXT": ["Cultist's ", "", " NL Gain %d Strength."]
   },
+  "CardAugments:DemurMod": {
+    "TEXT": ["Demurred ", "", "Can only be played if every card in your hand is a Skill. NL "]
+  },
   "CardAugments:DevotedMod": {
     "TEXT": ["Devoted ", "", " NL Gain %d Mantra."]
   },
