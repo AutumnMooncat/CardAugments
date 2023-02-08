@@ -1,4 +1,4 @@
-package CardAugments.cardmods.rare;
+package CardAugments.cardmods.event;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
@@ -31,7 +31,7 @@ public class CultistMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.baseDamage > 1 && card.type == AbstractCard.CardType.ATTACK;
+        return card.type == AbstractCard.CardType.ATTACK;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class CultistMod extends AbstractAugment {
 
     @Override
     public AugmentRarity getModRarity() {
-        return AugmentRarity.RARE;
+        return AugmentRarity.SPECIAL;
     }
 
     @Override
