@@ -64,6 +64,12 @@ public class GoForTheMod extends AbstractAugment implements DynvarCarrier {
     }
 
     @Override
+    public void onCalculateCardDamage(AbstractCard card, AbstractMonster mo) {
+        val = CalcHelper.calculateCardDamage(getBaseVal(card), mo);
+        modified = val != getBaseVal(card);
+    }
+
+    @Override
     public boolean validCard(AbstractCard card) {
         return cardCheck(card, c -> c.cost > 0 && c.baseDamage > 0 && doesntUpgradeCost() && usesVanillaTargeting(c) && c.type == AbstractCard.CardType.ATTACK && c.rawDescription.chars().filter(ch -> ch == '.' || ch == '。').count() == 1);
     }
@@ -93,7 +99,7 @@ public class GoForTheMod extends AbstractAugment implements DynvarCarrier {
 
     @Override
     public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
-        addToBot(new DamageAction(target, new DamageInfo(AbstractDungeon.player, getBaseVal(card), card.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
+        addToBot(new DamageAction(target, new DamageInfo(AbstractDungeon.player, val, card.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
         if (target instanceof AbstractMonster && ((AbstractMonster) target).getIntentBaseDmg() >= 0) {
             card.use(AbstractDungeon.player, target instanceof AbstractMonster ? (AbstractMonster) target : null);
         }
