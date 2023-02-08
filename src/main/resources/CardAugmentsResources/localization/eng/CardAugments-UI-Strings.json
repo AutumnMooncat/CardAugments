@@ -110,6 +110,9 @@
   "CardAugments:DisposableMod": {
     "TEXT": ["Disposable ", ""]
   },
+  "CardAugments:DivergentMod": {
+    "TEXT": ["Divergent ", "", " NL cardaugments:Echo."]
+  },
   "CardAugments:DoomedMod": {
     "TEXT": ["Doomed ", "", " NL Deals %d additional damage for each Curse in your deck."]
   },
