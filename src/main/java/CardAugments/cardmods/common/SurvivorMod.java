@@ -15,11 +15,6 @@ public class SurvivorMod extends AbstractAugment {
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     @Override
-    public void onInitialApplication(AbstractCard card) {
-        card.isEthereal = true;
-    }
-
-    @Override
     public float modifyBaseBlock(float block, AbstractCard card) {
         return block * MAJOR_BUFF;
     }
