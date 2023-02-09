@@ -37,6 +37,15 @@
       "[Locked] Requires: A non-Exhausting Attack."
     ]
   },
+  "CardAugments:DuplicatorEvent": {
+    "TEXT": [
+      "[Imbue] #gGive #ga #gnon-Exhausting #gAttack #gor #gSkill #gDouble #gPlay #rand #rExhaust.",
+      "[Locked] Requires a non-Exhausting Attack or Skill.",
+      "[Leave]",
+      "You hold your gear against the shrine. A ghastly mirror image appears from the shrine and is absorbed into it.",
+      "Choose a card to augment."
+    ]
+  },
   "CardAugments:ExampleMod": {
     "TEXT": ["Prefix name", "Suffix name", "Description stuff"]
   },
@@ -136,7 +145,7 @@
     "TEXT": ["Dramatic ", "", "Innate. NL ", " NL Exhaust."]
   },
   "CardAugments:EchoMod": {
-    "TEXT": ["Echoing ", "", " NL cardaugments:Echo. Purge."]
+    "TEXT": ["Echoing ", "", " NL cardaugments:Echo. Exhaust."]
   },
   "CardAugments:ElectroMod": {
     "TEXT": ["Electro ", "", " NL Channel %d Lightning."]
