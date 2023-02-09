@@ -27,13 +27,14 @@
   "CardAugments:NestEvent": {
     "TEXT": [
       "[Observe]",
-      "[Study Cultists] - Give an Attack #g\"Gain #g1 #gStrength.\" and #r-20% #rdamage.",
-      "[Study Ritual] - Give an Attack #g+50% #gdamage and #rExhaust.",
+      "[Study Cultists] #gGive #gan #gAttack #g\"Gain #g1 #gStrength.\" #rand #r-20% #rdamage.",
+      "[Study Ritual] #gGive #ga #gnon-Exhausting #gAttack #g+50% #gdamage #rand #rExhaust.",
       "[Leave]",
       "You stay out of the line to observe what is happening. Not long after, a group of #rCultists arrive and begin to gleefully @chant@ and ~wave~ their weapons around. NL NL #r@\"MURDER!!@ #r@MURDER@ #r@MURDER!!\"@ NL #b~\"CAW~ #b~CAW~ #b~CAAAAAWWW!\"~ NL #r@\"MURDER!@ #r@MURDER@ #r@MUURDER!!\"@ NL #b~\"CAAW~ #b~CAW~ #b~CAAAAAAWW!!\"~ NL NL You feel you may be able to learn something by observing them in action...",
       "As you watch the #rCultists and their #r@ritual,@ you feel yourself falling into a #p~trance.~ NL NL With a spark of #b@inspiration,@ you focus in and... NL #y@CLANG@ #y@CLAAANG@ #y@CLANG!@ NL ...improve your arsenal! ",
       "[Locked] Requires: An Attack.",
-      "Choose a card to augment."
+      "Choose a card to augment.",
+      "[Locked] Requires: A non-Exhausting Attack."
     ]
   },
   "CardAugments:ExampleMod": {

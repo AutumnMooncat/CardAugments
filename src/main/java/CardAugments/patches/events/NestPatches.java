@@ -35,7 +35,7 @@ public class NestPatches {
             if (AbstractDungeon.player.masterDeck.group.stream().anyMatch(c -> c.type == AbstractCard.CardType.ATTACK)) {
                 __instance.imageEventText.setDialogOption(NEST_TEXT[0]);
             } else {
-                __instance.imageEventText.setDialogOption(NEST_TEXT[6], false);
+                __instance.imageEventText.setDialogOption(NEST_TEXT[6], true);
             }
         }
     }
@@ -72,7 +72,12 @@ public class NestPatches {
                     __instance.imageEventText.clearRemainingOptions();
                     __instance.imageEventText.updateBodyText(NEST_TEXT[4]);
                     __instance.imageEventText.updateDialogOption(0, NEST_TEXT[1]);
-                    __instance.imageEventText.setDialogOption(NEST_TEXT[2]);
+                    FanaticMod mod = new FanaticMod();
+                    if (AbstractDungeon.player.masterDeck.group.stream().anyMatch(mod::validCard)) {
+                        __instance.imageEventText.setDialogOption(NEST_TEXT[2]);
+                    } else {
+                        __instance.imageEventText.setDialogOption(NEST_TEXT[8], true);
+                    }
                     choseObserve = true;
                     return SpireReturn.Return();
                 } else {

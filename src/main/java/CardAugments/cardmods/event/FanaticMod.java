@@ -15,10 +15,7 @@ public class FanaticMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        if (!card.exhaust) {
-            card.exhaust = true;
-            addedExhaust = true;
-        }
+        card.exhaust = true;
     }
 
     @Override
@@ -28,7 +25,7 @@ public class FanaticMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.type == AbstractCard.CardType.ATTACK;
+        return card.type == AbstractCard.CardType.ATTACK && cardCheck(card, AbstractAugment::notExhaust);
     }
 
     @Override
@@ -43,10 +40,7 @@ public class FanaticMod extends AbstractAugment {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        if (addedExhaust) {
-            return rawDescription + TEXT[2];
-        }
-        return rawDescription;
+        return rawDescription + TEXT[2];
     }
 
     @Override
