@@ -85,7 +85,7 @@ public class BracedMod extends AbstractAugment implements DynvarCarrier {
 
     @Override
     public int val(AbstractCard card) {
-        return val(card);
+        return getBaseVal(card);
     }
 
     @Override
