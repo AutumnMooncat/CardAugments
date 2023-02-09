@@ -33,7 +33,7 @@
       "You stay out of the line to observe what is happening. Not long after, a group of #rCultists arrive and begin to gleefully @chant@ and ~wave~ their weapons around. NL NL #r@\"MURDER!!@ #r@MURDER@ #r@MURDER!!\"@ NL #b~\"CAW~ #b~CAW~ #b~CAAAAAWWW!\"~ NL #r@\"MURDER!@ #r@MURDER@ #r@MUURDER!!\"@ NL #b~\"CAAW~ #b~CAW~ #b~CAAAAAAWW!!\"~ NL NL You feel you may be able to learn something by observing them in action...",
       "As you watch the #rCultists and their #r@ritual,@ you feel yourself falling into a #p~trance.~ NL NL With a spark of #b@inspiration,@ you focus in and... NL #y@CLANG@ #y@CLAAANG@ #y@CLANG!@ NL ...improve your arsenal! ",
       "[Locked] Requires: An Attack.",
-      "Choose a card to augment.",
+      "Choose a Card to Augment.",
       "[Locked] Requires: A non-Exhausting Attack."
     ]
   },
@@ -43,7 +43,16 @@
       "[Locked] Requires a non-Exhausting Attack or Skill.",
       "[Leave]",
       "You hold your gear against the shrine. A ghastly mirror image appears from the shrine and is absorbed into it.",
-      "Choose a card to augment."
+      "Choose a Card to Augment."
+    ]
+  },
+  "CardAugments:TransmogrifierEvent": {
+    "TEXT": [
+      "[Imbue] #gApply #ga #grandom #gmodifier #gto #g2 #gcards.",
+      "",
+      "[Leave]",
+      "As the power of the shrine flows through you, your arsenal feels altered.",
+      "Choose 2 Cards to Augment."
     ]
   },
   "CardAugments:ExampleMod": {

@@ -610,6 +610,36 @@ public class CardAugmentsMod implements
         }
     }
 
+    public static boolean canReceiveModifier(AbstractCard card) {
+        for (AbstractAugment a : commonMods) {
+            if (a.validCard(card)) {
+                return true;
+            }
+        }
+        for (AbstractAugment a : uncommonMods) {
+            if (a.validCard(card)) {
+                return true;
+            }
+        }
+        for (AbstractAugment a : rareMods) {
+            if (a.validCard(card)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void applyTrulyRandomCardMod(AbstractCard c) {
+        ArrayList<AbstractAugment> validMods = new ArrayList<>();
+        validMods.addAll(commonMods.stream().filter(m -> m.canRoll(c) && isCrossOverEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
+        validMods.addAll(uncommonMods.stream().filter(m -> m.canRoll(c) && isCrossOverEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
+        validMods.addAll(rareMods.stream().filter(m -> m.canRoll(c) && isCrossOverEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
+        if (!validMods.isEmpty()) {
+            AbstractCardModifier m = validMods.get(AbstractDungeon.miscRng.random(validMods.size()-1)).makeCopy();
+            CardModifierManager.addModifier(c, m);
+        }
+    }
+
     @SpirePatch2(clz = CardCrawlGame.class, method = "create")
     public static class PostLoadFontsPatch {
         @SpireInsertPatch(locator = Locator.class)
