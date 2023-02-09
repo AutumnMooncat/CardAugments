@@ -6,6 +6,7 @@ import basemod.BaseMod;
 import basemod.abstracts.AbstractCardModifier;
 import basemod.abstracts.DynamicVariable;
 import basemod.helpers.CardModifierManager;
+import basemod.patches.com.megacrit.cardcrawl.cards.AbstractCard.SmithPreview;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInstrumentPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -68,6 +69,7 @@ public class DynamicDynamicVariableManager extends DynamicVariable {
         BaseMod.cardDynamicVariableMap.put(dv.key(), instance);
     }
 
+    @SpirePatch2(clz = SmithPreview.class, method = "ForEachDynamicVariable")
     @SpirePatch2(clz = basemod.patches.com.megacrit.cardcrawl.cards.AbstractCard.RenderCustomDynamicVariable.Inner.class, method = "myRenderDynamicVariable")
     @SpirePatch2(clz = basemod.patches.com.megacrit.cardcrawl.cards.AbstractCard.RenderCustomDynamicVariableCN.class, method = "Insert")
     @SpirePatch2(clz = basemod.patches.com.megacrit.cardcrawl.screens.SingleCardViewPopup.RenderCustomDynamicVariable.Inner.class, method = "myRenderDynamicVariable")
