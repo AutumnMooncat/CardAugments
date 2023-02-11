@@ -6,7 +6,7 @@
     <groupId>CardAugments</groupId>
     <artifactId>CardAugments</artifactId> <!--Keep a note of this one: this is the ID used in the "auto add cards" method-->
     <name>Chimera Cards</name>
-    <version>0.2.3</version>
+    <version>0.2.4</version>
     <description>Adds random modifiers to card rewards.</description>
 
     <properties>
@@ -46,7 +46,7 @@
             <!--<systemPath>${basedir}/../lib/BaseMod.jar</systemPath>-->
         </dependency>
         <dependency>
-            <groupId>com.evacipated.cardcrawl.mod</groupId>
+            <groupId>sltslib</groupId>
             <artifactId>StSLib</artifactId>
             <version>1.21.3</version>
             <scope>system</scope>
