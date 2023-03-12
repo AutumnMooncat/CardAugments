@@ -20,7 +20,7 @@ public class SearingMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return isNormalCard(card) && card.canUpgrade() && cardCheck(card, c -> upgradesAVariable()) && doesntOverride(card, "canUpgrade") && !(card instanceof BranchingUpgradesCard) && !(card instanceof MultiUpgradeCard);
+        return (card.type == AbstractCard.CardType.ATTACK || card.type == AbstractCard.CardType.SKILL) && card.canUpgrade() && cardCheck(card, c -> upgradesAVariable()) && doesntOverride(card, "canUpgrade") && !(card instanceof BranchingUpgradesCard) && !(card instanceof MultiUpgradeCard);
     }
 
     @Override
