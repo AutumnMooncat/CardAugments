@@ -70,6 +70,14 @@
             <!--<systemPath>${basedir}/../lib/StSLib.jar</systemPath>-->
         </dependency>
         <dependency>
+            <groupId>ocean</groupId>
+            <artifactId>PencilCase</artifactId>
+            <version>2.5.5</version>
+            <scope>system</scope>
+            <systemPath>${Steam.path}/workshop/content/646570/2924301306/oceanmod.jar</systemPath>
+            <!--<systemPath>${basedir}/../lib/StSLib.jar</systemPath>-->
+        </dependency>
+        <dependency>
             <groupId>pan</groupId>
             <artifactId>SpireLocations</artifactId>
             <version>2.5.5</version>
