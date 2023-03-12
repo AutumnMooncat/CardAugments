@@ -107,9 +107,7 @@ public class CardAugmentsMod implements
     public static String[] EXTRA_TEXT;
     private static final String AUTHOR = "Mistress Alison";
 
-    public static ModPanel settingsPanel = new ModPanel(m -> {
-        setDefaults(m);
-    });
+    public static ModPanel settingsPanel;
     public static ModLabel noCrossoverLabel;
     public static HashMap<Integer, ArrayList<IUIElement>> pages = new HashMap<>();
     public static final float LAYOUT_Y = 740f;
@@ -252,10 +250,6 @@ public class CardAugmentsMod implements
     // ============== /SUBSCRIBE, CREATE THE COLOR_GRAY, INITIALIZE/ =================
     
     // =============== POST-INITIALIZE =================
-
-    public static void setDefaults(ModPanel mp) {
-
-    }
     
     @Override
     public void receivePostInitialize() {
@@ -278,6 +272,7 @@ public class CardAugmentsMod implements
 
     private static void setupSettingsPanel() {
         logger.info("Loading badge image and mod options");
+        settingsPanel = new ModPanel();
 
         //Grab the strings
         uiStrings = CardCrawlGame.languagePack.getUIString(makeID("ModConfigs"));
