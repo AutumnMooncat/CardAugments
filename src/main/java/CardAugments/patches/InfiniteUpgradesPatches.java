@@ -1,15 +1,28 @@
 package CardAugments.patches;
 
+import CardAugments.cardmods.rare.SearingMod;
+import basemod.BaseMod;
+import basemod.abstracts.AbstractCardModifier;
+import basemod.abstracts.CustomSavable;
+import basemod.abstracts.CustomSavableRaw;
 import basemod.helpers.CardModifierManager;
+import basemod.patches.com.megacrit.cardcrawl.cards.AbstractCard.CardModifierPatches;
 import basemod.patches.com.megacrit.cardcrawl.core.CardCrawlGame.LoadPlayerSaves;
 import basemod.patches.com.megacrit.cardcrawl.saveAndContinue.SaveFile.ModSaves;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.ModInfo;
 import com.evacipated.cardcrawl.modthespire.lib.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.reflect.TypeToken;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
+import com.megacrit.cardcrawl.relics.BottledFlame;
+import com.megacrit.cardcrawl.relics.BottledLightning;
+import com.megacrit.cardcrawl.relics.BottledTornado;
 import javassist.*;
 import javassist.expr.ExprEditor;
 import javassist.expr.FieldAccess;
@@ -21,7 +34,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class InfiniteUpgradesPatches {
-    @SpirePatch(clz = AbstractCard.class, method = "<class>")
+    @SpirePatch(clz = AbstractCard.class, method = SpirePatch.CLASS)
     public static class InfUpgradeField {
         public static SpireField<Boolean> inf = new SpireField<>(() -> false);
     }
@@ -45,7 +58,7 @@ public class InfiniteUpgradesPatches {
                     new NotClassFilter(new InterfaceOnlyClassFilter()),
                     new ClassModifiersClassFilter(Modifier.PUBLIC),
                     new OrClassFilter(
-                            new org.clapper.util.classutil.SubclassClassFilter(AbstractCard.class),
+                            new SubclassClassFilter(AbstractCard.class),
                             (classInfo, classFinder) -> classInfo.getClassName().equals(AbstractCard.class.getName())
                     )
             );
@@ -73,38 +86,13 @@ public class InfiniteUpgradesPatches {
         }
     }
 
-    @SpirePatch2(clz = LoadPlayerSaves.class, method = "Postfix")
-    public static class ReinitializeCards {
-        @SpireInsertPatch(locator = Locator.class)
-        public static void plz() {
-            HashMap<AbstractCard, AbstractCard> replacements = new HashMap<>();
-            for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
-                if (InfUpgradeField.inf.get(c)) {
-                    AbstractCard rawCopy = c.makeCopy();
-                    CardModifierManager.copyModifiers(c, rawCopy, false, false, false);
-                    for (int i = 0 ; i < c.timesUpgraded ; i++) {
-                        rawCopy.upgrade();
-                    }
-                    replacements.put(c, rawCopy.makeStatEquivalentCopy());
-                }
-            }
-            AbstractDungeon.player.masterDeck.group.replaceAll(c -> replacements.getOrDefault(c, c));
-        }
-
-        public static class Locator extends SpireInsertLocator {
-            @Override
-            public int[] Locate(CtBehavior ctBehavior) throws Exception {
-                Matcher m = new Matcher.FieldAccessMatcher(ModSaves.class, "modRelicSaves");
-                return LineFinder.findInOrder(ctBehavior, m);
-            }
-        }
-    }
-
     @SpirePatch2(clz = AbstractCard.class, method = "makeStatEquivalentCopy")
     public static class MakeStatEquivalentCopy {
         @SpireInsertPatch(locator = Locator.class, localvars = {"card"})
         public static void copyField(AbstractCard __instance, AbstractCard card) {
-            InfiniteUpgradesPatches.InfUpgradeField.inf.set(card, true);
+            if (InfUpgradeField.inf.get(__instance)) {
+                InfUpgradeField.inf.set(card, true);
+            }
         }
 
         public static class Locator extends SpireInsertLocator {
@@ -155,12 +143,47 @@ public class InfiniteUpgradesPatches {
             }
         }
     }
+    //Parse the cardmod gson (which has not yet loaded) to see if the card we are creating would have the Searing Mod
+    @SpirePatch2(clz = CardLibrary.class, method = "getCopy", paramtypez = {String.class, int.class, int.class})
+    public static class FixSaveAndLoadIssues {
+        @SpireInsertPatch(locator = Locator.class, localvars = "retVal")
+        public static void forceUpgrade(AbstractCard retVal) {
+            GsonBuilder builder = new GsonBuilder();
+            if (CardModifierPatches.modifierAdapter == null) {
+                CardModifierPatches.initializeAdapterFactory();
+            }
 
+            builder.registerTypeAdapterFactory(CardModifierPatches.modifierAdapter);
+            Gson gson = builder.create();
+            ModSaves.ArrayListOfJsonElement cardModifierSaves = ModSaves.cardModifierSaves.get(CardCrawlGame.saveFile);
+            int i = AbstractDungeon.player.masterDeck.size();
+            ArrayList<AbstractCardModifier> cardModifiersList = gson.fromJson(cardModifierSaves != null && i < cardModifierSaves.size() ? cardModifierSaves.get(i) : null, (new TypeToken<ArrayList<AbstractCardModifier>>() {}).getType());
+            if (cardModifiersList != null) {
+                for (AbstractCardModifier mod : cardModifiersList) {
+                    if (mod instanceof SearingMod) {
+                        InfUpgradeField.inf.set(retVal, true);
+                    }
+                }
+            }
+        }
+
+        private static class Locator extends SpireInsertLocator {
+            @Override
+            public int[] Locate(CtBehavior ctMethodToPatch) throws Exception {
+                Matcher finalMatcher = new Matcher.MethodCallMatcher(AbstractCard.class, "upgrade");
+                return new int[]{LineFinder.findInOrder(ctMethodToPatch, finalMatcher)[0]-1};
+            }
+        }
+    }
+
+    /*//First patch allows us to load cards that were saved with more upgrades than we can actually perform
     @SpirePatch2(clz = CardLibrary.class, method = "getCopy", paramtypez = {String.class, int.class, int.class})
     public static class FixSaveAndLoadIssues {
         private static boolean forcedUpgrade;
         @SpireInsertPatch(locator = Locator.class, localvars = "retVal")
         public static void forceUpgrade(AbstractCard retVal) {
+            //If we still have upgrades to do but we cant upgrade, forcefully change the upgraded var so the upgrades are performed.
+            //These will not correctly scale per upgrade, but it will create a card with the correct amount of upgrades
             if (!retVal.canUpgrade()) {
                 forcedUpgrade = true;
                 retVal.upgraded = false;
@@ -168,6 +191,7 @@ public class InfiniteUpgradesPatches {
         }
         @SpireInsertPatch(locator = LocatorAfter.class, localvars = "retVal")
         public static void fixName(AbstractCard retVal) {
+            //Reset forced upgrade and correct the name which like likely something like Strike++++++
             if (forcedUpgrade) {
                 forcedUpgrade = false;
                 retVal.name = retVal.originalName + "+" + retVal.timesUpgraded;
@@ -190,6 +214,77 @@ public class InfiniteUpgradesPatches {
             }
         }
     }
+
+    //Second patch allows us to replace the card with a copy that correctly scales once card mods are loaded
+    @SpirePatch2(clz = LoadPlayerSaves.class, method = "Postfix")
+    public static class ReinitializeCards {
+        @SpireInsertPatch(locator = Locator.class)
+        public static void plz() {
+            HashMap<AbstractCard, AbstractCard> replacements = new HashMap<>();
+            for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
+                //The card we got from loading has the correct upgrade amount and card mods, but no scaling was actually performed as the cardmods were not applied before the upgrades were done.
+                if (InfUpgradeField.inf.get(c)) {
+                    //Take a blank copy of the card with no upgrades
+                    AbstractCard rawCopy = c.makeCopy();
+                    //Set the field before upgrading
+                    InfUpgradeField.inf.set(rawCopy, true);
+                    //Perform the upgrades
+                    for (int i = 0 ; i < c.timesUpgraded ; i++) {
+                        rawCopy.upgrade();
+                    }
+                    //Reset the misc value
+                    if (c.misc != 0) {
+                        rawCopy.misc = c.misc;
+                        if (rawCopy.cardID.equals("Genetic Algorithm")) {
+                            rawCopy.block = rawCopy.misc;
+                            rawCopy.baseBlock = rawCopy.misc;
+                            rawCopy.initializeDescription();
+                        }
+
+                        if (rawCopy.cardID.equals("RitualDagger")) {
+                            rawCopy.damage = rawCopy.misc;
+                            rawCopy.baseDamage = rawCopy.misc;
+                            rawCopy.initializeDescription();
+                        }
+                    }
+                    //Attempt to unfuck custom saveable
+                    if (c instanceof CustomSavableRaw && rawCopy instanceof CustomSavableRaw) {
+                        ((CustomSavableRaw) rawCopy).onLoadRaw(((CustomSavableRaw) c).onSaveRaw());
+                    }
+                    //Copy over all the modifiers
+                    CardModifierManager.copyModifiers(c, rawCopy, false, false, false);
+                    //Attempt to unfuck bottles
+                    //Modded bottle relics haven't loaded yet, so it should be okay?
+                    if (c.inBottleLightning) {
+                        rawCopy.inBottleLightning = true;
+                        ((BottledLightning)AbstractDungeon.player.getRelic("Bottled Lightning")).card = rawCopy;
+                        ((BottledLightning)AbstractDungeon.player.getRelic("Bottled Lightning")).setDescriptionAfterLoading();
+                    }
+                    if (c.inBottleFlame) {
+                        rawCopy.inBottleFlame = true;
+                        ((BottledFlame)AbstractDungeon.player.getRelic("Bottled Flame")).card = rawCopy;
+                        ((BottledFlame)AbstractDungeon.player.getRelic("Bottled Flame")).setDescriptionAfterLoading();
+                    }
+                    if (c.inBottleTornado) {
+                        rawCopy.inBottleTornado = true;
+                        ((BottledTornado)AbstractDungeon.player.getRelic("Bottled Tornado")).card = rawCopy;
+                        ((BottledTornado)AbstractDungeon.player.getRelic("Bottled Tornado")).setDescriptionAfterLoading();
+                    }
+                    replacements.put(c, rawCopy);
+                }
+            }
+            //Replace the old cards with our newly rebuilt ones
+            AbstractDungeon.player.masterDeck.group.replaceAll(c -> replacements.getOrDefault(c, c));
+        }
+
+        public static class Locator extends SpireInsertLocator {
+            @Override
+            public int[] Locate(CtBehavior ctBehavior) throws Exception {
+                Matcher m = new Matcher.FieldAccessMatcher(ModSaves.class, "modRelicSaves");
+                return LineFinder.findInOrder(ctBehavior, m);
+            }
+        }
+    }*/
 
     public static boolean renderCheck(AbstractCard card) {
         return InfUpgradeField.inf.get(card) && card.timesUpgraded > 0;
