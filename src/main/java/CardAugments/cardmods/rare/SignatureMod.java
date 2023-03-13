@@ -22,7 +22,7 @@ public class SignatureMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.type == AbstractCard.CardType.ATTACK && card.baseDamage > 0 && doesntOverride(card, "canUse", AbstractPlayer.class, AbstractMonster.class);
+        return card.type == AbstractCard.CardType.ATTACK && card.baseDamage >= 2 && doesntOverride(card, "canUse", AbstractPlayer.class, AbstractMonster.class);
     }
 
     @Override
