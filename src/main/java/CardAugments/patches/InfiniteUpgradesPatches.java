@@ -1,12 +1,24 @@
 package CardAugments.patches;
 
+import basemod.helpers.CardModifierManager;
+import basemod.patches.com.megacrit.cardcrawl.core.CardCrawlGame.LoadPlayerSaves;
+import basemod.patches.com.megacrit.cardcrawl.saveAndContinue.SaveFile.ModSaves;
+import com.evacipated.cardcrawl.modthespire.Loader;
+import com.evacipated.cardcrawl.modthespire.ModInfo;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
-import javassist.CannotCompileException;
-import javassist.CtBehavior;
+import javassist.*;
 import javassist.expr.ExprEditor;
 import javassist.expr.FieldAccess;
+import org.clapper.util.classutil.*;
+
+import java.io.File;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class InfiniteUpgradesPatches {
     @SpirePatch(clz = AbstractCard.class, method = "<class>")
@@ -14,12 +26,85 @@ public class InfiniteUpgradesPatches {
         public static SpireField<Boolean> inf = new SpireField<>(() -> false);
     }
 
-    @SpirePatch(clz = AbstractCard.class, method = "makeStatEquivalentCopy")
+    @SpirePatch(clz = CardCrawlGame.class, method = SpirePatch.CONSTRUCTOR)
+    public static class UpgradePatch {
+        @SpireRawPatch
+        public static void resetUpgraded(CtBehavior ctBehavior) throws NotFoundException {
+            ClassFinder finder = new ClassFinder();
+            finder.add(new File(Loader.STS_JAR));
+
+            for (ModInfo modInfo : Loader.MODINFOS) {
+                if (modInfo.jarURL != null) {
+                    try {
+                        finder.add(new File(modInfo.jarURL.toURI()));
+                    } catch (URISyntaxException ignored) {}
+                }
+            }
+
+            ClassFilter filter = new AndClassFilter(
+                    new NotClassFilter(new InterfaceOnlyClassFilter()),
+                    new ClassModifiersClassFilter(Modifier.PUBLIC),
+                    new OrClassFilter(
+                            new org.clapper.util.classutil.SubclassClassFilter(AbstractCard.class),
+                            (classInfo, classFinder) -> classInfo.getClassName().equals(AbstractCard.class.getName())
+                    )
+            );
+
+            ArrayList<ClassInfo> foundClasses = new ArrayList<>();
+            finder.findClasses(foundClasses, filter);
+
+            for (ClassInfo classInfo : foundClasses) {
+                CtClass ctClass = ctBehavior.getDeclaringClass().getClassPool().get(classInfo.getClassName());
+                try {
+                    CtMethod[] methods = ctClass.getDeclaredMethods();
+                    for (CtMethod m : methods) {
+                        if (m.getName().equals("upgrade")) {
+                            m.insertBefore(InfiniteUpgradesPatches.class.getName() + ".infCheck($0);");
+                        }
+                    }
+                } catch (CannotCompileException ignored) {}
+            }
+        }
+    }
+
+    public static void infCheck(AbstractCard card) {
+        if (InfUpgradeField.inf.get(card)) {
+            card.upgraded = false;
+        }
+    }
+
+    @SpirePatch2(clz = LoadPlayerSaves.class, method = "Postfix")
+    public static class ReinitializeCards {
+        @SpireInsertPatch(locator = Locator.class)
+        public static void plz() {
+            HashMap<AbstractCard, AbstractCard> replacements = new HashMap<>();
+            for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
+                if (InfUpgradeField.inf.get(c)) {
+                    AbstractCard rawCopy = c.makeCopy();
+                    CardModifierManager.copyModifiers(c, rawCopy, false, false, false);
+                    for (int i = 0 ; i < c.timesUpgraded ; i++) {
+                        rawCopy.upgrade();
+                    }
+                    replacements.put(c, rawCopy.makeStatEquivalentCopy());
+                }
+            }
+            AbstractDungeon.player.masterDeck.group.replaceAll(c -> replacements.getOrDefault(c, c));
+        }
+
+        public static class Locator extends SpireInsertLocator {
+            @Override
+            public int[] Locate(CtBehavior ctBehavior) throws Exception {
+                Matcher m = new Matcher.FieldAccessMatcher(ModSaves.class, "modRelicSaves");
+                return LineFinder.findInOrder(ctBehavior, m);
+            }
+        }
+    }
+
+    @SpirePatch2(clz = AbstractCard.class, method = "makeStatEquivalentCopy")
     public static class MakeStatEquivalentCopy {
         @SpireInsertPatch(locator = Locator.class, localvars = {"card"})
-        public static AbstractCard copyField(AbstractCard __instance, AbstractCard card) {
-            InfUpgradeField.inf.set(card, InfUpgradeField.inf.get(__instance));
-            return card;
+        public static void copyField(AbstractCard __instance, AbstractCard card) {
+            InfiniteUpgradesPatches.InfUpgradeField.inf.set(card, true);
         }
 
         public static class Locator extends SpireInsertLocator {
@@ -36,7 +121,6 @@ public class InfiniteUpgradesPatches {
         @SpirePrefixPatch
         public static SpireReturn<?> plz(AbstractCard __instance) {
             if (InfUpgradeField.inf.get(__instance)) {
-                __instance.upgraded = false;
                 return SpireReturn.Return(true);
             }
             return SpireReturn.Continue();
@@ -60,7 +144,6 @@ public class InfiniteUpgradesPatches {
         @SpireInsertPatch(locator = Locator.class)
         public static void plz(AbstractCard __instance) {
             if (InfUpgradeField.inf.get(__instance)) {
-                __instance.upgraded = false;
                 __instance.name = __instance.originalName + "+" + __instance.timesUpgraded;
             }
         }
