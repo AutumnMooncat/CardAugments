@@ -86,6 +86,9 @@ public class CardAugmentsMod implements
     public static final String RARITY_BIAS = "rarityBias";
     public static int rarityBias = 1;
 
+    public static final String EVENT_ADDONS = "eventAddons";
+    public static boolean eventAddons = true;
+
     //Cardmod Lists
     public static final ArrayList<AbstractAugment> commonMods = new ArrayList<>();
     public static final ArrayList<AbstractAugment> uncommonMods = new ArrayList<>();
@@ -112,8 +115,8 @@ public class CardAugmentsMod implements
     public static HashMap<Integer, ArrayList<IUIElement>> pages = new HashMap<>();
     public static final float LAYOUT_Y = 740f;
     public static final float LAYOUT_X = 400f;
-    public static final float SPACING_Y = 55f;
-    public static final float FULL_PAGE_Y = (SPACING_Y * 9);
+    public static final float SPACING_Y = 52f;
+    public static final float FULL_PAGE_Y = (SPACING_Y * 10);
     public static float deltaY = 0;
     public static int currentPage = 0;
     
@@ -148,6 +151,7 @@ public class CardAugmentsMod implements
         cardAugmentsDefaultSettings.setProperty(RARITY_BIAS, String.valueOf(rarityBias));
         cardAugmentsDefaultSettings.setProperty(MODIFY_INSTANT_OBTAIN, Boolean.toString(modifyInstantObtain));
         cardAugmentsDefaultSettings.setProperty(MODIFY_SHOP, Boolean.toString(modifyShop));
+        cardAugmentsDefaultSettings.setProperty(EVENT_ADDONS, Boolean.toString(eventAddons));
         try {
             cardAugmentsConfig = new SpireConfig(modID, FILE_NAME, cardAugmentsDefaultSettings);
             cardAugmentsCrossoverConfig = new SpireConfig(modID, CROSSOVER_FILE_NAME);
@@ -161,6 +165,7 @@ public class CardAugmentsMod implements
             rarityBias = cardAugmentsConfig.getInt(RARITY_BIAS);
             modifyInstantObtain = cardAugmentsConfig.getBool(MODIFY_STARTERS);
             modifyShop = cardAugmentsConfig.getBool(MODIFY_SHOP);
+            eventAddons = cardAugmentsConfig.getBool(EVENT_ADDONS);
         } catch (IOException e) {
             logger.error("Card Augments SpireConfig initialization failed:");
             e.printStackTrace();
@@ -385,6 +390,14 @@ public class CardAugmentsMod implements
             try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
         });
 
+        //Used to allow orbs without prismatic shard
+        ModLabeledToggleButton enableEventsButtom = new ModLabeledToggleButton(TEXT[10],LAYOUT_X - 40f, LAYOUT_Y - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
+                cardAugmentsConfig.getBool(EVENT_ADDONS), settingsPanel, (label) -> {}, (button) -> {
+            cardAugmentsConfig.setBool(EVENT_ADDONS, button.enabled);
+            eventAddons = button.enabled;
+            try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
+        });
+
         registerUIElement(enableModsButton);
         registerUIElement(probabilityLabel, false);
         registerUIElement(probabilitySlider);
@@ -400,6 +413,7 @@ public class CardAugmentsMod implements
         registerUIElement(enableInstantObtainModificationButton);
         registerUIElement(enableShopButton);
         registerUIElement(enableAllowOrbsButton);
+        registerUIElement(enableEventsButtom);
 
         CenteredModLabel pageLabel = new CenteredModLabel(crossoverUIStrings.TEXT[1], Settings.WIDTH/2f/Settings.xScale, 830f, settingsPanel, l -> {
             l.text = crossoverUIStrings.TEXT[1] + " " + (currentPage + 1) + "/" + (pages.size());

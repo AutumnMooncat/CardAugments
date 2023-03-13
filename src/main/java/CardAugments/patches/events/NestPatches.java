@@ -28,14 +28,16 @@ public class NestPatches {
     public static class NestInit {
         @SpirePostfixPatch
         public static void addOption(Nest __instance) {
-            choseObserve = false;
-            pickedCard = false;
-            augment = null;
-            observeIndex = __instance.imageEventText.optionList.size();
-            if (AbstractDungeon.player.masterDeck.group.stream().anyMatch(c -> c.type == AbstractCard.CardType.ATTACK)) {
-                __instance.imageEventText.setDialogOption(NEST_TEXT[0]);
-            } else {
-                __instance.imageEventText.setDialogOption(NEST_TEXT[6], true);
+            if (CardAugmentsMod.eventAddons) {
+                choseObserve = false;
+                pickedCard = false;
+                augment = null;
+                observeIndex = __instance.imageEventText.optionList.size();
+                if (AbstractDungeon.player.masterDeck.group.stream().anyMatch(c -> c.type == AbstractCard.CardType.ATTACK)) {
+                    __instance.imageEventText.setDialogOption(NEST_TEXT[0]);
+                } else {
+                    __instance.imageEventText.setDialogOption(NEST_TEXT[6], true);
+                }
             }
         }
     }
@@ -44,44 +46,46 @@ public class NestPatches {
     public static class ButtonLogic {
         @SpirePrefixPatch
         public static SpireReturn<?> buttonPress(Nest __instance, int buttonPressed, @ByRef int[] ___screenNum) {
-            if (choseObserve) {
-                pickedCard = true;
-                __instance.imageEventText.updateBodyText(NEST_TEXT[5]);
-                switch (buttonPressed) {
-                    case 0:
-                        augment = new CultistMod();
-                        break;
-                    case 1:
-                        augment = new FanaticMod();
-                        break;
-                }
-                CardGroup group = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-                for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
-                    if (augment.validCard(c)) {
-                        group.addToBottom(c);
+            if (CardAugmentsMod.eventAddons) {
+                if (choseObserve) {
+                    pickedCard = true;
+                    __instance.imageEventText.updateBodyText(NEST_TEXT[5]);
+                    switch (buttonPressed) {
+                        case 0:
+                            augment = new CultistMod();
+                            break;
+                        case 1:
+                            augment = new FanaticMod();
+                            break;
                     }
-                }
-                AbstractDungeon.gridSelectScreen.open(group, 1, NEST_TEXT[7], false, false, false, false);
-                ___screenNum[0] = 2;
-                choseObserve = false;
-                __instance.imageEventText.updateDialogOption(0, NEST_TEXT[3]);
-                __instance.imageEventText.clearRemainingOptions();
-                return SpireReturn.Return();
-            } else if (___screenNum[0] == 0) {
-                if (buttonPressed == observeIndex) {
+                    CardGroup group = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+                    for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
+                        if (augment.validCard(c)) {
+                            group.addToBottom(c);
+                        }
+                    }
+                    AbstractDungeon.gridSelectScreen.open(group, 1, NEST_TEXT[7], false, false, false, false);
+                    ___screenNum[0] = 2;
+                    choseObserve = false;
+                    __instance.imageEventText.updateDialogOption(0, NEST_TEXT[3]);
                     __instance.imageEventText.clearRemainingOptions();
-                    __instance.imageEventText.updateBodyText(NEST_TEXT[4]);
-                    __instance.imageEventText.updateDialogOption(0, NEST_TEXT[1]);
-                    FanaticMod mod = new FanaticMod();
-                    if (AbstractDungeon.player.masterDeck.group.stream().anyMatch(mod::validCard)) {
-                        __instance.imageEventText.setDialogOption(NEST_TEXT[2]);
-                    } else {
-                        __instance.imageEventText.setDialogOption(NEST_TEXT[8], true);
-                    }
-                    choseObserve = true;
                     return SpireReturn.Return();
-                } else {
-                    __instance.imageEventText.removeDialogOption(observeIndex);
+                } else if (___screenNum[0] == 0) {
+                    if (buttonPressed == observeIndex) {
+                        __instance.imageEventText.clearRemainingOptions();
+                        __instance.imageEventText.updateBodyText(NEST_TEXT[4]);
+                        __instance.imageEventText.updateDialogOption(0, NEST_TEXT[1]);
+                        FanaticMod mod = new FanaticMod();
+                        if (AbstractDungeon.player.masterDeck.group.stream().anyMatch(mod::validCard)) {
+                            __instance.imageEventText.setDialogOption(NEST_TEXT[2]);
+                        } else {
+                            __instance.imageEventText.setDialogOption(NEST_TEXT[8], true);
+                        }
+                        choseObserve = true;
+                        return SpireReturn.Return();
+                    } else {
+                        __instance.imageEventText.removeDialogOption(observeIndex);
+                    }
                 }
             }
             return SpireReturn.Continue();
@@ -89,14 +93,16 @@ public class NestPatches {
     }
 
     public static void updateNest(Nest __instance) {
-        if (pickedCard && !AbstractDungeon.isScreenUp && !AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
-            AbstractCard c = AbstractDungeon.gridSelectScreen.selectedCards.get(0);
-            CardModifierManager.addModifier(c, augment);
-            AbstractDungeon.effectsQueue.add(new ShowCardBrieflyEffect(c.makeStatEquivalentCopy()));
-            AbstractDungeon.topLevelEffects.add(new UpgradeShineEffect((float) Settings.WIDTH / 2.0F, (float)Settings.HEIGHT / 2.0F));
-            AbstractDungeon.gridSelectScreen.selectedCards.clear();
-            pickedCard = false;
-            AbstractEvent.logMetricCardUpgrade("Nest", "Observe", c);
+        if (CardAugmentsMod.eventAddons) {
+            if (pickedCard && !AbstractDungeon.isScreenUp && !AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
+                AbstractCard c = AbstractDungeon.gridSelectScreen.selectedCards.get(0);
+                CardModifierManager.addModifier(c, augment);
+                AbstractDungeon.effectsQueue.add(new ShowCardBrieflyEffect(c.makeStatEquivalentCopy()));
+                AbstractDungeon.topLevelEffects.add(new UpgradeShineEffect((float) Settings.WIDTH / 2.0F, (float)Settings.HEIGHT / 2.0F));
+                AbstractDungeon.gridSelectScreen.selectedCards.clear();
+                pickedCard = false;
+                AbstractEvent.logMetricCardUpgrade("Nest", "Observe", c);
+            }
         }
     }
 
