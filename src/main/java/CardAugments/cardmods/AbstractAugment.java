@@ -56,14 +56,14 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         return "";
     }
 
-    public String getSufix() {
+    public String getSuffix() {
         return "";
     }
 
     @Override
     public String modifyName(String cardName, AbstractCard card) {
         String[] nameParts = removeUpgradeText(cardName);
-        return getPrefix() + nameParts[0] + getSufix() + nameParts[1];
+        return getPrefix() + nameParts[0] + getSuffix() + nameParts[1];
     }
 
     public CardBorderGlowManager.GlowInfo getGlowInfo() {

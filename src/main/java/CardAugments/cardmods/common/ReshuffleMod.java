@@ -26,7 +26,7 @@ public class ReshuffleMod extends AbstractAugment {
     }
 
     @Override
-    public String getSufix() {
+    public String getSuffix() {
         return TEXT[1];
     }
 

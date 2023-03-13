@@ -53,7 +53,7 @@ public class LockingMod extends AbstractAugment {
     }
 
     @Override
-    public String getSufix() {
+    public String getSuffix() {
         return TEXT[1];
     }
 

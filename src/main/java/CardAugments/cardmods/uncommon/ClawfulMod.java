@@ -68,7 +68,7 @@ public class ClawfulMod extends AbstractAugment implements DynvarCarrier {
     }
 
     @Override
-    public String getSufix() {
+    public String getSuffix() {
         return strikeMode ? TEXT[3] : TEXT[1];
     }
 
