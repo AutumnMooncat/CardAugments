@@ -1,28 +1,19 @@
 package CardAugments.patches;
 
 import CardAugments.cardmods.rare.SearingMod;
-import basemod.BaseMod;
 import basemod.abstracts.AbstractCardModifier;
-import basemod.abstracts.CustomSavable;
-import basemod.abstracts.CustomSavableRaw;
-import basemod.helpers.CardModifierManager;
 import basemod.patches.com.megacrit.cardcrawl.cards.AbstractCard.CardModifierPatches;
-import basemod.patches.com.megacrit.cardcrawl.core.CardCrawlGame.LoadPlayerSaves;
 import basemod.patches.com.megacrit.cardcrawl.saveAndContinue.SaveFile.ModSaves;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.ModInfo;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
-import com.megacrit.cardcrawl.relics.BottledFlame;
-import com.megacrit.cardcrawl.relics.BottledLightning;
-import com.megacrit.cardcrawl.relics.BottledTornado;
 import javassist.*;
 import javassist.expr.ExprEditor;
 import javassist.expr.FieldAccess;
@@ -31,7 +22,6 @@ import org.clapper.util.classutil.*;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class InfiniteUpgradesPatches {
     @SpirePatch(clz = AbstractCard.class, method = SpirePatch.CLASS)
