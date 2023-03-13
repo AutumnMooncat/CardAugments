@@ -26,6 +26,7 @@ import javassist.expr.FieldAccess;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 public abstract class AbstractAugment extends AbstractCardModifier {
@@ -201,8 +202,8 @@ public abstract class AbstractAugment extends AbstractCardModifier {
 
     public static boolean doesntUpgradeExhaust() {
         return cardsToCheck.stream().allMatch(c -> c.exhaust == baseCheck.exhaust && c.purgeOnUse == baseCheck.purgeOnUse
-                && ExhaustiveField.ExhaustiveFields.baseExhaustive.get(c) == ExhaustiveField.ExhaustiveFields.baseExhaustive.get(baseCheck)
-                && ExhaustiveField.ExhaustiveFields.exhaustive.get(c) == ExhaustiveField.ExhaustiveFields.exhaustive.get(baseCheck));
+                && Objects.equals(ExhaustiveField.ExhaustiveFields.baseExhaustive.get(c), ExhaustiveField.ExhaustiveFields.baseExhaustive.get(baseCheck))
+                && Objects.equals(ExhaustiveField.ExhaustiveFields.exhaustive.get(c), ExhaustiveField.ExhaustiveFields.exhaustive.get(baseCheck)));
     }
 
     public static boolean notEthereal(AbstractCard card) {
