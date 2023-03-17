@@ -19,7 +19,7 @@ public class AutoMod extends AbstractAugment {
 
     @Override
     public void onDrawn(AbstractCard card) {
-        addToTop(new AutoplayOnRandomEnemyAction(card));
+        addToBot(new AutoplayOnRandomEnemyAction(card));
     }
 
     @Override
