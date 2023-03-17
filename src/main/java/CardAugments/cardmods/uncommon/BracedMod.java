@@ -25,7 +25,7 @@ public class BracedMod extends AbstractAugment implements DynvarCarrier {
 
     @Override
     public float modifyBaseBlock(float block, AbstractCard card) {
-        return block * MAJOR_DEBUFF;
+        return block - baseAmount;
     }
 
     @Override

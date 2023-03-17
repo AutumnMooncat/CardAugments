@@ -27,7 +27,7 @@ public class RampedMod extends AbstractAugment implements DynvarCarrier {
 
     @Override
     public float modifyBaseDamage(float damage, DamageInfo.DamageType type, AbstractCard card, AbstractMonster target) {
-        return damage * MAJOR_DEBUFF;
+        return damage - baseAmount;
     }
 
     @Override
@@ -87,7 +87,7 @@ public class RampedMod extends AbstractAugment implements DynvarCarrier {
 
     @Override
     public int val(AbstractCard card) {
-        return val(card);
+        return getBaseVal(card);
     }
 
     @Override
