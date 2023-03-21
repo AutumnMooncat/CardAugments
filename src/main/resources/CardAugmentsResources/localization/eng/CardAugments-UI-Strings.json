@@ -250,6 +250,9 @@
   "CardAugments:MementoMod": {
     "TEXT": ["", "'s Memento", "Ethereal. NL "," NL When Exhausted, draw %d cards."]
   },
+  "CardAugments:MeteorMod": {
+    "TEXT": ["Meteoric ", "", " NL Channel %d Plasma."]
+  },
   "CardAugments:MK2Mod": {
     "TEXT": ["", " MK2"]
   },
