@@ -160,6 +160,14 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         AbstractDungeon.actionManager.addToTop(action);
     }
 
+    public static boolean customCheck(Predicate<AbstractCard> pred) {
+        return cardsToCheck.stream().allMatch(pred);
+    }
+
+    public static boolean customCheck(AbstractCard c, Predicate<AbstractCard> pred) {
+        return pred.test(c) && cardsToCheck.stream().allMatch(pred);
+    }
+
     public static boolean upgradesAVariable() {
         return upgradesDamage() || upgradesBlock() || upgradesMagic();
     }

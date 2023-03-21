@@ -166,6 +166,9 @@
       " NL Whenever you draw this card, add a copy of it into your hand.",
       " NL Whenever you draw this card, add 2 copies of it into your hand."]
   },
+  "CardAugments:ErangMod": {
+    "TEXT": ["erang", "rang", "ang"," to a random enemy 3 times.","Bang","arang"]
+  },
   "CardAugments:EruptingMod": {
     "TEXT": ["Erupting ", "", " NL Enter Wrath."]
   },

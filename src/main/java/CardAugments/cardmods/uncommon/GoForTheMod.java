@@ -71,7 +71,7 @@ public class GoForTheMod extends AbstractAugment implements DynvarCarrier {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return cardCheck(card, c -> c.cost > 0 && c.baseDamage > 0 && doesntUpgradeCost() && usesVanillaTargeting(c) && c.type == AbstractCard.CardType.ATTACK && c.rawDescription.chars().filter(ch -> ch == '.' || ch == '。').count() == 1);
+        return cardCheck(card, c -> c.cost > 0 && c.baseDamage > 0 && doesntUpgradeCost() && usesVanillaTargeting(c) && c.type == AbstractCard.CardType.ATTACK && customCheck(c, check -> check.rawDescription.chars().filter(ch -> ch == '.' || ch == '。').count() == 1));
     }
 
     @Override
