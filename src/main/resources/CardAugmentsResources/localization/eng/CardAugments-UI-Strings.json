@@ -220,6 +220,9 @@
   "CardAugments:GoForTheMod": {
     "TEXT": ["Go for the ", "", "Deal %s damage. NL If the enemy intends to attack, "]
   },
+  "CardAugments:GritMod": {
+    "TEXT": ["Gritty ", "", " NL Exhaust a random card in your hand."," NL Exhaust a card in your hand."]
+  },
   "CardAugments:GreedMod": {
     "TEXT": ["", " of Greed", " NL If Fatal, gain %d Gold. NL Exhaust."]
   },
