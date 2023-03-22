@@ -15,7 +15,7 @@ public class GritMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost != -2 && card.baseBlock > 0;
+        return card.cost != -2 && card.baseBlock > 0 && card.type == AbstractCard.CardType.SKILL;
     }
 
     @Override
