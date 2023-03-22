@@ -26,7 +26,7 @@ public class OmegaMod extends AbstractAugment {
     @Override
     public float modifyBaseDamage(float damage, DamageInfo.DamageType type, AbstractCard card, AbstractMonster target) {
         if (card.baseDamage > 0) {
-            return damage * 3f;
+            return damage * 4f;
         }
         return damage;
     }
@@ -34,7 +34,7 @@ public class OmegaMod extends AbstractAugment {
     @Override
     public float modifyBaseBlock(float block, AbstractCard card) {
         if (card.baseBlock > 0) {
-            return block * 3f;
+            return block * 4f;
         }
         return block;
     }
@@ -42,7 +42,7 @@ public class OmegaMod extends AbstractAugment {
     @Override
     public float modifyBaseMagic(float magic, AbstractCard card) {
         if (modMagic) {
-            return magic * 3f;
+            return magic * 4f;
         }
         return magic;
     }
