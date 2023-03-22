@@ -1,4 +1,4 @@
-package CardAugments.cardmods.rare;
+package CardAugments.cardmods.uncommon;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
