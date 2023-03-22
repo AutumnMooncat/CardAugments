@@ -120,6 +120,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         cardsToCheck.clear();
         //Grab an unmodified copy of the card. Yes Searing Blow is jank but that's fine.
         baseCheck = card.makeCopy();
+        cardsToCheck.add(baseCheck);
         if (card instanceof BranchingUpgradesCard) {
             //If this is branching upgrade card we need both the upgrade paths
             AbstractCard normalCheck = card.makeCopy();
