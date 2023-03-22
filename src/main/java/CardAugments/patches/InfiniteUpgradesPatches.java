@@ -4,8 +4,6 @@ import CardAugments.cardmods.rare.SearingMod;
 import basemod.abstracts.AbstractCardModifier;
 import basemod.patches.com.megacrit.cardcrawl.cards.AbstractCard.CardModifierPatches;
 import basemod.patches.com.megacrit.cardcrawl.saveAndContinue.SaveFile.ModSaves;
-import com.evacipated.cardcrawl.modthespire.Loader;
-import com.evacipated.cardcrawl.modthespire.ModInfo;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -14,60 +12,17 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
-import javassist.*;
+import javassist.CannotCompileException;
+import javassist.CtBehavior;
 import javassist.expr.ExprEditor;
 import javassist.expr.FieldAccess;
-import org.clapper.util.classutil.*;
 
-import java.io.File;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 public class InfiniteUpgradesPatches {
     @SpirePatch(clz = AbstractCard.class, method = SpirePatch.CLASS)
     public static class InfUpgradeField {
         public static SpireField<Boolean> inf = new SpireField<>(() -> false);
-    }
-
-    @SpirePatch(clz = CardCrawlGame.class, method = SpirePatch.CONSTRUCTOR)
-    public static class UpgradePatch {
-        @SpireRawPatch
-        public static void resetUpgraded(CtBehavior ctBehavior) throws NotFoundException {
-            ClassFinder finder = new ClassFinder();
-            finder.add(new File(Loader.STS_JAR));
-
-            for (ModInfo modInfo : Loader.MODINFOS) {
-                if (modInfo.jarURL != null) {
-                    try {
-                        finder.add(new File(modInfo.jarURL.toURI()));
-                    } catch (URISyntaxException ignored) {}
-                }
-            }
-
-            ClassFilter filter = new AndClassFilter(
-                    new NotClassFilter(new InterfaceOnlyClassFilter()),
-                    new ClassModifiersClassFilter(Modifier.PUBLIC),
-                    new OrClassFilter(
-                            new SubclassClassFilter(AbstractCard.class),
-                            (classInfo, classFinder) -> classInfo.getClassName().equals(AbstractCard.class.getName())
-                    )
-            );
-
-            ArrayList<ClassInfo> foundClasses = new ArrayList<>();
-            finder.findClasses(foundClasses, filter);
-
-            for (ClassInfo classInfo : foundClasses) {
-                CtClass ctClass = ctBehavior.getDeclaringClass().getClassPool().get(classInfo.getClassName());
-                try {
-                    CtMethod[] methods = ctClass.getDeclaredMethods();
-                    for (CtMethod m : methods) {
-                        if (m.getName().equals("upgrade")) {
-                            m.insertBefore(InfiniteUpgradesPatches.class.getName() + ".infCheck($0);");
-                        }
-                    }
-                } catch (CannotCompileException ignored) {}
-            }
-        }
     }
 
     public static void infCheck(AbstractCard card) {
