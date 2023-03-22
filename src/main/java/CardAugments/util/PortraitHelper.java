@@ -1,11 +1,10 @@
 package CardAugments.util;
 
+import Starlight.util.ImageHelper;
 import basemod.Pair;
 import basemod.ReflectionHacks;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
@@ -16,6 +15,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireInstrumentPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.ShaderHelper;
 import com.megacrit.cardcrawl.screens.SingleCardViewPopup;
 import javassist.CannotCompileException;
@@ -61,42 +61,69 @@ public class PortraitHelper {
         int width = WIDTH * multi;
         int height = HEIGHT * multi;
 
-        FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, width, height, false);
-        SpriteBatch spriteBatch = new SpriteBatch();
-        Matrix4 matrix = new Matrix4();
-        matrix.setToOrtho2D(0, 0, width, height);
-        spriteBatch.setProjectionMatrix(matrix);
-        spriteBatch.setBlendFunction(770, 771);
-        frameBuffer.begin();
-        spriteBatch.begin();
-        spriteBatch.setColor(Color.WHITE.cpy());
-
-        // the draws are all upside-down because when the frameBuffer writes it flips (for some reason)
-        float bgScale = 0.3f;
-//        spriteBatch.setShader(blurShader);  // TODO: get a blur shader to work
-        spriteBatch.draw(card.portrait, bgScale/2 * -width, (1+bgScale/2)*height, (1+bgScale)*width, (1+bgScale)*-height);
-
-//        ShaderHelper.setShader(spriteBatch, ShaderHelper.Shader.DEFAULT);
-        spriteBatch.draw(card.portrait, 0, height, width, -height);
-
-        spriteBatch.setBlendFunction(GL_DST_COLOR, GL_ZERO);
-
-        switch (card.type) {
-            case ATTACK:
-                spriteBatch.draw(attackMask, 0, height, width, -height);
-                break;
-            case SKILL:
-            case STATUS:
-            case CURSE:
-                spriteBatch.draw(skillMask, 0, height, width, -height);
-                break;
-            case POWER:
-                spriteBatch.draw(powerMask, 0, height, width, -height);
-                break;
+        AbstractCard baseCard = CardLibrary.getCard(card.cardID);
+        TextureAtlas.AtlasRegion t = baseCard.portrait;
+        FrameBuffer fb = new FrameBuffer(Pixmap.Format.RGBA8888, width, height, false);
+        SpriteBatch sb = new SpriteBatch();
+        OrthographicCamera og = new OrthographicCamera(width, height);
+        t.flip(false, true);
+        if (baseCard.type == AbstractCard.CardType.ATTACK) {
+            if (card.type == AbstractCard.CardType.POWER) {
+                //Attack to Power
+                og.zoom = 0.976f;
+                og.translate(-3, 0);
+            } else {
+                //Attack to Skill, Status, Curse
+                og.zoom = 0.9f;
+                og.translate(0, -10);
+            }
+        } else if (baseCard.type == AbstractCard.CardType.POWER) {
+            if (card.type == AbstractCard.CardType.ATTACK) {
+                //Power to Attack
+                og.zoom = 0.9f;
+                og.translate(0, -10);
+            } else {
+                //Power to Skill, Status, Curse
+                og.zoom = 0.825f;
+                og.translate(-1, -18);
+            }
+        } else {
+            if (card.type == AbstractCard.CardType.POWER) {
+                //Skill, Status, Curse to Power
+                og.zoom = 0.976f;
+                og.translate(-3, 0);
+            }
+            //Skill, Status, Curse to Attack is free
         }
-        spriteBatch.end();
-        frameBuffer.end();
-        return frameBuffer.getColorBufferTexture();
+
+        og.update();
+        sb.setProjectionMatrix(og.combined);
+
+        ImageHelper.beginBuffer(fb);
+        sb.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+        fb.begin();
+        sb.begin();
+
+        sb.setColor(Color.WHITE.cpy());
+        //sb.draw(card.portrait, -card.portrait.packedWidth/2f, -card.portrait.packedHeight/2f);
+        //sb.draw(t, -t.packedWidth/2f, -t.packedHeight/2f, -t.packedWidth/2f, -t.packedHeight/2f, t.packedWidth, t.packedHeight, multi, multi, 0);
+        sb.draw(t, -width/2f, -height/2f, -width/2f, -height/2f, width, height, 1, 1, 0);
+        sb.draw(t, -t.packedWidth/2f*multi, -t.packedHeight/2f*multi, -t.packedWidth/2f*multi, -t.packedHeight/2f*multi, t.packedWidth*multi, t.packedHeight*multi, 1, 1, 0);
+        sb.setBlendFunction(GL_DST_COLOR, GL_ZERO);
+        sb.setProjectionMatrix(new OrthographicCamera(width, height).combined);
+
+        Texture mask = skillMask;
+        if (card.type == AbstractCard.CardType.ATTACK) {
+            mask = attackMask;
+        } else if (card.type == AbstractCard.CardType.POWER) {
+            mask = powerMask;
+        }
+        sb.draw(mask, -width/2f, -height/2f, -width/2f, -height/2f, width, height, 1, 1, 0, 0, 0, mask.getWidth(), mask.getHeight(), false, true);
+
+        sb.end();
+        fb.end();
+        t.flip(false, true);
+        return fb.getColorBufferTexture();
     }
 
     @SpirePatch2(clz = SingleCardViewPopup.class, method = "loadPortraitImg")
@@ -105,32 +132,8 @@ public class PortraitHelper {
         public static void dontExplode(SingleCardViewPopup __instance, @ByRef Texture[] ___portraitImg, AbstractCard ___card) {
             Pair<String, AbstractCard.CardType> key = new Pair<>(___card.cardID, ___card.type);
             if (hashedTextures.containsKey(key)) {
-                ___portraitImg[0] = hashedTextures.get(key).getValue();
+                ___portraitImg[0] = makeMaskedTexture(___card, 2);
             }
-        }
-    }
-
-    public static boolean checkHash(SingleCardViewPopup scv) {
-        AbstractCard c = ReflectionHacks.getPrivate(scv, SingleCardViewPopup.class, "card");
-        Pair<String, AbstractCard.CardType> key = new Pair<>(c.cardID, c.type);
-        return !hashedTextures.containsKey(key);
-    }
-
-    @SpirePatch2(clz = SingleCardViewPopup.class, method = "close")
-    @SpirePatch2(clz = SingleCardViewPopup.class, method = "updateBetaArtToggler")
-    public static class StopDisposingMyHashedImages {
-        @SpireInstrumentPatch
-        public static ExprEditor patch() {
-            return new ExprEditor() {
-                @Override
-                //Method call is basically the equivalent of a methodcallmatcher of an insert patch, checks the edit method against every method call in the function you#re patching
-                public void edit(MethodCall m) throws CannotCompileException {
-                    //If the method is from the class AnimationState and the method is called update
-                    if (m.getClassName().equals(Texture.class.getName()) && m.getMethodName().equals("dispose")) {
-                        m.replace("if(CardAugments.util.PortraitHelper.checkHash(this)) {$proceed($$);}");
-                    }
-                }
-            };
         }
     }
 }
