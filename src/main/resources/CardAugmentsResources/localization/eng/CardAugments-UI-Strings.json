@@ -2,13 +2,13 @@
   "CardAugments:ModConfigs": {
     "TEXT": [
       "Enable Card Augments",
-      "Mod Percent Chance (10):",
-      "Common Mod Weight (5):",
-      "Uncommon Mod Weight (3):",
-      "Rare Mod Weight (1):",
+      "Mod Percent Chance (Default 10):",
+      "Common Mod Weight (Default 5):",
+      "Uncommon Mod Weight (Default 3):",
+      "Rare Mod Weight (Default 1):",
       "Modify Starter Cards",
       "Allow Orb Mods Without Prismatic Shard",
-      "Card Rarity Weight Bias (1):",
+      "Card Rarity Weight Bias (Default 1):",
       "Modify Instant Obtain Cards (Bites, Pandora's Box, Curses, etc.)",
       "Modify Shop Cards",
       "Enable Event Addons"
