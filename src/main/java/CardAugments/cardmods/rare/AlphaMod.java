@@ -4,8 +4,10 @@ import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import CardAugments.cardmods.util.BetaMod;
 import CardAugments.cardmods.util.OmegaMod;
+import CardAugments.cardmods.util.PreviewedMod;
 import CardAugments.patches.InterruptUseCardFieldPatches;
 import CardAugments.util.FormatHelper;
+import CardAugments.util.PortraitHelper;
 import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardModifierManager;
 import basemod.patches.com.megacrit.cardcrawl.cards.AbstractCard.MultiCardPreview;
@@ -32,11 +34,13 @@ public class AlphaMod extends AbstractAugment {
         MultiCardPreview.add(card, preview1, preview2);
         InterruptUseCardFieldPatches.InterceptUseField.interceptUse.set(card, true);
         card.isEthereal = false;
+        card.exhaust = true;
         originalTarget = card.target;
         card.target = AbstractCard.CardTarget.NONE;
-        /*if (card.type != AbstractCard.CardType.POWER) {
-            card.exhaust = true;
-        }*/
+        if (card.type != AbstractCard.CardType.SKILL) {
+            card.type = AbstractCard.CardType.SKILL;
+            PortraitHelper.setMaskedPortrait(card);
+        }
     }
 
     @Override
@@ -73,13 +77,23 @@ public class AlphaMod extends AbstractAugment {
 
     @Override
     public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
-        inherentHack = true;
+        AbstractCard preview = null;
+        for (AbstractCard c : MultiCardPreview.multiCardPreview.get(card)) {
+            if (CardModifierManager.hasModifier(c, BetaMod.ID)) {
+                preview = c;
+            }
+        }
+        if (preview != null) {
+            AbstractCard copy = preview.makeStatEquivalentCopy();
+            this.addToBot(new MakeTempCardInDrawPileAction(copy, 1, true, true));
+        }
+        /*inherentHack = true;
         AbstractCard copy = card.makeStatEquivalentCopy();
         copy.target = originalTarget;
         inherentHack = false;
         action.exhaustCard = true;
         CardModifierManager.addModifier(copy, new BetaMod());
-        this.addToBot(new MakeTempCardInDrawPileAction(copy, 1, true, true));
+        this.addToBot(new MakeTempCardInDrawPileAction(copy, 1, true, true));*/
     }
 
     @Override
