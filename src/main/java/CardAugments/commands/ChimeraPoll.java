@@ -23,17 +23,26 @@ public class ChimeraPoll extends ConsoleCommand {
             AbstractAugment a = CardAugmentsMod.modMap.get(tokens[depth]);
             ArrayList<String> validCards = Chimera.getAllValidCards(a);
             Collections.sort(validCards);
-            String ret = validCards.size()+" valid cards are: ";
-            for (String s : validCards) {
-                ret += " "+s;
-                if (ret.length() > 100) {
-                    DevConsole.log(ret);
-                    ret = "";
+            DevConsole.log(validCards.size()+" valid cards found. Dumping to logger.");
+            CardAugmentsMod.logger.info(validCards.size()+" valid cards found for modifier "+a.identifier(null));
+            CardAugmentsMod.logger.info(validCards);
+            /*if (validCards.size() >= 30) {
+                DevConsole.log(validCards.size()+" valid cards found. Dumping to logger.");
+                CardAugmentsMod.logger.info(validCards.size()+" valid cards found for modifier "+a.identifier(null));
+                CardAugmentsMod.logger.info(validCards);
+            } else {
+                String ret = validCards.size()+" valid cards found, listing: ";
+                for (String s : validCards) {
+                    ret += " "+s;
+                    if (ret.length() > 100) {
+                        DevConsole.log(ret);
+                        ret = "";
+                    }
                 }
-            }
-            if (!ret.isEmpty()) {
-                DevConsole.log(ret);
-            }
+                if (!ret.isEmpty()) {
+                    DevConsole.log(ret);
+                }
+            }*/
         } else {
             DevConsole.log("could not find mod " + tokens[depth]);
         }
