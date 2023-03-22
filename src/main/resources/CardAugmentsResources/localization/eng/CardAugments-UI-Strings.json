@@ -118,6 +118,9 @@
   "CardAugments:BrutalMod": {
     "TEXT": ["Brutal ", "", "Ethereal. NL "]
   },
+  "CardAugments:BundledMod": {
+    "TEXT": ["Bundled ", "", "Add 2 %s into your hand."," NL Exhaust.", "Innate. NL "]
+  },
   "CardAugments:ChargedMod": {
     "TEXT": ["Charged ", "", " NL Next turn, gain [E] ."]
   },
