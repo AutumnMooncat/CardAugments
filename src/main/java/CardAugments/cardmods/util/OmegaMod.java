@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class OmegaMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(OmegaMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    private static final float multiplier = 3f;
 
     boolean modMagic;
 
@@ -26,7 +27,7 @@ public class OmegaMod extends AbstractAugment {
     @Override
     public float modifyBaseDamage(float damage, DamageInfo.DamageType type, AbstractCard card, AbstractMonster target) {
         if (card.baseDamage > 0) {
-            return damage * 4f;
+            return damage * multiplier;
         }
         return damage;
     }
@@ -34,7 +35,7 @@ public class OmegaMod extends AbstractAugment {
     @Override
     public float modifyBaseBlock(float block, AbstractCard card) {
         if (card.baseBlock > 0) {
-            return block * 4f;
+            return block * multiplier;
         }
         return block;
     }
@@ -42,7 +43,7 @@ public class OmegaMod extends AbstractAugment {
     @Override
     public float modifyBaseMagic(float magic, AbstractCard card) {
         if (modMagic) {
-            return magic * 4f;
+            return magic * multiplier;
         }
         return magic;
     }

@@ -22,7 +22,6 @@ public class AlphaMod extends AbstractAugment {
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     private boolean inherentHack = true;
-    private AbstractCard.CardTarget originalTarget;
 
     @Override
     public void onInitialApplication(AbstractCard card) {
@@ -33,9 +32,16 @@ public class AlphaMod extends AbstractAugment {
         CardModifierManager.addModifier(preview2, new OmegaMod());
         MultiCardPreview.add(card, preview1, preview2);
         InterruptUseCardFieldPatches.InterceptUseField.interceptUse.set(card, true);
+        card.cost -= 2;
+        card.costForTurn -= 2;
+        if (card.cost < 0) {
+            card.cost = 0;
+        }
+        if (card.costForTurn < 0) {
+            card.costForTurn = 0;
+        }
         card.isEthereal = false;
         card.exhaust = true;
-        originalTarget = card.target;
         card.target = AbstractCard.CardTarget.NONE;
         if (card.type != AbstractCard.CardType.SKILL) {
             card.type = AbstractCard.CardType.SKILL;
@@ -45,7 +51,7 @@ public class AlphaMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return (card.baseDamage > 0 || card.baseBlock > 0 || usesMagic(card)) && noShenanigans(card);
+        return noShenanigans(card) && cardCheck(card, c -> c.cost >= 2 && doesntUpgradeCost() && (c.baseDamage > 0 || c.baseBlock > 0 || doesntDowngradeMagic()));
     }
 
     @Override

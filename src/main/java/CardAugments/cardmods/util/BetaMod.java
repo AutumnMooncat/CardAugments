@@ -19,7 +19,6 @@ public class BetaMod extends AbstractAugment {
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     private boolean inherentHack = true;
-    private AbstractCard.CardTarget originalTarget;
 
     @Override
     public void onInitialApplication(AbstractCard card) {
@@ -28,9 +27,16 @@ public class BetaMod extends AbstractAugment {
         CardModifierManager.addModifier(preview, new OmegaMod());
         MultiCardPreview.add(card, preview);
         InterruptUseCardFieldPatches.InterceptUseField.interceptUse.set(card, true);
+        card.cost -= 1;
+        card.costForTurn -= 1;
+        if (card.cost < 0) {
+            card.cost = 0;
+        }
+        if (card.costForTurn < 0) {
+            card.costForTurn = 0;
+        }
         card.isEthereal = false;
         card.exhaust = true;
-        originalTarget = card.target;
         card.target = AbstractCard.CardTarget.NONE;
         if (card.type != AbstractCard.CardType.SKILL) {
             card.type = AbstractCard.CardType.SKILL;
