@@ -2,25 +2,16 @@ package CardAugments.util;
 
 import Starlight.util.ImageHelper;
 import basemod.Pair;
-import basemod.ReflectionHacks;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
-import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import com.badlogic.gdx.math.Matrix4;
 import com.evacipated.cardcrawl.modthespire.lib.ByRef;
-import com.evacipated.cardcrawl.modthespire.lib.SpireInstrumentPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
-import com.megacrit.cardcrawl.helpers.ShaderHelper;
 import com.megacrit.cardcrawl.screens.SingleCardViewPopup;
-import javassist.CannotCompileException;
-import javassist.expr.ExprEditor;
-import javassist.expr.MethodCall;
 
 import java.util.HashMap;
 
@@ -35,16 +26,6 @@ public class PortraitHelper {
     private static final int WIDTH = 250;
     private static final int HEIGHT = 190;
     private static final HashMap<Pair<String, AbstractCard.CardType>, Pair<TextureAtlas.AtlasRegion, Texture>> hashedTextures = new HashMap<>();
-
-//    private static final ShaderProgram blurShader;
-
-//    static {
-//        blurShader = new ShaderProgram(Gdx.files.internal("shaders/blur/vertexShader.vs"), Gdx.files.internal("shaders/blur/fragShader.fs"));
-//        blurShader.setUniformf("dir", 1f, 0f);
-//        blurShader.setUniformf("resolution", 250f);
-//        blurShader.setUniformf("radius", 4);
-//    }
-
 
     public static void setMaskedPortrait(AbstractCard card) {
         Pair<String, AbstractCard.CardType> key = new Pair<>(card.cardID, card.type);
@@ -105,8 +86,6 @@ public class PortraitHelper {
         sb.begin();
 
         sb.setColor(Color.WHITE.cpy());
-        //sb.draw(card.portrait, -card.portrait.packedWidth/2f, -card.portrait.packedHeight/2f);
-        //sb.draw(t, -t.packedWidth/2f, -t.packedHeight/2f, -t.packedWidth/2f, -t.packedHeight/2f, t.packedWidth, t.packedHeight, multi, multi, 0);
         sb.draw(t, -width/2f, -height/2f, -width/2f, -height/2f, width, height, 1, 1, 0);
         sb.draw(t, -t.packedWidth/2f*multi, -t.packedHeight/2f*multi, -t.packedWidth/2f*multi, -t.packedHeight/2f*multi, t.packedWidth*multi, t.packedHeight*multi, 1, 1, 0);
         sb.setBlendFunction(GL_DST_COLOR, GL_ZERO);
