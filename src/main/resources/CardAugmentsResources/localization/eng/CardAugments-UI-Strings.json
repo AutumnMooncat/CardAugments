@@ -88,6 +88,9 @@
   "CardAugments:AmplifiedMod": {
     "TEXT": ["Amplified ", ""]
   },
+  "CardAugments:ArmedMod": {
+    "TEXT": ["Armed ", "", " NL Upgrade %s random card in your hand.", " NL Upgrade %s random cards in your hand."]
+  },
   "CardAugments:AugerMod": {
     "TEXT": ["Auger ", "", " NL If this breaks a target's Block, apply %d Vulnerable."]
   },
