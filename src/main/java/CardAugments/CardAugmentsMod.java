@@ -89,6 +89,9 @@ public class CardAugmentsMod implements
     public static final String EVENT_ADDONS = "eventAddons";
     public static boolean eventAddons = true;
 
+    public static final String GRIEF_LIBRARY = "libraryGrief";
+    public static boolean griefLibrary = false;
+
     //Cardmod Lists
     public static final ArrayList<AbstractAugment> commonMods = new ArrayList<>();
     public static final ArrayList<AbstractAugment> uncommonMods = new ArrayList<>();
@@ -152,6 +155,7 @@ public class CardAugmentsMod implements
         cardAugmentsDefaultSettings.setProperty(MODIFY_INSTANT_OBTAIN, Boolean.toString(modifyInstantObtain));
         cardAugmentsDefaultSettings.setProperty(MODIFY_SHOP, Boolean.toString(modifyShop));
         cardAugmentsDefaultSettings.setProperty(EVENT_ADDONS, Boolean.toString(eventAddons));
+        cardAugmentsDefaultSettings.setProperty(GRIEF_LIBRARY, Boolean.toString(griefLibrary));
         try {
             cardAugmentsConfig = new SpireConfig(modID, FILE_NAME, cardAugmentsDefaultSettings);
             cardAugmentsCrossoverConfig = new SpireConfig(modID, CROSSOVER_FILE_NAME);
@@ -166,6 +170,7 @@ public class CardAugmentsMod implements
             modifyInstantObtain = cardAugmentsConfig.getBool(MODIFY_STARTERS);
             modifyShop = cardAugmentsConfig.getBool(MODIFY_SHOP);
             eventAddons = cardAugmentsConfig.getBool(EVENT_ADDONS);
+            griefLibrary = cardAugmentsConfig.getBool(GRIEF_LIBRARY);
         } catch (IOException e) {
             logger.error("Card Augments SpireConfig initialization failed:");
             e.printStackTrace();

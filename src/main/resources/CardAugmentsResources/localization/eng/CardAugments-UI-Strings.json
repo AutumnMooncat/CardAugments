@@ -56,6 +56,36 @@
       "Choose 2 Cards to Augment."
     ]
   },
+  "CardAugments:LibraryEvent": {
+    "TEXT": [
+      "[Rewrite] #gChoose #ga #gcard, #gthen #gapply #g1 #gof #g5 #gmodifiers #gto #git.",
+      "[Locked] Requires: A card that accepts modifiers.",
+      "[Leave]",
+      "Grabbing the nearest book, you read halfway through it and then begin to scribble over the pages, changing the story entirely. NL NL ~Heh.~ NL NL You put the book back where you found it, looking forward to annoying whoever finds it next.",
+      "Choose a Card to Augment.",
+      "Choose a Modifier.",
+      "The story is about an insect-controlling teenage girl who aspires to become a hero. The book is filled with creative uses of powers, combat strategies, and... ~Hey~ @wait!@ Someone has #r@scribbled@ all over this! Who would do such a thing!",
+      "The story is about a man who journeyed beyond the stars and found himself stuck on a desolate foreign planet. You were looking forward to his return home, but it looks like someone has vandalized the book! NL How unsatisfying.",
+      "The story takes place in a giant isolated building underground as the outside conditions have become unbearable. The novel is mired with conspiracies, propaganda, and injustice. Somewhat comedically, someone has rendered the remainder of the book illegible. NL You wonder if this too was a conspiracy."
+    ]
+  },
+  "CardAugments:BlacksmithEvent": {
+    "TEXT": [
+      "[Tinker] #gGive #ga #gnon-Exhausting #gAttack #gor #gSkill #g-1 #gcost #rand #rExhaust.",
+      "[Locked] Requires: Non-Exhausting Attack or Skill that doesn't change cost.",
+      "[Leave]",
+      "You decide to put the forge to use and... NL #y@CLANG@ #y@CLAAANG@ #y@CLANG!@ NL ...lighten your arsenal!",
+      "Choose a Card to Augment."
+    ]
+  },
+  "CardAugments:ShiningEvent": {
+    "TEXT": [
+      "[Throw] #gGive #ga #grandom #gAttack #g\"When #gdrawn, #ggain #g1 #gEnergy\". #rLose #r%s #rHP.",
+      "[Locked] Requires: An Attack.",
+      "[Leave]",
+      "Testing the light by throwing some of your gear at it, you notice that the light is absorbed into it. It seems to be giving off a #y~welcoming~ #y~glow.~ NL Picking it back up, you find it is #r@scorching@ #r@hot@ ! You quickly put it away and tend to your burns."
+    ]
+  },
   "CardAugments:ExampleMod": {
     "TEXT": ["Prefix name", "Suffix name", "Description stuff"]
   },
