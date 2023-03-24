@@ -86,6 +86,16 @@
       "Testing the light by throwing some of your gear at it, you notice that the light is absorbed into it. It seems to be giving off a #y~welcoming~ #y~glow.~ NL Picking it back up, you find it is #r@scorching@ #r@hot@ ! You quickly put it away and tend to your burns."
     ]
   },
+  "CardAugments:SerpentEvent": {
+    "TEXT": [
+      "[Agree] #gGive #gALL #gAttacks #g\"If #gFatal, #ggain #g15 #gGold\" #rand #rExhaust.",
+      "[Locked] Requires: An Attack.",
+      "[Leave]",
+      "[Continue]",
+      "~\"Yeeeeeeessssssssssessss!~ NL ~Thisss~ ~will~ ~all~ ~be~ ~worthhh~ ~it.~ NL ~..ssSSs.....~ ~ss...~ ~sssss....!\"~",
+      "The serpent rears its head and blasts a stream of #ygold at you! NL It is amazing and terrifying simultaneously. NL As your gear absorbs all the #ygold, you thank the snake, and get going."
+    ]
+  },
   "CardAugments:ExampleMod": {
     "TEXT": ["Prefix name", "Suffix name", "Description stuff"]
   },
@@ -260,7 +270,7 @@
     "TEXT": ["Gritty ", "", " NL Exhaust a random card in your hand."," NL Exhaust a card in your hand."]
   },
   "CardAugments:GreedMod": {
-    "TEXT": ["", " of Greed", " NL If Fatal, gain %d Gold. NL Exhaust."]
+    "TEXT": ["", " of Greed", " NL If Fatal, gain %s Gold. NL Exhaust.", " NL If Fatal, gain %s Gold."]
   },
   "CardAugments:HemoMod": {
     "TEXT": ["Hemo ", "", "Lose %d HP. NL "]

@@ -2,27 +2,43 @@ package CardAugments.cardmods.rare;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
+import CardAugments.cardmods.DynvarCarrier;
 import CardAugments.damagemods.GreedDamage;
 import basemod.abstracts.AbstractCardModifier;
+import com.evacipated.cardcrawl.mod.stslib.damagemods.AbstractDamageModifier;
 import com.evacipated.cardcrawl.mod.stslib.damagemods.DamageModifierManager;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 
-public class GreedMod extends AbstractAugment {
+import java.util.ArrayList;
+import java.util.List;
+
+public class GreedMod extends AbstractAugment implements DynvarCarrier {
     public static final String ID = CardAugmentsMod.makeID(GreedMod.class.getSimpleName());
+    public static final String DESCRIPTION_KEY = "!"+ID+"!";
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
-    private static final int GOLD = 15;
+    private static final int EFFECT = 15;
+    private static final int UPGRADE_EFFECT = 5;
+
+    public boolean modified;
+    public boolean upgraded;
+    private boolean addedExhaust;
+
+    public int getBaseVal(AbstractCard card) {
+        return EFFECT + getEffectiveUpgrades(card) * UPGRADE_EFFECT;
+    }
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        DamageModifierManager.addModifier(card, new GreedDamage(GOLD));
+        DamageModifierManager.addModifier(card, new GreedDamage(getBaseVal(card)));
+        addedExhaust = !card.exhaust;
         card.exhaust = true;
     }
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.type == AbstractCard.CardType.ATTACK && card.baseDamage > 0 && cardCheck(card, AbstractAugment::notExhaust);
+        return card.type == AbstractCard.CardType.ATTACK && card.baseDamage > 0;
     }
 
     @Override
@@ -37,7 +53,30 @@ public class GreedMod extends AbstractAugment {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + String.format(TEXT[2], GOLD);
+        if (addedExhaust) {
+            return rawDescription + String.format(TEXT[2], DESCRIPTION_KEY);
+        }
+        return rawDescription + String.format(TEXT[3], DESCRIPTION_KEY);
+    }
+
+    @Override
+    public void onUpgradeCheck(AbstractCard card) {
+        List<AbstractDamageModifier> mods = DamageModifierManager.modifiers(card);
+        List<AbstractDamageModifier> toRemove = new ArrayList<>();
+        for (AbstractDamageModifier m : mods) {
+            if (m instanceof GreedDamage) {
+                toRemove.add(m);
+            }
+        }
+        for (AbstractDamageModifier m : toRemove) {
+            DamageModifierManager.removeModifier(card, m);
+        }
+        DamageModifierManager.addModifier(card, new GreedDamage(getBaseVal(card)));
+        if (!card.exhaust) {
+            addedExhaust = true;
+            card.exhaust = true;
+            card.initializeDescription();
+        }
     }
 
     @Override
@@ -53,6 +92,33 @@ public class GreedMod extends AbstractAugment {
     @Override
     public String identifier(AbstractCard card) {
         return ID;
+    }
+
+    @Override
+    public String key() {
+        return ID;
+    }
+
+    @Override
+    public int val(AbstractCard card) {
+        return getBaseVal(card);
+    }
+
+    @Override
+    public int baseVal(AbstractCard card) {
+        return getBaseVal(card);
+    }
+
+    @Override
+    public boolean modified(AbstractCard card) {
+        return modified;
+    }
+
+    @Override
+    public boolean upgraded(AbstractCard card) {
+        modified = card.timesUpgraded != 0 || card.upgraded;
+        upgraded = card.timesUpgraded != 0 || card.upgraded;
+        return upgraded;
     }
 
 }
