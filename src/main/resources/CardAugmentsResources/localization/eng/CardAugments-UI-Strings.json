@@ -41,7 +41,7 @@
   "CardAugments:DuplicatorEvent": {
     "TEXT": [
       "[Imbue] #gGive #ga #gnon-Exhausting #gAttack #gor #gSkill #gDouble #gPlay #rand #rExhaust.",
-      "[Locked] Requires a non-Exhausting Attack or Skill.",
+      "[Locked] Requires: Non-Exhausting Attack or Skill.",
       "[Leave]",
       "You hold your gear against the shrine. A ghastly mirror image appears from the shrine and is absorbed into it.",
       "Choose a Card to Augment."
@@ -50,7 +50,7 @@
   "CardAugments:TransmogrifierEvent": {
     "TEXT": [
       "[Imbue] #gApply #ga #grandom #gmodifier #gto #g2 #gcards.",
-      "",
+      "[Locked] Requires: Two cards that accept modifiers.",
       "[Leave]",
       "As the power of the shrine flows through you, your arsenal feels altered.",
       "Choose 2 Cards to Augment."
@@ -360,6 +360,9 @@
   },
   "CardAugments:ShieldedMod": {
     "TEXT": ["Shielded ", "", " NL Gain %s Block."]
+  },
+  "CardAugments:ShiningMod": {
+    "TEXT": ["Shining ", "", " NL When you draw this card, gain [E]."]
   },
   "CardAugments:ShivMod": {
     "TEXT": ["", " and Dagger", " NL Add %d *Shiv into your hand."]
