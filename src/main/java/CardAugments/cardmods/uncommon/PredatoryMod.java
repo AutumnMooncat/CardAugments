@@ -6,9 +6,11 @@ import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.DrawCardNextTurnPower;
 
 public class PredatoryMod extends AbstractAugment {
@@ -24,8 +26,13 @@ public class PredatoryMod extends AbstractAugment {
     }
 
     @Override
+    public float modifyBaseDamage(float damage, DamageInfo.DamageType type, AbstractCard card, AbstractMonster target) {
+        return damage * MAJOR_BUFF;
+    }
+
+    @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost >= 0 && card.type == AbstractCard.CardType.ATTACK && cardCheck(card, c -> doesntUpgradeCost());
+        return card.cost >= 0 && card.type == AbstractCard.CardType.ATTACK && cardCheck(card, c -> c.baseDamage >= 3 && doesntUpgradeCost());
     }
 
     @Override
