@@ -17,12 +17,12 @@ import com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect;
 import javassist.CtBehavior;
 
 public class DuplicatorPatches {
-    public static final String[] EXTRA_TEXT = CardCrawlGame.languagePack.getUIString(CardAugmentsMod.makeID("DuplicatorEvent")).TEXT;
+    public static final String[] MY_TEXT = CardCrawlGame.languagePack.getUIString(CardAugmentsMod.makeID("DuplicatorEvent")).TEXT;
     public static int myIndex = -1;
     public static boolean choseMyOption = false;
     static AbstractAugment augment = null;
     @SpirePatch2(clz = Duplicator.class, method = SpirePatch.CONSTRUCTOR)
-    public static class NestInit {
+    public static class EventInit {
         @SpirePostfixPatch
         public static void addOption(Duplicator __instance) {
             if (CardAugmentsMod.eventAddons) {
@@ -32,11 +32,11 @@ public class DuplicatorPatches {
                 __instance.imageEventText.clearRemainingOptions();
                 myIndex = __instance.imageEventText.optionList.size();
                 if (AbstractDungeon.player.masterDeck.group.stream().anyMatch(c -> augment.validCard(c))) {
-                    __instance.imageEventText.setDialogOption(EXTRA_TEXT[0]);
+                    __instance.imageEventText.setDialogOption(MY_TEXT[0]);
                 } else {
-                    __instance.imageEventText.setDialogOption(EXTRA_TEXT[1], false);
+                    __instance.imageEventText.setDialogOption(MY_TEXT[1], true);
                 }
-                __instance.imageEventText.setDialogOption(EXTRA_TEXT[2]);
+                __instance.imageEventText.setDialogOption(MY_TEXT[2]);
             }
         }
     }
@@ -54,15 +54,15 @@ public class DuplicatorPatches {
                     }
                     if (buttonPressed[0] == myIndex) {
                         __instance.imageEventText.clearRemainingOptions();
-                        __instance.imageEventText.updateBodyText(EXTRA_TEXT[3]);
-                        __instance.imageEventText.updateDialogOption(0, EXTRA_TEXT[2]);
+                        __instance.imageEventText.updateBodyText(MY_TEXT[3]);
+                        __instance.imageEventText.updateDialogOption(0, MY_TEXT[2]);
                         CardGroup group = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
                         for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
                             if (augment.validCard(c)) {
                                 group.addToBottom(c);
                             }
                         }
-                        AbstractDungeon.gridSelectScreen.open(group, 1, EXTRA_TEXT[4], false, false, false, false);
+                        AbstractDungeon.gridSelectScreen.open(group, 1, MY_TEXT[4], false, false, false, false);
                         choseMyOption = true;
                         ___screenNum[0] = 2;
                         return SpireReturn.Return();

@@ -17,12 +17,12 @@ import javassist.CtBehavior;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransmogrifierPatcher {
-    public static final String[] EXTRA_TEXT = CardCrawlGame.languagePack.getUIString(CardAugmentsMod.makeID("TransmogrifierEvent")).TEXT;
+public class TransmogrifierPatches {
+    public static final String[] MY_TEXT = CardCrawlGame.languagePack.getUIString(CardAugmentsMod.makeID("TransmogrifierEvent")).TEXT;
     public static int myIndex = -1;
     public static boolean choseMyOption = false;
     @SpirePatch2(clz = Transmogrifier.class, method = SpirePatch.CONSTRUCTOR)
-    public static class NestInit {
+    public static class EventInit {
         @SpirePostfixPatch
         public static void addOption(Transmogrifier __instance) {
             if (CardAugmentsMod.eventAddons) {
@@ -31,11 +31,11 @@ public class TransmogrifierPatcher {
                 __instance.imageEventText.clearRemainingOptions();
                 myIndex = __instance.imageEventText.optionList.size();
                 if (AbstractDungeon.player.masterDeck.group.stream().anyMatch(CardAugmentsMod::canReceiveModifier)) {
-                    __instance.imageEventText.setDialogOption(EXTRA_TEXT[0]);
+                    __instance.imageEventText.setDialogOption(MY_TEXT[0]);
                 } else {
-                    __instance.imageEventText.setDialogOption(EXTRA_TEXT[1], false);
+                    __instance.imageEventText.setDialogOption(MY_TEXT[1], true);
                 }
-                __instance.imageEventText.setDialogOption(EXTRA_TEXT[2]);
+                __instance.imageEventText.setDialogOption(MY_TEXT[2]);
             }
         }
     }
@@ -53,15 +53,15 @@ public class TransmogrifierPatcher {
                     }
                     if (buttonPressed[0] == myIndex) {
                         __instance.imageEventText.clearRemainingOptions();
-                        __instance.imageEventText.updateBodyText(EXTRA_TEXT[3]);
-                        __instance.imageEventText.updateDialogOption(0, EXTRA_TEXT[2]);
+                        __instance.imageEventText.updateBodyText(MY_TEXT[3]);
+                        __instance.imageEventText.updateDialogOption(0, MY_TEXT[2]);
                         CardGroup group = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
                         for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
                             if (CardAugmentsMod.canReceiveModifier(c)) {
                                 group.addToBottom(c);
                             }
                         }
-                        AbstractDungeon.gridSelectScreen.open(group, group.size() == 1 ? 1 : 2, EXTRA_TEXT[4], false, false, false, false);
+                        AbstractDungeon.gridSelectScreen.open(group, group.size() == 1 ? 1 : 2, MY_TEXT[4], false, false, false, false);
                         choseMyOption = true;
                         try {
                             Class<?> enumElement = Class.forName(Transmogrifier.class.getName()+"$CUR_SCREEN");
