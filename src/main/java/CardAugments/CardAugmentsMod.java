@@ -638,14 +638,26 @@ public class CardAugmentsMod implements
         return false;
     }
 
-    public static void applyTrulyRandomCardMod(AbstractCard c) {
+    public static ArrayList<AbstractAugment> getAllValidMods(AbstractCard c) {
         ArrayList<AbstractAugment> validMods = new ArrayList<>();
         validMods.addAll(commonMods.stream().filter(m -> m.canRoll(c) && isCrossOverEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
         validMods.addAll(uncommonMods.stream().filter(m -> m.canRoll(c) && isCrossOverEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
         validMods.addAll(rareMods.stream().filter(m -> m.canRoll(c) && isCrossOverEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
+        return validMods;
+    }
+
+    public static AbstractAugment getTrulyRandomValidCardMod(AbstractCard c) {
+        ArrayList<AbstractAugment> validMods = getAllValidMods(c);
         if (!validMods.isEmpty()) {
-            AbstractCardModifier m = validMods.get(AbstractDungeon.miscRng.random(validMods.size()-1)).makeCopy();
-            CardModifierManager.addModifier(c, m);
+            return (AbstractAugment) validMods.get(AbstractDungeon.miscRng.random(validMods.size()-1)).makeCopy();
+        }
+        return null;
+    }
+
+    public static void applyTrulyRandomCardMod(AbstractCard c) {
+        AbstractAugment a = getTrulyRandomValidCardMod(c);
+        if (a != null) {
+            CardModifierManager.addModifier(c, a);
         }
     }
 
