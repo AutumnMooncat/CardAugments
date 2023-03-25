@@ -2,8 +2,6 @@ package CardAugments.patches.events;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
-import CardAugments.cardmods.event.CultistMod;
-import CardAugments.cardmods.event.FanaticMod;
 import CardAugments.cardmods.uncommon.AutoMod;
 import basemod.ReflectionHacks;
 import basemod.helpers.CardModifierManager;
@@ -17,7 +15,6 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.events.AbstractEvent;
 import com.megacrit.cardcrawl.events.beyond.SensoryStone;
-import com.megacrit.cardcrawl.events.exordium.Sssserpent;
 import com.megacrit.cardcrawl.vfx.UpgradeShineEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect;
 import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
@@ -60,12 +57,14 @@ public class SensoryPatches {
     public static class AddButton {
         @SpireInsertPatch(locator = Locator.class)
         public static void add(SensoryStone __instance) {
-            myIndex = __instance.imageEventText.optionList.size();
-            augment = new AutoMod();
-            if (AbstractDungeon.player.masterDeck.group.stream().anyMatch(augment::validCard)) {
-                __instance.imageEventText.setDialogOption(String.format(MY_TEXT[0], DAMAGE));
-            } else {
-                __instance.imageEventText.setDialogOption(MY_TEXT[1], true);
+            if (CardAugmentsMod.eventAddons) {
+                myIndex = __instance.imageEventText.optionList.size();
+                augment = new AutoMod();
+                if (AbstractDungeon.player.masterDeck.group.stream().anyMatch(augment::validCard)) {
+                    __instance.imageEventText.setDialogOption(String.format(MY_TEXT[0], DAMAGE));
+                } else {
+                    __instance.imageEventText.setDialogOption(MY_TEXT[1], true);
+                }
             }
         }
 
