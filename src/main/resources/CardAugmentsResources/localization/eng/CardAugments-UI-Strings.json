@@ -96,6 +96,15 @@
       "The serpent rears its head and blasts a stream of #ygold at you! NL It is amazing and terrifying simultaneously. NL As your gear absorbs all the #ygold, you thank the snake, and get going."
     ]
   },
+  "CardAugments:SensoryEvent": {
+    "TEXT": [
+      "[Reject] #gGive #ga #gnon-Retain #gcard #g\"Draw #ga #gcard\" #rand #rAutoplay. #rLose #r%s #rHP.",
+      "[Locked] Requires: A non-Retain card.",
+      "[Leave]",
+      "#yREJECTION NL NL You @refuse@ to be overtaken by the memories that you do not recognize! Something in you #r~cracks.~ NL NL You shake your head in #rpain and look around. Things appear the same, and yet feel #p~eerily~ #p~different.~",
+      "Choose a Card to Augment."
+    ]
+  },
   "CardAugments:ExampleMod": {
     "TEXT": ["Prefix name", "Suffix name", "Description stuff"]
   },
