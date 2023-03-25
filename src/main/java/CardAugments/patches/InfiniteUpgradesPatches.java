@@ -7,6 +7,8 @@ import basemod.patches.com.megacrit.cardcrawl.saveAndContinue.SaveFile.ModSaves;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -16,8 +18,6 @@ import javassist.CannotCompileException;
 import javassist.CtBehavior;
 import javassist.expr.ExprEditor;
 import javassist.expr.FieldAccess;
-
-import java.util.ArrayList;
 
 public class InfiniteUpgradesPatches {
     @SpirePatch(clz = AbstractCard.class, method = SpirePatch.CLASS)
@@ -102,11 +102,18 @@ public class InfiniteUpgradesPatches {
             Gson gson = builder.create();
             ModSaves.ArrayListOfJsonElement cardModifierSaves = ModSaves.cardModifierSaves.get(CardCrawlGame.saveFile);
             int i = AbstractDungeon.player.masterDeck.size();
-            ArrayList<AbstractCardModifier> cardModifiersList = gson.fromJson(cardModifierSaves != null && i < cardModifierSaves.size() ? cardModifierSaves.get(i) : null, (new TypeToken<ArrayList<AbstractCardModifier>>() {}).getType());
-            if (cardModifiersList != null) {
-                for (AbstractCardModifier mod : cardModifiersList) {
-                    if (mod instanceof SearingMod) {
-                        InfUpgradeField.inf.set(retVal, true);
+            if (cardModifierSaves != null) {
+                JsonElement loaded = i >= cardModifierSaves.size() ? null : cardModifierSaves.get(i);
+                if (loaded != null && loaded.isJsonArray()) {
+                    JsonArray array = loaded.getAsJsonArray();
+                    for (JsonElement element : array) {
+                        AbstractCardModifier cardModifier = null;
+                        try {
+                            cardModifier = gson.fromJson(element, new TypeToken<AbstractCardModifier>() {}.getType());
+                        } catch (Exception ignored) {}
+                        if (cardModifier instanceof SearingMod) {
+                            InfUpgradeField.inf.set(retVal, true);
+                        }
                     }
                 }
             }
