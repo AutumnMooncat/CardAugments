@@ -324,7 +324,7 @@ public class CardAugmentsMod implements
         ModMinMaxSlider commonSlider = new ModMinMaxSlider("",
                 LAYOUT_X + sliderOffset,
                 LAYOUT_Y + 7f,
-                1, 10, cardAugmentsConfig.getInt(COMMON_WEIGHT), "%.0f", settingsPanel, slider -> {
+                0, 10, cardAugmentsConfig.getInt(COMMON_WEIGHT), "%.0f", settingsPanel, slider -> {
             cardAugmentsConfig.setInt(COMMON_WEIGHT, Math.round(slider.getValue()));
             commonWeight = Math.round(slider.getValue());
             try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
@@ -335,7 +335,7 @@ public class CardAugmentsMod implements
         ModMinMaxSlider uncommonSlider = new ModMinMaxSlider("",
                 LAYOUT_X + sliderOffset,
                 LAYOUT_Y + 7f,
-                1, 10, cardAugmentsConfig.getInt(UNCOMMON_WEIGHT), "%.0f", settingsPanel, slider -> {
+                0, 10, cardAugmentsConfig.getInt(UNCOMMON_WEIGHT), "%.0f", settingsPanel, slider -> {
             cardAugmentsConfig.setInt(UNCOMMON_WEIGHT, Math.round(slider.getValue()));
             uncommonWeight = Math.round(slider.getValue());
             try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
@@ -346,7 +346,7 @@ public class CardAugmentsMod implements
         ModMinMaxSlider rareSlider = new ModMinMaxSlider("",
                 LAYOUT_X + sliderOffset,
                 LAYOUT_Y + 7f,
-                1, 10, cardAugmentsConfig.getInt(RARE_WEIGHT), "%.0f", settingsPanel, slider -> {
+                0, 10, cardAugmentsConfig.getInt(RARE_WEIGHT), "%.0f", settingsPanel, slider -> {
             cardAugmentsConfig.setInt(RARE_WEIGHT, Math.round(slider.getValue()));
             rareWeight = Math.round(slider.getValue());
             try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
@@ -426,11 +426,19 @@ public class CardAugmentsMod implements
         BiggerModButton leftButton = new BiggerModButton(Settings.WIDTH/2F/Settings.xScale - 100f - ImageMaster.CF_LEFT_ARROW.getWidth()/2F, 805f, -5f, ImageMaster.CF_LEFT_ARROW, settingsPanel, b -> {
             if (currentPage > 0) {
                 previousPage();
+            } else {
+                for (int i = 0 ; i < pages.size()-1 ; i++) {
+                    nextPage();
+                }
             }
         });
         BiggerModButton rightButton = new BiggerModButton(Settings.WIDTH/2F/Settings.xScale + 100f - ImageMaster.CF_LEFT_ARROW.getWidth()/2F, 805f, -5f, ImageMaster.CF_RIGHT_ARROW, settingsPanel, b -> {
             if (currentPage < pages.size()-1) {
                 nextPage();
+            } else {
+                for (int i = currentPage ; i > 0 ; i--) {
+                    previousPage();
+                }
             }
         });
 
