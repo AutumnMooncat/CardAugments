@@ -105,6 +105,15 @@
       "Choose a Card to Augment."
     ]
   },
+  "CardAugments:FallingEvent": {
+    "TEXT": [
+      "[Exert] #rGive #rall #r3 #rcards #r\"Start #reach #rcombat #rin #rthe #rdiscard #rpile\".",
+      "[Locked] Requires: Skill card, Power card, and Attack card.",
+      "[Leave]",
+      "Exerting great effort, you combine all three options to land without fully breaking anything. Your gear is looking a little worse for wear however.",
+      "Choose a Card to Augment."
+    ]
+  },
   "CardAugments:ExampleMod": {
     "TEXT": ["Prefix name", "Suffix name", "Description stuff"]
   },
@@ -274,6 +283,9 @@
   },
   "CardAugments:GoForTheMod": {
     "TEXT": ["Go for the ", "", "Deal %s damage. NL If the enemy intends to attack, "]
+  },
+  "CardAugments:GraveMod": {
+    "TEXT": ["Crypt ", "", " NL Grave."]
   },
   "CardAugments:GritMod": {
     "TEXT": ["Gritty ", "", " NL Exhaust a random card in your hand."," NL Exhaust a card in your hand."]
