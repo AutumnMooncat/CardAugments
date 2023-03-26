@@ -42,7 +42,7 @@ public class PortraitHelper {
         int width = WIDTH * multi;
         int height = HEIGHT * multi;
 
-        AbstractCard baseCard = CardLibrary.getCard(card.cardID);
+        AbstractCard baseCard = CardLibrary.getCard(card.cardID).makeCopy();
         TextureAtlas.AtlasRegion t = baseCard.portrait;
         FrameBuffer fb = new FrameBuffer(Pixmap.Format.RGBA8888, width, height, false);
         SpriteBatch sb = new SpriteBatch();
