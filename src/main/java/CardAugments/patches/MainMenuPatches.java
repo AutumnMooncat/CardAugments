@@ -24,7 +24,7 @@ public class MainMenuPatches {
     }
 
     @SpirePatch(clz = MainMenuScreen.class, method = SpirePatch.CLASS)
-    public static class LoadoutScreenField {
+    public static class ModifierScreenField {
         public static SpireField<ModifierScreen> modifierScreen = new SpireField<>(() -> null);
     }
 
@@ -59,7 +59,7 @@ public class MainMenuPatches {
         @SpirePostfixPatch
         public static void openScreen(MenuButton __instance) {
             if (__instance.result == Enums.MODIFIERS_BUTTON) {
-                LoadoutScreenField.modifierScreen.get(CardCrawlGame.mainMenuScreen).open();
+                ModifierScreenField.modifierScreen.get(CardCrawlGame.mainMenuScreen).open();
             }
         }
     }
@@ -68,16 +68,16 @@ public class MainMenuPatches {
     private static class AddNewScreenToSpireField {
         @SpirePostfixPatch()
         public static void screenTime(MainMenuScreen __instance) {
-            LoadoutScreenField.modifierScreen.set(__instance, new ModifierScreen());
+            ModifierScreenField.modifierScreen.set(__instance, new ModifierScreen());
         }
     }
 
     @SpirePatch2(clz = MainMenuScreen.class, method = "update")
-    public static class UpdateLoadoutScreen {
+    public static class UpdateModifierScreen {
         @SpireInsertPatch(locator= UpdateLocator.class)
         public static void updateTime(MainMenuScreen __instance) {
             if (__instance.screen == Enums.MODIFIERS_VIEW) {
-                LoadoutScreenField.modifierScreen.get(__instance).update();
+                ModifierScreenField.modifierScreen.get(__instance).update();
             }
         }
 
@@ -90,11 +90,11 @@ public class MainMenuPatches {
     }
 
     @SpirePatch2(clz = MainMenuScreen.class, method = "render")
-    public static class RenderLoadoutScreen {
+    public static class RenderModifierScreen {
         @SpireInsertPatch(locator= RenderLocator.class)
         public static void renderTime(MainMenuScreen __instance, SpriteBatch sb) {
             if (__instance.screen == Enums.MODIFIERS_VIEW) {
-                LoadoutScreenField.modifierScreen.get(__instance).render(sb);
+                ModifierScreenField.modifierScreen.get(__instance).render(sb);
             }
         }
 
