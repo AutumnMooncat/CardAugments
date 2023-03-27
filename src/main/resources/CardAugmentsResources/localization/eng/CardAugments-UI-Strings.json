@@ -461,6 +461,12 @@
   "CardAugments:TinyMod": {
     "TEXT": ["Tiny ", ""]
   },
+  "CardAugments:TwinMod": {
+    "TEXT": ["Twin ", "", " twice."]
+  },
+  "CardAugments:VanishingMod": {
+    "TEXT": ["Vanishing ", "", " NL Exhausts whenever you lose HP this combat."]
+  },
   "CardAugments:VoidMod": {
     "TEXT": ["Void ", "", " NL Shuffle %d *Void into your draw pile."]
   },
