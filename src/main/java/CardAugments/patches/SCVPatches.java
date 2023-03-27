@@ -22,6 +22,8 @@ import com.megacrit.cardcrawl.screens.mainMenu.ScrollBar;
 import com.megacrit.cardcrawl.screens.mainMenu.ScrollBarListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 
 public class SCVPatches {
@@ -50,11 +52,13 @@ public class SCVPatches {
                 viewingAugments = !viewingAugments;// 240
                 cardsToRender.clear();
                 if (viewingAugments) {
-                    for (AbstractAugment a : CardAugmentsMod.getAllValidMods(___card)) {
+                    ArrayList<AbstractAugment> validAugments = CardAugmentsMod.getAllValidMods(___card);
+                    Collections.sort(validAugments, Comparator.comparing(o -> o.identifier(null)));
+                    for (AbstractAugment a : validAugments) {
                         AbstractCard copy = ___card.makeStatEquivalentCopy();
                         CardModifierManager.addModifier(copy, a.makeCopy());
                         copy.targetDrawScale = 0.75f;
-                        cardsToRender.addToBottom(copy);
+                        cardsToRender.addToTop(copy);
                     }
                     screen.calculateScrollBounds();
                 }
