@@ -43,7 +43,7 @@ public class BerserkMod extends AbstractAugment {
 
     @Override
     public void onUpdate(AbstractCard card) {
-        if (AbstractDungeon.player.isBloodied && AbstractDungeon.player.hand.contains(card)) {
+        if (CardCrawlGame.isInARun() && AbstractDungeon.player.isBloodied && AbstractDungeon.player.hand.contains(card)) {
             vfxTimer += Gdx.graphics.getDeltaTime();
             if (vfxTimer >= VFX_RATE) {
                 vfxTimer = 0;

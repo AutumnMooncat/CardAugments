@@ -1,6 +1,7 @@
 package CardAugments.cardmods;
 
 import CardAugments.CardAugmentsMod;
+import Starlight.util.Wiz;
 import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardBorderGlowManager;
 import basemod.helpers.CardModifierManager;
@@ -13,6 +14,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.colorless.PanicButton;
 import com.megacrit.cardcrawl.cards.purple.Halt;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.PrismaticShard;
@@ -46,7 +48,10 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         COMMON,
         UNCOMMON,
         RARE,
-        SPECIAL
+        SPECIAL;
+        public String toString() {
+            return name().charAt(0) + name().substring(1).toLowerCase();
+        }
     }
 
     public abstract AugmentRarity getModRarity();
@@ -325,11 +330,24 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     }
 
     public static boolean hasACurse() {
+        if (!CardCrawlGame.isInARun()) {
+            return true;
+        }
         return AbstractDungeon.player.masterDeck.group.stream().anyMatch(c -> c.type == AbstractCard.CardType.CURSE);
     }
 
     public static boolean allowOrbMods() {
+        if (!CardCrawlGame.isInARun()) {
+            return true;
+        }
         return CardAugmentsMod.allowOrbs || AbstractDungeon.player.hasRelic(PrismaticShard.ID) || CardAugmentsMod.ORB_CHARS.contains(AbstractDungeon.player.chosenClass);
+    }
+
+    public static boolean characterCheck(Predicate<AbstractPlayer> p) {
+        if (!CardCrawlGame.isInARun()) {
+            return true;
+        }
+        return p.test(Wiz.adp());
     }
 
     public static boolean isNormalCard(AbstractCard card) {
