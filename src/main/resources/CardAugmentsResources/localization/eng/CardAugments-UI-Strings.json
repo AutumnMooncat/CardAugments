@@ -188,6 +188,9 @@
   "CardAugments:BludgeonMod": {
     "TEXT": ["Bludgeoning ", ""]
   },
+  "CardAugments:BlurryMod": {
+    "TEXT": ["Blurry ", "", " NL Block is not removed at the start of your next turn."]
+  },
   "CardAugments:BootMod": {
     "TEXT": ["Boot ", "", "Innate. NL "]
   },
