@@ -96,6 +96,7 @@ public class CardAugmentsMod implements
     public static final ArrayList<AbstractAugment> commonMods = new ArrayList<>();
     public static final ArrayList<AbstractAugment> uncommonMods = new ArrayList<>();
     public static final ArrayList<AbstractAugment> rareMods = new ArrayList<>();
+    public static final ArrayList<AbstractAugment> specialMods = new ArrayList<>();
     public static final HashMap<String, AbstractAugment> modMap = new HashMap<>();
     public static final HashMap<AbstractAugment, String> crossoverMap = new HashMap<>();
     public static final HashMap<String, String> crossoverLabelMap = new HashMap<>();
@@ -235,6 +236,9 @@ public class CardAugmentsMod implements
                 break;
             case RARE:
                 rareMods.add(a);
+                break;
+            case SPECIAL:
+                specialMods.add(a);
                 break;
         }
         CardBorderGlowManager.GlowInfo i = a.getGlowInfo();
