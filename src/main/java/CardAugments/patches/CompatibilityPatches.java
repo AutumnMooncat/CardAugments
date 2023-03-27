@@ -2,11 +2,15 @@ package CardAugments.patches;
 
 import CardAugments.cardmods.common.MassiveMod;
 import CardAugments.cardmods.common.TinyMod;
+import CardAugments.cardmods.uncommon.BlurryMod;
 import SpireLocations.patches.nodemodifierhooks.ModifyRewardsPatch;
 import basemod.helpers.CardModifierManager;
+import blurryblur.CardPatches;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.green.Blur;
 import com.megacrit.cardcrawl.screens.CombatRewardScreen;
 import javassist.CannotCompileException;
 import javassist.expr.ExprEditor;
@@ -89,4 +93,61 @@ public class CompatibilityPatches {
         }
         return scale;
     }
+
+    @SpirePatch2(clz = CardPatches.NormalRender.class, method = "InsertBefore", requiredModId = "blurryblur", optional = true)
+    public static class BlurOn {
+        @SpirePostfixPatch
+        public static void plz(Object[] __args) {
+            if (__args[1] instanceof SpriteBatch && __args[0] instanceof AbstractCard) {
+                if (CardModifierManager.hasModifier((AbstractCard) __args[0], BlurryMod.ID)) {
+                    if (__args[0] instanceof Blur) {
+                        CardPatches.INSTANCE.begin((Batch) __args[1], 4.0f);
+                    } else {
+                        CardPatches.INSTANCE.begin((Batch) __args[1], 2.0f);
+                    }
+                }
+            }
+        }
+    }
+
+    @SpirePatch2(clz = CardPatches.NormalRender.class, method = "InsertAfter", requiredModId = "blurryblur", optional = true)
+    public static class BlurOff {
+        @SpirePostfixPatch
+        public static void plz(Object[] __args) {
+            if (__args[1] instanceof SpriteBatch && __args[0] instanceof AbstractCard) {
+                if (CardModifierManager.hasModifier((AbstractCard) __args[0], BlurryMod.ID)) {
+                    CardPatches.INSTANCE.end((Batch) __args[1]);
+                }
+            }
+        }
+    }
+
+    @SpirePatch2(clz = CardPatches.SCVRender.class, method = "InsertBefore", requiredModId = "blurryblur", optional = true)
+    public static class BlurOnSCV {
+        @SpirePostfixPatch
+        public static void plz(Object[] __args) {
+            if (__args[0] instanceof SpriteBatch && __args[1] instanceof AbstractCard) {
+                if (CardModifierManager.hasModifier((AbstractCard) __args[1], BlurryMod.ID)) {
+                    if (__args[1] instanceof Blur) {
+                        CardPatches.INSTANCE.begin((Batch) __args[0], 8.0f);
+                    } else {
+                        CardPatches.INSTANCE.begin((Batch) __args[0], 4.0f);
+                    }
+                }
+            }
+        }
+    }
+
+    @SpirePatch2(clz = CardPatches.SCVRender.class, method = "InsertAfter", requiredModId = "blurryblur", optional = true)
+    public static class BlurOffSCV {
+        @SpirePostfixPatch
+        public static void plz(Object[] __args) {
+            if (__args[0] instanceof SpriteBatch && __args[1] instanceof AbstractCard) {
+                if (CardModifierManager.hasModifier((AbstractCard) __args[1], BlurryMod.ID)) {
+                    CardPatches.INSTANCE.end((Batch) __args[0]);
+                }
+            }
+        }
+    }
+
 }
