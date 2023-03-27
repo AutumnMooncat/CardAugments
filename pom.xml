@@ -80,9 +80,17 @@
         <dependency>
             <groupId>pan</groupId>
             <artifactId>SpireLocations</artifactId>
-            <version>2.5.5</version>
+            <version>1.1.1</version>
             <scope>system</scope>
             <systemPath>${Steam.path}/workshop/content/646570/2862448454/SpireLocations.jar</systemPath>
+            <!--<systemPath>${basedir}/../lib/StSLib.jar</systemPath>-->
+        </dependency>
+        <dependency>
+            <groupId>pan</groupId>
+            <artifactId>BigCards</artifactId>
+            <version>1.2.1</version>
+            <scope>system</scope>
+            <systemPath>${Steam.path}/workshop/content/646570/2838934889/BigCards.jar</systemPath>
             <!--<systemPath>${basedir}/../lib/StSLib.jar</systemPath>-->
         </dependency>
         <dependency>
