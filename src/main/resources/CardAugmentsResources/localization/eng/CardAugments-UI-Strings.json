@@ -284,6 +284,9 @@
       "If the last card played this combat was an Attack, gain [W].",
       "If the last card played this combat was an Attack, gain [W] [W]."]
   },
+  "CardAugments:FormMod": {
+    "TEXT": ["", " Form"]
+  },
   "CardAugments:ForOneMod": {
     "TEXT": ["", " for One", " NL Move a random cost 0 card from your discard pile to your hand."]
   },
