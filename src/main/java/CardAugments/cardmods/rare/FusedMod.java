@@ -49,7 +49,7 @@ public class FusedMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return !card.upgraded && card.canUpgrade() && doesntOverride(card, "canUpgrade") && cardCheck(card, c -> upgradesDamage() || upgradesBlock() || (upgradesMagic() && c.baseMagicNumber >= 3));
+        return !card.upgraded && card.canUpgrade() && doesntOverride(card, "canUpgrade") && (card.baseDamage >= 3 || card.baseBlock >= 3 || cardCheck(card, c -> doesntDowngradeMagic() && c.baseMagicNumber >= 3));
     }
 
     @Override
