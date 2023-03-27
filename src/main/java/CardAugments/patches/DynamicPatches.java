@@ -49,6 +49,7 @@ public class DynamicPatches {
                         if (m.getName().equals("upgrade")) {
                             m.insertBefore(InfiniteUpgradesPatches.class.getName() + ".infCheck($0);");
                             m.insertAfter(OnUpgradePatch.class.getName() + ".onUpgrade($0);");
+                            m.insertBefore("if("+CantUpgradeFieldPatches.class.getName()+".cantUpgradeCheck($0)) {return;}");
                         }
                     }
                 } catch (CannotCompileException ignored) {}
