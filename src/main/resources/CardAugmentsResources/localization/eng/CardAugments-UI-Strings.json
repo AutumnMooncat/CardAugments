@@ -25,6 +25,24 @@
       "modifiers"
     ]
   },
+  "CardAugments:MainMenu": {
+    "TEXT": [
+      "Modifiers"
+    ]
+  },
+  "CardAugments:ModifierScreen": {
+    "TEXT": [
+      "Back",
+      "Upgrade",
+      "Rarity: ",
+      "Valid Cards: "
+    ]
+  },
+  "CardAugments:SCVScreen": {
+    "TEXT": [
+      "Preview Modifiers"
+    ]
+  },
   "CardAugments:NestEvent": {
     "TEXT": [
       "[Observe]",
