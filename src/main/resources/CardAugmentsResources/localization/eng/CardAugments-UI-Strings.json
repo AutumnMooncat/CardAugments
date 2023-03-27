@@ -326,6 +326,9 @@
   "CardAugments:HolyMod": {
     "TEXT": ["Holy ", "", " NL Add a *Miracle to your hand."]
   },
+  "CardAugments:JankMod": {
+    "TEXT": ["Janky ", ""]
+  },
   "CardAugments:LockingMod": {
     "TEXT": ["Locking ", "", " NL Apply %d Lock-On."]
   },
