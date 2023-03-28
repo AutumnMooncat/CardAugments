@@ -108,6 +108,10 @@ public abstract class AbstractAugment extends AbstractCardModifier {
 
     public void updateDynvar(AbstractCard card) {}
 
+    public boolean atBattleStartPreDraw(AbstractCard card) {
+        return false;
+    }
+
     public boolean canRoll(AbstractCard card) {
         return validCard(card);
     }

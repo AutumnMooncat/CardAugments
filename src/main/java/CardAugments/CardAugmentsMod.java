@@ -15,6 +15,7 @@ import basemod.helpers.CardBorderGlowManager;
 import basemod.helpers.CardModifierManager;
 import basemod.interfaces.EditKeywordsSubscriber;
 import basemod.interfaces.EditStringsSubscriber;
+import basemod.interfaces.OnStartBattleSubscriber;
 import basemod.interfaces.PostInitializeSubscriber;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -23,6 +24,7 @@ import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -31,6 +33,8 @@ import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect;
 import javassist.CtBehavior;
 import mintySpire.patches.cards.betterUpdatePreview.CardFields;
 import org.apache.logging.log4j.LogManager;
@@ -45,7 +49,8 @@ import java.util.stream.Collectors;
 public class CardAugmentsMod implements
         EditStringsSubscriber,
         PostInitializeSubscriber,
-        EditKeywordsSubscriber {
+        EditKeywordsSubscriber,
+        OnStartBattleSubscriber {
     public static final Logger logger = LogManager.getLogger(CardAugmentsMod.class.getName());
     private static String modID;
 
@@ -675,6 +680,30 @@ public class CardAugmentsMod implements
         AbstractAugment a = getTrulyRandomValidCardMod(c);
         if (a != null) {
             CardModifierManager.addModifier(c, a);
+        }
+    }
+
+    @Override
+    public void receiveOnBattleStart(AbstractRoom abstractRoom) {
+        CardGroup[] cardGroups = new CardGroup[] {
+                AbstractDungeon.player.drawPile,
+                AbstractDungeon.player.hand,
+                AbstractDungeon.player.discardPile,
+                AbstractDungeon.player.exhaustPile
+        };
+
+        for (CardGroup cardGroup : cardGroups) {
+            for (AbstractCard c : cardGroup.group) {
+                boolean show = false;
+                for (AbstractCardModifier m : CardModifierManager.modifiers(c)) {
+                    if (m instanceof AbstractAugment) {
+                        show |= ((AbstractAugment) m).atBattleStartPreDraw(c);
+                        if (show) {
+                            AbstractDungeon.effectList.add(0, new ShowCardBrieflyEffect(c.makeStatEquivalentCopy()));
+                        }
+                    }
+                }
+            }
         }
     }
 
