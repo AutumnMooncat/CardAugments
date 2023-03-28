@@ -479,6 +479,9 @@
   "CardAugments:WallopMod": {
     "TEXT": ["Walloping ", "", " NL Gain Block equal to unblocked damage dealt."]
   },
+  "CardAugments:WaveMod": {
+    "TEXT": ["", " Wave", "Gain %s Block. NL "]
+  },
   "CardAugments:XMod": {
     "TEXT": ["", " X", " NL Performed X times."]
   }
