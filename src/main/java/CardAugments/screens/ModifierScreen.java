@@ -157,11 +157,11 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
     public void render(SpriteBatch sb) {
         scrollBar.render(sb);
         cancelButton.render(sb);
-        renderCards(sb);
         renderUpgradeViewToggle(sb);
         renderInfo(sb);
         augmentDropdown.render(sb, DROPDOWN_X, AUGMENT_DROPDOWN_Y);
         modDropdown.render(sb, DROPDOWN_X, MOD_DROPDOWN_Y);
+        renderCards(sb);
     }
 
     public ArrayList<String> getModStrings() {
