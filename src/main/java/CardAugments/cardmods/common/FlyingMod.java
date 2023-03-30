@@ -26,7 +26,7 @@ public class FlyingMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost != -2 && card.damage > 1;
+        return card.cost != -2 && card.baseDamage > 1;
     }
 
     @Override
