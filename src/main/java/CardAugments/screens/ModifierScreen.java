@@ -95,12 +95,12 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
     }
 
     public void update() {
-        updateButtons();
         if (modDropdown.isOpen) {
             modDropdown.update();
         } else if (augmentDropdown.isOpen) {
             augmentDropdown.update();
         } else {
+            updateButtons();
             boolean isScrollBarScrolling = scrollBar.update();// 186
             if (!CardCrawlGame.cardPopup.isOpen && !isScrollBarScrolling) {// 187
                 updateScrolling();// 188
