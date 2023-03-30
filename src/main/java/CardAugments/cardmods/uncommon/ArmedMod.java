@@ -3,7 +3,7 @@ package CardAugments.cardmods.uncommon;
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import CardAugments.cardmods.DynvarCarrier;
-import Starlight.util.Wiz;
+import CardAugments.util.Wiz;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.actions.common.UpgradeRandomCardAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;

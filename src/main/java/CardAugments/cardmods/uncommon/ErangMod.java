@@ -3,7 +3,7 @@ package CardAugments.cardmods.uncommon;
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import CardAugments.patches.InterruptUseCardFieldPatches;
-import Starlight.util.Wiz;
+import CardAugments.util.Wiz;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;

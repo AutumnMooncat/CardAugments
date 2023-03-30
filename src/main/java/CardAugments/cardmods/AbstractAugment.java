@@ -1,7 +1,7 @@
 package CardAugments.cardmods;
 
 import CardAugments.CardAugmentsMod;
-import Starlight.util.Wiz;
+import CardAugments.util.Wiz;
 import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardBorderGlowManager;
 import basemod.helpers.CardModifierManager;

@@ -3,7 +3,7 @@ package CardAugments.cardmods.uncommon;
 import CardAugments.CardAugmentsMod;
 import CardAugments.actions.ImmediateExhaustCardAction;
 import CardAugments.cardmods.AbstractAugment;
-import Starlight.util.Wiz;
+import CardAugments.util.Wiz;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
