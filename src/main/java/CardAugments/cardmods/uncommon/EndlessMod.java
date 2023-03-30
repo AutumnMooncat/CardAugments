@@ -41,7 +41,7 @@ public class EndlessMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return isNormalCard(card) && cardCheck(card, c -> doesntUpgradeExhaust());
+        return isNormalCard(card) && cardCheck(card, c -> doesntUpgradeExhaust()) && card.cost >= 0;
     }
 
     @Override
