@@ -6,7 +6,7 @@
     <groupId>CardAugments</groupId>
     <artifactId>CardAugments</artifactId> <!--Keep a note of this one: this is the ID used in the "auto add cards" method-->
     <name>Chimera Cards</name>
-    <version>0.4.1</version>
+    <version>0.4.2</version>
     <description>Adds random modifiers to card rewards.</description>
 
     <properties>
@@ -98,9 +98,7 @@
             <artifactId>Starlight</artifactId>
             <version>0.8.9</version>
             <scope>system</scope>
-            <!--<systemPath>${Steam.path}/workshop/content/646570/1605833019/BaseMod.jar</systemPath>-->
             <systemPath>${Steam.path}/common/SlayTheSpire/mods/Starlight.jar</systemPath>
-            <!--<systemPath>${basedir}/../lib/BaseMod.jar</systemPath>-->
         </dependency>
         <dependency>
             <groupId>kio</groupId>
