@@ -1,4 +1,4 @@
-package CardAugments.cardmods.uncommon;
+package CardAugments.cardmods.event;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.actions.AutoplayOnRandomEnemyAction;
@@ -49,7 +49,7 @@ public class AutoMod extends AbstractAugment {
 
     @Override
     public AugmentRarity getModRarity() {
-        return AugmentRarity.UNCOMMON;
+        return AugmentRarity.SPECIAL;
     }
 
     @Override

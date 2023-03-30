@@ -2,7 +2,7 @@ package CardAugments.patches.events;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
-import CardAugments.cardmods.uncommon.AutoMod;
+import CardAugments.cardmods.event.AutoMod;
 import basemod.ReflectionHacks;
 import basemod.helpers.CardModifierManager;
 import com.evacipated.cardcrawl.modthespire.lib.*;
@@ -59,6 +59,7 @@ public class SensoryPatches {
         public static void add(SensoryStone __instance) {
             if (CardAugmentsMod.eventAddons) {
                 myIndex = __instance.imageEventText.optionList.size();
+                //TODO Better card mod for this?
                 augment = new AutoMod();
                 if (AbstractDungeon.player.masterDeck.group.stream().anyMatch(augment::validCard)) {
                     __instance.imageEventText.setDialogOption(String.format(MY_TEXT[0], DAMAGE));
