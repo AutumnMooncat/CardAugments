@@ -113,7 +113,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     }
 
     public boolean canRoll(AbstractCard card) {
-        return validCard(card);
+        return validCard(card) && !CardModifierManager.hasModifier(card, identifier(card));
     }
 
     public static AbstractCard makeNewInstance(AbstractCard card) {
