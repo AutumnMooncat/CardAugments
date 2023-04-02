@@ -260,8 +260,8 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         return cardsToCheck.stream().allMatch(c -> c.target == baseCheck.target);
     }
 
-    public static boolean usesEnemyTargeting(AbstractCard card) {
-        return targetsEnemy(card) && targetsEnemy(baseCheck) && cardsToCheck.stream().allMatch(AbstractAugment::targetsEnemy);
+    public static boolean usesEnemyTargeting() {
+        return cardsToCheck.stream().allMatch(AbstractAugment::targetsEnemy);
     }
 
     public static boolean canOverrideTargeting(AbstractCard card, AbstractCard.CardTarget desiredType) {
@@ -363,8 +363,12 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     }
 
     public static boolean doesntOverride(AbstractCard card, String method, Class<?>... paramtypez) {
+        return doesntOverride(card, AbstractCard.class, method, paramtypez);
+    }
+
+    public static boolean doesntOverride(Object o, Class<?> clazz, String method, Class<?>... paramtypez) {
         try {
-            return card.getClass().getMethod(method, paramtypez).getDeclaringClass().equals(AbstractCard.class);
+            return o.getClass().getMethod(method, paramtypez).getDeclaringClass().equals(clazz);
         } catch (NoSuchMethodException ignored) {}
         return false;
     }
@@ -401,6 +405,15 @@ public abstract class AbstractAugment extends AbstractCardModifier {
                 && doesntOverride(card, "onChoseThisOption")
                 && doesntOverride(card, "onRetained")
                 && doesntOverride(card, "triggerOnExhaust");
+    }
+
+    public static boolean noCardModDescriptionChanges(AbstractCard card) {
+        for (AbstractCardModifier mod : CardModifierManager.modifiers(card)) {
+            if (!doesntOverride(mod, AbstractCardModifier.class, "modifyDescription", String.class, AbstractCard.class)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static String[] removeUpgradeText(String name) {

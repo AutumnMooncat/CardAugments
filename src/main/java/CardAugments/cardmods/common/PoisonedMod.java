@@ -48,7 +48,7 @@ public class PoisonedMod extends AbstractAugment implements DynvarCarrier {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost >= 0 && card.baseDamage > 3 && card.type == AbstractCard.CardType.ATTACK && cardCheck(card, c -> usesEnemyTargeting(c));
+        return card.cost >= 0 && card.baseDamage > 3 && card.type == AbstractCard.CardType.ATTACK && cardCheck(card, c -> usesEnemyTargeting());
     }
 
     @Override
