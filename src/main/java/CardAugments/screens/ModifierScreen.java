@@ -3,6 +3,8 @@ package CardAugments.screens;
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import CardAugments.patches.MainMenuPatches;
+import CardAugments.util.FormatHelper;
+import basemod.BaseMod;
 import basemod.ReflectionHacks;
 import basemod.helpers.CardModifierManager;
 import basemod.patches.com.megacrit.cardcrawl.screens.compendium.CardLibraryScreen.NoCompendium;
@@ -12,6 +14,8 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireInstrumentPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.characters.TheSilent;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.GameCursor;
 import com.megacrit.cardcrawl.core.Settings;
@@ -30,6 +34,7 @@ import javassist.CannotCompileException;
 import javassist.expr.ExprEditor;
 import javassist.expr.MethodCall;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
@@ -37,9 +42,10 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
     public static final String[] TEXT = uiStrings.TEXT;
     private static final int CARDS_PER_LINE = (int)((float)Settings.WIDTH / (AbstractCard.IMG_WIDTH * 0.75F + Settings.CARD_VIEW_PAD_X * 3.0F));
     private static final float DROPDOWN_X = 20f * Settings.scale;
-    private static final float MOD_DROPDOWN_Y = Settings.HEIGHT/2f + 220.0F * Settings.scale;
+    private static final float MOD_DROPDOWN_Y = Settings.HEIGHT/2f + 280.0F * Settings.scale;
     private static final float AUGMENT_DROPDOWN_Y = MOD_DROPDOWN_Y - 60F * Settings.scale;
-    private static final float RARITY_Y = AUGMENT_DROPDOWN_Y - 50f * Settings.scale;
+    private static final float CHARACTER_DROPDOWN_Y = AUGMENT_DROPDOWN_Y - 60F * Settings.scale;
+    private static final float RARITY_Y = CHARACTER_DROPDOWN_Y - 50f * Settings.scale;
     private static final float VALID_CARDS_Y = RARITY_Y - 50f * Settings.scale;
     private static final float HB_X = DROPDOWN_X + 100f * Settings.scale;
     private static final float HB_Y = VALID_CARDS_Y - 60f * Settings.scale;
@@ -56,12 +62,16 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
     private final HashMap<String, AbstractAugment> augmentMap = new HashMap<>();
     private AbstractAugment selectedAugment;
     private String selectedModID;
+    private final CardGroup validCards;
     private final CardGroup cardsToRender;
     private AbstractCard hoveredCard;
     private AbstractCard clickStartedCard;
     private final MenuCancelButton cancelButton;
     private DropdownMenu modDropdown;
     private DropdownMenu augmentDropdown;
+    private DropdownMenu characterDropdown;
+    private AbstractCard.CardColor colorFilter;
+    private HashMap<String, AbstractCard.CardColor> colorMap = new HashMap<>();
     private ScrollBar scrollBar;
     private Hitbox upgradeHb;
     private boolean upgradePreview;
@@ -69,8 +79,14 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
     public ModifierScreen() {
         upgradeHb = new Hitbox(250.0F * Settings.scale, 80.0F * Settings.scale);
         cancelButton = new MenuCancelButton();
+
+        validCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+        cardsToRender = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+
         modDropdown = new DropdownMenu(this, getModStrings(), FontHelper.tipBodyFont, Settings.CREAM_COLOR);
         augmentDropdown = new DropdownMenu(this, getAugmentStrings(), FontHelper.tipBodyFont, Settings.CREAM_COLOR);
+        characterDropdown = new DropdownMenu(this, getCharacterStrings(), FontHelper.tipBodyFont, Settings.CREAM_COLOR);
+
         scrollBar = new ScrollBar(this);
         scrollLowerBound = -Settings.DEFAULT_SCROLL_LIMIT;// 47
         scrollUpperBound = Settings.DEFAULT_SCROLL_LIMIT;// 48
@@ -80,8 +96,6 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
         drawStartX -= (float)(CARDS_PER_LINE - 1) * Settings.CARD_VIEW_PAD_X;// 73
         drawStartX /= 2.0F;// 74
         drawStartX += AbstractCard.IMG_WIDTH * 0.75F / 2.0F;// 75
-
-        cardsToRender = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
     }
     
     public void open() {
@@ -99,6 +113,8 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
             modDropdown.update();
         } else if (augmentDropdown.isOpen) {
             augmentDropdown.update();
+        } else if (characterDropdown.isOpen) {
+            characterDropdown.update();
         } else {
             updateButtons();
             boolean isScrollBarScrolling = scrollBar.update();// 186
@@ -119,6 +135,7 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
             updateCards();
             modDropdown.update();
             augmentDropdown.update();
+            characterDropdown.update();
             if (this.hoveredCard != null) {// 166
                 CardCrawlGame.cursor.changeType(GameCursor.CursorType.INSPECT);// 167
                 if (InputHelper.justClickedLeft) {// 168
@@ -159,6 +176,7 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
         cancelButton.render(sb);
         renderUpgradeViewToggle(sb);
         renderInfo(sb);
+        characterDropdown.render(sb, DROPDOWN_X, CHARACTER_DROPDOWN_Y);
         augmentDropdown.render(sb, DROPDOWN_X, AUGMENT_DROPDOWN_Y);
         modDropdown.render(sb, DROPDOWN_X, MOD_DROPDOWN_Y);
         renderCards(sb);
@@ -192,6 +210,56 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
         return ret;
     }
 
+    public ArrayList<String> getCharacterStrings() {
+        ArrayList<String> ret = new ArrayList<>();
+        HashSet<AbstractCard.CardColor> checkedColors = new HashSet<>();
+        colorMap.clear();
+
+        ret.add(TEXT[4]);
+        colorMap.put(TEXT[4], null);
+        ret.add(BaseMod.findCharacter(AbstractPlayer.PlayerClass.IRONCLAD).getLocalizedCharacterName());
+        colorMap.put(BaseMod.findCharacter(AbstractPlayer.PlayerClass.IRONCLAD).getLocalizedCharacterName(), AbstractCard.CardColor.RED);
+        checkedColors.add(AbstractCard.CardColor.RED);
+        ret.add(BaseMod.findCharacter(AbstractPlayer.PlayerClass.THE_SILENT).getLocalizedCharacterName());
+        colorMap.put(BaseMod.findCharacter(AbstractPlayer.PlayerClass.THE_SILENT).getLocalizedCharacterName(), AbstractCard.CardColor.GREEN);
+        checkedColors.add(AbstractCard.CardColor.GREEN);
+        ret.add(BaseMod.findCharacter(AbstractPlayer.PlayerClass.DEFECT).getLocalizedCharacterName());
+        colorMap.put(BaseMod.findCharacter(AbstractPlayer.PlayerClass.DEFECT).getLocalizedCharacterName(), AbstractCard.CardColor.BLUE);
+        checkedColors.add(AbstractCard.CardColor.BLUE);
+        ret.add(BaseMod.findCharacter(AbstractPlayer.PlayerClass.WATCHER).getLocalizedCharacterName());
+        colorMap.put(BaseMod.findCharacter(AbstractPlayer.PlayerClass.WATCHER).getLocalizedCharacterName(), AbstractCard.CardColor.PURPLE);
+        checkedColors.add(AbstractCard.CardColor.PURPLE);
+        ret.add(FormatHelper.capitalize(AbstractCard.CardColor.COLORLESS.toString()));
+        colorMap.put(FormatHelper.capitalize(AbstractCard.CardColor.COLORLESS.toString()), AbstractCard.CardColor.COLORLESS);
+        checkedColors.add(AbstractCard.CardColor.COLORLESS);
+        ret.add(FormatHelper.capitalize(AbstractCard.CardColor.CURSE.toString()));
+        colorMap.put(FormatHelper.capitalize(AbstractCard.CardColor.CURSE.toString()), AbstractCard.CardColor.CURSE);
+        checkedColors.add(AbstractCard.CardColor.CURSE);
+
+        ArrayList<String> modChars = new ArrayList<>();
+        for (AbstractCard c : CardLibrary.getAllCards()) {
+            if (!c.getClass().isAnnotationPresent(NoCompendium.class)) {
+                AbstractCard.CardColor color = c.color;
+                if (!checkedColors.contains(color)) {
+                    checkedColors.add(color);
+                    AbstractPlayer.PlayerClass playerClass = null;
+                    for (AbstractPlayer character : CardCrawlGame.characterManager.getAllCharacters()) {
+                        if (character.getCardColor().equals(color)) {
+                            playerClass = character.chosenClass;
+                            break;
+                        }
+                    }
+                    String name = playerClass != null ? BaseMod.findCharacter(playerClass).getLocalizedCharacterName() : FormatHelper.capitalize(color.toString());
+                    modChars.add(name);
+                    colorMap.put(name, c.color);
+                }
+            }
+        }
+        Collections.sort(modChars);
+        ret.addAll(modChars);
+        return ret;
+    }
+
     public String formatText(String s) {
         int index = s.lastIndexOf(":");
         if (index != -1) {
@@ -203,7 +271,7 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
     @Override
     public void changedSelectionTo(DropdownMenu dropdownMenu, int i, String s) {
         if (dropdownMenu == augmentDropdown) {
-            cardsToRender.clear();
+            validCards.clear();
             selectedAugment = augmentMap.get(s);
             for (AbstractCard c : CardLibrary.getAllCards()) {
                 if (!c.getClass().isAnnotationPresent(NoCompendium.class)) {
@@ -215,22 +283,37 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
                             copy.displayUpgrades();
                         }
                         copy.targetDrawScale = 0.75f;
-                        cardsToRender.addToBottom(copy);
+                        validCards.addToBottom(copy);
                     }
                 }
             }
-            cardsToRender.sortAlphabetically(true);// 143
-            cardsToRender.sortByRarity(true);// 144
-            cardsToRender.group.sort(Comparator.comparing(card -> card.color));
-            cardsToRender.sortByStatus(true);
-            justSorted = true;
-            calculateScrollBounds();
+            validCards.sortAlphabetically(true);// 143
+            validCards.sortByRarity(true);// 144
+            validCards.group.sort(Comparator.comparing(card -> card.color));
+            validCards.sortByStatus(true);
+            updateCardFilters();
         }
         if (dropdownMenu == modDropdown) {
             selectedModID = s;
             augmentDropdown = new DropdownMenu(this, getAugmentStrings(), FontHelper.tipBodyFont, Settings.CREAM_COLOR);
             refreshDropdownMenu(augmentDropdown);
         }
+        if (dropdownMenu == characterDropdown) {
+            colorFilter = colorMap.getOrDefault(s, null);
+            updateCardFilters();
+        }
+    }
+
+    private void updateCardFilters() {
+        cardsToRender.clear();
+        for (AbstractCard c : validCards.group) {
+            if (colorFilter == null || c.color.equals(colorFilter)) {
+                cardsToRender.addToTop(c);
+            }
+        }
+        justSorted = true;
+        calculateScrollBounds();
+        currentDiffY = 0;
     }
 
     private void updateCards() {
@@ -246,6 +329,10 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
 
             cards.get(i).target_x = drawStartX + (float)mod * padX;// 347
             cards.get(i).target_y = drawStartY + this.currentDiffY - (float)lineNum * padY;// 348
+            if (justSorted) {// 356
+                cards.get(i).current_x = cards.get(i).target_x;
+                cards.get(i).current_y = cards.get(i).target_y;
+            }
             cards.get(i).update();// 349
             cards.get(i).updateHoverLogic();// 350
             if (cards.get(i).hb.hovered) {// 352
@@ -253,16 +340,7 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
             }
         }
 
-        if (justSorted) {// 356
-            AbstractCard c;
-            for(Iterator var5 = cards.iterator(); var5.hasNext(); c.current_y = c.target_y) {// 357 359
-                c = (AbstractCard)var5.next();
-                c.current_x = c.target_x;// 358
-            }
-
-            justSorted = false;// 361
-        }
-
+        justSorted = false;
     }
 
     public void renderCards(SpriteBatch sb) {
@@ -276,7 +354,7 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
 
     private void renderInfo(SpriteBatch sb) {
         FontHelper.renderFont(sb, FontHelper.tipBodyFont, TEXT[2]+selectedAugment.getModRarity().toString(), DROPDOWN_X, RARITY_Y, Settings.GOLD_COLOR);
-        FontHelper.renderFont(sb, FontHelper.tipBodyFont, TEXT[3]+cardsToRender.size(), DROPDOWN_X, VALID_CARDS_Y, Settings.GOLD_COLOR);
+        FontHelper.renderFont(sb, FontHelper.tipBodyFont, TEXT[3]+cardsToRender.size() + (colorFilter != null ? "/"+validCards.group.size() : ""), DROPDOWN_X, VALID_CARDS_Y, Settings.GOLD_COLOR);
     }
 
     private void renderUpgradeViewToggle(SpriteBatch sb) {
