@@ -31,7 +31,7 @@ public class ErangMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return cardCheck(card, c -> c.baseDamage > 1 && targetsEnemy(c) && c.type == AbstractCard.CardType.ATTACK && customCheck(c, check -> check.rawDescription.chars().filter(ch -> ch == '.' || ch == '。').count() == 1));
+        return cardCheck(card, c -> c.baseDamage > 1 && usesEnemyTargeting() && c.type == AbstractCard.CardType.ATTACK && customCheck(c, check -> noCardModDescriptionChanges(check) && check.rawDescription.chars().filter(ch -> ch == '.' || ch == '。').count() == 1));
     }
 
     @Override
