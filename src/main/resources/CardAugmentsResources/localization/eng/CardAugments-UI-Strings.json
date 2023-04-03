@@ -330,6 +330,9 @@
   "CardAugments:InfiniteMod": {
     "TEXT": ["Infinite ", "", "At the start of your turn, add a %s into your hand.", "Innate. NL "]
   },
+  "CardAugments:InvertedMod": {
+    "TEXT": ["Inverted ", "", "Gain !B! Block.","Deal !D! damage."]
+  },
   "CardAugments:JankMod": {
     "TEXT": ["Janky ", ""]
   },

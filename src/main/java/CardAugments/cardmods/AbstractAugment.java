@@ -1,6 +1,7 @@
 package CardAugments.cardmods;
 
 import CardAugments.CardAugmentsMod;
+import CardAugments.patches.InterruptUseCardFieldPatches;
 import CardAugments.util.Wiz;
 import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardBorderGlowManager;
@@ -19,12 +20,11 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.PrismaticShard;
 import com.megacrit.cardcrawl.stances.AbstractStance;
-import javassist.ClassPool;
-import javassist.CtClass;
-import javassist.CtMethod;
-import javassist.NotFoundException;
+import javassist.*;
 import javassist.expr.ExprEditor;
 import javassist.expr.FieldAccess;
+import javassist.expr.MethodCall;
+import javassist.expr.NewExpr;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -290,9 +290,8 @@ public abstract class AbstractAugment extends AbstractCardModifier {
                 || card.target == AbstractCard.CardTarget.ALL);
     }
 
-    private static boolean usesMagicBool;
     public static boolean usesMagic(AbstractCard card) {
-        usesMagicBool = false;
+        final boolean[] usesMagicBool = {false};
         if (card.baseMagicNumber > 0 && StringUtils.containsIgnoreCase(card.rawDescription, "!M!") && !(card instanceof PanicButton) && !(card instanceof Halt)) {
             ClassPool pool = Loader.getClassPool();
             try {
@@ -301,7 +300,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
                     @Override
                     public void edit(FieldAccess f) {
                         if (f.getFieldName().equals("magicNumber") && !f.isWriter()) {
-                            usesMagicBool = true;
+                            usesMagicBool[0] = true;
                         }
                     }
                 });
@@ -312,7 +311,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
                     @Override
                     public void edit(FieldAccess f) {
                         if (f.getFieldName().equals("magicNumber") && !f.isWriter()) {
-                            usesMagicBool = true;
+                            usesMagicBool[0] = true;
                         }
                     }
                 });
@@ -323,14 +322,14 @@ public abstract class AbstractAugment extends AbstractCardModifier {
                     @Override
                     public void edit(FieldAccess f) {
                         if (f.getFieldName().equals("magicNumber") && !f.isWriter()) {
-                            usesMagicBool = true;
+                            usesMagicBool[0] = true;
                         }
                     }
                 });
 
             } catch (Exception ignored) { }
         }
-        return usesMagicBool;
+        return usesMagicBool[0];
     }
 
     public static boolean hasACurse() {
@@ -383,7 +382,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     }
 
     public static boolean noShenanigans(AbstractCard card) {
-        return noInterfaces(card)
+        return !InterruptUseCardFieldPatches.InterceptUseField.interceptUse.get(card) && noInterfaces(card)
                 && doesntOverride(card, "canUse", AbstractPlayer.class, AbstractMonster.class)
                 && doesntOverride(card, "tookDamage")
                 && doesntOverride(card, "didDiscard")
@@ -405,6 +404,41 @@ public abstract class AbstractAugment extends AbstractCardModifier {
                 && doesntOverride(card, "onChoseThisOption")
                 && doesntOverride(card, "onRetained")
                 && doesntOverride(card, "triggerOnExhaust");
+    }
+
+    private static boolean usesAction = false;
+    public static boolean usesAction(AbstractCard card, Class<? extends AbstractGameAction> clazz) {
+        usesAction = false;
+        ClassPool pool = Loader.getClassPool();
+        try {
+            CtClass ctClass = pool.get(card.getClass().getName());
+            ctClass.defrost();
+            CtMethod ctUse = ctClass.getDeclaredMethod("use");
+            ctUse.instrument(new ExprEditor() {
+                @Override
+                public void edit(NewExpr e) {
+                    if (e.getClassName().equals(clazz.getName())) {
+                        usesAction = true;
+                    }
+                }
+
+                @Override
+                public void edit(MethodCall m) {
+                    try {
+                        CtMethod check = m.getMethod();
+                        check.instrument(new ExprEditor() {
+                            @Override
+                            public void edit(NewExpr e) {
+                                if (e.getClassName().equals(clazz.getName())) {
+                                    usesAction = true;
+                                }
+                            }
+                        });
+                    } catch (Exception ignored) {}
+                }
+            });
+        } catch (Exception ignored) {}
+        return usesAction;
     }
 
     public static boolean noCardModDescriptionChanges(AbstractCard card) {
