@@ -75,6 +75,7 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
     private ScrollBar scrollBar;
     private Hitbox upgradeHb;
     private boolean upgradePreview;
+    private boolean ignoreScrollReset;
     
     public ModifierScreen() {
         upgradeHb = new Hitbox(250.0F * Settings.scale, 80.0F * Settings.scale);
@@ -130,6 +131,7 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
                 CInputActionSet.proceed.unpress();// 238
                 this.upgradeHb.clicked = false;// 239
                 upgradePreview = !upgradePreview;// 240
+                ignoreScrollReset = true;
                 refreshDropdownMenu(augmentDropdown);
             }
             updateCards();
@@ -313,7 +315,10 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
         }
         justSorted = true;
         calculateScrollBounds();
-        currentDiffY = 0;
+        if (!ignoreScrollReset) {
+            currentDiffY = 0;
+        }
+        ignoreScrollReset = false;
     }
 
     private void updateCards() {
