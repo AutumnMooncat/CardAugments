@@ -61,7 +61,7 @@ public class NestPatches {
                     CardGroup group = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
                     for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
                         if (augment.validCard(c)) {
-                            group.addToBottom(c);
+                            group.addToTop(c);
                         }
                     }
                     AbstractDungeon.gridSelectScreen.open(group, 1, NEST_TEXT[7], false, false, false, false);

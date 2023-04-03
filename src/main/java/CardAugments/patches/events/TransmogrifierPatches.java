@@ -58,7 +58,7 @@ public class TransmogrifierPatches {
                         CardGroup group = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
                         for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
                             if (CardAugmentsMod.canReceiveModifier(c)) {
-                                group.addToBottom(c);
+                                group.addToTop(c);
                             }
                         }
                         AbstractDungeon.gridSelectScreen.open(group, group.size() == 1 ? 1 : 2, MY_TEXT[4], false, false, false, false);

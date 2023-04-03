@@ -35,7 +35,7 @@ public class ShiningPatches {
         public static void addOption(ShiningLight __instance) {
             if (CardAugmentsMod.eventAddons) {
                 choseMyOption = false;
-                //TODO  better mod with a proper downside. Making it ethereal makes the text too long.
+                //TODO better mod with a proper downside. Making it ethereal makes the text too long.
                 augment = new ShiningMod();
                 //Rip the leave button out and put it back later
                 __instance.imageEventText.clearRemainingOptions();
