@@ -44,6 +44,11 @@
       "Preview Modifiers"
     ]
   },
+  "CardAugments:AugmentPreviewCard": {
+    "TEXT": [
+      "Mod"
+    ]
+  },
   "CardAugments:NestEvent": {
     "TEXT": [
       "[Observe]",
@@ -133,8 +138,22 @@
       "Choose a Card to Augment."
     ]
   },
+  "CardAugments:GhostsEvent": {
+    "TEXT": [
+      "[Agree] #gGive #ga #gcard Aberrant. #rLose #r%s #rMax #rHP.",
+      "[Locked] Requires: Non-Exhausting Attack or Skill.",
+      "[Leave]",
+      "Stuff happens",
+      "Choose a Card to Augment.",
+      "Aberrant",
+      "Gain 1 Intangible. NL Exhaust. NL Non-Exhausting Attack or Skill only."
+    ]
+  },
   "CardAugments:ExampleMod": {
     "TEXT": ["Prefix name", "Suffix name", "Description stuff"]
+  },
+  "CardAugments:AberrantMod": {
+    "TEXT": ["Aberrant ", "", " NL Gain 1 Intangible. NL Exhaust."]
   },
   "CardAugments:AbsoluteMod": {
     "TEXT": ["Absolute ", "", " NL Absolute cards must be played before other cards in your hand.",
