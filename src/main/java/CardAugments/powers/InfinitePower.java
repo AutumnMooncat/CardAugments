@@ -1,13 +1,7 @@
-/*
 package CardAugments.powers;
 
 import CardAugments.CardAugmentsMod;
-import CardAugments.cutStuff.InfiniteGeneratedMod;
-import CardAugments.cutStuff.InfiniteMod;
-import CardAugments.util.TextureLoader;
-import basemod.helpers.CardModifierManager;
-import basemod.interfaces.CloneablePowerInterface;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import CardAugments.util.FormatHelper;
 import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.NonStackablePower;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -16,43 +10,29 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
-public class InfinitePower extends AbstractPower implements CloneablePowerInterface, NonStackablePower {
+public class InfinitePower extends AbstractPower implements NonStackablePower {
     public static final String POWER_ID = CardAugmentsMod.makeID(InfinitePower.class.getSimpleName());
     private static final PowerStrings TEXT = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
-
     private final AbstractCard card;
 
     public InfinitePower(AbstractCreature owner, AbstractCard card) {
-        name = TEXT.NAME + card.name + TEXT.DESCRIPTIONS[0];
+        name = TEXT.NAME + card.name;
         ID = POWER_ID;
-
         this.owner = owner;
         this.card = card.makeStatEquivalentCopy();
-        CardModifierManager.removeModifiersById(this.card, InfiniteMod.ID, true);
-        CardModifierManager.addModifier(this.card, new InfiniteGeneratedMod());
-
         type = PowerType.BUFF;
         isTurnBased = false;
-
-        region128 = new TextureAtlas.AtlasRegion(TextureLoader.getTexture("CardAugmentsResources/images/powers/" + InfinitePower.class.getSimpleName() + "84.png"), 0, 0, 84, 84);
-        region48 = new TextureAtlas.AtlasRegion(TextureLoader.getTexture("CardAugmentsResources/images/powers/" + InfinitePower.class.getSimpleName() + "32.png"), 0, 0, 32, 32);
-
+        this.loadRegion("infiniteBlades");
         updateDescription();
     }
 
     @Override
     public void updateDescription() {
-        description = String.format(TEXT.DESCRIPTIONS[1], card.name);
+        description = String.format(TEXT.DESCRIPTIONS[0], FormatHelper.prefixWords(card.name, "#y"));
     }
 
     @Override
     public void atStartOfTurnPostDraw() {
         addToBot(new MakeTempCardInHandAction(card.makeStatEquivalentCopy()));
     }
-
-    @Override
-    public AbstractPower makeCopy() {
-        return new InfinitePower(owner, card);
-    }
 }
-*/
