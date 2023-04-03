@@ -259,7 +259,7 @@
     "TEXT": ["Erupting ", "", " NL Enter Wrath."]
   },
   "CardAugments:ExplosiveMod": {
-    "TEXT": ["Explosive ", "", " NL At the end of 3 turns, deal %d damage to ALL enemies."]
+    "TEXT": ["Explosive ", "", "In 2 turns, play %1$s copies of %2$s at the start of your turn.", "Innate. NL "]
   },
   "CardAugments:FanaticMod": {
     "TEXT": ["Fanatic ", "", " NL Exhaust."]

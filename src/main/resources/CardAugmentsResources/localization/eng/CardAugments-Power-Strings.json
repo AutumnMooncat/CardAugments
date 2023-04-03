@@ -22,5 +22,10 @@
   "CardAugments:RunicPower": {
     "NAME": "Obscuring Runes",
     "DESCRIPTIONS": ["You cannot see enemy intents."]
+  },
+  "CardAugments:BombPower": {
+    "NAME": "Explosive ",
+    "DESCRIPTIONS": ["In #b%1$s turns, play #b%2$s copies of %3$s at the start of your turn.",
+      "At the start of next turn, play #b%1$s copies of %2$s."]
   }
 }
