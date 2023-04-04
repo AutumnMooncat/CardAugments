@@ -13,8 +13,13 @@ public class ShiningMod extends AbstractAugment {
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
     @Override
+    public void onInitialApplication(AbstractCard card) {
+        card.isEthereal = true;
+    }
+
+    @Override
     public boolean validCard(AbstractCard card) {
-        return card.type == AbstractCard.CardType.ATTACK;
+        return isNormalCard(card) && cardCheck(card, AbstractAugment::notEthereal);
     }
 
     @Override
@@ -35,7 +40,7 @@ public class ShiningMod extends AbstractAugment {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + TEXT[2];
+        return TEXT[2] + rawDescription + TEXT[3];
     }
 
     @Override

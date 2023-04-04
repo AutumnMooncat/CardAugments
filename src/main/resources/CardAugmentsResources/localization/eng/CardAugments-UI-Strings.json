@@ -49,104 +49,140 @@
       "Mod"
     ]
   },
-  "CardAugments:NestEvent": {
+  "CardAugments:BlacksmithEvent": {
     "TEXT": [
-      "[Observe]",
-      "[Study Cultists] #gGive #gan #gAttack #g\"Gain #g1 #gStrength.\" #rand #r-20% #rdamage.",
-      "[Study Ritual] #gGive #ga #gnon-Exhausting #gAttack #g+50% #gdamage #rand #rExhaust.",
-      "[Leave]",
-      "You stay out of the line to observe what is happening. Not long after, a group of #rCultists arrive and begin to gleefully @chant@ and ~wave~ their weapons around. NL NL #r@\"MURDER!!@ #r@MURDER@ #r@MURDER!!\"@ NL #b~\"CAW~ #b~CAW~ #b~CAAAAAWWW!\"~ NL #r@\"MURDER!@ #r@MURDER@ #r@MUURDER!!\"@ NL #b~\"CAAW~ #b~CAW~ #b~CAAAAAAWW!!\"~ NL NL You feel you may be able to learn something by observing them in action...",
-      "As you watch the #rCultists and their #r@ritual,@ you feel yourself falling into a #p~trance.~ NL NL With a spark of #b@inspiration,@ you focus in and... NL #y@CLANG@ #y@CLAAANG@ #y@CLANG!@ NL ...improve your arsenal! ",
-      "[Locked] Requires: An Attack.",
+      "You decide to put the forge to use and... NL #y@CLANG@ #y@CLAAANG@ #y@CLANG!@ NL ...lighten your arsenal!",
       "Choose a Card to Augment.",
-      "[Locked] Requires: A non-Exhausting Attack."
+      "Fragile",
+      "Cost -1. NL Exhaust. NL Only applicable to cards without Exhaust that don't change cost."
+    ],
+    "EXTRA_TEXT": [
+      "[Tinker] #gGive #gan #gAttack #gor #gSkill Fragile.",
+      "[Locked] Requires: Non-Exhausting Attack or Skill that doesn't change cost.",
+      "[Leave]"
     ]
   },
   "CardAugments:DuplicatorEvent": {
     "TEXT": [
-      "[Imbue] #gGive #ga #gnon-Exhausting #gAttack #gor #gSkill #gDouble #gPlay #rand #rExhaust.",
-      "[Locked] Requires: Non-Exhausting Attack or Skill.",
-      "[Leave]",
       "You hold your gear against the shrine. A ghastly mirror image appears from the shrine and is absorbed into it.",
-      "Choose a Card to Augment."
+      "Choose a Card to Augment.",
+      "Echoing",
+      "Double Play. NL Exhaust. NL Only applicable to cards without Exhaust."
+    ],
+    "EXTRA_TEXT": [
+      "[Imbue] #gGive #gan #gAttack #gor #gSkill Echoing.",
+      "[Locked] Requires: Non-Exhausting Attack or Skill.",
+      "[Leave]"
     ]
   },
-  "CardAugments:TransmogrifierEvent": {
+  "CardAugments:FallingEvent": {
     "TEXT": [
-      "[Imbue] #gApply #ga #grandom #gmodifier #gto #g2 #gcards.",
-      "[Locked] Requires: Two cards that accept modifiers.",
-      "[Leave]",
-      "As the power of the shrine flows through you, your arsenal feels altered.",
-      "Choose 2 Cards to Augment."
+      "Exerting great effort, you combine all three options to land without fully breaking anything. Your gear is looking a little worse for wear however.",
+      "Choose a Card to Augment.",
+      "Crypt",
+      "Start each combat in the discard pile."
+    ],
+    "EXTRA_TEXT": [
+      "[Exert] #rGive #rall #r3 #rcards Crypt.",
+      "[Locked] Requires: Skill card, Power card, and Attack card.",
+      "[Leave]"
+    ]
+  },
+  "CardAugments:GhostsEvent": {
+    "TEXT": [
+      "#y\"Excellent!\" NL As the ghostly shape speaks, you notice its large mouth opening wider and wider. #p~Thick~ #p~black~ #p~smoke~ spews forth and envelops the room. You cannot see or breathe and begin to wave things around wildly in an attempt to dissipate it... NL NL Eventually, enough smoke is dispersed and the sensation stops. NL NL Whatever those things were, they are gone now. You continue on, feeling rather #bhollow.",
+      "Choose a Card to Augment.",
+      "Aberrant",
+      "Gain 1 Intangible. NL Exhaust. NL Only applicable to cards without Exhaust."
+    ],
+    "EXTRA_TEXT": [
+      "[Agree] #gGive #gan #gAttack #gor #gSkill Aberrant. #rLose #r%s #rMax #rHP.",
+      "[Locked] Requires: Non-Exhausting Attack or Skill.",
+      "[Leave]"
     ]
   },
   "CardAugments:LibraryEvent": {
     "TEXT": [
-      "[Rewrite] #gChoose #ga #gcard, #gthen #gapply #g1 #gof #g5 #gmodifiers #gto #git.",
-      "[Locked] Requires: A card that accepts modifiers.",
-      "[Leave]",
       "Grabbing the nearest book, you read halfway through it and then begin to scribble over the pages, changing the story entirely. NL NL ~Heh.~ NL NL You put the book back where you found it, looking forward to annoying whoever finds it next.",
       "Choose a Card to Augment.",
       "Choose a Modifier.",
       "The story is about an insect-controlling teenage girl who aspires to become a hero. The book is filled with creative uses of powers, combat strategies, and... ~Hey~ @wait!@ Someone has #r@scribbled@ all over this! Who would do such a thing!",
       "The story is about a man who journeyed beyond the stars and found himself stuck on a desolate foreign planet. You were looking forward to his return home, but it looks like someone has vandalized the book! NL How unsatisfying.",
       "The story takes place in a giant isolated building underground as the outside conditions have become unbearable. The novel is mired with conspiracies, propaganda, and injustice. Somewhat comedically, someone has rendered the remainder of the book illegible. NL You wonder if this too was a conspiracy."
+    ],
+    "EXTRA_TEXT": [
+      "[Rewrite] #gChoose #ga #gcard, #gthen #gapply #g1 #gof #g5 #gmodifiers #gto #git.",
+      "[Locked] Requires: A card that accepts modifiers.",
+      "[Leave]"
     ]
   },
-  "CardAugments:BlacksmithEvent": {
+  "CardAugments:NestEvent": {
     "TEXT": [
-      "[Tinker] #gGive #ga #gnon-Exhausting #gAttack #gor #gSkill #g-1 #gcost #rand #rExhaust.",
-      "[Locked] Requires: Non-Exhausting Attack or Skill that doesn't change cost.",
-      "[Leave]",
-      "You decide to put the forge to use and... NL #y@CLANG@ #y@CLAAANG@ #y@CLANG!@ NL ...lighten your arsenal!",
-      "Choose a Card to Augment."
-    ]
-  },
-  "CardAugments:ShiningEvent": {
-    "TEXT": [
-      "[Throw] #gGive #ga #grandom #gAttack #g\"When #gdrawn, #ggain #g1 #gEnergy\". #rLose #r%s #rHP.",
+      "You stay out of the line to observe what is happening. Not long after, a group of #rCultists arrive and begin to gleefully @chant@ and ~wave~ their weapons around. NL NL #r@\"MURDER!!@ #r@MURDER@ #r@MURDER!!\"@ NL #b~\"CAW~ #b~CAW~ #b~CAAAAAWWW!\"~ NL #r@\"MURDER!@ #r@MURDER@ #r@MUURDER!!\"@ NL #b~\"CAAW~ #b~CAW~ #b~CAAAAAAWW!!\"~ NL NL You feel you may be able to learn something by observing them in action...",
+      "As you watch the #rCultists and their #r@ritual,@ you feel yourself falling into a #p~trance.~ NL NL With a spark of #b@inspiration,@ you focus in and... NL #y@CLANG@ #y@CLAAANG@ #y@CLANG!@ NL ...improve your arsenal! ",
+      "Choose a Card to Augment.",
+      "Cultist's",
+      "Gain 1 Strength. NL Damage -20%.",
+      "Fanatic",
+      "Damage +50%. NL Exhaust. NL Only applicable to cards without Exhaust."
+    ],
+    "EXTRA_TEXT": [
+      "[Observe]",
       "[Locked] Requires: An Attack.",
-      "[Leave]",
-      "Testing the light by throwing some of your gear at it, you notice that the light is absorbed into it. It seems to be giving off a #y~welcoming~ #y~glow.~ NL Picking it back up, you find it is #r@scorching@ #r@hot@ ! You quickly put it away and tend to your burns."
-    ]
-  },
-  "CardAugments:SerpentEvent": {
-    "TEXT": [
-      "[Agree] #gGive #gALL #gAttacks #g\"If #gFatal, #ggain #g15 #gGold\" #rand #rExhaust.",
-      "[Locked] Requires: An Attack.",
-      "[Leave]",
-      "[Continue]",
-      "~\"Yeeeeeeessssssssssessss!~ NL ~Thisss~ ~will~ ~all~ ~be~ ~worthhh~ ~it.~ NL ~..ssSSs.....~ ~ss...~ ~sssss....!\"~",
-      "The serpent rears its head and blasts a stream of #ygold at you! NL It is amazing and terrifying simultaneously. NL As your gear absorbs all the #ygold, you thank the snake, and get going."
+      "[Study Cultists] #gGive #gan #gAttack Cultist's.",
+      "[Study Ritual] #gGive #gan #gAttack Fanatic.",
+      "[Locked] Requires: A non-Exhausting Attack.",
+      "[Leave]"
     ]
   },
   "CardAugments:SensoryEvent": {
     "TEXT": [
-      "[Reject] #gGive #ga #gnon-Retain #gcard #g\"Draw #ga #gcard\" #rand #rAutoplay. #rLose #r%s #rHP.",
-      "[Locked] Requires: A non-Retain card.",
-      "[Leave]",
       "#yREJECTION NL NL You @refuse@ to be overtaken by the memories that you do not recognize! Something in you #r~cracks.~ NL NL You shake your head in #rpain and look around. Things appear the same, and yet feel #p~eerily~ #p~different.~",
-      "Choose a Card to Augment."
-    ]
-  },
-  "CardAugments:FallingEvent": {
-    "TEXT": [
-      "[Exert] #rGive #rall #r3 #rcards #r\"Start #reach #rcombat #rin #rthe #rdiscard #rpile\".",
-      "[Locked] Requires: Skill card, Power card, and Attack card.",
-      "[Leave]",
-      "Exerting great effort, you combine all three options to land without fully breaking anything. Your gear is looking a little worse for wear however.",
-      "Choose a Card to Augment."
-    ]
-  },
-  "CardAugments:GhostsEvent": {
-    "TEXT": [
-      "[Agree] #gGive #ga #gcard Aberrant. #rLose #r%s #rMax #rHP.",
-      "[Locked] Requires: Non-Exhausting Attack or Skill.",
-      "[Leave]",
-      "Stuff happens",
       "Choose a Card to Augment.",
-      "Aberrant",
-      "Gain 1 Intangible. NL Exhaust. NL Non-Exhausting Attack or Skill only."
+      "Auto",
+      "Autoplay. NL Draw 1 card. NL Only applicable to cards without Retain and Autoplay."
+    ],
+    "EXTRA_TEXT": [
+      "[Reject] #gGive #ga #gcard Auto. #rLose #r%s #rHP.",
+      "[Locked] Requires: A non-Retain card.",
+      "[Leave]"
+    ]
+  },
+  "CardAugments:SerpentEvent": {
+    "TEXT": [
+      "~\"Yeeeeeeessssssssssessss!~ NL ~Thisss~ ~will~ ~all~ ~be~ ~worthhh~ ~it.~ NL ~..ssSSs.....~ ~ss...~ ~sssss....!\"~",
+      "The serpent rears its head and blasts a stream of #ygold at you! NL It is amazing and terrifying simultaneously. NL As your gear absorbs all the #ygold, you thank the snake, and get going.",
+      "Greedy",
+      "If Fatal, gain 15 Gold. NL Exhaust."
+    ],
+    "EXTRA_TEXT": [
+      "[Agree] #gGive #gALL #gAttacks Greedy.",
+      "[Locked] Requires: An Attack.",
+      "[Leave]",
+      "[Continue]"
+    ]
+  },
+  "CardAugments:ShiningEvent": {
+    "TEXT": [
+      "Testing the light by throwing some of your gear at it, you notice that the light is absorbed into it. It seems to be giving off a #y~welcoming~ #y~glow.~ NL Picking it back up, you find it is #r@scorching@ #r@hot@ ! You quickly put it away and tend to your burns.",
+      "Shining",
+      "Ethereal. NL When drawn, gain [E]. NL Only applicable to cards without Ethereal."
+    ],
+    "EXTRA_TEXT": [
+      "[Throw] #gGive #ga #grandom #gcard Shining. #rLose #r%s #rHP.",
+      "[Locked] Requires: Non-Ethereal Card.",
+      "[Leave]"
+    ]
+  },
+  "CardAugments:TransmogrifierEvent": {
+    "TEXT": [
+      "As the power of the shrine flows through you, your arsenal feels altered.",
+      "Choose 2 Cards to Augment."
+    ],
+    "EXTRA_TEXT": [
+      "[Imbue] #gApply #ga #grandom #gmodifier #gto #g2 #gcards.",
+      "[Locked] Requires: Two cards that accept modifiers.",
+      "[Leave]"
     ]
   },
   "CardAugments:ExampleMod": {
@@ -446,7 +482,7 @@
     "TEXT": ["Shielded ", "", " NL Gain %s Block."]
   },
   "CardAugments:ShiningMod": {
-    "TEXT": ["Shining ", "", " NL When you draw this card, gain [E]."]
+    "TEXT": ["Shining ", "", "Ethereal. NL "," NL When you draw this card, gain [E]."]
   },
   "CardAugments:ShivMod": {
     "TEXT": ["", " and Dagger", " NL Add %d *Shiv into your hand."]

@@ -3,6 +3,7 @@ package CardAugments.patches.events;
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import CardAugments.cardmods.event.GraveMod;
+import CardAugments.util.AugmentPreviewCard;
 import basemod.ReflectionHacks;
 import basemod.helpers.CardModifierManager;
 import com.evacipated.cardcrawl.modthespire.lib.*;
@@ -12,6 +13,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.events.AbstractEvent;
 import com.megacrit.cardcrawl.events.beyond.Falling;
+import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.vfx.UpgradeShineEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect;
 
@@ -19,7 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FallingPatches {
-    public static final String[] MY_TEXT = CardCrawlGame.languagePack.getUIString(CardAugmentsMod.makeID("FallingEvent")).TEXT;
+    private static final UIStrings STRINGS = CardCrawlGame.languagePack.getUIString(CardAugmentsMod.makeID("FallingEvent"));
+    public static final String[] TEXT = STRINGS.TEXT;
+    public static final String[] OPTIONS = STRINGS.EXTRA_TEXT;
     public static int myIndex = -1;
     public static AbstractAugment augment;
     public static Object[] enumElements = null;
@@ -52,9 +56,9 @@ public class FallingPatches {
                     myIndex = __instance.imageEventText.optionList.size();
                     augment = new GraveMod();
                     if (___attack && ___power && ___skill) {
-                        __instance.imageEventText.setDialogOption(MY_TEXT[0]);
+                        __instance.imageEventText.setDialogOption(OPTIONS[0], new AugmentPreviewCard(TEXT[2], TEXT[3]));
                     } else {
-                        __instance.imageEventText.setDialogOption(MY_TEXT[1], true);
+                        __instance.imageEventText.setDialogOption(OPTIONS[1], true);
                     }
                 }
             }
@@ -69,8 +73,8 @@ public class FallingPatches {
                 if (___screen == enumElements[1]) {
                     if (buttonPressed[0] == myIndex) {
                         __instance.imageEventText.clearRemainingOptions();
-                        __instance.imageEventText.updateBodyText(MY_TEXT[3]);
-                        __instance.imageEventText.updateDialogOption(0, MY_TEXT[2]);
+                        __instance.imageEventText.updateBodyText(TEXT[0]);
+                        __instance.imageEventText.updateDialogOption(0, OPTIONS[2]);
                         List<String> cardMetrics = new ArrayList<>();
 
                         if (___skillCard != null && augment.validCard(___skillCard)) {

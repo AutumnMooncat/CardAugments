@@ -4,6 +4,7 @@ import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import CardAugments.cardmods.event.CultistMod;
 import CardAugments.cardmods.event.FanaticMod;
+import CardAugments.util.AugmentPreviewCard;
 import basemod.helpers.CardModifierManager;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -13,13 +14,16 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.events.AbstractEvent;
 import com.megacrit.cardcrawl.events.city.Nest;
+import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.vfx.UpgradeShineEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect;
 import javassist.*;
 import javassist.bytecode.DuplicateMemberException;
 
 public class NestPatches {
-    public static final String[] NEST_TEXT = CardCrawlGame.languagePack.getUIString(CardAugmentsMod.makeID("NestEvent")).TEXT;
+    private static final UIStrings STRINGS = CardCrawlGame.languagePack.getUIString(CardAugmentsMod.makeID("NestEvent"));
+    public static final String[] TEXT = STRINGS.TEXT;
+    public static final String[] OPTIONS = STRINGS.EXTRA_TEXT;
     public static int observeIndex = -1;
     public static boolean choseObserve = false;
     public static boolean pickedCard = false;
@@ -34,9 +38,9 @@ public class NestPatches {
                 augment = null;
                 observeIndex = __instance.imageEventText.optionList.size();
                 if (AbstractDungeon.player.masterDeck.group.stream().anyMatch(c -> c.type == AbstractCard.CardType.ATTACK)) {
-                    __instance.imageEventText.setDialogOption(NEST_TEXT[0]);
+                    __instance.imageEventText.setDialogOption(OPTIONS[0]);
                 } else {
-                    __instance.imageEventText.setDialogOption(NEST_TEXT[6], true);
+                    __instance.imageEventText.setDialogOption(OPTIONS[1], true);
                 }
             }
         }
@@ -49,7 +53,7 @@ public class NestPatches {
             if (CardAugmentsMod.eventAddons) {
                 if (choseObserve) {
                     pickedCard = true;
-                    __instance.imageEventText.updateBodyText(NEST_TEXT[5]);
+                    __instance.imageEventText.updateBodyText(TEXT[1]);
                     switch (buttonPressed) {
                         case 0:
                             augment = new CultistMod();
@@ -64,22 +68,22 @@ public class NestPatches {
                             group.addToTop(c);
                         }
                     }
-                    AbstractDungeon.gridSelectScreen.open(group, 1, NEST_TEXT[7], false, false, false, false);
+                    AbstractDungeon.gridSelectScreen.open(group, 1, TEXT[2], false, false, false, false);
                     ___screenNum[0] = 2;
                     choseObserve = false;
-                    __instance.imageEventText.updateDialogOption(0, NEST_TEXT[3]);
+                    __instance.imageEventText.updateDialogOption(0, OPTIONS[5]);
                     __instance.imageEventText.clearRemainingOptions();
                     return SpireReturn.Return();
                 } else if (___screenNum[0] == 0) {
                     if (buttonPressed == observeIndex) {
                         __instance.imageEventText.clearRemainingOptions();
-                        __instance.imageEventText.updateBodyText(NEST_TEXT[4]);
-                        __instance.imageEventText.updateDialogOption(0, NEST_TEXT[1]);
+                        __instance.imageEventText.updateBodyText(TEXT[0]);
+                        __instance.imageEventText.updateDialogOption(0, OPTIONS[2], new AugmentPreviewCard(TEXT[3], TEXT[4]));
                         FanaticMod mod = new FanaticMod();
                         if (AbstractDungeon.player.masterDeck.group.stream().anyMatch(mod::validCard)) {
-                            __instance.imageEventText.setDialogOption(NEST_TEXT[2]);
+                            __instance.imageEventText.setDialogOption(OPTIONS[3], new AugmentPreviewCard(TEXT[5], TEXT[6]));
                         } else {
-                            __instance.imageEventText.setDialogOption(NEST_TEXT[8], true);
+                            __instance.imageEventText.setDialogOption(OPTIONS[4], true);
                         }
                         choseObserve = true;
                         return SpireReturn.Return();

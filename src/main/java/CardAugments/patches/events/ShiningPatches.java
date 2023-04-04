@@ -3,6 +3,7 @@ package CardAugments.patches.events;
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import CardAugments.cardmods.event.ShiningMod;
+import CardAugments.util.AugmentPreviewCard;
 import CardAugments.util.Wiz;
 import basemod.ReflectionHacks;
 import basemod.helpers.CardModifierManager;
@@ -15,6 +16,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.events.AbstractEvent;
 import com.megacrit.cardcrawl.events.exordium.ShiningLight;
+import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.vfx.UpgradeShineEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect;
 import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
@@ -23,7 +25,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ShiningPatches {
-    public static final String[] MY_TEXT = CardCrawlGame.languagePack.getUIString(CardAugmentsMod.makeID("ShiningEvent")).TEXT;
+    private static final UIStrings STRINGS = CardCrawlGame.languagePack.getUIString(CardAugmentsMod.makeID("ShiningEvent"));
+    public static final String[] TEXT = STRINGS.TEXT;
+    public static final String[] OPTIONS = STRINGS.EXTRA_TEXT;
     public static int myIndex = -1;
     public static boolean choseMyOption = false;
     public static AbstractAugment augment;
@@ -35,18 +39,17 @@ public class ShiningPatches {
         public static void addOption(ShiningLight __instance) {
             if (CardAugmentsMod.eventAddons) {
                 choseMyOption = false;
-                //TODO better mod with a proper downside. Making it ethereal makes the text too long.
                 augment = new ShiningMod();
                 //Rip the leave button out and put it back later
                 __instance.imageEventText.clearRemainingOptions();
                 myIndex = __instance.imageEventText.optionList.size();
                 if (AbstractDungeon.player.masterDeck.group.stream().anyMatch(augment::validCard)) {
-                    damage = (int) (ReflectionHacks.<Integer>getPrivate(__instance, ShiningLight.class, "damage") * 0.8f);
-                    __instance.imageEventText.setDialogOption(String.format(MY_TEXT[0], damage));
+                    damage = (int) (ReflectionHacks.<Integer>getPrivate(__instance, ShiningLight.class, "damage") * 0.5f);
+                    __instance.imageEventText.setDialogOption(String.format(OPTIONS[0], damage), new AugmentPreviewCard(TEXT[1], TEXT[2]));
                 } else {
-                    __instance.imageEventText.setDialogOption(MY_TEXT[1], true);
+                    __instance.imageEventText.setDialogOption(OPTIONS[1], true);
                 }
-                __instance.imageEventText.setDialogOption(MY_TEXT[2]);
+                __instance.imageEventText.setDialogOption(OPTIONS[2]);
             }
         }
     }
@@ -61,8 +64,8 @@ public class ShiningPatches {
                         AbstractDungeon.player.damage(new DamageInfo(AbstractDungeon.player, damage));
                         AbstractDungeon.effectList.add(new FlashAtkImgEffect(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, AbstractGameAction.AttackEffect.FIRE));
                         __instance.imageEventText.clearRemainingOptions();
-                        __instance.imageEventText.updateBodyText(MY_TEXT[3]);
-                        __instance.imageEventText.updateDialogOption(0, MY_TEXT[2]);
+                        __instance.imageEventText.updateBodyText(TEXT[0]);
+                        __instance.imageEventText.updateDialogOption(0, OPTIONS[2]);
                         ArrayList<AbstractCard> validCards = new ArrayList<>();
                         for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
                             if (augment.validCard(c)) {

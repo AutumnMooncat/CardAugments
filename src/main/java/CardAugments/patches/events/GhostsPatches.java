@@ -14,6 +14,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.events.AbstractEvent;
 import com.megacrit.cardcrawl.events.city.Ghosts;
+import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.vfx.UpgradeShineEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect;
 import javassist.*;
@@ -22,7 +23,9 @@ import javassist.bytecode.DuplicateMemberException;
 import java.util.Collections;
 
 public class GhostsPatches {
-    public static final String[] MY_TEXT = CardCrawlGame.languagePack.getUIString(CardAugmentsMod.makeID("GhostsEvent")).TEXT;
+    private static final UIStrings STRINGS = CardCrawlGame.languagePack.getUIString(CardAugmentsMod.makeID("GhostsEvent"));
+    public static final String[] TEXT = STRINGS.TEXT;
+    public static final String[] OPTIONS = STRINGS.EXTRA_TEXT;
     public static int myIndex = -1;
     public static boolean choseMyOption = false;
     static AbstractAugment augment = null;
@@ -42,11 +45,11 @@ public class GhostsPatches {
                 __instance.imageEventText.clearRemainingOptions();
                 myIndex = __instance.imageEventText.optionList.size();
                 if (AbstractDungeon.player.masterDeck.group.stream().anyMatch(c -> augment.validCard(c))) {
-                    __instance.imageEventText.setDialogOption(String.format(MY_TEXT[0], hpLoss), new AugmentPreviewCard(MY_TEXT[5], MY_TEXT[6]));
+                    __instance.imageEventText.setDialogOption(String.format(OPTIONS[0], hpLoss), new AugmentPreviewCard(TEXT[2], TEXT[3]));
                 } else {
-                    __instance.imageEventText.setDialogOption(MY_TEXT[1], true);
+                    __instance.imageEventText.setDialogOption(OPTIONS[1], true);
                 }
-                __instance.imageEventText.setDialogOption(MY_TEXT[2]);
+                __instance.imageEventText.setDialogOption(OPTIONS[2]);
             }
         }
     }
@@ -64,15 +67,15 @@ public class GhostsPatches {
                     }
                     if (buttonPressed[0] == myIndex) {
                         __instance.imageEventText.clearRemainingOptions();
-                        __instance.imageEventText.updateBodyText(MY_TEXT[3]);
-                        __instance.imageEventText.updateDialogOption(0, MY_TEXT[2]);
+                        __instance.imageEventText.updateBodyText(TEXT[0]);
+                        __instance.imageEventText.updateDialogOption(0, OPTIONS[2]);
                         CardGroup group = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
                         for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
                             if (augment.validCard(c)) {
                                 group.addToTop(c);
                             }
                         }
-                        AbstractDungeon.gridSelectScreen.open(group, 1, MY_TEXT[4], false, false, false, false);
+                        AbstractDungeon.gridSelectScreen.open(group, 1, TEXT[1], false, false, false, false);
                         choseMyOption = true;
                         ___screenNum[0] = 2;
                         return SpireReturn.Return();
