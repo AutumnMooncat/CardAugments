@@ -1,6 +1,7 @@
 package CardAugments.util;
 
 import basemod.Pair;
+import basemod.abstracts.CustomCard;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -111,6 +112,17 @@ public class PortraitHelper {
             Pair<String, AbstractCard.CardType> key = new Pair<>(___card.cardID, ___card.type);
             if (hashedTextures.containsKey(key)) {
                 ___portraitImg[0] = makeMaskedTexture(___card, 2);
+            }
+        }
+    }
+
+    @SpirePatch2(clz = CustomCard.class, method = "getPortraitImage",paramtypez = {})
+    public static class FixCustomCardHopefully {
+        @SpirePostfixPatch
+        public static void plz(CustomCard __instance, @ByRef Texture[] __result) {
+            Pair<String, AbstractCard.CardType> key = new Pair<>(__instance.cardID, __instance.type);
+            if (hashedTextures.containsKey(key)) {
+                __result[0] = makeMaskedTexture(__instance, 2);
             }
         }
     }
