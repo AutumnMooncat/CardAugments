@@ -46,8 +46,9 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
     public static final String[] TEXT = uiStrings.TEXT;
     private static final int CARDS_PER_LINE = (int)((float)Settings.WIDTH / (AbstractCard.IMG_WIDTH * 0.75F + Settings.CARD_VIEW_PAD_X * 3.0F));
     private static final float DROPDOWN_X = 20f * Settings.scale;
-    private static final float MOD_DROPDOWN_Y = Settings.HEIGHT/2f + 280.0F * Settings.scale;
-    private static final float AUGMENT_DROPDOWN_Y = MOD_DROPDOWN_Y - 60F * Settings.scale;
+    private static final float MOD_DROPDOWN_Y = Settings.HEIGHT/2f + 340.0F * Settings.scale;
+    private static final float RARITY_DROPDOWN_Y = MOD_DROPDOWN_Y - 60F * Settings.scale;
+    private static final float AUGMENT_DROPDOWN_Y = RARITY_DROPDOWN_Y - 60F * Settings.scale;
     private static final float CHARACTER_DROPDOWN_Y = AUGMENT_DROPDOWN_Y - 60F * Settings.scale;
     private static final float RARITY_Y = CHARACTER_DROPDOWN_Y - 50f * Settings.scale;
     private static final float VALID_CARDS_Y = RARITY_Y - 50f * Settings.scale;
@@ -73,9 +74,12 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
     private final MenuCancelButton cancelButton;
     private final SettingsButton settingsButton;
     private DropdownMenu modDropdown;
+    private DropdownMenu rarityDropdown;
     private DropdownMenu augmentDropdown;
     private DropdownMenu characterDropdown;
+    private AbstractAugment.AugmentRarity rarityFilter;
     private AbstractCard.CardColor colorFilter;
+    private HashMap<String, AbstractAugment.AugmentRarity> rarityMap = new HashMap<>();
     private HashMap<String, AbstractCard.CardColor> colorMap = new HashMap<>();
     private ScrollBar scrollBar;
     private Hitbox upgradeHb;
@@ -92,6 +96,7 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
         cardsToRender = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 
         modDropdown = new DropdownMenu(this, getModStrings(), FontHelper.tipBodyFont, Settings.CREAM_COLOR);
+        rarityDropdown = new DropdownMenu(this, getRarityStrings(), FontHelper.tipBodyFont, Settings.CREAM_COLOR);
         augmentDropdown = new DropdownMenu(this, getAugmentStrings(), FontHelper.tipBodyFont, Settings.CREAM_COLOR);
         characterDropdown = new DropdownMenu(this, getCharacterStrings(), FontHelper.tipBodyFont, Settings.CREAM_COLOR);
 
@@ -120,6 +125,8 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
     public void update() {
         if (modDropdown.isOpen) {
             modDropdown.update();
+        } else if (rarityDropdown.isOpen) {
+            rarityDropdown.update();
         } else if (augmentDropdown.isOpen) {
             augmentDropdown.update();
         } else if (characterDropdown.isOpen) {
@@ -145,6 +152,7 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
 
             updateCards();
             modDropdown.update();
+            rarityDropdown.update();
             augmentDropdown.update();
             characterDropdown.update();
             if (this.hoveredCard != null) {// 166
@@ -225,6 +233,7 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
         renderInfo(sb);
         characterDropdown.render(sb, DROPDOWN_X, CHARACTER_DROPDOWN_Y);
         augmentDropdown.render(sb, DROPDOWN_X, AUGMENT_DROPDOWN_Y);
+        rarityDropdown.render(sb, DROPDOWN_X, RARITY_DROPDOWN_Y);
         modDropdown.render(sb, DROPDOWN_X, MOD_DROPDOWN_Y);
         renderCards(sb);
     }
@@ -241,19 +250,35 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
         return ret;
     }
 
+    public ArrayList<String> getRarityStrings() {
+        ArrayList<String> ret = new ArrayList<>();
+        ret.add(TEXT[6]);
+        rarityMap.put(TEXT[6], null);
+        for (AbstractAugment.AugmentRarity r : AbstractAugment.AugmentRarity.values()) {
+            ret.add(r.toString());
+            rarityMap.put(r.toString(), r);
+        }
+        return ret;
+    }
+
     public ArrayList<String> getAugmentStrings() {
         ArrayList<String> ret = new ArrayList<>();
         augmentMap.clear();
         for (String id : CardAugmentsMod.modMap.keySet()) {
             AbstractAugment a = CardAugmentsMod.modMap.get(id);
-            if (CardAugmentsMod.crossoverMap.get(a).equals(selectedModID)) {
-                String s = formatText(id);
-                ret.add(s);
-                augmentMap.put(s, a);
+            if (rarityFilter == null || a.getModRarity() == rarityFilter) {
+                if (CardAugmentsMod.crossoverMap.get(a).equals(selectedModID)) {
+                    String s = formatText(id);
+                    ret.add(s);
+                    augmentMap.put(s, a);
+                }
             }
         }
         Collections.sort(ret);
         //ret.replaceAll(this::formatText);
+        if (ret.isEmpty()) {
+            ret.add(TEXT[7]);
+        }
         return ret;
     }
 
@@ -319,6 +344,10 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
     public void changedSelectionTo(DropdownMenu dropdownMenu, int i, String s) {
         if (dropdownMenu == augmentDropdown) {
             validCards.clear();
+            if (s.equals(TEXT[7])) {
+                updateCardFilters();
+                return;
+            }
             selectedAugment = augmentMap.get(s);
             for (AbstractCard c : CardLibrary.getAllCards()) {
                 if (!c.getClass().isAnnotationPresent(NoCompendium.class)) {
@@ -348,6 +377,11 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
         if (dropdownMenu == characterDropdown) {
             colorFilter = colorMap.getOrDefault(s, null);
             updateCardFilters();
+        }
+        if (dropdownMenu == rarityDropdown) {
+            rarityFilter = rarityMap.getOrDefault(s, null);
+            augmentDropdown = new DropdownMenu(this, getAugmentStrings(), FontHelper.tipBodyFont, Settings.CREAM_COLOR);
+            refreshDropdownMenu(augmentDropdown);
         }
     }
 

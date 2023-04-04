@@ -37,7 +37,9 @@
       "Rarity: ",
       "Valid Cards: ",
       "All Characters",
-      "Settings"
+      "Settings",
+      "All Rarities",
+      "None"
     ]
   },
   "CardAugments:SCVScreen": {
