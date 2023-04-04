@@ -3,6 +3,7 @@ package CardAugments.cardmods.common;
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
+import com.megacrit.cardcrawl.actions.common.EmptyDeckShuffleAction;
 import com.megacrit.cardcrawl.actions.utility.ScryAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -18,7 +19,7 @@ public class LuckyMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost != -2 && !(card instanceof GrandFinale);
+        return card.cost != -2 && drawsCards(card) && !usesAction(card, EmptyDeckShuffleAction.class);
     }
 
     @Override

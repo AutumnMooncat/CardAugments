@@ -11,6 +11,17 @@ import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.MultiUpgradeCard;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.ExhaustiveField;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.megacrit.cardcrawl.actions.defect.CompileDriverAction;
+import com.megacrit.cardcrawl.actions.defect.FTLAction;
+import com.megacrit.cardcrawl.actions.defect.FissionAction;
+import com.megacrit.cardcrawl.actions.unique.CalculatedGambleAction;
+import com.megacrit.cardcrawl.actions.unique.DoppelgangerAction;
+import com.megacrit.cardcrawl.actions.unique.DropkickAction;
+import com.megacrit.cardcrawl.actions.unique.ExpertiseAction;
+import com.megacrit.cardcrawl.actions.utility.ConditionalDrawAction;
+import com.megacrit.cardcrawl.actions.watcher.InnerPeaceAction;
+import com.megacrit.cardcrawl.actions.watcher.SanctityAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.colorless.PanicButton;
 import com.megacrit.cardcrawl.cards.purple.Halt;
@@ -28,6 +39,7 @@ import javassist.expr.NewExpr;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.Predicate;
 
@@ -448,6 +460,48 @@ public abstract class AbstractAugment extends AbstractCardModifier {
             }
         }
         return true;
+    }
+
+    public static Class<?>[] drawClasses = {DrawCardAction.class, ConditionalDrawAction.class, DropkickAction.class, CalculatedGambleAction.class, DoppelgangerAction.class, ExpertiseAction.class, CompileDriverAction.class, FTLAction.class, FissionAction.class,  InnerPeaceAction.class, SanctityAction.class};
+    public static boolean drawsCards(AbstractCard card) {
+        final boolean[] foundDrawCard = {false};
+        try {
+            //Grab the use method
+            ClassPool pool = Loader.getClassPool();
+            CtClass ctClass = pool.get(card.getClass().getName());
+            ctClass.defrost();
+            CtMethod useMethod;
+            try {
+                useMethod = ctClass.getDeclaredMethod("use");
+            } catch (NotFoundException ignore) {
+                return false;
+            }
+
+            useMethod.instrument(new ExprEditor() {
+                @Override
+                public void edit(NewExpr n) {
+                    try {
+                        //Check if the new object extends DrawCardAction or something similar
+                        CtConstructor constructor = n.getConstructor();
+                        CtClass activeClass = constructor.getDeclaringClass();
+
+                        if (activeClass != null) {
+                            CtClass[] plz = {activeClass};
+                            //Loop until we either run out of supers or we find a matching class
+                            while (activeClass != null && (Arrays.stream(drawClasses).noneMatch(clz -> clz.getName().equals(plz[0].getName())))) {
+                                activeClass = activeClass.getSuperclass();
+                                plz[0] = activeClass;
+                            }
+                            //We found it, nice
+                            if (activeClass != null && (Arrays.stream(drawClasses).anyMatch(clz -> clz.getName().equals(plz[0].getName())))) {
+                                foundDrawCard[0] = true;
+                            }
+                        }
+                    } catch (Exception ignored) {}
+                }
+            });
+        } catch(Exception ignored) {}
+        return foundDrawCard[0];
     }
 
     public static String[] removeUpgradeText(String name) {
