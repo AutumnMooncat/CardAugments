@@ -9,9 +9,12 @@ import basemod.BaseMod;
 import basemod.ModBadge;
 import basemod.ReflectionHacks;
 import basemod.helpers.CardModifierManager;
+import basemod.patches.com.megacrit.cardcrawl.characters.AbstractPlayer.MaxHandSizePatch;
 import basemod.patches.com.megacrit.cardcrawl.screens.compendium.CardLibraryScreen.NoCompendium;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.evacipated.cardcrawl.modthespire.Loader;
+import com.evacipated.cardcrawl.modthespire.ModInfo;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
@@ -194,6 +197,13 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
                 }
                 Method open = ModsScreen.getDeclaredMethod("open");
                 open.invoke(o);
+                for (int i = 0 ; i < Loader.MODINFOS.length ; i++) {
+                    ModInfo info = Loader.MODINFOS[i];
+                    if (info.ID.equals(CardAugmentsMod.getModID())) {
+                        ReflectionHacks.setPrivate(o, ModsScreen, "selectedMod", i);
+                        break;
+                    }
+                }
                 if (myBadge != null) {
                     ReflectionHacks.RMethod mboc = ReflectionHacks.privateMethod(ModsScreen, "modBadge_onClick", Object.class);
                     mboc.invoke(o, myBadge);
