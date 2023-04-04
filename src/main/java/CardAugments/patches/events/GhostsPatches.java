@@ -37,7 +37,7 @@ public class GhostsPatches {
             if (CardAugmentsMod.eventAddons) {
                 choseMyOption = false;
                 augment = new AberrantMod();
-                hpLoss = MathUtils.ceil((float)AbstractDungeon.player.maxHealth * 0.1F);// 33
+                hpLoss = MathUtils.ceil((float)AbstractDungeon.player.maxHealth * 0.125F);// 33
                 if (hpLoss >= AbstractDungeon.player.maxHealth) {// 34
                     hpLoss = AbstractDungeon.player.maxHealth - 1;// 35
                 }
