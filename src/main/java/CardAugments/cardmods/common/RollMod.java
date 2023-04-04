@@ -13,47 +13,18 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.NextTurnBlockPower;
 
-public class RollMod extends AbstractAugment implements DynvarCarrier {
+public class RollMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(RollMod.class.getSimpleName());
-    public static final String DESCRIPTION_KEY = "!"+ID+"!";
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
-
-    private static final int BLOCK = 4;
-    private static final int UPGRADE_BLOCK = 2;
-
-    public int val;
-    public boolean modified;
-    public boolean upgraded;
-
-    public int getBaseVal(AbstractCard card) {
-        return BLOCK + getEffectiveUpgrades(card) * UPGRADE_BLOCK;
-    }
-
-    @Override
-    public void onInitialApplication(AbstractCard card) {
-        val = getBaseVal(card);
-    }
 
     @Override
     public float modifyBaseBlock(float block, AbstractCard card) {
-        return block * MINOR_DEBUFF;
-    }
-
-    @Override
-    public void updateDynvar(AbstractCard card) {
-        val = getBaseVal(card);
-        modified = false;
-    }
-
-    @Override
-    public void onApplyPowers(AbstractCard card) {
-        val = CalcHelper.applyPowersToBlock(getBaseVal(card));
-        modified = val != getBaseVal(card);
+        return block * MAJOR_DEBUFF;
     }
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost != -2 &&  card.baseBlock > 1;
+        return card.cost != -2 &&  card.baseBlock >= 3;
     }
 
     @Override
@@ -68,12 +39,12 @@ public class RollMod extends AbstractAugment implements DynvarCarrier {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + String.format(TEXT[2], DESCRIPTION_KEY);
+        return rawDescription + TEXT[2];
     }
 
     @Override
     public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
-        this.addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new NextTurnBlockPower(AbstractDungeon.player, val)));
+        this.addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new NextTurnBlockPower(AbstractDungeon.player, card.block)));
     }
 
     @Override
@@ -89,33 +60,5 @@ public class RollMod extends AbstractAugment implements DynvarCarrier {
     @Override
     public String identifier(AbstractCard card) {
         return ID;
-    }
-
-    @Override
-    public String key() {
-        return ID;
-    }
-
-    @Override
-    public int val(AbstractCard card) {
-        return val;
-    }
-
-    @Override
-    public int baseVal(AbstractCard card) {
-        return getBaseVal(card);
-    }
-
-    @Override
-    public boolean modified(AbstractCard card) {
-        return modified;
-    }
-
-    @Override
-    public boolean upgraded(AbstractCard card) {
-        val = getBaseVal(card);
-        modified = card.upgraded;
-        upgraded = card.upgraded;
-        return upgraded;
     }
 }

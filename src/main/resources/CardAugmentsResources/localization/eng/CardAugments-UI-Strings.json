@@ -464,7 +464,7 @@
     "TEXT": ["Returning ", "", " NL cardaugments:Reshuffle."]
   },
   "CardAugments:RollMod": {
-    "TEXT": ["", " and Roll", " NL Next turn, gain %s Block."]
+    "TEXT": ["", " and Roll", " NL Next turn, gain !B! Block."]
   },
   "CardAugments:RunicMod": {
     "TEXT": ["Runic ", "", " NL You cannot see enemy intents for %d turns."]
