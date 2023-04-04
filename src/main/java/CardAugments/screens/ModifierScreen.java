@@ -3,19 +3,19 @@ package CardAugments.screens;
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import CardAugments.patches.MainMenuPatches;
+import CardAugments.ui.SettingsButton;
 import CardAugments.util.FormatHelper;
 import basemod.BaseMod;
+import basemod.ModBadge;
 import basemod.ReflectionHacks;
 import basemod.helpers.CardModifierManager;
 import basemod.patches.com.megacrit.cardcrawl.screens.compendium.CardLibraryScreen.NoCompendium;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpireInstrumentPatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
+import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.characters.TheSilent;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.GameCursor;
 import com.megacrit.cardcrawl.core.Settings;
@@ -31,10 +31,11 @@ import com.megacrit.cardcrawl.screens.mainMenu.ScrollBarListener;
 import com.megacrit.cardcrawl.screens.options.DropdownMenu;
 import com.megacrit.cardcrawl.screens.options.DropdownMenuListener;
 import javassist.CannotCompileException;
+import javassist.CtBehavior;
 import javassist.expr.ExprEditor;
 import javassist.expr.MethodCall;
 
-import java.lang.reflect.Array;
+import java.lang.reflect.Method;
 import java.util.*;
 
 public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
@@ -67,6 +68,7 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
     private AbstractCard hoveredCard;
     private AbstractCard clickStartedCard;
     private final MenuCancelButton cancelButton;
+    private final SettingsButton settingsButton;
     private DropdownMenu modDropdown;
     private DropdownMenu augmentDropdown;
     private DropdownMenu characterDropdown;
@@ -76,10 +78,12 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
     private Hitbox upgradeHb;
     private boolean upgradePreview;
     private boolean ignoreScrollReset;
+    private static ModBadge myBadge;
     
     public ModifierScreen() {
         upgradeHb = new Hitbox(250.0F * Settings.scale, 80.0F * Settings.scale);
         cancelButton = new MenuCancelButton();
+        settingsButton = new SettingsButton();
 
         validCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
         cardsToRender = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
@@ -104,6 +108,7 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
         upgradePreview = false;
         refreshDropdownMenu(modDropdown);
         cancelButton.show(TEXT[0]);
+        settingsButton.show(TEXT[5]);
         CardCrawlGame.mainMenuScreen.screen = MainMenuPatches.Enums.MODIFIERS_VIEW; //This is how we tell it what screen is open
         CardCrawlGame.mainMenuScreen.darken();
         upgradeHb.move(HB_X, HB_Y);
@@ -134,6 +139,7 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
                 ignoreScrollReset = true;
                 refreshDropdownMenu(augmentDropdown);
             }
+
             updateCards();
             modDropdown.update();
             augmentDropdown.update();
@@ -166,16 +172,45 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
             InputHelper.pressedEscape = false;
             cancelButton.hb.clicked = false;
             cancelButton.hide();
+            settingsButton.hide();
             CardCrawlGame.mainMenuScreen.screen = MainMenuScreen.CurScreen.MAIN_MENU;
             CardCrawlGame.mainMenuScreen.lighten();
             selectedAugment = null;
             cardsToRender.clear();
+        }
+
+        settingsButton.update();
+        if (settingsButton.hb.clicked) {
+            settingsButton.hb.clicked = false;
+            cancelButton.hide();
+            settingsButton.hide();
+            try {
+                Class<?> ModsScreen = Class.forName("com.evacipated.cardcrawl.modthespire.patches.modsscreen.ModsScreen");
+                Class<?> ModMenuButton = Class.forName("com.evacipated.cardcrawl.modthespire.patches.modsscreen.ModMenuButton");
+                Object o = ReflectionHacks.getPrivateStatic(ModMenuButton, "modsScreen");
+                if (o == null) {
+                    o = ModsScreen.getConstructor().newInstance();
+                    ReflectionHacks.setPrivateStatic(ModMenuButton, "modsScreen", o);
+                }
+                Method open = ModsScreen.getDeclaredMethod("open");
+                open.invoke(o);
+                if (myBadge != null) {
+                    ReflectionHacks.RMethod mboc = ReflectionHacks.privateMethod(ModsScreen, "modBadge_onClick", Object.class);
+                    mboc.invoke(o, myBadge);
+                }
+            } catch (Exception ignored) {
+                CardCrawlGame.mainMenuScreen.screen = MainMenuScreen.CurScreen.MAIN_MENU;
+                CardCrawlGame.mainMenuScreen.lighten();
+                selectedAugment = null;
+                cardsToRender.clear();
+            }
         }
     }
 
     public void render(SpriteBatch sb) {
         scrollBar.render(sb);
         cancelButton.render(sb);
+        settingsButton.render(sb);
         renderUpgradeViewToggle(sb);
         renderInfo(sb);
         characterDropdown.render(sb, DROPDOWN_X, CHARACTER_DROPDOWN_Y);
@@ -465,6 +500,24 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
                     }
                 }
             };
+        }
+    }
+
+    @SpirePatch2(clz = BaseMod.class, method = "registerModBadge")
+    public static class GrabBadge {
+        @SpireInsertPatch(locator = Locator.class, localvars = {"badge"})
+        public static void plz(ModBadge badge) {
+            if (ReflectionHacks.getPrivate(badge, ModBadge.class, "modName").equals(CardAugmentsMod.EXTRA_TEXT[0])) {
+                myBadge = badge;
+            }
+        }
+
+        public static class Locator extends SpireInsertLocator {
+            @Override
+            public int[] Locate(CtBehavior ctBehavior) throws Exception {
+                Matcher m = new Matcher.MethodCallMatcher(ArrayList.class, "add");
+                return LineFinder.findInOrder(ctBehavior, m);
+            }
         }
     }
 }

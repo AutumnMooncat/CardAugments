@@ -36,7 +36,8 @@
       "Upgrade",
       "Rarity: ",
       "Valid Cards: ",
-      "All Characters"
+      "All Characters",
+      "Settings"
     ]
   },
   "CardAugments:SCVScreen": {
@@ -96,7 +97,7 @@
       "Gain 1 Intangible. NL Exhaust. NL Only applicable to cards without Exhaust."
     ],
     "EXTRA_TEXT": [
-      "[Agree] #gGive #gan #gAttack #gor #gSkill Aberrant. #rLose #r%s #rMax #rHP.",
+      "[Accept] #gGive #gan #gAttack #gor #gSkill Aberrant. #rLose #r%s #rMax #rHP.",
       "[Locked] Requires: Non-Exhausting Attack or Skill.",
       "[Leave]"
     ]
