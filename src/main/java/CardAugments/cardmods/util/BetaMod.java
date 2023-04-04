@@ -46,7 +46,7 @@ public class BetaMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return true;
+        return noShenanigans(card) && cardCheck(card, c -> c.cost >= 2 && doesntUpgradeCost() && (c.baseDamage > 0 || c.baseBlock > 0 || doesntDowngradeMagic()));
     }
 
     @Override
