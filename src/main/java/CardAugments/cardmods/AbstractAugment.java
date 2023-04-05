@@ -322,7 +322,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
                             }
                         }
                     });
-                } catch (CannotCompileException ignored) {}
+                } catch (Exception ignored) {}
                 try {
                     CtMethod ctApplyPowers = ctClass.getDeclaredMethod("applyPowers");
                     ctApplyPowers.instrument(new ExprEditor() {
@@ -333,7 +333,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
                             }
                         }
                     });
-                } catch (CannotCompileException ignored) {}
+                } catch (Exception ignored) {}
                 try {
                     CtMethod ctCalcCardDamage = ctClass.getDeclaredMethod("calculateCardDamage", new CtClass[]{pool.get(AbstractMonster.class.getName())});
                     ctCalcCardDamage.instrument(new ExprEditor() {
@@ -345,7 +345,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
                         }
                     });
 
-                } catch (CannotCompileException ignored) {}
+                } catch (Exception ignored) {}
             } catch (NotFoundException ignored) {
                 return false;
             }
