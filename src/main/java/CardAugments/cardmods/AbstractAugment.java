@@ -167,8 +167,14 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     }
 
     public static boolean cardCheck(AbstractCard card, Predicate<AbstractCard> p) {
-        setCardChecks(card);
-        return p.test(card);
+        boolean ret = false;
+        try {
+            setCardChecks(card);
+            ret = p.test(card);
+        } catch (Exception e) {
+            CardAugmentsMod.logger.error("ERROR: Card "+card.cardID+" crashes when upgraded. Go yell at the mod author.");
+        }
+        return ret;
     }
 
     protected void addToBot(AbstractGameAction action) {
@@ -304,39 +310,45 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         if (card.baseMagicNumber > 0 && StringUtils.containsIgnoreCase(card.rawDescription, "!M!") && !(card instanceof PanicButton) && !(card instanceof Halt)) {
             ClassPool pool = Loader.getClassPool();
             try {
-                CtMethod ctUse = pool.get(card.getClass().getName()).getDeclaredMethod("use");
-                ctUse.instrument(new ExprEditor() {
-                    @Override
-                    public void edit(FieldAccess f) {
-                        if (f.getFieldName().equals("magicNumber") && !f.isWriter()) {
-                            usesMagicBool[0] = true;
+                CtClass ctClass = pool.get(card.getClass().getName());
+                ctClass.defrost();
+                try {
+                    CtMethod ctUse = ctClass.getDeclaredMethod("use");
+                    ctUse.instrument(new ExprEditor() {
+                        @Override
+                        public void edit(FieldAccess f) {
+                            if (f.getFieldName().equals("magicNumber") && !f.isWriter()) {
+                                usesMagicBool[0] = true;
+                            }
                         }
-                    }
-                });
-            } catch (Exception ignored) { }
-            try {
-                CtMethod ctApplyPowers = pool.get(card.getClass().getName()).getDeclaredMethod("applyPowers");
-                ctApplyPowers.instrument(new ExprEditor() {
-                    @Override
-                    public void edit(FieldAccess f) {
-                        if (f.getFieldName().equals("magicNumber") && !f.isWriter()) {
-                            usesMagicBool[0] = true;
+                    });
+                } catch (CannotCompileException ignored) {}
+                try {
+                    CtMethod ctApplyPowers = ctClass.getDeclaredMethod("applyPowers");
+                    ctApplyPowers.instrument(new ExprEditor() {
+                        @Override
+                        public void edit(FieldAccess f) {
+                            if (f.getFieldName().equals("magicNumber") && !f.isWriter()) {
+                                usesMagicBool[0] = true;
+                            }
                         }
-                    }
-                });
-            } catch (Exception ignored) { }
-            try {
-                CtMethod ctCalcCardDamage = pool.get(card.getClass().getName()).getDeclaredMethod("calculateCardDamage", new CtClass[]{pool.get(AbstractMonster.class.getName())});
-                ctCalcCardDamage.instrument(new ExprEditor() {
-                    @Override
-                    public void edit(FieldAccess f) {
-                        if (f.getFieldName().equals("magicNumber") && !f.isWriter()) {
-                            usesMagicBool[0] = true;
+                    });
+                } catch (CannotCompileException ignored) {}
+                try {
+                    CtMethod ctCalcCardDamage = ctClass.getDeclaredMethod("calculateCardDamage", new CtClass[]{pool.get(AbstractMonster.class.getName())});
+                    ctCalcCardDamage.instrument(new ExprEditor() {
+                        @Override
+                        public void edit(FieldAccess f) {
+                            if (f.getFieldName().equals("magicNumber") && !f.isWriter()) {
+                                usesMagicBool[0] = true;
+                            }
                         }
-                    }
-                });
+                    });
 
-            } catch (Exception ignored) { }
+                } catch (CannotCompileException ignored) {}
+            } catch (NotFoundException ignored) {
+                return false;
+            }
         }
         return usesMagicBool[0];
     }
