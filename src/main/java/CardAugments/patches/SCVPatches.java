@@ -137,7 +137,7 @@ public class SCVPatches {
     public static class PreviewScreen implements ScrollBarListener {
         private static final int CARDS_PER_LINE = (int)((float)Settings.WIDTH / (AbstractCard.IMG_WIDTH * 0.75F + Settings.CARD_VIEW_PAD_X * 3.0F));
         private static float drawStartX;
-        private static final float drawStartY = (float)Settings.HEIGHT * 0.66F;
+        private static final float drawStartY = (float)Settings.HEIGHT * 0.8F;
         private static final float padX = AbstractCard.IMG_WIDTH * 0.75F + Settings.CARD_VIEW_PAD_X;
         private static final float padY = AbstractCard.IMG_HEIGHT * 0.75F + Settings.CARD_VIEW_PAD_Y;
         private boolean grabbedScreen = false;
