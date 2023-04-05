@@ -11,10 +11,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.green.Blur;
+import com.megacrit.cardcrawl.rewards.RewardItem;
 import com.megacrit.cardcrawl.screens.CombatRewardScreen;
 import javassist.CannotCompileException;
 import javassist.expr.ExprEditor;
 import javassist.expr.MethodCall;
+import rainbowMod.patches.RainbowCardsInChestsPatch;
+
+import static CardAugments.CardAugmentsMod.rollCardAugment;
 
 public class CompatibilityPatches {
     @SpirePatch2(clz = ModifyRewardsPatch.class, method = "addModifiersRewards", requiredModId = "spirelocations", optional = true)
@@ -150,4 +154,15 @@ public class CompatibilityPatches {
         }
     }
 
+    @SpirePatch2(clz = RainbowCardsInChestsPatch.class, method = "makeRainbowReward", requiredModId = "RainbowMod", optional = true)
+    public static class ModsOnRainbowCards {
+        @SpirePostfixPatch
+        public static void modTime(RewardItem __result) {
+            if (__result.cards != null) {
+                for (AbstractCard c : __result.cards) {
+                    rollCardAugment(c);
+                }
+            }
+        }
+    }
 }
