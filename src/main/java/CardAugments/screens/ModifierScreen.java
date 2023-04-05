@@ -109,12 +109,12 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
         drawStartX -= (float)(CARDS_PER_LINE - 1) * Settings.CARD_VIEW_PAD_X;// 73
         drawStartX /= 2.0F;// 74
         drawStartX += AbstractCard.IMG_WIDTH * 0.75F / 2.0F;// 75
+        refreshDropdownMenu(modDropdown);
     }
     
     public void open() {
         SingleCardViewPopup.isViewingUpgrade = false;
         upgradePreview = false;
-        refreshDropdownMenu(modDropdown);
         cancelButton.show(TEXT[0]);
         settingsButton.show(TEXT[5]);
         CardCrawlGame.mainMenuScreen.screen = MainMenuPatches.Enums.MODIFIERS_VIEW; //This is how we tell it what screen is open
@@ -186,8 +186,6 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
             settingsButton.hide();
             CardCrawlGame.mainMenuScreen.screen = MainMenuScreen.CurScreen.MAIN_MENU;
             CardCrawlGame.mainMenuScreen.lighten();
-            selectedAugment = null;
-            cardsToRender.clear();
         }
 
         settingsButton.update();
@@ -219,8 +217,6 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
             } catch (Exception ignored) {
                 CardCrawlGame.mainMenuScreen.screen = MainMenuScreen.CurScreen.MAIN_MENU;
                 CardCrawlGame.mainMenuScreen.lighten();
-                selectedAugment = null;
-                cardsToRender.clear();
             }
         }
     }
