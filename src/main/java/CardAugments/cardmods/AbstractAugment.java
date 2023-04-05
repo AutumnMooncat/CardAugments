@@ -15,10 +15,7 @@ import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.defect.CompileDriverAction;
 import com.megacrit.cardcrawl.actions.defect.FTLAction;
 import com.megacrit.cardcrawl.actions.defect.FissionAction;
-import com.megacrit.cardcrawl.actions.unique.CalculatedGambleAction;
-import com.megacrit.cardcrawl.actions.unique.DoppelgangerAction;
-import com.megacrit.cardcrawl.actions.unique.DropkickAction;
-import com.megacrit.cardcrawl.actions.unique.ExpertiseAction;
+import com.megacrit.cardcrawl.actions.unique.*;
 import com.megacrit.cardcrawl.actions.utility.ConditionalDrawAction;
 import com.megacrit.cardcrawl.actions.watcher.InnerPeaceAction;
 import com.megacrit.cardcrawl.actions.watcher.SanctityAction;
@@ -462,7 +459,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         return true;
     }
 
-    public static Class<?>[] drawClasses = {DrawCardAction.class, ConditionalDrawAction.class, DropkickAction.class, CalculatedGambleAction.class, ExpertiseAction.class, CompileDriverAction.class, FTLAction.class, FissionAction.class,  InnerPeaceAction.class, SanctityAction.class};
+    public static Class<?>[] drawClasses = {DrawCardAction.class, ConditionalDrawAction.class, DropkickAction.class, HeelHookAction.class, CalculatedGambleAction.class, ExpertiseAction.class, CompileDriverAction.class, FTLAction.class, FissionAction.class,  InnerPeaceAction.class, SanctityAction.class};
     public static boolean drawsCards(AbstractCard card) {
         final boolean[] foundDrawCard = {false};
         try {
