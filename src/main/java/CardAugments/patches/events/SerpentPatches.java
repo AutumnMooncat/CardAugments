@@ -89,6 +89,7 @@ public class SerpentPatches {
 
                         AbstractEvent.logMetric("Liars Game", "Agree", null, null, null, cardMetrics, null, null, null, 0, 0, 0, 0, 0, 0);
                         choseMyOption = true;
+                        needsContinue = false;
                         try {
                             Class<?> enumElement = Class.forName(Sssserpent.class.getName()+"$CUR_SCREEN");
                             if (enumElement.isEnum()) {
