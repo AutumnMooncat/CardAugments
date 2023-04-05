@@ -415,9 +415,8 @@ public abstract class AbstractAugment extends AbstractCardModifier {
                 && doesntOverride(card, "triggerOnExhaust");
     }
 
-    private static boolean usesAction = false;
     public static boolean usesAction(AbstractCard card, Class<? extends AbstractGameAction> clazz) {
-        usesAction = false;
+        final boolean[] usesAction = {false};
         ClassPool pool = Loader.getClassPool();
         try {
             CtClass ctClass = pool.get(card.getClass().getName());
@@ -427,7 +426,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
                 @Override
                 public void edit(NewExpr e) {
                     if (e.getClassName().equals(clazz.getName())) {
-                        usesAction = true;
+                        usesAction[0] = true;
                     }
                 }
 
@@ -439,7 +438,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
                             @Override
                             public void edit(NewExpr e) {
                                 if (e.getClassName().equals(clazz.getName())) {
-                                    usesAction = true;
+                                    usesAction[0] = true;
                                 }
                             }
                         });
@@ -447,7 +446,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
                 }
             });
         } catch (Exception ignored) {}
-        return usesAction;
+        return usesAction[0];
     }
 
     public static boolean noCardModDescriptionChanges(AbstractCard card) {
