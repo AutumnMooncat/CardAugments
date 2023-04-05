@@ -462,7 +462,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         return true;
     }
 
-    public static Class<?>[] drawClasses = {DrawCardAction.class, ConditionalDrawAction.class, DropkickAction.class, CalculatedGambleAction.class, DoppelgangerAction.class, ExpertiseAction.class, CompileDriverAction.class, FTLAction.class, FissionAction.class,  InnerPeaceAction.class, SanctityAction.class};
+    public static Class<?>[] drawClasses = {DrawCardAction.class, ConditionalDrawAction.class, DropkickAction.class, CalculatedGambleAction.class, ExpertiseAction.class, CompileDriverAction.class, FTLAction.class, FissionAction.class,  InnerPeaceAction.class, SanctityAction.class};
     public static boolean drawsCards(AbstractCard card) {
         final boolean[] foundDrawCard = {false};
         try {

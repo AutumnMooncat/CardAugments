@@ -398,7 +398,7 @@
     "TEXT": ["Locking ", "", " NL Apply %d Lock-On."]
   },
   "CardAugments:LuckyMod": {
-    "TEXT": ["Lucky ", "", "Scry %d. NL "]
+    "TEXT": ["Lucky ", "", "Scry %s. NL "]
   },
   "CardAugments:MasochisticMod": {
     "TEXT": ["Masochistic ", "", " NL Gains 3 additional Block per debuff you have."]
