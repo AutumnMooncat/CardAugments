@@ -13,7 +13,7 @@
   },
   "CardAugments:InfinitePower": {
     "NAME": "Infinite ",
-    "DESCRIPTIONS": ["At the start of your turn, add a a #y%s to your hand."]
+    "DESCRIPTIONS": ["At the start of your turn, add a %s to your hand."]
   },
   "CardAugments:BiasPower": {
     "NAME": "Biased",
