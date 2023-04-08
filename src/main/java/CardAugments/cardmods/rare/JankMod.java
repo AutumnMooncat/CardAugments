@@ -10,7 +10,9 @@ public class JankMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(JankMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
-    boolean modMagic;
+    public int upDamage = -1;
+    public int upBlock = -1;
+    public int upMagic = -1;
 
     @Override
     public void onInitialApplication(AbstractCard card) {
@@ -38,6 +40,48 @@ public class JankMod extends AbstractAugment {
     @Override
     public boolean validCard(AbstractCard card) {
         return (card.baseDamage > 0 || card.baseBlock > 0) && cardCheck(card, c -> doesntDowngradeMagic() && c.baseMagicNumber > 0);
+    }
+
+    @Override
+    public void onUpgradeCheck(AbstractCard card) {
+        super.onUpgradeCheck(card);
+        boolean hasDamage = card.baseDamage > 0;
+        boolean hasBlock = card.baseBlock > 0;
+        if (hasDamage && hasBlock) {
+            if (upDamage > 0) {
+                card.baseBlock += upDamage;
+                card.upgradedBlock = true;
+            }
+            if (upBlock > 0) {
+                card.baseMagicNumber += upBlock;
+                card.magicNumber = card.baseMagicNumber;
+                card.upgradedMagicNumber = true;
+            }
+            if (upMagic > 0) {
+                card.baseDamage += upMagic;
+                card.upgradedBlock = true;
+            }
+        } else if (hasDamage) {
+            if (upDamage > 0) {
+                card.baseMagicNumber += upDamage;
+                card.magicNumber = card.baseMagicNumber;
+                card.upgradedMagicNumber = true;
+            }
+            if (upMagic > 0) {
+                card.baseDamage += upMagic;
+                card.upgradedDamage = true;
+            }
+        } else {
+            if (upBlock > 0) {
+                card.baseMagicNumber += upBlock;
+                card.magicNumber = card.baseMagicNumber;
+                card.upgradedMagicNumber = true;
+            }
+            if (upMagic > 0) {
+                card.baseBlock += upMagic;
+                card.upgradedBlock = true;
+            }
+        }
     }
 
     @Override
