@@ -312,40 +312,19 @@ public abstract class AbstractAugment extends AbstractCardModifier {
             try {
                 CtClass ctClass = pool.get(card.getClass().getName());
                 ctClass.defrost();
-                try {
-                    CtMethod ctUse = ctClass.getDeclaredMethod("use");
-                    ctUse.instrument(new ExprEditor() {
-                        @Override
-                        public void edit(FieldAccess f) {
-                            if (f.getFieldName().equals("magicNumber") && !f.isWriter()) {
-                                usesMagicBool[0] = true;
+                CtMethod[] methods = ctClass.getDeclaredMethods();
+                for (CtMethod method : methods) {
+                    try {
+                        method.instrument(new ExprEditor() {
+                            @Override
+                            public void edit(FieldAccess f) {
+                                if (f.getFieldName().equals("magicNumber") && f.isReader()) {
+                                    usesMagicBool[0] = true;
+                                }
                             }
-                        }
-                    });
-                } catch (Exception ignored) {}
-                try {
-                    CtMethod ctApplyPowers = ctClass.getDeclaredMethod("applyPowers");
-                    ctApplyPowers.instrument(new ExprEditor() {
-                        @Override
-                        public void edit(FieldAccess f) {
-                            if (f.getFieldName().equals("magicNumber") && !f.isWriter()) {
-                                usesMagicBool[0] = true;
-                            }
-                        }
-                    });
-                } catch (Exception ignored) {}
-                try {
-                    CtMethod ctCalcCardDamage = ctClass.getDeclaredMethod("calculateCardDamage", new CtClass[]{pool.get(AbstractMonster.class.getName())});
-                    ctCalcCardDamage.instrument(new ExprEditor() {
-                        @Override
-                        public void edit(FieldAccess f) {
-                            if (f.getFieldName().equals("magicNumber") && !f.isWriter()) {
-                                usesMagicBool[0] = true;
-                            }
-                        }
-                    });
-
-                } catch (Exception ignored) {}
+                        });
+                    } catch (Exception ignored) {}
+                }
             } catch (NotFoundException ignored) {
                 return false;
             }
