@@ -45,7 +45,7 @@ public class DevotedMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return (card.baseDamage > 1 || card.baseBlock > 1) && card.color == AbstractCard.CardColor.PURPLE;
+        return (card.baseDamage > 1 || card.baseBlock > 1) && card.color == AbstractCard.CardColor.PURPLE && card.cost >= 0;
     }
 
     @Override
