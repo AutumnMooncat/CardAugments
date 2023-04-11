@@ -28,7 +28,7 @@ public class SanctifiedMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost != -2;
+        return card.cost > 0;
     }
 
     @Override
