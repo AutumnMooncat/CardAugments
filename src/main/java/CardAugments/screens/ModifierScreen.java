@@ -3,6 +3,7 @@ package CardAugments.screens;
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import CardAugments.patches.MainMenuPatches;
+import CardAugments.patches.SCVPatches;
 import CardAugments.ui.SettingsButton;
 import CardAugments.util.FormatHelper;
 import basemod.BaseMod;
@@ -525,7 +526,7 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
     @SpirePatch2(clz = AbstractCard.class, method = "renderInLibrary")
     public static class FixUpgrades {
         public static AbstractCard getCard(AbstractCard baseCard, AbstractCard copy) {
-            if (CardCrawlGame.mainMenuScreen.screen == MainMenuPatches.Enums.MODIFIERS_VIEW) {
+            if (CardCrawlGame.mainMenuScreen.screen == MainMenuPatches.Enums.MODIFIERS_VIEW || SCVPatches.viewingAugments) {
                 return baseCard.makeStatEquivalentCopy();
             }
             return copy;

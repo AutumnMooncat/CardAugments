@@ -2,9 +2,12 @@ package CardAugments.patches;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
+import CardAugments.screens.ModifierScreen;
+import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardModifierManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.evacipated.cardcrawl.mod.stslib.ui.MultiUpgradeTree;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
@@ -20,6 +23,10 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.screens.SingleCardViewPopup;
 import com.megacrit.cardcrawl.screens.mainMenu.ScrollBar;
 import com.megacrit.cardcrawl.screens.mainMenu.ScrollBarListener;
+import javassist.CannotCompileException;
+import javassist.expr.ExprEditor;
+import javassist.expr.FieldAccess;
+import javassist.expr.MethodCall;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,7 +36,7 @@ import java.util.Iterator;
 public class SCVPatches {
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(CardAugmentsMod.makeID("SCVScreen"));
     public static final String[] TEXT = uiStrings.TEXT;
-    public static final Hitbox augmentHitbox = new Hitbox(250.0F * Settings.scale, 80.0F * Settings.scale);
+    public static final Hitbox augmentHitbox = new Hitbox(320.0F * Settings.scale, 80.0F * Settings.scale);
     public static boolean viewingAugments = false;
     public static final CardGroup cardsToRender = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
     public static final PreviewScreen screen = new PreviewScreen();
@@ -76,16 +83,16 @@ public class SCVPatches {
 
             FontHelper.cardTitleFont.getData().setScale(1.0F);
             sb.setColor(Color.WHITE);// 1712
-            sb.draw(ImageMaster.CHECKBOX, augmentHitbox.cX - 80.0F * Settings.scale - 32.0F, augmentHitbox.cY - 32.0F, 32.0F, 32.0F, 64.0F, 64.0F, Settings.scale, Settings.scale, 0.0F, 0, 0, 64, 64, false, false);// 1713
+            sb.draw(ImageMaster.CHECKBOX, augmentHitbox.cX - 120.0F * Settings.scale - 32.0F, augmentHitbox.cY - 32.0F, 32.0F, 32.0F, 64.0F, 64.0F, Settings.scale, Settings.scale, 0.0F, 0, 0, 64, 64, false, false);// 1713
             if (augmentHitbox.hovered) {// 1731
-                FontHelper.renderFont(sb, FontHelper.cardTitleFont, TEXT[0], augmentHitbox.cX - 45.0F * Settings.scale, augmentHitbox.cY + 10.0F * Settings.scale, Settings.BLUE_TEXT_COLOR);// 1732
+                FontHelper.renderFont(sb, FontHelper.cardTitleFont, TEXT[0], augmentHitbox.cX - 85.0F * Settings.scale, augmentHitbox.cY + 10.0F * Settings.scale, Settings.BLUE_TEXT_COLOR);// 1732
             } else {
-                FontHelper.renderFont(sb, FontHelper.cardTitleFont, TEXT[0], augmentHitbox.cX - 45.0F * Settings.scale, augmentHitbox.cY + 10.0F * Settings.scale, Settings.GOLD_COLOR);// 1740
+                FontHelper.renderFont(sb, FontHelper.cardTitleFont, TEXT[0], augmentHitbox.cX - 85.0F * Settings.scale, augmentHitbox.cY + 10.0F * Settings.scale, Settings.GOLD_COLOR);// 1740
             }
 
             if (viewingAugments) {// 1749
                 sb.setColor(Color.WHITE);// 1750
-                sb.draw(ImageMaster.TICK, augmentHitbox.cX - 80.0F * Settings.scale - 32.0F, augmentHitbox.cY - 32.0F, 32.0F, 32.0F, 64.0F, 64.0F, Settings.scale, Settings.scale, 0.0F, 0, 0, 64, 64, false, false);// 1751
+                sb.draw(ImageMaster.TICK, augmentHitbox.cX - 120.0F * Settings.scale - 32.0F, augmentHitbox.cY - 32.0F, 32.0F, 32.0F, 64.0F, 64.0F, Settings.scale, Settings.scale, 0.0F, 0, 0, 64, 64, false, false);// 1751
             }
 
             augmentHitbox.render(sb);
@@ -97,7 +104,7 @@ public class SCVPatches {
     public static class OpenPatch {
         @SpirePostfixPatch
         public static void openTime(SingleCardViewPopup __instance) {
-            augmentHitbox.move(120F * Settings.scale, 70.0F * Settings.scale);
+            augmentHitbox.move(155F * Settings.scale, 70.0F * Settings.scale);
         }
     }
 
@@ -127,6 +134,18 @@ public class SCVPatches {
     public static class TipsBeGone {
         @SpirePrefixPatch
         public static SpireReturn<?> stop(SingleCardViewPopup __instance, SpriteBatch sb, AbstractCard ___card) {
+            if (viewingAugments) {
+                return SpireReturn.Return();
+            }
+            return SpireReturn.Continue();
+        }
+    }
+
+    @SpirePatch2(clz = MultiUpgradeTree.class, method = "update")
+    @SpirePatch2(clz = MultiUpgradeTree.class, method = "render")
+    public static class ClobberTime {
+        @SpirePrefixPatch
+        public static SpireReturn<?> ceaseAndDesist() {
             if (viewingAugments) {
                 return SpireReturn.Return();
             }
@@ -209,6 +228,11 @@ public class SCVPatches {
         }
 
         public void renderCards(SpriteBatch sb) {
+            for (AbstractCard c : cardsToRender.group) {
+                for (AbstractCardModifier m : CardModifierManager.modifiers(c)) {
+                    String s = m.identifier(c);
+                }
+            }
             cardsToRender.renderInLibrary(sb);// 503
             cardsToRender.renderTip(sb);
             if (this.hoveredCard != null) {// 426
