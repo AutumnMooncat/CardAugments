@@ -407,6 +407,10 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     }
 
     public static boolean usesAction(AbstractCard card, Class<? extends AbstractGameAction> clazz) {
+        return usesClass(card, clazz);
+    }
+
+    public static boolean usesClass(AbstractCard card, Class<?> clazz) {
         final boolean[] usesAction = {false};
         ClassPool pool = Loader.getClassPool();
         try {

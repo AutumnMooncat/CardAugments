@@ -5,54 +5,25 @@ import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.actions.watcher.ChangeStanceAction;
+import com.megacrit.cardcrawl.actions.watcher.IndignationAction;
+import com.megacrit.cardcrawl.actions.watcher.InnerPeaceAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.purple.*;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.powers.watcher.MantraPower;
 import com.megacrit.cardcrawl.stances.WrathStance;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class EruptingMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(EruptingMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
-    // Could argue to figure out what is a "stance card" programatically for mod compatibility, but it's not *that* important
-    private static final List<Class<? extends AbstractCard>> CARD_BLACKLIST = Arrays.asList(
-            Eruption.class,
-            Crescendo.class,
-            Indignation.class,
-            //SimmeringFury.class,
-            Tantrum.class,
-
-            // One could argue to allow the non-Wrath cards to also be Erupting, switching stances twice instantly.
-            Vigilance.class,
-            Tranquility.class,
-            FearNoEvil.class,
-            InnerPeace.class,
-            Meditate.class,
-
-            Blasphemy.class,
-
-            EmptyBody.class,
-            EmptyFist.class,
-            EmptyMind.class,
-
-            Prostrate.class,
-            Pray.class,
-            Worship.class
-            );
-
-    @Override
-    public void onInitialApplication(AbstractCard card) {
-    }
-
     @Override
     public boolean validCard(AbstractCard card) {
         return card.color == AbstractCard.CardColor.PURPLE &&
-                card.type != AbstractCard.CardType.POWER &&
-                ! CARD_BLACKLIST.contains(card.getClass());
+                (card.type == AbstractCard.CardType.ATTACK || card.type == AbstractCard.CardType.SKILL) &&
+                card.cost > -2 &&
+                !usesAction(card, ChangeStanceAction.class) && !usesClass(card, MantraPower.class) &&
+                !usesClass(card, IndignationAction.class) && !usesAction(card, InnerPeaceAction.class);
     }
 
     @Override
