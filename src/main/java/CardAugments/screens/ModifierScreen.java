@@ -10,7 +10,6 @@ import basemod.BaseMod;
 import basemod.ModBadge;
 import basemod.ReflectionHacks;
 import basemod.helpers.CardModifierManager;
-import basemod.patches.com.megacrit.cardcrawl.characters.AbstractPlayer.MaxHandSizePatch;
 import basemod.patches.com.megacrit.cardcrawl.screens.compendium.CardLibraryScreen.NoCompendium;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
