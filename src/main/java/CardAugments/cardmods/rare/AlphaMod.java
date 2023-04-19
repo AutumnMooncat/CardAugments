@@ -74,7 +74,6 @@ public class AlphaMod extends AbstractAugment {
         for (AbstractCard c : MultiCardPreview.multiCardPreview.get(card)) {
             if (CardModifierManager.hasModifier(c, BetaMod.ID) || CardModifierManager.hasModifier(c, OmegaMod.ID)) {
                 c.upgrade();
-                CardModifierManager.testBaseValues(c);
                 c.initializeDescription();
             }
         }

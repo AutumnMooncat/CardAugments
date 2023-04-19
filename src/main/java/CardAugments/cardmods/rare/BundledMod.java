@@ -68,7 +68,6 @@ public class BundledMod extends AbstractAugment {
         for (AbstractCard c : MultiCardPreview.multiCardPreview.get(card)) {
             if (CardModifierManager.hasModifier(c, PreviewedMod.ID)) {
                 c.upgrade();
-                CardModifierManager.testBaseValues(c);
                 c.initializeDescription();
             }
         }

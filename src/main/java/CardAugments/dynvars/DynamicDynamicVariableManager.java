@@ -70,18 +70,16 @@ public class DynamicDynamicVariableManager extends DynamicVariable {
     }
 
     @SpirePatch2(clz = SmithPreview.class, method = "ForEachDynamicVariable")
-    @SpirePatch2(clz = basemod.patches.com.megacrit.cardcrawl.cards.AbstractCard.RenderCustomDynamicVariable.Inner.class, method = "myRenderDynamicVariable")
+    @SpirePatch2(clz = basemod.patches.com.megacrit.cardcrawl.cards.AbstractCard.RenderCustomDynamicVariable.Inner.class, method = "subRenderDynamicVariable")
     @SpirePatch2(clz = basemod.patches.com.megacrit.cardcrawl.cards.AbstractCard.RenderCustomDynamicVariableCN.class, method = "Insert")
-    @SpirePatch2(clz = basemod.patches.com.megacrit.cardcrawl.screens.SingleCardViewPopup.RenderCustomDynamicVariable.Inner.class, method = "myRenderDynamicVariable")
+    @SpirePatch2(clz = basemod.patches.com.megacrit.cardcrawl.screens.SingleCardViewPopup.RenderCustomDynamicVariable.Inner.class, method = "subRenderDynamicVariable")
     @SpirePatch2(clz = basemod.patches.com.megacrit.cardcrawl.screens.SingleCardViewPopup.RenderCustomDynamicVariableCN.class, method = "Insert")
     public static class GrabWorkingKey {
         @SpireInstrumentPatch
         public static ExprEditor patch() {
             return new ExprEditor() {
                 @Override
-                //Method call is basically the equivalent of a methodcallmatcher of an insert patch, checks the edit method against every method call in the function you#re patching
                 public void edit(MethodCall m) throws CannotCompileException {
-                    //If the method is from the class AnimationState and the method is called update
                     if (m.getClassName().equals(HashMap.class.getName()) && m.getMethodName().equals("get")) {
                         m.replace("{ " +
                                 "$1 = " + CardAugments.dynvars.DynamicDynamicVariableManager.GrabWorkingKey.class.getName() + ".grabWorkingKey($1); " +

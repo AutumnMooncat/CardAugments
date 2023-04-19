@@ -69,7 +69,6 @@ public class BetaMod extends AbstractAugment {
         for (AbstractCard c : MultiCardPreview.multiCardPreview.get(card)) {
             if (CardModifierManager.hasModifier(c, OmegaMod.ID)) {
                 c.upgrade();
-                CardModifierManager.testBaseValues(c);
                 c.initializeDescription();
             }
         }
