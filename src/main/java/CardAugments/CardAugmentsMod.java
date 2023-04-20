@@ -68,10 +68,10 @@ public class CardAugmentsMod implements
     public static int modProbabilityPercent = 10;
 
     public static final String COMMON_WEIGHT = "commonWeight";
-    public static int commonWeight = 5;
+    public static int commonWeight = 3;
 
     public static final String UNCOMMON_WEIGHT = "uncommonWeight";
-    public static int uncommonWeight = 3;
+    public static int uncommonWeight = 2;
 
     public static final String RARE_WEIGHT = "rareWeight";
     public static int rareWeight = 1;
