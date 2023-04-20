@@ -256,6 +256,9 @@
   "CardAugments:BootMod": {
     "TEXT": ["Boot ", "", "Innate. NL "]
   },
+  "CardAugments:BowlingMod": {
+    "TEXT": ["Bowling ", ""," for each enemy in combat."]
+  },
   "CardAugments:BracedMod": {
     "TEXT": ["Braced ", "", " NL Increase this card's Block by %s this combat."]
   },
