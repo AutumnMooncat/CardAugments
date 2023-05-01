@@ -12,7 +12,7 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.VulnerablePower;
+import com.megacrit.cardcrawl.powers.LockOnPower;
 
 public class LockingMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(LockingMod.class.getSimpleName());
@@ -38,7 +38,7 @@ public class LockingMod extends AbstractAugment {
     @Override
     public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
         if (!modifiedBase && target != null) {
-            addToBot(new ApplyPowerAction(target, AbstractDungeon.player, new VulnerablePower(target, EFFECT, false)));
+            addToBot(new ApplyPowerAction(target, AbstractDungeon.player, new LockOnPower(target, EFFECT)));
         }
     }
 
