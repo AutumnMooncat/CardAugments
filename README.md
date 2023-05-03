@@ -1,6 +1,6 @@
 # Chimera Cards
 ### Overview
-Chimera Cards aims to add extra flavour to runs by adding modifiers to cards that change how they work. Instead of seeing the same Cleave every time, you may instead find a Searing Cleave which can be upgraded any number of times, or perhaps a Bludgeoning Cleave which costs much more, but deals perportionally more damage as well! 
+Chimera Cards aims to add extra flavour to runs by adding modifiers to cards that change how they work. Instead of seeing the same Cleave every time, you may instead find a Searing Cleave which can be upgraded any number of times, or perhaps a Bludgeoning Cleave which costs much more, but deals proportionally more damage as well! 
 
 ### Features
 Chimera Cards comes packaged with 100+ modifiers that are split into different rarities. By default, some modifiers are more likely to be seen than others, with rarer cards being more likely to see rarer modifiers.
@@ -10,13 +10,13 @@ In addition to modifiers, it also adds 10+ new options in basegame events. Some 
 Finally, a Modifier Screen was added to the main menu to let you browse modifiers to see how they work on any cards they can be applied to. Included in this screen is a Settings button you can access to quickly change all the configuration options.
 
 ### Configurable
-Appealing to different playstyles was a core concept when designing the mod, and as such, it comes with many config options to suit your tastes. All of the config options can be accessed from the Modifier Screen and include the following:
+Appealing to different play styles was a core concept when designing the mod, and as such, it comes with many config options to suit your tastes. All of the config options can be accessed from the Modifier Screen and include the following:
 
 What percentage of cards should roll modifiers
 
 How likely Common / Uncommon / and Rare modifiers are to appear
 
-How much the rarity of the card should influience the modifier it rolls
+How much the rarity of the card should influence the modifier it rolls
 
 Should starter cards roll modifies
 
