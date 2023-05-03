@@ -26,7 +26,7 @@ Should cards from events or relics like Pandora's Box roll modifies
 
 Should Orb related modifiers be able to roll on other characters
 
-Should the extra Events options appear
+Should the extra Event options appear
 
 In addition to this, any modifiers added via other mods (such as crossover content of modifier packs), will be given their own config option as well to toggle if those modifiers should also appear.
 
