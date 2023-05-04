@@ -1,0 +1,31 @@
+{
+  "${ModID}:LosePowerPower": {
+    "NAME": "Lose ",
+    "DESCRIPTIONS": ["At the end of your turn, lose #b"," ","."]
+  },
+  "${ModID}:NextTurnPowerPower": {
+    "NAME": "Next Turn ",
+    "DESCRIPTIONS": ["Next turn, gain #b"," ","."]
+  },
+  "CardAugments:IcizePower": {
+    "NAME": "icize",
+    "DESCRIPTIONS": ["At the start of your turn, mimic a #y%s."]
+  },
+  "CardAugments:InfinitePower": {
+    "NAME": "Infinite ",
+    "DESCRIPTIONS": ["At the start of your turn, add a %s to your hand."]
+  },
+  "CardAugments:BiasPower": {
+    "NAME": "Biased",
+    "DESCRIPTIONS": ["At the start of your turn, lose %d #y%s."]
+  },
+  "CardAugments:RunicPower": {
+    "NAME": "Obscuring Runes",
+    "DESCRIPTIONS": ["You cannot see enemy intents."]
+  },
+  "CardAugments:BombPower": {
+    "NAME": "Explosive ",
+    "DESCRIPTIONS": ["In #b%1$s turns, play #b%2$s copies of %3$s at the start of your turn.",
+      "At the start of next turn, play #b%1$s copies of %2$s."]
+  }
+}
