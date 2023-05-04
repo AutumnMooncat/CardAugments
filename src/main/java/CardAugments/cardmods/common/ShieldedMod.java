@@ -17,7 +17,7 @@ public class ShieldedMod extends AbstractAugment implements DynvarCarrier {
     public static final String DESCRIPTION_KEY = "!"+ID+"!";
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
 
-    private static final int BLOCK = 5;
+    private static final int BLOCK = 7;
     private static final int UPGRADE_BLOCK = 3;
 
     public int val;
