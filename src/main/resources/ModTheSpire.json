@@ -2,7 +2,7 @@
   "modid": "${project.artifactId}",
   "name": "${project.name}",
   "author_list": ["Mistress Alison"],
-  "credits": "ZHS Translation - cyxz, Sxy6214\nBeta Testing - Sandtag",
+  "credits": "ZHS Translation - cyxw, Sxy6214\nBeta Testing - Sandtag",
   "description": "${project.description}",
   "version": "${project.version}",
   "sts_version": "${SlayTheSpire.version}",
