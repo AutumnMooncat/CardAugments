@@ -18,6 +18,11 @@
       "Adds randomly rolled card modifiers to card rewards. See the Mod Options if you would like to change any configurations!"
     ]
   },
+  "CardAugments:AbstractAugment": {
+    "TEXT": [
+      "Card"
+    ]
+  },
   "CardAugments:CrossoverConfig": {
     "TEXT": [
       "Enable Base Chimera Cards Content",

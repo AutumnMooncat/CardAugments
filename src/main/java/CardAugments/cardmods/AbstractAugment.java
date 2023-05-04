@@ -1,11 +1,13 @@
 package CardAugments.cardmods;
 
 import CardAugments.CardAugmentsMod;
+import CardAugments.cardmods.common.AllOutMod;
 import CardAugments.patches.InterruptUseCardFieldPatches;
 import CardAugments.util.Wiz;
 import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardBorderGlowManager;
 import basemod.helpers.CardModifierManager;
+import basemod.helpers.TooltipInfo;
 import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.BranchingUpgradesCard;
 import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.MultiUpgradeCard;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.ExhaustiveField;
@@ -35,12 +37,11 @@ import javassist.expr.MethodCall;
 import javassist.expr.NewExpr;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Predicate;
 
 public abstract class AbstractAugment extends AbstractCardModifier {
+    private static final String[] HELPER_TEXT = CardCrawlGame.languagePack.getUIString(CardAugmentsMod.makeID(AbstractAugment.class.getSimpleName())).TEXT;
     public static final float HUGE_BUFF = 3/2f;
     public static final float MAJOR_BUFF = 4/3f;
     public static final float MODERATE_BUFF = 5/4f;
@@ -73,6 +74,18 @@ public abstract class AbstractAugment extends AbstractCardModifier {
 
     public String getSuffix() {
         return "";
+    }
+
+    public String getAugmentDescription() {
+        return "";
+    }
+
+    @Override
+    public List<TooltipInfo> additionalTooltips(AbstractCard card) {
+        if (!getAugmentDescription().isEmpty() && (!getPrefix().isEmpty() || !getSuffix().isEmpty())) {
+            return Collections.singletonList(new TooltipInfo(getPrefix()+HELPER_TEXT[0]+getSuffix(), getAugmentDescription()));
+        }
+        return null;
     }
 
     @Override
