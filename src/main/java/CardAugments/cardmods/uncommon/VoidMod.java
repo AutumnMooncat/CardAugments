@@ -3,6 +3,7 @@ package CardAugments.cardmods.uncommon;
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import basemod.abstracts.AbstractCardModifier;
+import basemod.patches.com.megacrit.cardcrawl.cards.AbstractCard.MultiCardPreview;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -18,16 +19,14 @@ public class VoidMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        if (card.cardsToPreview == null) {
-            card.cardsToPreview = new VoidCard();
-        }
-        card.cost -= 1;
+        MultiCardPreview.add(card, new VoidCard());
+        card.cost -= 2;
         card.costForTurn = card.cost;
     }
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost > 0 && cardCheck(card, c -> doesntUpgradeCost());
+        return card.cost >= 2 && cardCheck(card, c -> doesntUpgradeCost());
     }
 
     @Override
