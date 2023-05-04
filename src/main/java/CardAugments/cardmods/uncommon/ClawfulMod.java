@@ -96,6 +96,13 @@ public class ClawfulMod extends AbstractAugment implements DynvarCarrier {
     }
 
     @Override
+    public void onUpgradeCheck(AbstractCard card) {
+        if (card instanceof Claw) {
+            card.upgradedMagicNumber = true;
+        }
+    }
+
+    @Override
     public AugmentRarity getModRarity() {
         return AugmentRarity.UNCOMMON;
     }
