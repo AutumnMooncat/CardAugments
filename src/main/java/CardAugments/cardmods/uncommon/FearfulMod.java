@@ -1,4 +1,4 @@
-package CardAugments.cardmods.common;
+package CardAugments.cardmods.uncommon;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
@@ -19,13 +19,13 @@ public class FearfulMod extends AbstractAugment {
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        card.cost = card.cost - 1;
+        card.cost = card.cost - 2;
         card.costForTurn = card.cost;
     }
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost > 0 && hasACurse() && cardCheck(card, c -> doesntUpgradeCost());
+        return card.cost >= 2 && hasACurse() && cardCheck(card, c -> doesntUpgradeCost());
     }
 
     @Override
@@ -50,7 +50,7 @@ public class FearfulMod extends AbstractAugment {
 
     @Override
     public AugmentRarity getModRarity() {
-        return AugmentRarity.COMMON;
+        return AugmentRarity.UNCOMMON;
     }
 
     @Override
