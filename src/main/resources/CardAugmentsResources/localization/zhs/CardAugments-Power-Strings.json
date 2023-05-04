@@ -1,0 +1,31 @@
+{
+  "${ModID}:LosePowerPower": {
+    "NAME": "失去",
+    "DESCRIPTIONS": ["回合结束时失去 #b "," ",""]
+  },
+  "${ModID}:NextTurnPowerPower": {
+    "NAME": "下一回合",
+    "DESCRIPTIONS": ["下一回合获得 #b "," ",""]
+  },
+  "CardAugments:IcizePower": {
+    "NAME": "icize",
+    "DESCRIPTIONS": ["回合开始时, mimic a #y%s"]
+  },
+  "CardAugments:InfinitePower": {
+    "NAME": "无限",
+    "DESCRIPTIONS": ["下一回合开始时将一张 %s 加入手牌"]
+  },
+  "CardAugments:BiasPower": {
+    "NAME": "被欺凌",
+    "DESCRIPTIONS": ["回合开始时失去 %d #y%s"]
+  },
+  "CardAugments:RunicPower": {
+    "NAME": "模糊符文",
+    "DESCRIPTIONS": ["你不能看见敌方意图"]
+  },
+  "CardAugments:BombPower": {
+    "NAME": "爆炸性增长",
+    "DESCRIPTIONS": ["在 #b%1$s 回合内, 每回合开始时打出 #b%2$s 次 %3$s 的复制品",
+      "下回合开始时打出 #b%1$s 次 %2$s 的复制品"]
+  }
+}
