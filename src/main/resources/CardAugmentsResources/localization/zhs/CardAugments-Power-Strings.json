@@ -1,31 +1,31 @@
 {
   "${ModID}:LosePowerPower": {
-    "NAME": "Lose ",
-    "DESCRIPTIONS": ["At the end of your turn, lose #b"," ","."]
+    "NAME": "失去",
+    "DESCRIPTIONS": ["回合结束时失去#b"," ",""]
   },
   "${ModID}:NextTurnPowerPower": {
-    "NAME": "Next Turn ",
-    "DESCRIPTIONS": ["Next turn, gain #b"," ","."]
+    "NAME": "下一回合",
+    "DESCRIPTIONS": ["下一回合获得#b"," ",""]
   },
   "CardAugments:IcizePower": {
     "NAME": "icize",
-    "DESCRIPTIONS": ["At the start of your turn, mimic a #y%s."]
+    "DESCRIPTIONS": ["回合开始时, mimic a #y%s"]
   },
   "CardAugments:InfinitePower": {
-    "NAME": "Infinite ",
-    "DESCRIPTIONS": ["At the start of your turn, add a %s to your hand."]
+    "NAME": "无限",
+    "DESCRIPTIONS": ["下一回合开始时将一张%s加入手牌"]
   },
   "CardAugments:BiasPower": {
-    "NAME": "Biased",
-    "DESCRIPTIONS": ["At the start of your turn, lose %d #y%s."]
+    "NAME": "被欺凌",
+    "DESCRIPTIONS": ["回合开始时失去%d #y%s"]
   },
   "CardAugments:RunicPower": {
-    "NAME": "Obscuring Runes",
-    "DESCRIPTIONS": ["You cannot see enemy intents."]
+    "NAME": "模糊符文",
+    "DESCRIPTIONS": ["你不能看见敌方意图"]
   },
   "CardAugments:BombPower": {
-    "NAME": "Explosive ",
-    "DESCRIPTIONS": ["In #b%1$s turns, play #b%2$s copies of %3$s at the start of your turn.",
-      "At the start of next turn, play #b%1$s copies of %2$s."]
+    "NAME": "爆炸性增长",
+    "DESCRIPTIONS": ["在#b%1$s回合内, 每回合开始时打出#b%2$s次%3$s的复制品",
+      "下回合开始时打出#b%1$s次%2$s的复制品"]
   }
 }
