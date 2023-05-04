@@ -1,7 +1,7 @@
 {
   "CardAugments:ModConfigs": {
     "TEXT": [
-      "Enable Card Augments",
+      "启用卡牌修改",
       "修改几率百分比 (默认 10):",
       "普通修改比重 (默认 3):",
       "罕见修改比重 (默认 2):",
@@ -9,7 +9,7 @@
       "允许修改初始牌",
       "允许在没有棱镜碎片的情况下获得充能球修改",
       "卡牌稀有度权重偏置 (默认 1):",
-      "允许修改立刻获得的牌 (噬咬, Pandora's Box, 诅咒, 等等)",
+      "允许修改立刻获得的牌 (噬咬, 潘多拉的魔盒, 诅咒, 等等)",
       "允许修改商店牌",
       "允许启用附加事件"
     ],
@@ -156,7 +156,7 @@
       "~\"对～~ NL ~这会很值～得的。~ NL ~嘶……嘶～嘶……\"~",
       "T蛇抬起头，往上喷出了一堆#y金币！ NL 这令人震惊又有点可怕。 NL 你把#y金币 收好，谢过蛇后，重新上路。",
       "贪婪",
-      "若斩杀，获得15金币 NL 消耗"
+      "斩杀时，获得15金币 NL 消耗"
     ],
     "EXTRA_TEXT": [
       "[同意] #g给予所有攻击牌 贪婪。",
@@ -167,396 +167,396 @@
   },
   "CardAugments:ShiningEvent": {
     "TEXT": [
-      "Testing the light by throwing some of your gear at it, you notice that the light is absorbed into it. It seems to be giving off a #y~welcoming~ #y~glow.~ NL Picking it back up, you find it is #r@scorching@ #r@hot@ ! You quickly put it away and tend to your burns.",
-      "Shining",
-      "Ethereal. NL When drawn, gain [E]. NL Only applicable to cards without Ethereal."
+      "通过往光柱里丢入装备, 你发现装备把光芒吸收了。它看起来散发着#y~诱人的光芒。~ NL 但当你把它捡起来的时候，你发现它 #r@出奇的烫@！你很快把它丢了出去并处理你的烧伤伤口。",
+      "闪耀",
+      "虚无 NL 抽到本牌时，获得 [E] NL 只能应用于没有虚无的牌。"
     ],
     "EXTRA_TEXT": [
-      "[Throw] #gGive #ga #grandom #gcard Shining. #rLose #r%s #rHP.",
-      "[Locked] Requires: Non-Ethereal Card.",
-      "[Leave]"
+      "[扔出] #g给予一张随机卡牌 闪耀。 #r失去 #r%s #r生命。",
+      "[锁定] 需要: 一张没有虚无的卡牌。",
+      "[离开]"
     ]
   },
   "CardAugments:TransmogrifierEvent": {
     "TEXT": [
-      "As the power of the shrine flows through you, your arsenal feels altered.",
-      "Choose 2 Cards to Augment."
+      "神龛的力量涌入你，你感觉自己的内心发生了一些变化。",
+      "选择两张卡来增加"
     ],
     "EXTRA_TEXT": [
-      "[Imbue] #gApply #ga #grandom #gmodifier #gto #g2 #gcards.",
-      "[Locked] Requires: Two cards that accept modifiers.",
-      "[Leave]"
+      "[浸染] #g给予两张随机卡牌一个随机修改。",
+      "[锁定] 需要: 两张能够接受修改的卡牌。",
+      "[离开]"
     ]
   },
   "CardAugments:ExampleMod": {
-    "TEXT": ["Prefix name", "Suffix name", "Description stuff"]
+    "TEXT": ["前缀名字", "后缀名字", "附加描述"]
   },
   "CardAugments:AberrantMod": {
-    "TEXT": ["Aberrant ", "", " NL Gain 1 Intangible. NL Exhaust."]
+    "TEXT": ["畸变的", "", " NL 获得1层 无实体。 NL 消耗。"]
   },
   "CardAugments:AbsoluteMod": {
-    "TEXT": ["Absolute ", "", " NL Absolute cards must be played before other cards in your hand.",
+    "TEXT": ["绝对化", "", " NL 绝对化卡牌必须在其他卡牌之前打出。",
       "Translator note: This is the cant use message that will appear",
-      "The "," is Absolute!"]
+      ""," 是绝对化的！"]
   },
   "CardAugments:AllOutMod": {
-    "TEXT": ["All-Out ", "", " NL Discard %d card at random.",
-      "Translator note: These strings are for replacing All-Out Attack's description. The first string is what to search for, the second string replaces it.",
-      " NL Discard 1 card at random.",
-      " NL Discard 2 cards at random."]
+    "TEXT": ["All-Out ", "", " NL 丢弃 %d 张随机手牌。",
+      "下面是替换 全力攻击 本卡的字符串，第一个是搜索用，第二个是用来替换的字符串。",
+      " NL 丢弃一张随机手牌。",
+      " NL 丢弃两张随机手牌。"]
   },
   "CardAugments:AlphaMod": {
-    "TEXT": ["Alpha ", "", "Shuffle a *Beta %s into your draw pile."," NL Exhaust.", "Innate. NL "]
+    "TEXT": ["阿尔法", "", "将一张 *贝塔 %s 洗入你的抽牌堆中。"," NL 消耗。", "固有。 NL "]
   },
   "CardAugments:BetaMod": {
-    "TEXT": ["Beta ", "", "Shuffle an *Omega %s into your draw pile."," NL Exhaust."]
+    "TEXT": ["贝塔", "", "将一张 *欧米伽 %s 洗入你的抽牌堆中。"," NL 消耗。"]
   },
   "CardAugments:OmegaMod": {
-    "TEXT": ["Omega ", "", ""]
+    "TEXT": ["欧米伽", "", ""]
   },
   "CardAugments:AngryMod": {
-    "TEXT": ["Angry ", "", " NL Add a copy of this card into your discard pile.",
-      "Translator note: These strings are for replacing Anger's description. The first string is what to search for, the second string replaces it.",
-      " NL Add a copy of this card into your discard pile.",
-      " NL Add 2 copies of this card into your discard pile."]
+    "TEXT": ["愤怒", "", " NL 在弃牌堆放入1张此牌的复制品。",
+      "愤怒本家牌的字符串替换。",
+      " NL 在弃牌堆放入1张此牌的复制品。",
+      " NL 在弃牌堆放入2张此牌的复制品。"]
   },
   "CardAugments:AmplifiedMod": {
-    "TEXT": ["Amplified ", ""]
+    "TEXT": ["强化", ""]
   },
   "CardAugments:ArmedMod": {
-    "TEXT": ["Armed ", "", " NL Upgrade %s random card in your hand.", " NL Upgrade %s random cards in your hand."]
+    "TEXT": ["武装", "", " NL 升级 %s 张随机手牌。", " NL 升级 %s 张随机手牌。"]
   },
   "CardAugments:AugerMod": {
-    "TEXT": ["Auger ", "", " NL If this breaks a target's Block, apply %d Vulnerable."]
+    "TEXT": ["螺旋", "", " NL 如果打破了目标的 格挡，给予 %d 层 易伤 。"]
   },
   "CardAugments:AutoMod": {
-    "TEXT": ["Auto-", "", "Autoplay. NL "," NL Draw %d card."]
+    "TEXT": ["自动：", "", "自动打出。 NL "," NL 抽 %d 张牌。"]
   },
   "CardAugments:BashMod": {
-    "TEXT": ["Bashing ", "", " NL Apply %d Vulnerable."]
+    "TEXT": ["痛击", "", " NL 给予 %d 层 易伤 。"]
   },
   "CardAugments:BerserkMod": {
-    "TEXT": ["Berserk ", "", " NL Deals 50% more damage if your HP is at or under 50%."]
+    "TEXT": ["狂战士", "", " NL 当你的生命值低于 50% 时，造成 50% 更多伤害。"]
   },
   "CardAugments:BlasphemousMod": {
-    "TEXT": ["Blasphemous ", "", " NL Die next turn."]
+    "TEXT": ["渎神", "", " NL 在下回合死亡。"]
   },
   "CardAugments:BloodyMod": {
-    "TEXT": ["", " for Blood", "Costs 1 less [E] for each time you lost HP this combat. NL ",
-      "Translator note: These strings are for replacing Blood for Blood's description. The first string is what to search for, the second string replaces it.",
-      "Costs 1 less [R] NL for each time you lose HP this combat. NL ",
-      "Costs 2 less [R] NL for each time you lose HP this combat. NL "]
+    "TEXT": ["", "换血", "你每在战斗中失去生命一次，这张牌的耗能就减少 [E] 。 NL ",
+      "下面替换本家牌",
+      "你每在战斗中失去生命一次，这张牌的耗能就减少 [E] 。 NL ",
+      "你每在战斗中失去生命一次，这张牌的耗能就减少 [E] [E] 。 NL "]
   },
   "CardAugments:BludgeonMod": {
-    "TEXT": ["Bludgeoning ", ""]
+    "TEXT": ["粗重", ""]
   },
   "CardAugments:BlurryMod": {
-    "TEXT": ["Blurry ", "", " NL Block is not removed at the start of your next turn."]
+    "TEXT": ["残影", "", " NL 你的下1回合开始时 格挡 不会消失。"]
   },
   "CardAugments:BootMod": {
-    "TEXT": ["Boot ", "", "Innate. NL "]
+    "TEXT": ["启动：", "", " 固有 。 NL "]
   },
   "CardAugments:BowlingMod": {
-    "TEXT": ["Bowling ", ""," for each enemy in combat."]
+    "TEXT": ["碰撞", "","当前每有一名敌人。"]
   },
   "CardAugments:BracedMod": {
-    "TEXT": ["Braced ", "", " NL Increase this card's Block by %s this combat."]
+    "TEXT": ["紧绷", "", " NL 本场战斗本牌获得 格挡 增加 %s 。"]
   },
   "CardAugments:BrutalMod": {
-    "TEXT": ["Brutal ", "", "Ethereal. NL "]
+    "TEXT": ["残暴", "", " 虚无 。 NL "]
   },
   "CardAugments:BundledMod": {
-    "TEXT": ["Bundled ", "", "Add 2 %s into your hand."," NL Exhaust.", "Innate. NL "]
+    "TEXT": ["捆绑", "", "增加2张 %s 到你的手牌。"," NL 消耗 。", " 固有 。 NL "]
   },
   "CardAugments:ChargedMod": {
-    "TEXT": ["Charged ", "", " NL Next turn, gain [E] ."]
+    "TEXT": ["充能", "", " NL 在下一回合获得 [E] ."]
   },
   "CardAugments:ClashyMod": {
-    "TEXT": ["Clashy ", "", "Can only be played if every card in your hand is an Attack. NL "]
+    "TEXT": ["交锋", "", "只有在手牌每一张牌都是攻击牌时才能打出。 NL "]
   },
   "CardAugments:ClawfulMod": {
-    "TEXT": ["Clawful ", "",
-            "Strikeful ", "",
-            " NL Increase the damage of ALL %s cards by %s this combat.",
-            " NL Increase the damage of ALL your cards containing \"Strike\" by %s this combat."]
+    "TEXT": ["爪击", "",
+            "打击", "",
+            " NL 本场战斗所有 %s 伤害增加 %s 。",
+            " NL 本场战斗所有打击牌伤害增加 %s 。"]
   },
   "CardAugments:CultistMod": {
-    "TEXT": ["Cultist's ", "", " NL Gain %d Strength."]
+    "TEXT": ["邪教", "", " NL 获得 %d 点 力量。"]
   },
   "CardAugments:DemurMod": {
-    "TEXT": ["Demurred ", "", "Can only be played if every card in your hand is a Skill. NL "]
+    "TEXT": ["辩驳", "", "只有在手牌每一张牌都是技能牌时才能打出。 NL "]
   },
   "CardAugments:DevotedMod": {
-    "TEXT": ["Devoted ", "", " NL Gain %d Mantra."]
+    "TEXT": ["敬拜", "", " NL 获得 %d 层 真言 。"]
   },
   "CardAugments:DisposableMod": {
-    "TEXT": ["Disposable ", ""]
+    "TEXT": ["可处理的", ""]
   },
   "CardAugments:DivergentMod": {
-    "TEXT": ["Divergent ", "", " NL cardaugments:Echo."]
+    "TEXT": ["分歧", "", " NL cardaugments:Echo."]
   },
   "CardAugments:DoomedMod": {
-    "TEXT": ["Doomed ", "", " NL Deals %d additional damage for each Curse in your deck."]
+    "TEXT": ["诅咒", "", " NL 牌组里每有一张诅咒，额外造成 %d 伤害。"]
   },
   "CardAugments:DoubtfulMod": {
-    "TEXT": ["Doubtful ", "", " NL Gain %d Weak."]
+    "TEXT": ["疑虑", "", " NL 获得 %d 层 虚弱 。"]
   },
   "CardAugments:DramaticMod": {
-    "TEXT": ["Dramatic ", "", "Innate. NL ", " NL Exhaust."]
+    "TEXT": ["盛大", "", " 固有 。 NL ", " NL 消耗 。"]
   },
   "CardAugments:EchoMod": {
-    "TEXT": ["Echoing ", "", " NL cardaugments:Echo. Exhaust."]
+    "TEXT": ["余音", "", " NL cardaugments:Echo。 消耗 。"]
   },
   "CardAugments:ElectroMod": {
-    "TEXT": ["Electro ", "", " NL Channel %d Lightning."]
+    "TEXT": ["闪电", "", " NL 生成 %d 个 闪电 充能球。"]
   },
   "CardAugments:EndlessMod": {
-    "TEXT": ["Endless ", "", " NL Whenever you draw this card, add a copy of it into your hand.", " NL Exhaust.",
+    "TEXT": ["无尽", "", " NL 每当你抽到这张牌，都增加1张其复制品到你的手牌。", " NL 消耗 。",
       "Translator note: These strings are for replacing Endless Agony's description. The first string is what to search for, the second string replaces it.",
-      " NL Whenever you draw this card, add a copy of it into your hand.",
-      " NL Whenever you draw this card, add 2 copies of it into your hand."]
+      " NL 每当你抽到这张牌，都增加1张其复制品到你的手牌。",
+      " NL 每当你抽到这张牌，都增加2张其复制品到你的手牌。"]
   },
   "CardAugments:ErangMod": {
-    "TEXT": ["erang", "rang", "ang"," to a random enemy 3 times.","Bang","arang"]
+    "TEXT": ["回旋镖", "回旋镖", "回旋镖"," 对随机敌人造成3次。","回旋镖","回旋镖"]
   },
   "CardAugments:EruptingMod": {
-    "TEXT": ["Erupting ", "", " NL Enter Wrath."]
+    "TEXT": ["发泄", "", " NL 进入 愤怒 。"]
   },
   "CardAugments:ExplosiveMod": {
-    "TEXT": ["Explosive ", "", "In 2 turns, play %1$s copies of %2$s at the start of your turn.", "Innate. NL "]
+    "TEXT": ["炸弹化", "", "在打出这张牌后第3回合开始时，打出 %2$s 的 %1$s 张复制。", " 固有 。 NL "]
   },
   "CardAugments:FanaticMod": {
-    "TEXT": ["Fanatic ", "", " NL Exhaust."]
+    "TEXT": ["狂热", "", " NL 消耗 。"]
   },
   "CardAugments:FearfulMod": {
-    "TEXT": ["Fearful ", "", " NL Gain %d Vulnerable."]
+    "TEXT": ["恐惧", "", " NL 获得 %d 层 易伤 。"]
   },
   "CardAugments:FlexMod": {
-    "TEXT": ["Flexed ", "", " NL Gain %d Strength. NL At the end of this turn, lose %d Strength."]
+    "TEXT": ["活动", "", " NL 获得 %d 点 临时 力量 。"]
   },
   "CardAugments:FlyingMod": {
-    "TEXT": ["Flying ", "", " NL Next turn, gain [E] ."]
+    "TEXT": ["飞", "", " NL 在下一个回合获得 [E] ."]
   },
   "CardAugments:FragileMod": {
-    "TEXT": ["Fragile ", "", " NL Exhaust."]
+    "TEXT": ["易碎", "", " NL 消耗 。"]
   },
   "CardAugments:FrostyMod": {
-    "TEXT": ["Frosty ", "", " NL Channel %d Frost."]
+    "TEXT": ["冰霜", "", " NL 生成 %d 个 冰霜 充能球。"]
   },
   "CardAugments:FollowUpMod": {
-    "TEXT": ["Following ", "", " NL If the last card played this combat was an Attack, gain [E].",
+    "TEXT": ["追击", "", " NL 如果本场战斗中打出的上一张牌是攻击牌，获得 [E]。",
       "Translator note: These strings are for replacing Follow-Up's description. The first string is what to search for, the second string replaces it.",
-      "If the last card played this combat was an Attack, gain [W].",
-      "If the last card played this combat was an Attack, gain [W] [W]."]
+      "如果本场战斗中打出的上一张牌是攻击牌，获得 [W]。",
+      "如果本场战斗中打出的上一张牌是攻击牌，获得 [W] [W]。"]
   },
   "CardAugments:FormMod": {
-    "TEXT": ["", " Form"]
+    "TEXT": ["", "形态"]
   },
   "CardAugments:ForOneMod": {
-    "TEXT": ["", " for One", " NL Move a random cost 0 card from your discard pile to your hand."]
+    "TEXT": ["", "一心", " NL 将弃牌堆中随机1张0耗能的牌放入你的手牌。"]
   },
   "CardAugments:FusedMod": {
-    "TEXT": ["Fused ", "", " NL Cannot be Upgraded."]
+    "TEXT": ["融合", "", " NL 不能被 升级。"]
   },
   "CardAugments:GhostlyMod": {
-    "TEXT": ["Ghostly ", "", "Ethereal. NL "]
+    "TEXT": ["鬼祟", "", " 虚无 。 NL "]
   },
   "CardAugments:GlassMod": {
-    "TEXT": ["Glass ", "", " NL Decrease the damage of this card by 2 this combat.",
+    "TEXT": ["玻璃", "", " NL 这张牌每被打出一次，在本场战斗中其基础伤害减少2。",
       "Translator note: These strings are for replacing Glass Knife's description. The first string is what to search for, the second string replaces it.",
-      "Decrease the damage of this card by 2 this combat.",
-      "Decrease the damage of this card by 4 this combat."]
+      "这张牌每被打出一次，在本场战斗中其基础伤害减少2。",
+      "这张牌每被打出一次，在本场战斗中其基础伤害减少4。"]
   },
   "CardAugments:GloomMod": {
-    "TEXT": ["", " and Gloom", " NL Channel %d Dark."]
+    "TEXT": ["黑暗", "", " NL 生成 %d 个 黑暗 充能球."]
   },
   "CardAugments:GoForTheMod": {
-    "TEXT": ["Go for the ", "", "Deal %s damage. NL If the enemy intends to attack, "]
+    "TEXT": ["预审", "", "造成 %s 点伤害。 NL 如果敌人意图为攻击，"]
   },
   "CardAugments:GraveMod": {
-    "TEXT": ["Crypt ", "", " NL Grave."]
+    "TEXT": ["墓地", "", " NL 墓地 。"]
   },
   "CardAugments:GritMod": {
-    "TEXT": ["Gritty ", "", " NL Exhaust a random card in your hand."," NL Exhaust a card in your hand."]
+    "TEXT": ["坚毅", "", " NL 消耗 一张随机手牌。"," NL 消耗 一张手牌。"]
   },
   "CardAugments:GreedMod": {
-    "TEXT": ["", " of Greed", " NL If Fatal, gain %s Gold. NL Exhaust.", " NL If Fatal, gain %s Gold."]
+    "TEXT": ["贪婪", "", " NL 斩杀时，获得 %s 金币。 NL 消耗 。", " NL 斩杀时，获得 %s 金币。"]
   },
   "CardAugments:HemoMod": {
-    "TEXT": ["Hemo ", "", "Lose %d HP. NL "]
+    "TEXT": ["御血", "", "失去 %d 点生命. NL "]
   },
   "CardAugments:HeavyMod": {
-    "TEXT": ["Heavy ", "", " NL Strength affects this card %d times."]
+    "TEXT": ["重", "", " NL 力量 在本牌上发挥 %d 倍效果。"]
   },
   "CardAugments:HolyMod": {
-    "TEXT": ["Holy ", "", " NL Add a *Miracle to your hand."]
+    "TEXT": ["神圣", "", " NL 在你的手牌中加入一张 *奇迹 。"]
   },
   "CardAugments:InfiniteMod": {
-    "TEXT": ["Infinite ", "", "At the start of your turn, add a %s into your hand.", "Innate. NL "]
+    "TEXT": ["无限", "", "在你的回合开始时，将一张 %s 加入你的手牌。", "Innate. NL "]
   },
   "CardAugments:InvertedMod": {
-    "TEXT": ["Inverted ", "", "Gain !B! Block.","Deal !D! damage."]
+    "TEXT": ["反转", "", "获得 !B! 点 格挡 。","造成 !D! 点伤害。"]
   },
   "CardAugments:JankMod": {
-    "TEXT": ["Janky ", ""]
+    "TEXT": ["垃圾", ""]
   },
   "CardAugments:LockingMod": {
-    "TEXT": ["Locking ", "", " NL Apply %d Lock-On."]
+    "TEXT": ["锁定", "", " NL 给予 %d 层 跟踪锁定 。"]
   },
   "CardAugments:LuckyMod": {
-    "TEXT": ["Lucky ", "", "Scry %s. NL "]
+    "TEXT": ["幸运", "", " 预见 %s 。 NL "]
   },
   "CardAugments:MasochisticMod": {
-    "TEXT": ["Masochistic ", "", " NL Gains 3 additional Block per debuff you have."]
+    "TEXT": ["受虐", "", " NL 每个你的负面效果额外获得3 格挡 。"]
   },
   "CardAugments:MassiveMod": {
-    "TEXT": ["Massive ", ""]
+    "TEXT": ["巨大", ""]
   },
   "CardAugments:MasterfulMod": {
-    "TEXT": ["Masterful ", "", " NL Costs 1 additional [E] for each time you lose HP this combat."]
+    "TEXT": ["精巧", "", " NL 你每次收到伤害，这张牌的耗能增加1。"]
   },
   "CardAugments:MementoMod": {
-    "TEXT": ["", "'s Memento", "Ethereal. NL "," NL When Exhausted, draw %d cards."]
+    "TEXT": ["", "的纪念物", " 虚无 。 NL "," NL 若被 消耗 ，抽 %d 张牌。"]
   },
   "CardAugments:MeteorMod": {
-    "TEXT": ["Meteoric ", "", " NL Channel %d Plasma."]
+    "TEXT": ["陨石", "", " NL 生成 %d 个 等离子 充能球。"]
   },
   "CardAugments:MK2Mod": {
     "TEXT": ["", " MK2"]
   },
   "CardAugments:MoxieMod": {
-    "TEXT": ["Ritual ", "", " NL If Fatal, permanently increase this card's damage by %d. NL Exhaust."]
+    "TEXT": ["仪式", "", " NL 斩杀 时，永久增加本牌伤害 %d 点。 NL 消耗 。"]
   },
   "CardAugments:NoxiousMod": {
-    "TEXT": ["Noxious ", "", " NL Apply %d Poison to ALL enemies."]
+    "TEXT": ["泛毒", "", " NL 给予所有敌人 %d 层 中毒 。"]
   },
   "CardAugments:NuclearMod": {
-    "TEXT": ["Nuclear ", "", " NL Channel %d Plasma."]
+    "TEXT": ["离子化", "", " NL 生成 %d 等离子 充能球 。"]
   },
   "CardAugments:PerniciousMod": {
-    "TEXT": ["Pernicious ", "", " NL Apply Poison equal to unblocked damage dealt."]
+    "TEXT": ["恶毒", "", " NL 给予等同于未被格挡的伤害点数层数的 中毒 。"]
   },
   "CardAugments:PhilosophersMod": {
-    "TEXT": ["Philosopher's ", "", " NL ALL enemies gain 1 Strength."]
+    "TEXT": ["哲理化", "", " NL 所有敌人获得1点 力量 。"]
   },
   "CardAugments:PiercingMod": {
-    "TEXT": ["Piercing ", "", " NL Ignores Block."]
+    "TEXT": ["穿刺", "", " NL 无视 格挡 。"]
   },
   "CardAugments:PoisonedMod": {
-    "TEXT": ["Poisoned ", "", " NL Apply %s Poison."]
+    "TEXT": ["带毒", "", " NL 给予 %s 层 中毒 。"]
   },
   "CardAugments:PredatoryMod": {
-    "TEXT": ["Predatory ", "", " NL Next turn, draw %d additional cards.",
+    "TEXT": ["猎杀", "", " NL 下一回合多抽 %d 张牌。",
       "Translator note: These strings are for replacing Predator's description. The first string is what to search for, the second string replaces it.",
-      "Next turn, draw 2 additional cards.",
-      "Next turn, draw 4 additional cards."]
+      "下一回合多抽2张牌。",
+      "下一回合多抽4张牌。"]
   },
   "CardAugments:PreparedMod": {
-    "TEXT": ["Prepared ", "", " NL Draw %d card. NL Discard %d card."]
+    "TEXT": ["准备", "", " NL 抽 %d 张牌。 NL 弃 %d 张牌。"]
   },
   "CardAugments:PureMod": {
-    "TEXT": ["Pure ", "", " NL Exhaust all Status and Curse cards in your hand."]
+    "TEXT": ["净化", "", " NL 消耗手牌中所有的 状态牌 与 诅咒 。"]
   },
   "CardAugments:QuickMod": {
-    "TEXT": ["Quick ", "", " NL Draw %d card."]
+    "TEXT": ["快速", "", " NL 抽 %d 张牌。"]
   },
   "CardAugments:RampedMod": {
-    "TEXT": ["Ramped ", "", " NL Increase this card's damage by %s this combat."]
+    "TEXT": ["暴走", "", " NL 增加本牌在本场战斗中的伤害 %s 点。"]
   },
   "CardAugments:ReshuffleMod": {
-    "TEXT": ["Recalling ", "", " NL cardaugments:Reshuffle."]
+    "TEXT": ["回返", "", " NL cardaugments:Reshuffle."]
   },
   "CardAugments:ReturningMod": {
-    "TEXT": ["Returning ", "", " NL cardaugments:Reshuffle."]
+    "TEXT": ["萦绕", "", " NL cardaugments:Reshuffle."]
   },
   "CardAugments:RollMod": {
-    "TEXT": ["", " and Roll", " NL Next turn, gain !B! Block."]
+    "TEXT": ["", "翻滚", " NL 下一回合获得 !B! 点 格挡 。"]
   },
   "CardAugments:RunicMod": {
-    "TEXT": ["Runic ", "", " NL You cannot see enemy intents for %d turns."]
+    "TEXT": ["符文化", "", " NL 下 %d 个回合内你无法看见敌方意图。"]
   },
   "CardAugments:SadisticMod": {
-    "TEXT": ["Sadistic ", "", " NL Deals %d additional damage per debuff on the enemy."]
+    "TEXT": ["施虐", "", " NL 敌人每有一种负面效果，造成 %d 点额外伤害。"]
   },
   "CardAugments:SanctifiedMod": {
-    "TEXT": ["Sanctified ", "", " NL If the last card played this combat was a Skill, draw %d cards."]
+    "TEXT": ["圣洁", "", " NL 若本场战斗上一张打出的牌是技能牌，抽 %d 张牌。"]
   },
   "CardAugments:ShamefulMod": {
-    "TEXT": ["Shameful ", "", " NL Gain %d Frail."]
+    "TEXT": ["羞耻", "", " NL 获得 %d 层 脆弱 。"]
   },
   "CardAugments:SearingMod": {
-    "TEXT": ["Searing ", "", " NL Can be Upgraded any number of times."]
+    "TEXT": ["灼热", "", " NL 能被多次 升级 。"]
   },
   "CardAugments:ShieldedMod": {
-    "TEXT": ["Shielded ", "", " NL Gain %s Block."]
+    "TEXT": ["盾化", "", " NL 获得 %s 点 格挡 。"]
   },
   "CardAugments:ShiningMod": {
-    "TEXT": ["Shining ", "", "Ethereal. NL "," NL When you draw this card, gain [E]."]
+    "TEXT": ["闪光", "", " 虚无 。 NL "," NL 抽到本牌时获得 [E]。"]
   },
   "CardAugments:ShivMod": {
-    "TEXT": ["", " and Dagger", " NL Add %d *Shiv into your hand."]
+    "TEXT": ["", "与匕首", " NL 增加 %d 张 *小刀 到你的手牌。"]
   },
   "CardAugments:SignatureMod": {
-    "TEXT": ["Signature ", "", "Can only be played if this is the only Attack in your hand. NL "]
+    "TEXT": ["招牌", "", "仅当本牌为你手中唯一一张攻击牌时可打出。 NL "]
   },
   "CardAugments:SlaverMod": {
-    "TEXT": ["Slaver's ", "", " NL Costs 1 less [E] in Boss and Elite combats."]
+    "TEXT": ["奴性", "", " NL 在首领与精英战中耗能减少1 [E] 。"]
   },
   "CardAugments:SlayerMod": {
-    "TEXT": ["Slayer's ", "", " NL Deals double damage to the enemy with the lowest HP."]
+    "TEXT": ["凶狠", "", " NL 对场上生命值最低的敌人造成双倍伤害。"]
   },
   "CardAugments:SlipperyMod": {
-    "TEXT": ["Slippery ", "", " NL Discard this card the first time it is drawn each combat."]
+    "TEXT": ["滑溜", "", " NL 当本牌于本次战斗中第一次被抽到时，丢弃本牌。"]
   },
   "CardAugments:SneckoMod": {
-    "TEXT": ["Snecko ", "", "Snecko. NL "]
+    "TEXT": ["混乱", "", "耗能随机。 NL "]
   },
   "CardAugments:StickyMod": {
-    "TEXT": ["Sticky ", "", "Retain. NL "]
+    "TEXT": ["黏性", "", " 保留 。 NL "]
   },
   "CardAugments:StreamlinedMod": {
-    "TEXT": ["Streamlined ", "", " NL Reduce this card's cost by 1 this combat."]
+    "TEXT": ["精简", "", " NL 减少本牌在本场战斗中的耗能1点。"]
   },
   "CardAugments:SuckerMod": {
-    "TEXT": ["Sucker ", "", " NL Apply %d Weak."]
+    "TEXT": ["突然", "", " NL 给予 %d 层 虚弱 。"]
   },
   "CardAugments:SupplyMod": {
-    "TEXT": ["Supplier ", "", " NL Next turn, gain [E] [E] ."]
+    "TEXT": ["先机", "", " NL 下一回合获得 [E] [E] 。"]
   },
   "CardAugments:SurgeMod": {
-    "TEXT": ["", " Surge", " NL Gain %d Artifact. NL Exhaust."]
+    "TEXT": ["", "电涌", " NL 获得 %d 层 人工制品 。 NL 消耗 。"]
   },
   "CardAugments:SurvivorMod": {
-    "TEXT": ["Survivor's ", "", " NL Discard %d card."]
+    "TEXT": ["生存者", "", " NL 弃 %d 张牌。"]
   },
   "CardAugments:SwivelMod": {
-    "TEXT": ["Swivelled ", "", " NL The next Attack you play costs 0."]
+    "TEXT": ["旋身", "", " NL 你打出的下一张攻击牌耗能变为0。"]
   },
   "CardAugments:TearMod": {
-    "TEXT": ["", " and Tear", " NL Deal !D! damage to a random enemy."]
+    "TEXT": ["", "撕扯", " NL 随机对一名敌人造成 !D! 点伤害。"]
   },
   "CardAugments:TinyMod": {
-    "TEXT": ["Tiny ", ""]
+    "TEXT": ["精小", ""]
   },
   "CardAugments:TwinMod": {
-    "TEXT": ["Twin ", "", " twice."]
+    "TEXT": ["双重", "", " NL 生效两次。"]
   },
   "CardAugments:VanishingMod": {
-    "TEXT": ["Vanishing ", "", " NL Exhausts whenever you lose HP this combat."]
+    "TEXT": ["消逝", "", " NL 一旦在战斗中失去生命， 消耗 本牌。"]
   },
   "CardAugments:VoidMod": {
-    "TEXT": ["Void ", "", " NL Shuffle %d *Void into your draw pile."]
+    "TEXT": ["预支", "", " NL 将 %d 张 *虚空 洗入抽牌堆。"]
   },
   "CardAugments:VoidingMod": {
-    "TEXT": ["Voiding ", "", "Ethereal. NL ", " NL Whenever this card is drawn, lose 1 Energy."]
+    "TEXT": ["虚空", "", " 虚无 。 NL ", " NL 抽到这张牌时失去1点能量。"]
   },
   "CardAugments:WallopMod": {
-    "TEXT": ["Walloping ", "", " NL Gain Block equal to unblocked damage dealt."]
+    "TEXT": ["当头", "", " NL 获得与所造成的未被格挡的伤害相等的 格挡 。"]
   },
   "CardAugments:WaveMod": {
-    "TEXT": ["", " Wave", "Gain %s Block. NL "]
+    "TEXT": ["", "铁波", "获得 %s 点 格挡 。 NL "]
   },
   "CardAugments:XMod": {
-    "TEXT": ["", " X", " NL Performed X times."]
+    "TEXT": ["", " X", " NL 生效X次。"]
   }
 }
