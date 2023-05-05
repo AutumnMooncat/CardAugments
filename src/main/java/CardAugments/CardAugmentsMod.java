@@ -94,6 +94,9 @@ public class CardAugmentsMod implements
     public static final String EVENT_ADDONS = "eventAddons";
     public static boolean eventAddons = true;
 
+    public static final String ENABLE_TOOLTIPS = "enableTooltips";
+    public static boolean enableTooltips = true;
+
     public static final String GRIEF_LIBRARY = "libraryGrief";
     public static boolean griefLibrary = false;
 
@@ -122,10 +125,10 @@ public class CardAugmentsMod implements
     public static ModPanel settingsPanel;
     public static ModLabel noCrossoverLabel;
     public static HashMap<Integer, ArrayList<IUIElement>> pages = new HashMap<>();
-    public static final float LAYOUT_Y = 740f;
+    public static final float LAYOUT_Y = 760f;
     public static final float LAYOUT_X = 400f;
-    public static final float SPACING_Y = 52f;
-    public static final float FULL_PAGE_Y = (SPACING_Y * 10);
+    public static final float SPACING_Y = 50f;
+    public static final float FULL_PAGE_Y = (SPACING_Y * 11);
     public static float deltaY = 0;
     public static int currentPage = 0;
     
@@ -162,6 +165,7 @@ public class CardAugmentsMod implements
         cardAugmentsDefaultSettings.setProperty(MODIFY_SHOP, Boolean.toString(modifyShop));
         cardAugmentsDefaultSettings.setProperty(EVENT_ADDONS, Boolean.toString(eventAddons));
         cardAugmentsDefaultSettings.setProperty(GRIEF_LIBRARY, Boolean.toString(griefLibrary));
+        cardAugmentsDefaultSettings.setProperty(ENABLE_TOOLTIPS, Boolean.toString(enableTooltips));
         try {
             cardAugmentsConfig = new SpireConfig(modID, FILE_NAME, cardAugmentsDefaultSettings);
             cardAugmentsCrossoverConfig = new SpireConfig(modID, CROSSOVER_FILE_NAME);
@@ -177,6 +181,7 @@ public class CardAugmentsMod implements
             modifyShop = cardAugmentsConfig.getBool(MODIFY_SHOP);
             eventAddons = cardAugmentsConfig.getBool(EVENT_ADDONS);
             griefLibrary = cardAugmentsConfig.getBool(GRIEF_LIBRARY);
+            enableTooltips = cardAugmentsConfig.getBool(ENABLE_TOOLTIPS);
         } catch (IOException e) {
             logger.error("Card Augments SpireConfig initialization failed:");
             e.printStackTrace();
@@ -404,11 +409,19 @@ public class CardAugmentsMod implements
             try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
         });
 
-        //Used to allow orbs without prismatic shard
+        //Used enable event changes
         ModLabeledToggleButton enableEventsButtom = new ModLabeledToggleButton(TEXT[10],LAYOUT_X - 40f, LAYOUT_Y - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
                 cardAugmentsConfig.getBool(EVENT_ADDONS), settingsPanel, (label) -> {}, (button) -> {
             cardAugmentsConfig.setBool(EVENT_ADDONS, button.enabled);
             eventAddons = button.enabled;
+            try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
+        });
+
+        //Used enable tooltips
+        ModLabeledToggleButton enableTooltipsButton = new ModLabeledToggleButton(TEXT[11],LAYOUT_X - 40f, LAYOUT_Y - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
+                cardAugmentsConfig.getBool(ENABLE_TOOLTIPS), settingsPanel, (label) -> {}, (button) -> {
+            cardAugmentsConfig.setBool(ENABLE_TOOLTIPS, button.enabled);
+            enableTooltips = button.enabled;
             try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
         });
 
@@ -428,6 +441,7 @@ public class CardAugmentsMod implements
         registerUIElement(enableShopButton);
         registerUIElement(enableAllowOrbsButton);
         registerUIElement(enableEventsButtom);
+        registerUIElement(enableTooltipsButton);
 
         CenteredModLabel pageLabel = new CenteredModLabel(crossoverUIStrings.TEXT[1], Settings.WIDTH/2f/Settings.xScale, 830f, settingsPanel, l -> {
             l.text = crossoverUIStrings.TEXT[1] + " " + (currentPage + 1) + "/" + (pages.size());

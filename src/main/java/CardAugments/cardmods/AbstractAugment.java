@@ -1,13 +1,14 @@
 package CardAugments.cardmods;
 
 import CardAugments.CardAugmentsMod;
-import CardAugments.cardmods.common.AllOutMod;
 import CardAugments.patches.InterruptUseCardFieldPatches;
+import CardAugments.util.FormatHelper;
 import CardAugments.util.Wiz;
 import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardBorderGlowManager;
 import basemod.helpers.CardModifierManager;
 import basemod.helpers.TooltipInfo;
+import basemod.patches.whatmod.WhatMod;
 import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.BranchingUpgradesCard;
 import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.MultiUpgradeCard;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.ExhaustiveField;
@@ -17,7 +18,10 @@ import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.defect.CompileDriverAction;
 import com.megacrit.cardcrawl.actions.defect.FTLAction;
 import com.megacrit.cardcrawl.actions.defect.FissionAction;
-import com.megacrit.cardcrawl.actions.unique.*;
+import com.megacrit.cardcrawl.actions.unique.CalculatedGambleAction;
+import com.megacrit.cardcrawl.actions.unique.DropkickAction;
+import com.megacrit.cardcrawl.actions.unique.ExpertiseAction;
+import com.megacrit.cardcrawl.actions.unique.HeelHookAction;
 import com.megacrit.cardcrawl.actions.utility.ConditionalDrawAction;
 import com.megacrit.cardcrawl.actions.watcher.InnerPeaceAction;
 import com.megacrit.cardcrawl.actions.watcher.SanctityAction;
@@ -82,8 +86,16 @@ public abstract class AbstractAugment extends AbstractCardModifier {
 
     @Override
     public List<TooltipInfo> additionalTooltips(AbstractCard card) {
-        if (!getAugmentDescription().isEmpty() && (!getPrefix().isEmpty() || !getSuffix().isEmpty())) {
-            return Collections.singletonList(new TooltipInfo(getPrefix()+HELPER_TEXT[0]+getSuffix(), getAugmentDescription()));
+        if (CardAugmentsMod.enableTooltips) {
+            String header = modifyName(card.name, card);
+            String body = FormatHelper.prefixWords(WhatMod.findModName(getClass()), "#p") + " NL " + getAugmentDescription();
+            if (header.isEmpty()) {
+                header = getClass().getSimpleName();
+            }
+            if (body.endsWith(" NL ")) {
+                body = body.substring(0, body.length()-4);
+            }
+            return Collections.singletonList(new TooltipInfo(header, body));
         }
         return null;
     }
