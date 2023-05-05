@@ -413,7 +413,7 @@
     "TEXT": ["巨大", ""]
   },
   "CardAugments:MasterfulMod": {
-    "TEXT": ["精巧", "", " NL 你每次收到伤害，这张牌的耗能增加1。"]
+    "TEXT": ["精巧", "", " NL 你每次受到伤害，这张牌的耗能增加1。"]
   },
   "CardAugments:MementoMod": {
     "TEXT": ["", "的纪念物", " 虚无 。 NL "," NL 若被 消耗 ，抽 %d 张牌。"]
