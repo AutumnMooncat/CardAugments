@@ -200,7 +200,7 @@
       ""," 是绝对化的！"]
   },
   "CardAugments:AllOutMod": {
-    "TEXT": ["All-Out ", "", " NL 丢弃 %d 张随机手牌。",
+    "TEXT": ["全力", "", " NL 丢弃 %d 张随机手牌。",
       "下面是替换 全力攻击 本卡的字符串，第一个是搜索用，第二个是用来替换的字符串。",
       " NL 丢弃一张随机手牌。",
       " NL 丢弃两张随机手牌。"]
@@ -293,7 +293,7 @@
     "TEXT": ["可处理的", ""]
   },
   "CardAugments:DivergentMod": {
-    "TEXT": ["分歧", "", " NL cardaugments:Echo."]
+    "TEXT": ["分歧", "", " NL 回声 。"]
   },
   "CardAugments:DoomedMod": {
     "TEXT": ["诅咒", "", " NL 牌组里每有一张诅咒，额外造成 %d 伤害。"]
@@ -305,7 +305,7 @@
     "TEXT": ["盛大", "", " 固有 。 NL ", " NL 消耗 。"]
   },
   "CardAugments:EchoMod": {
-    "TEXT": ["余音", "", " NL cardaugments:Echo。 消耗 。"]
+    "TEXT": ["余音", "", " NL 回声 。 消耗 。"]
   },
   "CardAugments:ElectroMod": {
     "TEXT": ["闪电", "", " NL 生成 %d 个 闪电 充能球。"]
@@ -413,7 +413,7 @@
     "TEXT": ["巨大", ""]
   },
   "CardAugments:MasterfulMod": {
-    "TEXT": ["精巧", "", " NL 你每次收到伤害，这张牌的耗能增加1。"]
+    "TEXT": ["精巧", "", " NL 你每次受到伤害，这张牌的耗能增加1。"]
   },
   "CardAugments:MementoMod": {
     "TEXT": ["", "的纪念物", " 虚无 。 NL "," NL 若被 消耗 ，抽 %d 张牌。"]
@@ -464,10 +464,10 @@
     "TEXT": ["暴走", "", " NL 增加本牌在本场战斗中的伤害 %s 点。"]
   },
   "CardAugments:ReshuffleMod": {
-    "TEXT": ["回返", "", " NL cardaugments:Reshuffle."]
+    "TEXT": ["回返", "", " NL 再洗入 。"]
   },
   "CardAugments:ReturningMod": {
-    "TEXT": ["萦绕", "", " NL cardaugments:Reshuffle."]
+    "TEXT": ["萦绕", "", " NL 再洗入 。"]
   },
   "CardAugments:RollMod": {
     "TEXT": ["", "翻滚", " NL 下一回合获得 !B! 点 格挡 。"]
