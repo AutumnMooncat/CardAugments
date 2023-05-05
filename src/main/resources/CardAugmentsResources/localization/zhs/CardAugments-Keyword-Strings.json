@@ -2,21 +2,24 @@
   {
     "PROPER_NAME": "回声",
     "NAMES": [
-      "echo"
+      "echo",
+      "回声"
     ],
     "DESCRIPTION": "打出本牌的一张复制"
   },
   {
     "PROPER_NAME": "再洗入",
     "NAMES": [
-      "reshuffle"
+      "reshuffle",
+      "再洗入"
     ],
     "DESCRIPTION": "打出本牌后，将本牌洗入抽牌堆"
   },
   {
     "PROPER_NAME": "通达",
     "NAMES": [
-      "unrestricted"
+      "unrestricted",
+      "通达"
     ],
     "DESCRIPTION": "这张牌无视打出限制"
   }
