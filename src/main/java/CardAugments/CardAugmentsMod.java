@@ -7,6 +7,7 @@ import CardAugments.dynvars.DynamicDynamicVariableManager;
 import CardAugments.patches.RolledModFieldPatches;
 import CardAugments.ui.BiggerModButton;
 import CardAugments.ui.CenteredModLabel;
+import CardAugments.util.MintyFixer;
 import CardAugments.util.TextureLoader;
 import basemod.*;
 import basemod.abstracts.AbstractCardModifier;
@@ -36,7 +37,6 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect;
 import javassist.CtBehavior;
-import mintySpire.patches.cards.betterUpdatePreview.CardFields;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -634,9 +634,7 @@ public class CardAugmentsMod implements
             AbstractCardModifier m = validMods.get(AbstractDungeon.miscRng.random(validMods.size()-1)).makeCopy();
             CardModifierManager.addModifier(c, m);
             if (index != -1 && isMintyLoaded) {
-                if (index < CardFields.SCVPopup.unupgradedCardRewards.get(CardCrawlGame.cardPopup).size()) {
-                    CardModifierManager.addModifier(CardFields.SCVPopup.unupgradedCardRewards.get(CardCrawlGame.cardPopup).get(index), m);
-                }
+                MintyFixer.fixMods(index, m);
             }
         }
     }
