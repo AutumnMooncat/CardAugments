@@ -192,7 +192,7 @@
     "TEXT": ["前缀名字", "后缀名字", "附加描述"]
   },
   "CardAugments:AberrantMod": {
-    "TEXT": ["畸变的", "", " NL 获得1层 无实体。 NL 消耗。"]
+    "TEXT": ["畸变", "", " NL 获得1层 无实体 。 NL 消耗 。"]
   },
   "CardAugments:AbsoluteMod": {
     "TEXT": ["绝对化", "", " NL 绝对化卡牌必须在其他卡牌之前打出。",
