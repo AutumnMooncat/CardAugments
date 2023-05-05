@@ -410,7 +410,7 @@
     "TEXT": ["受虐", "", " NL 每个你的负面效果额外获得3 格挡 。"]
   },
   "CardAugments:MassiveMod": {
-    "TEXT": ["巨大", ""]
+    "TEXT": ["笨重", ""]
   },
   "CardAugments:MasterfulMod": {
     "TEXT": ["精巧", "", " NL 你每次受到伤害，这张牌的耗能增加1。"]
