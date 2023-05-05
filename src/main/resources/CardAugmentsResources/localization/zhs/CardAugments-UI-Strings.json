@@ -398,7 +398,7 @@
     "TEXT": ["反转", "", "获得 !B! 点 格挡 。","造成 !D! 点伤害。"]
   },
   "CardAugments:JankMod": {
-    "TEXT": ["垃圾", ""]
+    "TEXT": ["辣鸡", ""]
   },
   "CardAugments:LockingMod": {
     "TEXT": ["锁定", "", " NL 给予 %d 层 跟踪锁定 。"]
