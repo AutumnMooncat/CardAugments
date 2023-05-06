@@ -65,7 +65,7 @@ public class WaveMod extends AbstractAugment implements DynvarCarrier {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.type == AbstractCard.CardType.ATTACK && card.baseDamage > 1 && cardCheck(card, c -> notEthereal(c) && notInnate(c) && notRetain(c));
+        return card.type == AbstractCard.CardType.ATTACK && card.baseDamage > 1;
     }
 
     @Override
@@ -80,7 +80,7 @@ public class WaveMod extends AbstractAugment implements DynvarCarrier {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return String.format(TEXT[2], DESCRIPTION_KEY) + rawDescription;
+        return insertBeforeText(rawDescription, String.format(TEXT[2], DESCRIPTION_KEY));
     }
 
     @Override
