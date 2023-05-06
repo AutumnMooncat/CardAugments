@@ -31,6 +31,8 @@ import com.megacrit.cardcrawl.cards.purple.Halt;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.GameDictionary;
+import com.megacrit.cardcrawl.localization.LocalizedStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.PrismaticShard;
 import com.megacrit.cardcrawl.stances.AbstractStance;
@@ -46,6 +48,11 @@ import java.util.function.Predicate;
 
 public abstract class AbstractAugment extends AbstractCardModifier {
     private static final String[] HELPER_TEXT = CardCrawlGame.languagePack.getUIString(CardAugmentsMod.makeID(AbstractAugment.class.getSimpleName())).TEXT;
+    private static final String EXHAUST_TEXT = " NL " + FormatHelper.capitalize(GameDictionary.EXHAUST.NAMES[0]) + LocalizedStrings.PERIOD;
+    private static final String INNATE_TEXT = FormatHelper.capitalize(GameDictionary.INNATE.NAMES[0]) + LocalizedStrings.PERIOD + " NL ";
+    private static final String ETHEREAL_TEXT = FormatHelper.capitalize(GameDictionary.ETHEREAL.NAMES[0]) + LocalizedStrings.PERIOD + " NL ";
+    private static final String RETAIN_TEXT = FormatHelper.capitalize(GameDictionary.RETAIN.NAMES[0]) + LocalizedStrings.PERIOD + " NL ";
+    private static final String UNPLAYABLE_TEXT = FormatHelper.capitalize(GameDictionary.UNPLAYABLE.NAMES[0]) + LocalizedStrings.PERIOD + " NL ";
     public static final float HUGE_BUFF = 3/2f;
     public static final float MAJOR_BUFF = 4/3f;
     public static final float MODERATE_BUFF = 5/4f;
@@ -540,5 +547,37 @@ public abstract class AbstractAugment extends AbstractCardModifier {
             }
         }
         return ret;
+    }
+
+    public static String insertBeforeText(String rawDescription, String text) {
+        StringBuilder removed = new StringBuilder();
+        while (rawDescription.startsWith(INNATE_TEXT) || rawDescription.startsWith(ETHEREAL_TEXT) || rawDescription.startsWith(RETAIN_TEXT) || rawDescription.startsWith(UNPLAYABLE_TEXT)) {
+            if (rawDescription.startsWith(INNATE_TEXT)) {
+                rawDescription = rawDescription.substring(INNATE_TEXT.length());
+                removed.append(INNATE_TEXT);
+            }
+            if (rawDescription.startsWith(ETHEREAL_TEXT)) {
+                rawDescription = rawDescription.substring(ETHEREAL_TEXT.length());
+                removed.append(ETHEREAL_TEXT);
+            }
+            if (rawDescription.startsWith(RETAIN_TEXT)) {
+                rawDescription = rawDescription.substring(RETAIN_TEXT.length());
+                removed.append(RETAIN_TEXT);
+            }
+            if (rawDescription.startsWith(UNPLAYABLE_TEXT)) {
+                rawDescription = rawDescription.substring(UNPLAYABLE_TEXT.length());
+                removed.append(UNPLAYABLE_TEXT);
+            }
+        }
+        return removed + text + rawDescription;
+    }
+
+    public static String insertAfterText(String rawDescription, String text) {
+        String removed = "";
+        if (rawDescription.endsWith(EXHAUST_TEXT)) {
+            rawDescription = rawDescription.substring(0, rawDescription.length()-EXHAUST_TEXT.length());
+            removed += EXHAUST_TEXT;
+        }
+        return rawDescription + text + removed;
     }
 }
