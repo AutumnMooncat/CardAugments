@@ -391,7 +391,7 @@
     "EXTRA_TEXT": [""]
   },
   "CardAugments:FollowUpMod": {
-    "TEXT": ["追击", "", " NL 如果本场战斗中打出的上一张牌是攻击牌，获得 [E]。",
+    "TEXT": ["追击", "", " NL 如果本场战斗中打出的上一张牌是攻击牌，获得 [E] 。",
       "Translator note: These strings are for replacing Follow-Up's description. The first string is what to search for, the second string replaces it.",
       "如果本场战斗中打出的上一张牌是攻击牌，获得 [W]。",
       "如果本场战斗中打出的上一张牌是攻击牌，获得 [W] [W]。"],
