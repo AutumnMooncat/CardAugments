@@ -53,3 +53,7 @@ Blurry Blur - 残影词条会让卡牌变得模糊
 如果你是一个mod开发者并且想要在你的mod中为此mod添加词条作为联动内容（或者单纯的做一个加一些修改词条的mod），你可以检查本项目的Wiki以开始！通过在本mod中将你的mod中编写的词条注册，mod会自动在设置中添加是否启用你的内容的选项。
 
 https://github.com/MistressAlison/CardAugments/wiki
+
+### 特别感谢
+
+cyxw与Sxy6214：简体中文翻译
