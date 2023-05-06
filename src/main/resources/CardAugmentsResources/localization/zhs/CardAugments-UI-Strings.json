@@ -348,7 +348,7 @@
     "EXTRA_TEXT": [""]
   },
   "CardAugments:EndlessMod": {
-    "TEXT": ["无尽", "", " NL 每当你抽到这张牌，都增加1张其复制品到你的手牌。", " NL 消耗 。",
+    "TEXT": ["无尽", "", " NL 每当你抽到这张牌，增加1张其复制品到你的手牌。", " NL 消耗 。",
       "Translator note: These strings are for replacing Endless Agony's description. The first string is what to search for, the second string replaces it.",
       " NL 每当你抽到这张牌，都增加1张其复制品到你的手牌。",
       " NL 每当你抽到这张牌，都增加2张其复制品到你的手牌。"],
@@ -536,7 +536,7 @@
     "EXTRA_TEXT": [""]
   },
   "CardAugments:PureMod": {
-    "TEXT": ["净化", "", " NL 消耗手牌中所有的 状态牌 与 诅咒 。"],
+    "TEXT": ["净化", "", " NL 消耗 手牌中所有的 状态牌 与 诅咒 。"],
     "EXTRA_TEXT": [""]
   },
   "CardAugments:QuickMod": {
