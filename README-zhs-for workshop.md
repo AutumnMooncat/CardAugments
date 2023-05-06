@@ -20,15 +20,15 @@ How likely Common / Uncommon / and Rare modifiers are to appear
 
 How much the rarity of the card should influence the modifier it rolls
 
-Should starter cards roll modifies
+是否允许修改初始牌
 
-Should cards in shops roll modifies
+是否允许修改商店牌
 
-Should cards from events or relics like Pandora's Box roll modifies
+是否允许修改事件和遗物获得的立即牌(例：潘多拉的魔盒)
 
-Should Orb related modifiers be able to roll on other characters
+是否允许其他角色也能获得充能球修改
 
-Should the extra Event options appear
+是否允许出现额外的事件选项
 
 In addition to this, any modifiers added via other mods (such as crossover content of modifier packs), will be given their own config option as well to toggle if those modifiers should also appear.
 
