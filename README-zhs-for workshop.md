@@ -12,13 +12,13 @@ In addition to modifiers, it also adds 10+ new options in vanilla events. Some o
 Finally, a Modifier Screen was added to the main menu to let you browse modifiers to see how they work on any cards they can be applied to. Included in this screen is a Settings button you can access to quickly change all the configuration options.
 
 ### 高度可配置化
-Appealing to different play styles was a core concept when designing the mod, and as such, it comes with many config options to suit your tastes. All of the config options can be accessed from the Modifier Screen and include the following:
+不同的游玩风格在设计本mod之初就是主要的目标，因此本mod有很多选项任君挑选。以下选项都可以在 主界面-卡牌修改-设置 中访问:
 
 修改卡牌的概率
 
-How likely Common / Uncommon / and Rare modifiers are to appear
+普通/罕见/稀有修改出现的概率
 
-How much the rarity of the card should influence the modifier it rolls
+卡牌稀有度影响修改的权重
 
 是否允许修改初始牌
 
@@ -30,7 +30,7 @@ How much the rarity of the card should influence the modifier it rolls
 
 是否允许出现额外的事件选项
 
-In addition to this, any modifiers added via other mods (such as crossover content of modifier packs), will be given their own config option as well to toggle if those modifiers should also appear.
+此外，其它mod添加的修改内容（如额外的修改组）会有额外的选项来决定是否在游戏中启用。
 
 ### 兼容性
 本mod应当能和其它mod一同游玩而不产生额外的兼容性问题。如果有，欢迎在steam评论区留言！
