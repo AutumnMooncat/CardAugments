@@ -41,7 +41,7 @@ public class EndlessMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return isNormalCard(card) && cardCheck(card, c -> doesntUpgradeExhaust()) && card.cost >= 0;
+        return isNormalCard(card) && cardCheck(card, c -> doesntUpgradeExhaust()) && card.cost == 0 && (card.baseDamage > 1 || card.baseBlock > 1);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class EndlessMod extends AbstractAugment {
         if (rawDescription.contains(TEXT[5])) {
             return rawDescription.replace(TEXT[5], TEXT[6]);
         }
-        return rawDescription + TEXT[2] + (setExhaust ? TEXT[3] : "");
+        return insertAfterText(rawDescription, TEXT[2]) + (setExhaust ? TEXT[3] : "");
     }
 
     @Override
