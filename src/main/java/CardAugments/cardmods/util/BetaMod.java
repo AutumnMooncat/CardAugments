@@ -17,6 +17,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 public class BetaMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(BetaMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     private boolean inherentHack = true;
 
@@ -60,8 +61,13 @@ public class BetaMod extends AbstractAugment {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return String.format(TEXT[2], FormatHelper.prefixWords(card.name, "*")) + (card.type == AbstractCard.CardType.POWER ? "" : TEXT[3]);
+        return String.format(CARD_TEXT[0], FormatHelper.prefixWords(card.name, "*")) + (card.type == AbstractCard.CardType.POWER ? "" : CARD_TEXT[1]);
     }
 
     @Override

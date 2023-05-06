@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class OmegaMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(OmegaMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
     private static final float multiplier = 3f;
 
     boolean modMagic;
@@ -61,6 +62,11 @@ public class OmegaMod extends AbstractAugment {
     @Override
     public String getSuffix() {
         return TEXT[1];
+    }
+
+    @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
     }
 
     @Override

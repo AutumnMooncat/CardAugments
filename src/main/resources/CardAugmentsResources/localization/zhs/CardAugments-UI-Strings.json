@@ -217,15 +217,15 @@
       " NL 丢弃两张随机手牌。"]
   },
   "CardAugments:AlphaMod": {
-    "TEXT": ["阿尔法", "", "将一张 *贝塔 %s 洗入你的抽牌堆中。"," NL 消耗。", "固有。 NL "],
-    "EXTRA_TEXT": [""]
+    "TEXT": ["阿尔法", "", "Reduces cost by #b2. Shuffles #yBeta into your draw pile. #yExhaust."],
+    "EXTRA_TEXT": ["将一张 *贝塔 %s 洗入你的抽牌堆中。"," NL 消耗。", "固有。 NL "]
   },
   "CardAugments:BetaMod": {
-    "TEXT": ["贝塔", "", "将一张 *欧米伽 %s 洗入你的抽牌堆中。"," NL 消耗。"],
-    "EXTRA_TEXT": [""]
+    "TEXT": ["贝塔", "", "Reduces cost by #b1. Shuffles #yOmega into your draw pile. #yExhaust."],
+    "EXTRA_TEXT": ["将一张 *欧米伽 %s 洗入你的抽牌堆中。"," NL 消耗。"]
   },
   "CardAugments:OmegaMod": {
-    "TEXT": ["欧米伽", "", ""],
+    "TEXT": ["欧米伽", "", "Increases card values by #b200%"],
     "EXTRA_TEXT": [""]
   },
   "CardAugments:AngryMod": {

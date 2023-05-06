@@ -217,15 +217,15 @@
       " NL Discard 2 cards at random."]
   },
   "CardAugments:AlphaMod": {
-    "TEXT": ["Alpha ", "", "Shuffle a *Beta %s into your draw pile."," NL Exhaust.", "Innate. NL "],
-    "EXTRA_TEXT": [""]
+    "TEXT": ["Alpha ", "", "Reduces cost by #b2. Shuffles a #yBeta version into your draw pile. #yExhaust."],
+    "EXTRA_TEXT": ["Shuffle a *Beta %s into your draw pile."," NL Exhaust.", "Innate. NL "]
   },
   "CardAugments:BetaMod": {
-    "TEXT": ["Beta ", "", "Shuffle an *Omega %s into your draw pile."," NL Exhaust."],
-    "EXTRA_TEXT": [""]
+    "TEXT": ["Beta ", "", "Reduces cost by #b1. Shuffles a #yOmega version into your draw pile. #yExhaust."],
+    "EXTRA_TEXT": ["Shuffle an *Omega %s into your draw pile."," NL Exhaust."]
   },
   "CardAugments:OmegaMod": {
-    "TEXT": ["Omega ", "", ""],
+    "TEXT": ["Omega ", "", "Increases card values by #b200%."],
     "EXTRA_TEXT": [""]
   },
   "CardAugments:AngryMod": {
