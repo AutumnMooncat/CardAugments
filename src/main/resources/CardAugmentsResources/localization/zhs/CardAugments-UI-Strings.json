@@ -229,11 +229,11 @@
     "EXTRA_TEXT": [""]
   },
   "CardAugments:AngryMod": {
-    "TEXT": ["愤怒", "", " NL 在弃牌堆放入1张此牌的复制品。",
+    "TEXT": ["愤怒", "", "Adds a copy of the card into your discard pile."],
+    "EXTRA_TEXT": [" NL 在弃牌堆放入1张此牌的复制品。",
       "愤怒本家牌的字符串替换。",
       " NL 在弃牌堆放入1张此牌的复制品。",
-      " NL 在弃牌堆放入2张此牌的复制品。"],
-    "EXTRA_TEXT": [""]
+      " NL 在弃牌堆放入2张此牌的复制品。"]
   },
   "CardAugments:AmplifiedMod": {
     "TEXT": ["强化", ""],

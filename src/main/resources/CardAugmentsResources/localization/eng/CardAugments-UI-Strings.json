@@ -229,11 +229,11 @@
     "EXTRA_TEXT": [""]
   },
   "CardAugments:AngryMod": {
-    "TEXT": ["Angry ", "", " NL Add a copy of this card into your discard pile.",
+    "TEXT": ["Angry ", "", "Adds a copy of the card into your discard pile."],
+    "EXTRA_TEXT": [" NL Add a copy of this card into your discard pile.",
       "Translator note: These strings are for replacing Anger's description. The first string is what to search for, the second string replaces it.",
       " NL Add a copy of this card into your discard pile.",
-      " NL Add 2 copies of this card into your discard pile."],
-    "EXTRA_TEXT": [""]
+      " NL Add 2 copies of this card into your discard pile."]
   },
   "CardAugments:AmplifiedMod": {
     "TEXT": ["Amplified ", ""],

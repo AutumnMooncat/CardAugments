@@ -6,34 +6,17 @@ import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDiscardAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class AngryMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(AngryMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
-
-    @Override
-    public float modifyBaseDamage(float damage, DamageInfo.DamageType type, AbstractCard card, AbstractMonster target) {
-        if (card.baseDamage > 1) {
-            return damage * MINOR_DEBUFF;
-        }
-        return damage;
-    }
-
-    @Override
-    public float modifyBaseBlock(float block, AbstractCard card) {
-        if (card.baseBlock > 1) {
-            return block * MINOR_DEBUFF;
-        }
-        return block;
-    }
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return isNormalCard(card) && card.cost != -2;
+        return card.type == AbstractCard.CardType.ATTACK && card.cost != -2;
     }
 
     @Override
@@ -47,11 +30,16 @@ public class AngryMod extends AbstractAugment {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        if (rawDescription.contains(TEXT[4])) {
-            return rawDescription.replace(TEXT[4], TEXT[5]);
+        if (rawDescription.contains(CARD_TEXT[2])) {
+            return rawDescription.replace(CARD_TEXT[2], CARD_TEXT[3]);
         }
-        return rawDescription + TEXT[2];
+        return insertAfterText(rawDescription,CARD_TEXT[0]);
     }
 
     @Override
