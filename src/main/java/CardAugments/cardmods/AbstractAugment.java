@@ -94,7 +94,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     @Override
     public List<TooltipInfo> additionalTooltips(AbstractCard card) {
         if (CardAugmentsMod.enableTooltips) {
-            String header = modifyName(card.name, card);
+            String header = modifyName("", card).replace("  ", " ").trim();
             String body = FormatHelper.prefixWords(WhatMod.findModName(getClass()), "#p") + " NL " + getAugmentDescription();
             if (header.isEmpty()) {
                 header = getClass().getSimpleName();
