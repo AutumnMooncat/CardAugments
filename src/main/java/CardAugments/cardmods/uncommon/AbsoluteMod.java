@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class AbsoluteMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(AbsoluteMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     boolean modMagic;
 
@@ -61,8 +62,13 @@ public class AbsoluteMod extends AbstractAugment {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + TEXT[2];
+        return rawDescription + CARD_TEXT[0];
     }
 
     @Override
@@ -70,7 +76,7 @@ public class AbsoluteMod extends AbstractAugment {
         if (cardWithThisMod == cardToCheck || hasThisMod(cardToCheck)) {
             return true;
         }
-        cardToCheck.cantUseMessage = TEXT[4] + cardWithThisMod.name + TEXT[5];
+        cardToCheck.cantUseMessage = CARD_TEXT[2] + cardWithThisMod.name + CARD_TEXT[3];
         return false;
     }
 

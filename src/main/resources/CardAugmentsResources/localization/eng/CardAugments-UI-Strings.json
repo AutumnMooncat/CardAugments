@@ -21,7 +21,8 @@
   },
   "CardAugments:AbstractAugment": {
     "TEXT": [
-      "Card"
+      "Card",
+      "Modifier"
     ]
   },
   "CardAugments:CrossoverConfig": {
@@ -199,21 +200,21 @@
     "EXTRA_TEXT": ["Card text"]
   },
   "CardAugments:AberrantMod": {
-    "TEXT": ["Aberrant ", "", " NL Gain 1 Intangible. NL Exhaust."],
-    "EXTRA_TEXT": [""]
+    "TEXT": ["Aberrant ", "", "Gain #b1 #yIntangible. #yExhaust."],
+    "EXTRA_TEXT": [" NL Gain 1 Intangible. NL Exhaust."]
   },
   "CardAugments:AbsoluteMod": {
-    "TEXT": ["Absolute ", "", " NL Absolute cards must be played before other cards in your hand.",
+    "TEXT": ["Absolute ", "", "Increases card values by #b33%. Must be played before #ynon-Absolute cards."],
+    "EXTRA_TEXT": [" NL Absolute cards must be played before other cards in your hand.",
       "Translator note: This is the cant use message that will appear",
-      "The "," is Absolute!"],
-    "EXTRA_TEXT": [""]
+      "The "," is Absolute!"]
   },
   "CardAugments:AllOutMod": {
-    "TEXT": ["All-Out ", "", " NL Discard %d card at random.",
+    "TEXT": ["All-Out ", "", "Increases damage by #b33%. Discards a random card."],
+    "EXTRA_TEXT": [" NL Discard %d card at random.",
       "Translator note: These strings are for replacing All-Out Attack's description. The first string is what to search for, the second string replaces it.",
       " NL Discard 1 card at random.",
-      " NL Discard 2 cards at random."],
-    "EXTRA_TEXT": [""]
+      " NL Discard 2 cards at random."]
   },
   "CardAugments:AlphaMod": {
     "TEXT": ["Alpha ", "", "Shuffle a *Beta %s into your draw pile."," NL Exhaust.", "Innate. NL "],

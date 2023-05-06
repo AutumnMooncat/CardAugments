@@ -19,6 +19,12 @@
       "为奖励卡牌添加随机修改。查看Mod设置来更改设置！"
     ]
   },
+  "CardAugments:AbstractAugment": {
+    "TEXT": [
+      "Card",
+      "Modifier"
+    ]
+  },
   "CardAugments:CrossoverConfig": {
     "TEXT": [
       "启用基础奇美拉卡牌内容",
@@ -194,21 +200,21 @@
     "EXTRA_TEXT": [""]
   },
   "CardAugments:AberrantMod": {
-    "TEXT": ["畸变", "", " NL 获得1层 无实体 。 NL 消耗 。"],
-    "EXTRA_TEXT": [""]
+    "TEXT": ["畸变", "", "Gain #b1 #yIntangible. Add #yExhaust."],
+    "EXTRA_TEXT": [" NL 获得1层 无实体 。 NL 消耗 。"]
   },
   "CardAugments:AbsoluteMod": {
-    "TEXT": ["绝对化", "", " NL 绝对化卡牌必须在其他卡牌之前打出。",
+    "TEXT": ["绝对化", "", "Increases card values by #b33%. Must be played before #ynon-Absolute cards."],
+    "EXTRA_TEXT": [" NL 绝对化卡牌必须在其他卡牌之前打出。",
       "Translator note: This is the cant use message that will appear",
-      ""," 是绝对化的！"],
-    "EXTRA_TEXT": [""]
+      ""," 是绝对化的！"]
   },
   "CardAugments:AllOutMod": {
-    "TEXT": ["全力", "", " NL 丢弃 %d 张随机手牌。",
+    "TEXT": ["全力", "", "Increases damage by #b33%. Discards a random card."],
+    "EXTRA_TEXT": [" NL 丢弃 %d 张随机手牌。",
       "下面是替换 全力攻击 本卡的字符串，第一个是搜索用，第二个是用来替换的字符串。",
       " NL 丢弃一张随机手牌。",
-      " NL 丢弃两张随机手牌。"],
-    "EXTRA_TEXT": [""]
+      " NL 丢弃两张随机手牌。"]
   },
   "CardAugments:AlphaMod": {
     "TEXT": ["阿尔法", "", "将一张 *贝塔 %s 洗入你的抽牌堆中。"," NL 消耗。", "固有。 NL "],
