@@ -236,20 +236,20 @@
       " NL Add 2 copies of this card into your discard pile."]
   },
   "CardAugments:AmplifiedMod": {
-    "TEXT": ["Amplified ", ""],
+    "TEXT": ["Amplified ", "", "Increases cost by #b1. Proportionally increases effects that are not damage or #yBlock."],
     "EXTRA_TEXT": [""]
   },
   "CardAugments:ArmedMod": {
-    "TEXT": ["Armed ", "", " NL Upgrade %s random card in your hand.", " NL Upgrade %s random cards in your hand."],
-    "EXTRA_TEXT": [""]
+    "TEXT": ["Armed ", "", "#yUpgrades random cards in your hand."],
+    "EXTRA_TEXT": [" NL Upgrade %s random card in your hand.", " NL Upgrade %s random cards in your hand."]
   },
   "CardAugments:AugerMod": {
-    "TEXT": ["Auger ", "", " NL If this breaks a target's Block, apply %d Vulnerable."],
-    "EXTRA_TEXT": [""]
+    "TEXT": ["Auger ", "", "Applies #yVulnerable when breaking #yBlock."],
+    "EXTRA_TEXT": ["NL If this breaks a target's Block, apply %d Vulnerable."]
   },
   "CardAugments:AutoMod": {
-    "TEXT": ["Auto-", "", "Autoplay. NL "," NL Draw %d card."],
-    "EXTRA_TEXT": [""]
+    "TEXT": ["Auto-", "", "#yAutoplays. Draws a card."],
+    "EXTRA_TEXT": ["Autoplay. NL "," NL Draw %d card."]
   },
   "CardAugments:BashMod": {
     "TEXT": ["Bashing ", "", " NL Apply %d Vulnerable."],

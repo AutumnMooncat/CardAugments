@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 public class AugerMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(AugerMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     private static final int VULN = 1;
 
@@ -35,8 +36,13 @@ public class AugerMod extends AbstractAugment {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + String.format(TEXT[2], VULN);
+        return insertAfterText(rawDescription, String.format(CARD_TEXT[0], VULN));
     }
 
     @Override

@@ -15,6 +15,7 @@ public class ArmedMod extends AbstractAugment implements DynvarCarrier {
     public static final String ID = CardAugmentsMod.makeID(ArmedMod.class.getSimpleName());
     public static final String DESCRIPTION_KEY = "!"+ID+"!";
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     private static final int EFFECT = 1;
     private static final int UPGRADE_EFFECT = 1;
@@ -47,11 +48,13 @@ public class ArmedMod extends AbstractAugment implements DynvarCarrier {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        if (card.upgraded) {
-            return rawDescription + String.format(TEXT[3], DESCRIPTION_KEY);
-        }
-        return rawDescription + String.format(TEXT[2], DESCRIPTION_KEY);
+        return insertAfterText(rawDescription, String.format(card.upgraded ? CARD_TEXT[1] : CARD_TEXT[0], DESCRIPTION_KEY));
     }
 
     @Override

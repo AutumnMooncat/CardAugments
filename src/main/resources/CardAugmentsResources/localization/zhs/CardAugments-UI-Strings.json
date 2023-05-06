@@ -236,20 +236,20 @@
       " NL 在弃牌堆放入2张此牌的复制品。"]
   },
   "CardAugments:AmplifiedMod": {
-    "TEXT": ["强化", ""],
+    "TEXT": ["强化", "", "Increases cost by #b1. Proportionally increases effects that are not damage or #yBlock."],
     "EXTRA_TEXT": [""]
   },
   "CardAugments:ArmedMod": {
-    "TEXT": ["武装", "", " NL 升级 %s 张随机手牌。", " NL 升级 %s 张随机手牌。"],
-    "EXTRA_TEXT": [""]
+    "TEXT": ["武装", "", "#yUpgrades random cards in your hand."],
+    "EXTRA_TEXT": [" NL 升级 %s 张随机手牌。", " NL 升级 %s 张随机手牌。"]
   },
   "CardAugments:AugerMod": {
-    "TEXT": ["螺旋", "", " NL 如果打破了目标的 格挡，给予 %d 层 易伤 。"],
-    "EXTRA_TEXT": [""]
+    "TEXT": ["螺旋", "", "Applies #yVulnerable when breaking #yBlock."],
+    "EXTRA_TEXT": [" NL 如果打破了目标的 格挡，给予 %d 层 易伤 。"]
   },
   "CardAugments:AutoMod": {
-    "TEXT": ["自动：", "", "自动打出。 NL "," NL 抽 %d 张牌。"],
-    "EXTRA_TEXT": [""]
+    "TEXT": ["自动：", "", "#yAutoplays. Draws a card."],
+    "EXTRA_TEXT": ["自动打出。 NL "," NL 抽 %d 张牌。"]
   },
   "CardAugments:BashMod": {
     "TEXT": ["痛击", "", " NL 给予 %d 层 易伤 。"],
