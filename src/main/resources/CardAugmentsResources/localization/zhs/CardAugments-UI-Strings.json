@@ -196,11 +196,11 @@
     ]
   },
   "CardAugments:ExampleMod": {
-    "TEXT": ["前缀名字", "后缀名字", "附加描述"],
-    "EXTRA_TEXT": [""]
+    "TEXT": ["前缀名字", "后缀名字", "Augment description"],
+    "EXTRA_TEXT": ["附加描述"]
   },
   "CardAugments:AberrantMod": {
-    "TEXT": ["畸变", "", "Gain #b1 #yIntangible. Add #yExhaust."],
+    "TEXT": ["畸变", "", "Gains #b1 #yIntangible. #yExhausts."],
     "EXTRA_TEXT": [" NL 获得1层 无实体 。 NL 消耗 。"]
   },
   "CardAugments:AbsoluteMod": {
@@ -217,11 +217,11 @@
       " NL 丢弃两张随机手牌。"]
   },
   "CardAugments:AlphaMod": {
-    "TEXT": ["阿尔法", "", "Reduces cost by #b2. Shuffles #yBeta into your draw pile. #yExhaust."],
+    "TEXT": ["阿尔法", "", "Reduces cost by #b2. Shuffles #yBeta into your draw pile. #yExhausts."],
     "EXTRA_TEXT": ["将一张 *贝塔 %s 洗入你的抽牌堆中。"," NL 消耗。", "固有。 NL "]
   },
   "CardAugments:BetaMod": {
-    "TEXT": ["贝塔", "", "Reduces cost by #b1. Shuffles #yOmega into your draw pile. #yExhaust."],
+    "TEXT": ["贝塔", "", "Reduces cost by #b1. Shuffles #yOmega into your draw pile. #yExhausts."],
     "EXTRA_TEXT": ["将一张 *欧米伽 %s 洗入你的抽牌堆中。"," NL 消耗。"]
   },
   "CardAugments:OmegaMod": {

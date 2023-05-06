@@ -200,7 +200,7 @@
     "EXTRA_TEXT": ["Card text"]
   },
   "CardAugments:AberrantMod": {
-    "TEXT": ["Aberrant ", "", "Gain #b1 #yIntangible. #yExhaust."],
+    "TEXT": ["Aberrant ", "", "Gains #b1 #yIntangible. #yExhausts."],
     "EXTRA_TEXT": [" NL Gain 1 Intangible. NL Exhaust."]
   },
   "CardAugments:AbsoluteMod": {
@@ -217,11 +217,11 @@
       " NL Discard 2 cards at random."]
   },
   "CardAugments:AlphaMod": {
-    "TEXT": ["Alpha ", "", "Reduces cost by #b2. Shuffles a #yBeta version into your draw pile. #yExhaust."],
+    "TEXT": ["Alpha ", "", "Reduces cost by #b2. Shuffles a #yBeta version into your draw pile. #yExhausts."],
     "EXTRA_TEXT": ["Shuffle a *Beta %s into your draw pile."," NL Exhaust.", "Innate. NL "]
   },
   "CardAugments:BetaMod": {
-    "TEXT": ["Beta ", "", "Reduces cost by #b1. Shuffles a #yOmega version into your draw pile. #yExhaust."],
+    "TEXT": ["Beta ", "", "Reduces cost by #b1. Shuffles a #yOmega version into your draw pile. #yExhausts."],
     "EXTRA_TEXT": ["Shuffle an *Omega %s into your draw pile."," NL Exhaust."]
   },
   "CardAugments:OmegaMod": {
