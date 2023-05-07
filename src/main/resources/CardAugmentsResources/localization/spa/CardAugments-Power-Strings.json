@@ -1,0 +1,49 @@
+{
+  "${ModID}:LosePowerPower": {
+    "NAME": "Pierde ",
+    "DESCRIPTIONS": [
+      "Al final de tu turno, pierde #b",
+      " ",
+      "."
+    ]
+  },
+  "${ModID}:NextTurnPowerPower": {
+    "NAME": "Próximo turno ",
+    "DESCRIPTIONS": [
+      "En el próximo turno, gana #b.",
+      " ",
+      "."
+    ]
+  },
+  "CardAugments:IcizePower": {
+    "NAME": "icize",
+    "DESCRIPTIONS": [
+      "Al comienzo de tu turno, imita un #y%s."
+    ]
+  },
+  "CardAugments:InfinitePower": {
+    "NAME": "Infinito ",
+    "DESCRIPTIONS": [
+      "Al inicio de tu turno, agrega un %s a tu mano."
+    ]
+  },
+  "CardAugments:BiasPower": {
+    "NAME": "Biased",
+    "DESCRIPTIONS": [
+      "Al inicio de tu turno, pierdes %d #y%s."
+    ]
+  },
+  "CardAugments:RunicPower": {
+    "NAME": "Runas Oscurecedoras",
+    "DESCRIPTIONS": [
+      "No puedes ver las intenciones del enemigo"
+    ]
+  },
+  "CardAugments:BombPower": {
+    "NAME": "Explosivo ",
+    "DESCRIPTIONS": [
+      "En #b%1$s turnos, juega #b%2$s copias de %3$s al inicio de tu turno.",
+      "Al inicio del próximo turno, juega #b%1$s copias de %2$s."
+    ]
+  }
+}

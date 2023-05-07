@@ -1,0 +1,23 @@
+[
+  {
+    "PROPER_NAME": "Eco",
+    "NAMES": [
+      "eco"
+    ],
+    "DESCRIPTION": "Juega una copia adicional de esta carta."
+  },
+  {
+    "PROPER_NAME": "Rebarajar",
+    "NAMES": [
+      "rebarajar"
+    ],
+    "DESCRIPTION": "Baraja esta carta en tu pila de robo cuando se juegue."
+  },
+  {
+    "PROPER_NAME": "Sin restricciones",
+    "NAMES": [
+      "sin restricciones"
+    ],
+    "DESCRIPTION": "Esta carta ignora restricciones de jugabilidad."
+  }
+]

@@ -1,0 +1,1388 @@
+{
+  "CardAugments:ModConfigs": {
+    "TEXT": [
+      "Activar Mejoras de Cartas.",
+      "Porcentaje de probabilidad del mod (por defecto 10):",
+      "Peso de Modificador Común (por defecto 3):",
+      "Peso de Modificador poco común (por defecto 2):",
+      "Peso de Modificador Raro (por defecto 1):",
+      "Modifica las cartas iniciales.",
+      "Permitir modificadores de orbes sin Fragmento Prismático.",
+      "Sesgo de peso de rareza de carta (por defecto 1):",
+      "Modificar cartas de Obtención Instantánea (Mordeduras, Caja de Pandora, Maldiciones, etc.)",
+      "Modificar cartas de tienda",
+      "Activar complementos de eventos",
+      "Enable Modifier Tooltips"
+    ],
+    "EXTRA_TEXT": [
+      "Cartas Quimera",
+      "Agrega modificadores de carta de rollo aleatorio a las recompensas de cartas. ¡Consulta las opciones de modificación si deseas cambiar alguna configuración!"
+    ]
+  },
+  "CardAugments:AbstractAugment": {
+    "TEXT": [
+      "Carta",
+      "Modifier"
+    ]
+  },
+  "CardAugments:CrossoverConfig": {
+    "TEXT": [
+      "Activar contenido base de cartas Quimera",
+      "Página",
+      "modificadores"
+    ]
+  },
+  "CardAugments:MainMenu": {
+    "TEXT": [
+      "Modificadores"
+    ]
+  },
+  "CardAugments:ModifierScreen": {
+    "TEXT": [
+      "Atrás",
+      "Mejora",
+      "Rareza: ",
+      "Cartas válidas: ",
+      "Todos los personajes",
+      "Configuración",
+      "Todas las rarezas",
+      "Ninguno"
+    ]
+  },
+  "CardAugments:SCVScreen": {
+    "TEXT": [
+      "Previsualizar modificadores"
+    ]
+  },
+  "CardAugments:AugmentPreviewCard": {
+    "TEXT": [
+      "Mod"
+    ]
+  },
+  "CardAugments:BlacksmithEvent": {
+    "TEXT": [
+      "Decides usar la forja y... NL #y@CLANG@ #y@CLAAANG@ #y@CLANG!@ NL ...¡mejora tu arsenal!",
+      "Elige una carta para mejorar.",
+      "Frágil",
+      "Coste -1. NL Agotar. NL Solo se aplica a cartas sin Agotar que no cambian de coste."
+    ],
+    "EXTRA_TEXT": [
+      "[Trasteando] #gDa #gFrágil #gal #gAtaque #go #gHabilidad.",
+      "[Bloqueado] Requiere: Ataque o Habilidad que no tenga Agotar y no cambie de coste.",
+      "[Salir]"
+    ]
+  },
+  "CardAugments:DuplicatorEvent": {
+    "TEXT": [
+      "Sostienes tu equipo contra el santuario. Una imagen especular espeluznante aparece desde el santuario y es absorbida por él.",
+      "Elige una carta para mejorar.",
+      "Ecoante",
+      "Doble Juego. NL Agotar. NL Solo se aplica a cartas sin Agotar."
+    ],
+    "EXTRA_TEXT": [
+      "[Imbuir] #gOtorga #gEcoante a una carta #gAtaque o #gHabilidad.",
+      "[Bloqueado] Requiere: Ataque o Habilidad que no tenga Agotar.",
+      "[Dejar]"
+    ]
+  },
+  "CardAugments:FallingEvent": {
+    "TEXT": [
+      "Haciendo un gran esfuerzo, combinas las tres opciones para aterrizar sin romper nada por completo. Sin embargo, tu equipo parece un poco más deteriorado.",
+      "Elige una carta para mejorar.",
+      "Cripta",
+      "Comienza cada combate en la pila de descarte."
+    ],
+    "EXTRA_TEXT": [
+      "[Exertar] #rOtorga a #rtodas las #r3 #rcartas Cripta.",
+      "[Bloqueado] Requiere: una carta de Habilidad, una carta de Poder y una carta de Ataque.",
+      "[Dejar]"
+    ]
+  },
+  "CardAugments:GhostsEvent": {
+    "TEXT": [
+      "#y\"¡Excelente!\" NL Mientras la forma fantasmal habla, notas que su gran boca se abre cada vez más. Un #p~Espeso~ #p~humo~ #p~negro~ brota y envuelve la habitación. No puedes ver ni respirar y comienzas a agitar cosas salvajemente en un intento por dispersarlo... NL NL Eventualmente, suficiente humo se dispersa y la sensación se detiene. NL NL Lo que sea que eran esas cosas, ya se han ido. Continúas adelante, sintiéndote bastante #bvacío",
+      "Elige una carta para mejorar.",
+      "Aberrante",
+      "Obtén 1 Intangible. NL Agotar. NL Solo aplicable a cartas sin Agotar."
+    ],
+    "EXTRA_TEXT": [
+      "[Acceptar] #gDar #gun #gAtaque #go #gHabilidad Aberrante. #rPerder #r%s #rMáx #rHP.",
+      "[ Bloqueado ] Requiere: Ataque o Habilidad sin Agotamiento.",
+      "[Dejar]"
+    ]
+  },
+  "CardAugments:LibraryEvent": {
+    "TEXT": [
+      "Agarrando el libro más cercano, lo lees hasta la mitad y luego comienzas a garabatear sobre las páginas, cambiando completamente la historia. NL NL ~Jeje.~ NL NL Vuelves a colocar el libro donde lo encontraste, deseando molestar a quien lo encuentre después.",
+      "Elige una carta para mejorar",
+      "Selecciona un Modificador.",
+      "La historia trata sobre una chica adolescente que controla insectos y aspira a convertirse en una heroína. El libro está lleno de usos creativos de poderes, estrategias de combate y... ~Hey~ @¡Espera!@ ¡Alguien ha #r@garabateado@ todo esto! ¿Quién habrá sido?",
+      "The story is about a man who journeyed beyond the stars and found himself stuck on a desolate foreign planet. You were looking forward to his return home, but it looks like someone has vandalized the book! NL How unsatisfying.",
+      "La historia trata sobre un hombre que viajó más allá de las estrellas y se encontró atrapado en un planeta extranjero desolado. Estabas esperando su regreso a casa, ¡pero parece que alguien ha vandalizado el libro! NL Qué insatisfactorio."
+    ],
+    "EXTRA_TEXT": [
+      "[Reescribir] #gElige #guna #gcarta, #gy #gaplica #g1 #gde #g5 #gmodificadores #ga #gella.",
+      "[Bloqueado] Requiere: Una carta que acepte modificadores.",
+      "[Dejar]"
+    ]
+  },
+  "CardAugments:NestEvent": {
+    "TEXT": [
+      "Permaneces fuera de la fila para observar lo que está sucediendo. No mucho después, un grupo de #rCultistas llega y comienza a @cantar@ alegremente y ~agitar~ sus armas alrededor. NL NL #r@\"¡¡ASESINATO@ #r@ASESINATO@ #r@ASESINATO!!\"@ NL #b~\"¡CAW~ #b~CAW~ #b~CAAAAAWWW!\"~ NL #r@\"¡¡ASESINATO@ #r@ASESINATO@ #r@ASESINATO!!\"@ NL #b~\"CAAW~ #b~CAW~ #b~CAAAAAAWW!!\"~ NL NL Sientes que podrías aprender algo observándolos en acción...",
+      "Mientras observas a los #rCultistas y su #r@ritual,@ sientes que caes en un #p~trance~. NL NL Con una chispa de #b@inspiración,@ te enfocas y... NL #y@CLANG@ #y@CLAAANG@ #y@CLANG!@ NL ...¡mejoras tu arsenal!",
+      "Elige una carta para mejorar.",
+      "Cultista",
+      "Aumenta 1 de Fuerza. Daño -20%.",
+      "Fanático",
+      "Daño +50%. NL Agotado. NL Solo aplicable a cartas que no estén Agotadas."
+    ],
+    "EXTRA_TEXT": [
+      "[Observar]",
+      "[Bloqueado] Requiere: Un Ataque.",
+      "[Estudiar Cultistas] #gDar #gun #gAtaque a los Cultistas.",
+      "[Study Ritual] #gDar #gun #gAtaque al Fanático.",
+      "[Bloqueado] Requiere: Un ataque que no se agote.",
+      "[Irse]"
+    ]
+  },
+  "CardAugments:SensoryEvent": {
+    "TEXT": [
+      "#yRECHAZO NL NL ¡Te @niegas@ a ser conquistado por los recuerdos que no reconoces! Algo en ti #rse ~quiebra.~ NL NL Sacudes tu cabeza con #rdolor y miras alrededor. Las cosas parecen iguales, pero se sienten #p~inquietantemente~ #p~diferentes.~",
+      "Elige una carta para mejorar.",
+      "Auto",
+      "Autoplay. NL Roba 1 carta. NL Solo aplicable a cartas sin Retener y Autoplay."
+    ],
+    "EXTRA_TEXT": [
+      "[Rechazar] #gEntregar #guna #gcarta Auto. #rPerder #r%s #rHP.",
+      "[Bloqueado] Requiere: Una carta que no tenga Retener.",
+      "[Irse]"
+    ]
+  },
+  "CardAugments:SerpentEvent": {
+    "TEXT": [
+      "~\"¡Sííííííííííííííííííííííííííííííííííííííííííííííííííííííííí!~ NL ~Esto~ ~valdrá~ ~todo~ ~el~ ~esfuerzo.~ NL ~..ssSSs.....~ ~ss...~ ~sssss....!\"~",
+      "¡La serpiente alza su cabeza y te lanza un chorro de #yoro! NL Es sorprendente y aterrador al mismo tiempo. NL Mientras tu equipo absorbe todo el #yoro, agradeces a la serpiente y sigues adelante.",
+      "Codicioso",
+      "Si es letal, gana 15 de oro. NL Se agota."
+    ],
+    "EXTRA_TEXT": [
+      "[De acuerdo] #gDar #gTODOS los #gAtaques  al Codicioso.",
+      "[Bloqueado] Requiere: Un Ataque.",
+      "[Irse]",
+      "[Continuar]"
+    ]
+  },
+  "CardAugments:ShiningEvent": {
+    "TEXT": [
+      "Probando la luz arrojando parte de tu equipo hacia ella, notas que la luz es absorbida por éste. Parece estar emitiendo un #y~resplandor~ #y~acogedor.~ NL Al recogerlo, encuentras que está ¡#r@quemando@ #r@muchísimo@! Rápidamente lo guardas y atiendes tus quemaduras.",
+      "Resplandeciente",
+      "Etérea. NL Cuando se roba, obtienes [E]. NL Solo se aplica a cartas sin Etérea."
+    ],
+    "EXTRA_TEXT": [
+      "[Arrojar] #gDar #guna #gcarta #gal azar Resplandeciente. #rPierde #r%s #rHP.",
+      "[Bloqueado] Requiere: Una carta que no sea Etérea.",
+      "[Irse]"
+    ]
+  },
+  "CardAugments:TransmogrifierEvent": {
+    "TEXT": [
+      "Al recibir el poder del santuario, sientes que tu arsenal ha sido alterado.",
+      "Elige 2 cartas para mejorar."
+    ],
+    "EXTRA_TEXT": [
+      "[Infundir] #gAplica #gun #modificador #galeatorio #ga #g2 #gcartas.",
+      "[Bloqueado] Requiere: Dos cartas que acepten modificadores.",
+      "[Irse]"
+    ]
+  },
+  "CardAugments:ExampleMod": {
+    "TEXT": [
+      "Nombre prefijo",
+      "Nombre sufijo",
+      ""
+    ],
+    "EXTRA_TEXT": [
+      "Descripción"
+    ]
+  },
+  "CardAugments:AberrantMod": {
+    "TEXT": [
+      "",
+      " Aberrante",
+      "Gains #b1 #yIntangible. #yExhausts."
+    ],
+    "EXTRA_TEXT": [
+      " NL Obtén 1 Intangible. NL Agotar."
+    ]
+  },
+  "CardAugments:AbsoluteMod": {
+    "TEXT": [
+      "",
+      " Absoluto/a",
+      "Increases card values by #b33%. Must be played before #ynon-Absolute cards."
+    ],
+    "EXTRA_TEXT": [
+      " NL Las cartas Absoluto/a deben ser jugadas antes que otras cartas en tu mano.",
+      "Nota del traductor: Este es el mensaje de \"no se puede usar\" que aparecerá.",
+      "El",
+      " es Absoluto!"
+    ]
+  },
+  "CardAugments:AllOutMod": {
+    "TEXT": [
+      "",
+      " Todo o Nada",
+      "Increases damage by #b33%. Discards a random card."
+    ],
+    "EXTRA_TEXT": [
+      " NL Descarta %d carta al azar.",
+      "Nota del traductor: Estas cadenas son para reemplazar la descripción del ataque Todo o Nada. La primera cadena es lo que se busca, la segunda cadena lo reemplaza.",
+      " NL Descarta 1 carta al azar.",
+      "Descarta 2 cartas al azar."
+    ]
+  },
+  "CardAugments:AlphaMod": {
+    "TEXT": [
+      "",
+      " Alfa",
+      "Reduces cost by #b2. Shuffles #yBeta into your draw pile. #yExhausts."
+    ],
+    "EXTRA_TEXT": [
+      "Baraja una *Beta %s en tu pila de robo.",
+      " NL Agotar.",
+      "Innata. NL "
+    ]
+  },
+  "CardAugments:BetaMod": {
+    "TEXT": [
+      "",
+      " Beta",
+      "Reduces cost by #b1. Shuffles #yOmega into your draw pile. #yExhausts."
+    ],
+    "EXTRA_TEXT": [
+      "Baraja una *Omega %s en tu pila de robo.",
+      " NL Agotar."
+    ]
+  },
+  "CardAugments:OmegaMod": {
+    "TEXT": [
+      "",
+      " Omega",
+      "Increases card values by #b200%"
+    ],
+    "EXTRA_TEXT": [
+      ""
+    ]
+  },
+  "CardAugments:AngryMod": {
+    "TEXT": [
+      "",
+      " Enojado/a",
+      "Adds a copy of the card into your discard pile."
+    ],
+    "EXTRA_TEXT": [
+      " NL Añade una copia de esta carta a tu pila de descarte.",
+      "Nota del traductor: Estas cadenas son para reemplazar la descripción de las Iras. La primera cadena es lo que se busca, la segunda cadena lo reemplaza.",
+      " NL Añade una copia de esta carta a tu pila de descarte.",
+      " NL Agregar 2 copias de esta carta a tu pila de descarte."
+    ]
+  },
+  "CardAugments:AmplifiedMod": {
+    "TEXT": [
+      "",
+      " Amplificado/a",
+      "Increases cost by #b1. Proportionally increases effects that are not damage or #yBlock."
+    ],
+    "EXTRA_TEXT": [
+      ""
+    ]
+  },
+  "CardAugments:ArmedMod": {
+    "TEXT": [
+      "",
+      " Armado/a",
+      "#yUpgrades random cards in your hand."
+    ],
+    "EXTRA_TEXT": [
+      " NL Actualiza una carta aleatoria de tu mano.",
+      " NL Actualiza %s cartas al azar en tu mano."
+    ]
+  },
+  "CardAugments:AugerMod": {
+    "TEXT": [
+      "",
+      " de Barrena",
+      "Applies #yVulnerable when breaking #yBlock."
+    ],
+    "EXTRA_TEXT": [
+      " NL Si esto rompe el Bloqueo de un objetivo, aplica %d Vulnerable."
+    ]
+  },
+  "CardAugments:AutoMod": {
+    "TEXT": [
+      "Auto-",
+      "",
+      "#yAutoplays. Draws a card."
+    ],
+    "EXTRA_TEXT": [
+      "Autoplay. NL ",
+      " NL Roba %d carta."
+    ]
+  },
+  "CardAugments:BashMod": {
+    "TEXT": [
+      "",
+      " de Porrazo",
+      " NL Aplica %d Vulnerable."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:BerserkMod": {
+    "TEXT": [
+      "",
+      " Berserk",
+      " NL Inflige un 50% de daño adicional si tu HP es igual o inferior al 50%."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:BlasphemousMod": {
+    "TEXT": [
+      "",
+      " Blasfemo/a",
+      " NL Muere en el próximo turno."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:BloodyMod": {
+    "TEXT": [
+      "",
+      " por Sangre",
+      "Cuesta 1 [E] menos por cada vez que pierdas HP en este combate. NL ",
+      "Nota del traductor: Estas cadenas se utilizan para reemplazar la descripción de \"Sangre por sangre\". La primera cadena es lo que se busca, la segunda cadena lo reemplaza.",
+      "Cuesta 1 [R] menos NL por cada vez que pierdas HP en este combate. NL ",
+      "Cuesta 2 [R] menos NL por cada vez que pierdas HP en este combate. NL "
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:BludgeonMod": {
+    "TEXT": [
+      "",
+      " Aporreado/a"
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:BlurryMod": {
+    "TEXT": [
+      "",
+      " Borroso",
+      " NL El Bloqueo no se elimina al comienzo del próximo turno."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:BootMod": {
+    "TEXT": [
+      "",
+      " de Arranque",
+      "Innata. NL "
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:BowlingMod": {
+    "TEXT": [
+      "",
+      " de Bolos",
+      " por cada enemigo en combate."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:BracedMod": {
+    "TEXT": [
+      "",
+      " Reforzado/a",
+      " NL Aumenta el Bloqueo de esta carta en %s este combate."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:BrutalMod": {
+    "TEXT": [
+      "",
+      " Brutal",
+      "Etérea. NL "
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:BundledMod": {
+    "TEXT": [
+      "",
+      " Agrupado/a",
+      "Agrega 2 %s a tu mano.",
+      " NL Agotar.",
+      "Innata. NL "
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:ChargedMod": {
+    "TEXT": [
+      " Cargado/a",
+      "",
+      " NL Siguiente turno, ganas [E] ."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:ClashyMod": {
+    "TEXT": [
+      "",
+      " Condicional",
+      "Solo se puede jugar si todas las cartas en tu mano son Ataques. NL "
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:ClawfulMod": {
+    "TEXT": [
+      "",
+      " de Garra",
+      "",
+      " Contundente",
+      " NL Aumenta el daño de TODAS las %s cartas en %s de daño este combate.",
+      " NL Aumenta el daño de TODAS tus cartas que contengan \"Golpe\" en %s este combate."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:CultistMod": {
+    "TEXT": [
+      "",
+      " Cultista",
+      " NL Gana %d Fuerza."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:DemurMod": {
+    "TEXT": [
+      "",
+      " Objetado/a",
+      "Solo se puede jugar si todas las cartas en tu mano son Habilidades. NL "
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:DevotedMod": {
+    "TEXT": [
+      "",
+      " Devoto/a",
+      " NL Gana %d Mantra."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:DisposableMod": {
+    "TEXT": [
+      "",
+      " Desechable"
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:DivergentMod": {
+    "TEXT": [
+      "",
+      " Divergente",
+      " NL cardaugments:Eco."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:DoomedMod": {
+    "TEXT": [
+      "",
+      " Maldito/a",
+      " NL Inflige %d de daño adicional por cada Maldición en tu mazo."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:DoubtfulMod": {
+    "TEXT": [
+      "",
+      " Dudoso/a",
+      " NL Gana %d Débil."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:DramaticMod": {
+    "TEXT": [
+      "",
+      " Dramatico",
+      "Innata. NL ",
+      " NL Agotar."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:EchoMod": {
+    "TEXT": [
+      "",
+      " Ecoante",
+      " NL cardaugments:Eco. Agotar."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:ElectroMod": {
+    "TEXT": [
+      "Electro ",
+      "",
+      " NL Invoca %d Relámpago."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:EndlessMod": {
+    "TEXT": [
+      "",
+      " Infinito/a",
+      " NL Cada vez que robes esta carta, añade una copia de ella a tu mano.",
+      " NL Agotar.",
+      "Nota del traductor: Estas cadenas son para reemplazar la descripción de Agonía Infinita. La primera cadena es lo que se busca, la segunda cadena lo reemplaza.",
+      " NL Cada vez que roba esta carta, añade una copia a tu mano.",
+      " NL Cada vez que robes esta carta, añade 2 copias a tu mano."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:ErangMod": {
+    "TEXT": [
+      " Búmeran",
+      " Búmeran",
+      " Búmeran",
+      " a un enemigo aleatorio 3 veces.",
+      "Bang",
+      " Búmeran"
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:EruptingMod": {
+    "TEXT": [
+      "",
+      " en Erupción",
+      " NL Entra en Ira"
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:ExplosiveMod": {
+    "TEXT": [
+      "",
+      " Explosivo",
+      "En 2 turnos, juega %1$s copias de %2$s al comienzo de tu turno.",
+      "Innata. NL "
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:FanaticMod": {
+    "TEXT": [
+      "",
+      " Fanatico/a",
+      " NL Agotar."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:FearfulMod": {
+    "TEXT": [
+      "",
+      " Temeroso/a",
+      " NL Gana %d Vulnerable."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:FlexMod": {
+    "TEXT": [
+      "",
+      " Flexionado/a",
+      " NL Obtén %d Fuerza. Al final de este turno, pierde %d Fuerza."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:FlyingMod": {
+    "TEXT": [
+      "",
+      " Volador/a",
+      " NL Siguiente turno, gana [E] ."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:FragileMod": {
+    "TEXT": [
+      "",
+      " Frágil",
+      " NL Agotar."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:FrostyMod": {
+    "TEXT": [
+      "",
+      " Helado/a",
+      " NL Invoca %d Escarcha."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:FollowUpMod": {
+    "TEXT": [
+      "",
+      " Siguiente",
+      " NL Si la última carta jugada en este combate fue un Ataque, obtén [E].",
+      "Nota del traductor: Estas cadenas son para reemplazar la descripción de Seguidores. La primera cadena es lo que se busca y la segunda cadena lo reemplaza.",
+      "Si la ultima carta jugada en este combate fue un Ataque, gana [W].",
+      "Si la ultima carta jugada en este combate fue un Ataque, gana [W] [W]."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:FormMod": {
+    "TEXT": [
+      "Forma ",
+      ""
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:ForOneMod": {
+    "TEXT": [
+      "",
+      " para Uno/a",
+      " NL Mueve una carta aleatoria de costo 0 de tu pila de descarte a tu mano."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:FusedMod": {
+    "TEXT": [
+      "",
+      " Fusionado/a",
+      " NL No puede ser mejorada."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:GhostlyMod": {
+    "TEXT": [
+      "",
+      " Fantasmal",
+      "Etérea. NL "
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:GlassMod": {
+    "TEXT": [
+      "",
+      " de Vidrio",
+      " NL Disminuye el daño de esta carta en 2 durante este combate.",
+      "Nota del traductor: Estas cadenas son para reemplazar la descripción del Cuchillo de Vidrio. La primera cadena es lo que se busca y la segunda cadena lo reemplaza.",
+      "Disminuye el daño de esta carta en 2 durante este combate.",
+      "Disminuye el daño de esta carta en 4 durante este combate."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:GloomMod": {
+    "TEXT": [
+      "",
+      " y Oscuridad",
+      " Invoca %d de Oscuridad."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:GoForTheMod": {
+    "TEXT": [
+      "",
+      " Ve por él",
+      "Inflige %s de daño. NL Si el enemigo tiene la intención de atacar, "
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:GraveMod": {
+    "TEXT": [
+      "",
+      " de Cripta",
+      " NL Tumba."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:GritMod": {
+    "TEXT": [
+      "",
+      " Arenoso/a",
+      " NL Agota una carta aleatoria en tu mano.",
+      " NL Agota una carta de tu mano."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:GreedMod": {
+    "TEXT": [
+      "",
+      " de la avaricia",
+      " NL Si es Fatal, obtén %s Oro. NL Agotar.",
+      " Si es Fatal, obtén %s Oro."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:HemoMod": {
+    "TEXT": [
+      "Hemo ",
+      "",
+      "Pierde %d HP. NL "
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:HeavyMod": {
+    "TEXT": [
+      "",
+      " Pesado/a",
+      " NL La Fuerza afecta esta carta %d veces."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:HolyMod": {
+    "TEXT": [
+      "",
+      " Santo/a",
+      " NL Agrega un *Milagro a tu mano."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:InfiniteMod": {
+    "TEXT": [
+      "",
+      " Infinito",
+      "Al inicio de tu turno, agrega un %s a tu mano.",
+      "Innata. NL "
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:InvertedMod": {
+    "TEXT": [
+      "",
+      " Invertido",
+      "Gana !B! de Bloqueo.",
+      "Inflige !D! de daño."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:JankMod": {
+    "TEXT": [
+      "",
+      " Cutre"
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:LockingMod": {
+    "TEXT": [
+      "",
+      " con Bloqueo",
+      " NL Aplica %d Bloquear objetivo."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:LuckyMod": {
+    "TEXT": [
+      "",
+      " de Suerte",
+      "Adivina %s. NL "
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:MasochisticMod": {
+    "TEXT": [
+      "",
+      " Masoquista",
+      " Gana 3 de Bloqueo adicional por cada debuff que tengas."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:MassiveMod": {
+    "TEXT": [
+      "",
+      " Masivo/a"
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:MasterfulMod": {
+    "TEXT": [
+      "",
+      " Magistral",
+      " Cuesta 1 [E] adicional por cada vez que pierdas HP en este combate."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:MementoMod": {
+    "TEXT": [
+      "",
+      " Memento",
+      "Etérea. NL ",
+      " NL Cuando se agote, roba %d cartas."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:MeteorMod": {
+    "TEXT": [
+      "",
+      " Meteorico/a",
+      " NL Invoca %d de Plasma."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:MK2Mod": {
+    "TEXT": [
+      "",
+      " MK2"
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:MoxieMod": {
+    "TEXT": [
+      "",
+      " Ritual",
+      " NL Si es fatal, aumenta permanentemente el daño de esta carta en %d. NL Agotar."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:NoxiousMod": {
+    "TEXT": [
+      "",
+      " Nocivo/a",
+      " NL Aplica %d de veneno a TODOS los enemigos."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:NuclearMod": {
+    "TEXT": [
+      "",
+      " Nuclear",
+      " NL Invoca %d Plasma."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:PerniciousMod": {
+    "TEXT": [
+      "",
+      " Pernicioso/a",
+      " NL Aplica Veneno igual al daño no bloqueado infligido."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:PhilosophersMod": {
+    "TEXT": [
+      "",
+      " Filosofal",
+      " NL TODOS los enemigos ganan 1 Fuerza."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:PiercingMod": {
+    "TEXT": [
+      "",
+      " Piercing",
+      " NL Ignora el Bloqueo."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:PoisonedMod": {
+    "TEXT": [
+      "",
+      " Envenenado/a",
+      " NL Aplica %s de veneno."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:PredatoryMod": {
+    "TEXT": [
+      "",
+      " Depredatorio/a",
+      " NL El próximo turno, roba %d cartas adicionales",
+      "Nota del traductor: Estas cadenas son para reemplazar la descripción del Depredador. La primera cadena es lo que se debe buscar, la segunda cadena lo reemplaza",
+      "El próximo turno, roba 2 cartas adicionales.",
+      "El próximo turno, roba 4 cartas adicionales."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:PreparedMod": {
+    "TEXT": [
+      "",
+      " Preparado/a",
+      " NL Roba %d carta. Descarta %d carta."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:PureMod": {
+    "TEXT": [
+      "",
+      " Puro/a",
+      " NL Agota todas las cartas de Estado y Maldición de tu mano."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:QuickMod": {
+    "TEXT": [
+      "",
+      " Rápido/a",
+      " NL Roba %d carta."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:RampedMod": {
+    "TEXT": [
+      "",
+      " Acelerado/a",
+      " NL Aumenta el daño de esta carta en %s durante este combate."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:ReshuffleMod": {
+    "TEXT": [
+      "Recordando ",
+      "",
+      " NL cardaugments:Rebarajar."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:ReturningMod": {
+    "TEXT": [
+      "Retornando ",
+      "",
+      " NL cardaugments:Rebarajar."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:RollMod": {
+    "TEXT": [
+      "",
+      " y Balanceo",
+      " NL En el próximo turno, gana !B! de Bloqueo."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:RunicMod": {
+    "TEXT": [
+      "",
+      " Rúnico/a",
+      " NL No puedes ver las intenciones del enemigo durante %d turnos."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:SadisticMod": {
+    "TEXT": [
+      "",
+      " Sadístico/a",
+      " NL Inflige %d de daño adicional por cada debuff en el enemigo."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:SanctifiedMod": {
+    "TEXT": [
+      "",
+      " Santificado/a",
+      " NL Si la última carta jugada en este combate fue una Habilidad, roba %d cartas."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:ShamefulMod": {
+    "TEXT": [
+      "",
+      " Vergonzoso/a",
+      " NL Obtén %d Frágil."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:SearingMod": {
+    "TEXT": [
+      "",
+      " Abrasador/a",
+      " NL Puede ser mejorado cualquier número de veces."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:ShieldedMod": {
+    "TEXT": [
+      "",
+      " Blindado/a",
+      " NL Gana %s de Bloqueo."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:ShiningMod": {
+    "TEXT": [
+      "",
+      " Brillante",
+      "Etérea NL ",
+      " NL Cuando robes esta carta, gana [E]."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:ShivMod": {
+    "TEXT": [
+      "",
+      " y Daga",
+      " NL Agrega %d *Navaja a tu mano."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:SignatureMod": {
+    "TEXT": [
+      "",
+      " de Firma",
+      "Solo se puede jugar si este es el único Ataque en tu mano. NL "
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:SlaverMod": {
+    "TEXT": [
+      "",
+      " Esclavista",
+      " NL Cuesta 1 menos de [E] en combates contra Jefes y Élites."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:SlayerMod": {
+    "TEXT": [
+      "",
+      " del Cazador",
+      " NL Inflige el doble de daño al enemigo con menos HP."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:SlipperyMod": {
+    "TEXT": [
+      "",
+      " Escurridizo/a",
+      " NL Descarta esta carta la primera vez que se roba durante cada combate."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:SneckoMod": {
+    "TEXT": [
+      "",
+      " Snecko",
+      "Snecko. NL "
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:StickyMod": {
+    "TEXT": [
+      "",
+      " Pegajoso",
+      "Retiene. NL "
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:StreamlinedMod": {
+    "TEXT": [
+      "",
+      " Optimizado/a",
+      " NL Reduce el costo de esta carta en 1 durante este combate."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:SuckerMod": {
+    "TEXT": [
+      "",
+      " de Ventosas",
+      " NL Aplica %d Débil."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:SupplyMod": {
+    "TEXT": [
+      "",
+      " Proveedor",
+      " NL En el próximo turno, gana [E] [E] ."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:SurgeMod": {
+    "TEXT": [
+      "",
+      "Sobrecarga de ",
+      " NL Gana %d Artefacto. NL Agotar."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:SurvivorMod": {
+    "TEXT": [
+      "",
+      " Sobreviviente",
+      " NL Descarta %d carta."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:SwivelMod": {
+    "TEXT": [
+      "",
+      " Giratorio/a",
+      " NL El siguiente Ataque que juegues cuesta 0."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:TearMod": {
+    "TEXT": [
+      "",
+      " y Lágrima",
+      " NL Inflige !D! de daño a un enemigo aleatorio."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:TinyMod": {
+    "TEXT": [
+      "",
+      " Pequeño/a"
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:TwinMod": {
+    "TEXT": [
+      "Doble ",
+      "",
+      " dos veces."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:VanishingMod": {
+    "TEXT": [
+      "",
+      " Desvanecido",
+      " NL Se agota cuando pierdes HP en este combate."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:VoidMod": {
+    "TEXT": [
+      "",
+      " Vacío",
+      " NL Baraja %d *Vacío en tu pila de robo."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:VoidingMod": {
+    "TEXT": [
+      "",
+      " Vaciando",
+      "Etérea. NL ",
+      " NL Cada vez que sacas esta carta, pierdes 1 de Energía."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:WallopMod": {
+    "TEXT": [
+      "",
+      " Demoledor",
+      " NL Gana Bloqueo igual al daño no bloqueado infligido."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:WaveMod": {
+    "TEXT": [
+      "",
+      " en Oleada",
+      "Gana %s de Bloqueo. NL "
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  },
+  "CardAugments:XMod": {
+    "TEXT": [
+      "",
+      " X",
+      " NL Realizado X veces."
+    ],
+    "EXTRA_TEXT": [
+
+    ]
+  }
+}
