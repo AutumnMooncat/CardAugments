@@ -293,7 +293,7 @@
     "EXTRA_TEXT": [""]
   },
   "CardAugments:ChargedMod": {
-    "TEXT": ["充能", "", " NL 在下一回合获得 [E] ."],
+    "TEXT": ["充能", "", " NL 在下一回合获得 [E] 。"],
     "EXTRA_TEXT": [""]
   },
   "CardAugments:ClashyMod": {
@@ -379,7 +379,7 @@
     "EXTRA_TEXT": [""]
   },
   "CardAugments:FlyingMod": {
-    "TEXT": ["飞", "", " NL 在下一个回合获得 [E] ."],
+    "TEXT": ["飞", "", " NL 在下一个回合获得 [E] 。"],
     "EXTRA_TEXT": [""]
   },
   "CardAugments:FragileMod": {
@@ -584,7 +584,7 @@
     "EXTRA_TEXT": [""]
   },
   "CardAugments:ShiningMod": {
-    "TEXT": ["闪光", "", " 虚无 。 NL "," NL 抽到本牌时获得 [E]。"],
+    "TEXT": ["闪光", "", " 虚无 。 NL "," NL 抽到本牌时获得 [E] 。"],
     "EXTRA_TEXT": [""]
   },
   "CardAugments:ShivMod": {
