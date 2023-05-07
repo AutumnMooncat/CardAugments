@@ -70,21 +70,23 @@ public class InfiniteUpgradesPatches {
                 CardModifierPatches.initializeAdapterFactory();
             }
 
-            builder.registerTypeAdapterFactory(CardModifierPatches.modifierAdapter);
-            Gson gson = builder.create();
-            ModSaves.ArrayListOfJsonElement cardModifierSaves = ModSaves.cardModifierSaves.get(CardCrawlGame.saveFile);
-            int i = AbstractDungeon.player.masterDeck.size();
-            if (cardModifierSaves != null) {
-                JsonElement loaded = i >= cardModifierSaves.size() ? null : cardModifierSaves.get(i);
-                if (loaded != null && loaded.isJsonArray()) {
-                    JsonArray array = loaded.getAsJsonArray();
-                    for (JsonElement element : array) {
-                        AbstractCardModifier cardModifier = null;
-                        try {
-                            cardModifier = gson.fromJson(element, new TypeToken<AbstractCardModifier>() {}.getType());
-                        } catch (Exception ignored) {}
-                        if (cardModifier instanceof SearingMod) {
-                            InfUpgradeField.inf.set(retVal, true);
+            if (ModSaves.cardModifierSaves != null && CardCrawlGame.saveFile != null) {
+                builder.registerTypeAdapterFactory(CardModifierPatches.modifierAdapter);
+                Gson gson = builder.create();
+                ModSaves.ArrayListOfJsonElement cardModifierSaves = ModSaves.cardModifierSaves.get(CardCrawlGame.saveFile);
+                int i = AbstractDungeon.player.masterDeck.size();
+                if (cardModifierSaves != null) {
+                    JsonElement loaded = i >= cardModifierSaves.size() ? null : cardModifierSaves.get(i);
+                    if (loaded != null && loaded.isJsonArray()) {
+                        JsonArray array = loaded.getAsJsonArray();
+                        for (JsonElement element : array) {
+                            AbstractCardModifier cardModifier = null;
+                            try {
+                                cardModifier = gson.fromJson(element, new TypeToken<AbstractCardModifier>() {}.getType());
+                            } catch (Exception ignored) {}
+                            if (cardModifier instanceof SearingMod) {
+                                InfUpgradeField.inf.set(retVal, true);
+                            }
                         }
                     }
                 }
