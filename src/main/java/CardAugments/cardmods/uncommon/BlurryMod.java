@@ -14,6 +14,7 @@ public class BlurryMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(BlurryMod.class.getSimpleName());
     public static final String DESCRIPTION_KEY = "!"+ID+"!";
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     @Override
     public float modifyBaseBlock(float block, AbstractCard card) {
@@ -36,8 +37,13 @@ public class BlurryMod extends AbstractAugment {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + String.format(TEXT[2], DESCRIPTION_KEY);
+        return insertAfterText(rawDescription, String.format(CARD_TEXT[0], DESCRIPTION_KEY));
     }
 
     @Override

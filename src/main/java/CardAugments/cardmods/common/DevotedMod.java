@@ -16,6 +16,7 @@ import com.megacrit.cardcrawl.powers.watcher.MantraPower;
 public class DevotedMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(DevotedMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     private int mantra;
 
@@ -64,8 +65,13 @@ public class DevotedMod extends AbstractAugment {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + String.format(TEXT[2], mantra);
+        return insertAfterText(rawDescription , String.format(CARD_TEXT[0], mantra));
     }
 
     @Override

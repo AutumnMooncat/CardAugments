@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.localization.LocalizedStrings;
 public class DisposableMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(DisposableMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     @Override
     public void onInitialApplication(AbstractCard card) {
@@ -31,6 +32,11 @@ public class DisposableMod extends AbstractAugment {
     @Override
     public String getSuffix() {
         return TEXT[1];
+    }
+
+    @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
     }
 
     @Override

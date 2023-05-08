@@ -14,6 +14,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class GlassMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(GlassMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     private static final int NERF = 2;
 
@@ -43,11 +44,16 @@ public class GlassMod extends AbstractAugment {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        if (rawDescription.contains(TEXT[4])) {
-            return rawDescription.replace(TEXT[4], TEXT[5]);
+        if (rawDescription.contains(CARD_TEXT[2])) {
+            return rawDescription.replace(CARD_TEXT[2], CARD_TEXT[3]);
         }
-        return rawDescription + String.format(TEXT[2], NERF);
+        return insertAfterText(rawDescription , String.format(CARD_TEXT[0], NERF));
     }
 
     @Override

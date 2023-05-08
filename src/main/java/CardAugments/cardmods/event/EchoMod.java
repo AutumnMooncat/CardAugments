@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 public class EchoMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(EchoMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
     private static final int AMOUNT = 1;
 
     @Override
@@ -34,8 +35,13 @@ public class EchoMod extends AbstractAugment {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + TEXT[2];
+        return rawDescription + CARD_TEXT[0];
     }
 
     @Override

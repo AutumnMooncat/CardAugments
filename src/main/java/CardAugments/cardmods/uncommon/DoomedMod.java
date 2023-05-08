@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class DoomedMod  extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(DoomedMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     private static final int BOOST = 3;
 
@@ -31,8 +32,13 @@ public class DoomedMod  extends AbstractAugment {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + String.format(TEXT[2], BOOST);
+        return insertAfterText(rawDescription , String.format(CARD_TEXT[0], BOOST));
     }
 
     @Override

@@ -16,6 +16,7 @@ import com.megacrit.cardcrawl.powers.watcher.EndTurnDeathPower;
 public class BlasphemousMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(BlasphemousMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     boolean modMagic;
 
@@ -57,7 +58,7 @@ public class BlasphemousMod extends AbstractAugment {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + TEXT[2];
+        return insertAfterText(rawDescription, CARD_TEXT[0]);
     }
 
     @Override
@@ -73,6 +74,11 @@ public class BlasphemousMod extends AbstractAugment {
     @Override
     public String getSuffix() {
         return TEXT[1];
+    }
+
+    @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
     }
 
     @Override

@@ -15,6 +15,7 @@ import com.megacrit.cardcrawl.vfx.combat.FlameParticleEffect;
 public class BerserkMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(BerserkMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
     private static final float VFX_RATE = 0.1F;
     private float vfxTimer = 0F;
 
@@ -31,6 +32,11 @@ public class BerserkMod extends AbstractAugment {
     @Override
     public String getSuffix() {
         return TEXT[1];
+    }
+
+    @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
     }
 
     @Override
@@ -55,7 +61,7 @@ public class BerserkMod extends AbstractAugment {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + TEXT[2];
+        return insertAfterText(rawDescription, CARD_TEXT[0]);
     }
 
     @Override

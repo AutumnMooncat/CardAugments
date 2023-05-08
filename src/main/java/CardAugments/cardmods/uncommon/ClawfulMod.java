@@ -17,6 +17,7 @@ public class ClawfulMod extends AbstractAugment implements DynvarCarrier {
     public static final String ID = CardAugmentsMod.makeID(ClawfulMod.class.getSimpleName());
     public static final String DESCRIPTION_KEY = "!"+ID+"!";
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     private static final int EFFECT = 2;
     private static final int UPGRADE_EFFECT = 1;
@@ -73,14 +74,19 @@ public class ClawfulMod extends AbstractAugment implements DynvarCarrier {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return strikeMode ? TEXT[5] : TEXT[4];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
         if (card instanceof Claw) {
             return rawDescription;
         }
         if (strikeMode) {
-            return rawDescription + String.format(TEXT[5], DESCRIPTION_KEY);
+            return insertAfterText(rawDescription, String.format(CARD_TEXT[1], DESCRIPTION_KEY));
         }
-        return rawDescription + String.format(TEXT[4], card.originalName, DESCRIPTION_KEY);
+        return insertAfterText(rawDescription, String.format(CARD_TEXT[0], card.originalName, DESCRIPTION_KEY));
     }
 
     @Override

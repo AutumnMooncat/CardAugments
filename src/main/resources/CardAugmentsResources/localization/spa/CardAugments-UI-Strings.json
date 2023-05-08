@@ -333,49 +333,50 @@
     "TEXT": [
       "",
       " de Porrazo",
-      " NL Aplica %d Vulnerable."
+      "Deals #b25% less damage. Applies #yVulnerable."
     ],
     "EXTRA_TEXT": [
-
+      " NL Aplica %d Vulnerable."
     ]
   },
   "CardAugments:BerserkMod": {
     "TEXT": [
       "",
       " Berserk",
-      " NL Inflige un 50% de daño adicional si tu HP es igual o inferior al 50%."
+      "Deals #b50% more damage when under half HP."
     ],
     "EXTRA_TEXT": [
-
+      " NL Inflige un 50% de daño adicional si tu HP es igual o inferior al 50%."
     ]
   },
   "CardAugments:BlasphemousMod": {
     "TEXT": [
       "",
       " Blasfemo/a",
-      " NL Muere en el próximo turno."
+      "Increases card values by #b400%. Causes you to die next turn."
     ],
     "EXTRA_TEXT": [
-
+      " NL Muere en el próximo turno."
     ]
   },
   "CardAugments:BloodyMod": {
     "TEXT": [
       "",
       " por Sangre",
+      "Increases cost by #b1. Reduces cost by #b1 each time you lose HP."
+    ],
+    "EXTRA_TEXT": [
       "Cuesta 1 [E] menos por cada vez que pierdas HP en este combate. NL ",
       "Nota del traductor: Estas cadenas se utilizan para reemplazar la descripción de \"Sangre por sangre\". La primera cadena es lo que se busca, la segunda cadena lo reemplaza.",
       "Cuesta 1 [R] menos NL por cada vez que pierdas HP en este combate. NL ",
       "Cuesta 2 [R] menos NL por cada vez que pierdas HP en este combate. NL "
-    ],
-    "EXTRA_TEXT": [
-
     ]
   },
   "CardAugments:BludgeonMod": {
     "TEXT": [
       "",
-      " Aporreado/a"
+      " Aporreado/a",
+      "Sets cost to #b3. Increases card values by #b250% or #b400% if the initial cost was #b1 or #b0."
     ],
     "EXTRA_TEXT": [
 
@@ -385,82 +386,82 @@
     "TEXT": [
       "",
       " Borroso",
-      " NL El Bloqueo no se elimina al comienzo del próximo turno."
+      "Reduces #yBlock by #b25%. Allows #yBlock to carry over next turn."
     ],
     "EXTRA_TEXT": [
-
+      " NL El Bloqueo no se elimina al comienzo del próximo turno."
     ]
   },
   "CardAugments:BootMod": {
     "TEXT": [
       "",
       " de Arranque",
-      "Innata. NL "
+      "Adds #yInnate."
     ],
     "EXTRA_TEXT": [
-
+      "Innata. NL "
     ]
   },
   "CardAugments:BowlingMod": {
     "TEXT": [
       "",
       " de Bolos",
-      " por cada enemigo en combate."
+      "Reduces damage by #b33%. Hits once for each enemy in combat."
     ],
     "EXTRA_TEXT": [
-
+      " por cada enemigo en combate."
     ]
   },
   "CardAugments:BracedMod": {
     "TEXT": [
       "",
       " Reforzado/a",
-      " NL Aumenta el Bloqueo de esta carta en %s este combate."
+      "Reduces #yBlock by #b33%. Increases #yBlock a proportionate amount on play."
     ],
     "EXTRA_TEXT": [
-
+      " NL Aumenta el Bloqueo de esta carta en %s este combate."
     ]
   },
   "CardAugments:BrutalMod": {
     "TEXT": [
       "",
       " Brutal",
-      "Etérea. NL "
+      "Increases damage by #b33%. Adds #yEthereal."
     ],
     "EXTRA_TEXT": [
-
+      "Etérea. NL "
     ]
   },
   "CardAugments:BundledMod": {
     "TEXT": [
       "",
       " Agrupado/a",
+      "Sets cost to #b0. Adds #b2 copies of the card into your hand. #yExhausts."
+    ],
+    "EXTRA_TEXT": [
       "Agrega 2 %s a tu mano.",
       " NL Agotar.",
       "Innata. NL "
-    ],
-    "EXTRA_TEXT": [
-
     ]
   },
   "CardAugments:ChargedMod": {
     "TEXT": [
-      " Cargado/a",
       "",
-      " NL Siguiente turno, ganas [E] ."
+      " Cargado/a",
+      "Reduces #yBlock by #b20%. Gives [E] next turn."
     ],
     "EXTRA_TEXT": [
-
+      " NL Siguiente turno, ganas [E] ."
     ]
   },
   "CardAugments:ClashyMod": {
     "TEXT": [
       "",
       " Condicional",
-      "Solo se puede jugar si todas las cartas en tu mano son Ataques. NL "
+      "Increases damage by #b100%. Adds playability restriction."
     ],
     "EXTRA_TEXT": [
-
+      "Solo se puede jugar si todas las cartas en tu mano son Ataques. NL "
     ]
   },
   "CardAugments:ClawfulMod": {
@@ -469,47 +470,49 @@
       " de Garra",
       "",
       " Contundente",
-      " NL Aumenta el daño de TODAS las %s cartas en %s de daño este combate.",
-      " NL Aumenta el daño de TODAS tus cartas que contengan \"Golpe\" en %s este combate."
+      "Decreases damage by #b2. Increases the damage of ALL versions of this card when played.",
+      "Decreases damage by #b2. Increases the damage of ALL #yStrike cards when played."
     ],
     "EXTRA_TEXT": [
-
+      " NL Aumenta el daño de TODAS las %s cartas en %s de daño este combate.",
+      " NL Aumenta el daño de TODAS tus cartas que contengan \"Golpe\" en %s este combate."
     ]
   },
   "CardAugments:CultistMod": {
     "TEXT": [
       "",
       " Cultista",
-      " NL Gana %d Fuerza."
+      "Reduces damage by #b20%. Gains #b1 #yStrength."
     ],
     "EXTRA_TEXT": [
-
+      " NL Gana %d Fuerza."
     ]
   },
   "CardAugments:DemurMod": {
     "TEXT": [
       "",
       " Objetado/a",
-      "Solo se puede jugar si todas las cartas en tu mano son Habilidades. NL "
+      "Increases #yBlock by #b100%. Adds playability restriction."
     ],
     "EXTRA_TEXT": [
-
+      "Solo se puede jugar si todas las cartas en tu mano son Habilidades. NL "
     ]
   },
   "CardAugments:DevotedMod": {
     "TEXT": [
       "",
       " Devoto/a",
-      " NL Gana %d Mantra."
+      "Reduces #yBlock and damage by #b25%. Gains #yMantra relative to the card cost."
     ],
     "EXTRA_TEXT": [
-
+      " NL Gana %d Mantra."
     ]
   },
   "CardAugments:DisposableMod": {
     "TEXT": [
       "",
-      " Desechable"
+      " Desechable",
+      "Sets cost by #b1. Allows playing the card."
     ],
     "EXTRA_TEXT": [
 
@@ -519,75 +522,75 @@
     "TEXT": [
       "",
       " Divergente",
-      " NL cardaugments:Eco."
+      "Reduces #yBlock and damage by #b50%. Plays twice."
     ],
     "EXTRA_TEXT": [
-
+      " NL cardaugments:Eco."
     ]
   },
   "CardAugments:DoomedMod": {
     "TEXT": [
       "",
       " Maldito/a",
-      " NL Inflige %d de daño adicional por cada Maldición en tu mazo."
+      "Deals extra damage for each #yCurse in your deck."
     ],
     "EXTRA_TEXT": [
-
+      " NL Inflige %d de daño adicional por cada Maldición en tu mazo."
     ]
   },
   "CardAugments:DoubtfulMod": {
     "TEXT": [
       "",
       " Dudoso/a",
-      " NL Gana %d Débil."
+      "Reduce cost by #b1. Gains #b2 Weak."
     ],
     "EXTRA_TEXT": [
-
+      " NL Gana %d Débil."
     ]
   },
   "CardAugments:DramaticMod": {
     "TEXT": [
       "",
       " Dramatico",
-      "Innata. NL ",
-      " NL Agotar."
+      "Increases #yBlock and damage by #b33%. Adds #yInnate and #yExhaust."
     ],
     "EXTRA_TEXT": [
-
+      "Innata. NL ",
+      " NL Agotar."
     ]
   },
   "CardAugments:EchoMod": {
     "TEXT": [
       "",
       " Ecoante",
-      " NL cardaugments:Eco. Agotar."
+      "Plays Twice. Adds #yExhaust."
     ],
     "EXTRA_TEXT": [
-
+      " NL cardaugments:Eco. Agotar."
     ]
   },
   "CardAugments:ElectroMod": {
     "TEXT": [
       "Electro ",
       "",
-      " NL Invoca %d Relámpago."
+      "Reduces damage by #b25%. #yChannels a #yLightning."
     ],
     "EXTRA_TEXT": [
-
+      " NL Invoca %d Relámpago."
     ]
   },
   "CardAugments:EndlessMod": {
     "TEXT": [
       "",
       " Infinito/a",
+      "Reduces #yBlock and damage by #b20%. Duplicates when drawn. Adds #yExhaust."
+    ],
+    "EXTRA_TEXT": [
       " NL Cada vez que robes esta carta, añade una copia de ella a tu mano.",
       " NL Agotar.",
       "Nota del traductor: Estas cadenas son para reemplazar la descripción de Agonía Infinita. La primera cadena es lo que se busca, la segunda cadena lo reemplaza.",
       " NL Cada vez que roba esta carta, añade una copia a tu mano.",
       " NL Cada vez que robes esta carta, añade 2 copias a tu mano."
-    ],
-    "EXTRA_TEXT": [
-
     ]
   },
   "CardAugments:ErangMod": {
@@ -595,112 +598,113 @@
       " Búmeran",
       " Búmeran",
       " Búmeran",
-      " a un enemigo aleatorio 3 veces.",
       "Bang",
-      " Búmeran"
+      " Búmeran",
+      "Reduces damage by #b50%. Hits #b3 random enemies."
     ],
     "EXTRA_TEXT": [
-
+      " a un enemigo aleatorio 3 veces."
     ]
   },
   "CardAugments:EruptingMod": {
     "TEXT": [
       "",
       " en Erupción",
-      " NL Entra en Ira"
+      "Enters #yWrath."
     ],
     "EXTRA_TEXT": [
-
+      " NL Entra en Ira"
     ]
   },
   "CardAugments:ExplosiveMod": {
     "TEXT": [
       "",
       " Explosivo",
-      "En 2 turnos, juega %1$s copias de %2$s al comienzo de tu turno.",
-      "Innata. NL "
+      "Delays effect for #b2 turns, then plays #b5 copies of the card."
     ],
     "EXTRA_TEXT": [
-
+      "En 2 turnos, juega %1$s copias de %2$s al comienzo de tu turno.",
+      "Innata. NL "
     ]
   },
   "CardAugments:FanaticMod": {
     "TEXT": [
       "",
       " Fanatico/a",
-      " NL Agotar."
+      "Increases damage by #b50%. Adds #yExhaust."
     ],
     "EXTRA_TEXT": [
-
+      " NL Agotar."
     ]
   },
   "CardAugments:FearfulMod": {
     "TEXT": [
       "",
       " Temeroso/a",
-      " NL Gana %d Vulnerable."
+      "Reduces cost by #b2. Gains #b1 #yVulnerable."
     ],
     "EXTRA_TEXT": [
-
+      " NL Gana %d Vulnerable."
     ]
   },
   "CardAugments:FlexMod": {
     "TEXT": [
       "",
       " Flexionado/a",
-      " NL Obtén %d Fuerza. Al final de este turno, pierde %d Fuerza."
+      "Gains #b3 #yStrength this turn."
     ],
     "EXTRA_TEXT": [
-
+      " NL Obtén %d Fuerza. Al final de este turno, pierde %d Fuerza."
     ]
   },
   "CardAugments:FlyingMod": {
     "TEXT": [
       "",
       " Volador/a",
-      " NL Siguiente turno, gana [E] ."
+      "Reduces damage by #b20%. Gives [E] next turn."
     ],
     "EXTRA_TEXT": [
-
+      " NL Siguiente turno, gana [E] ."
     ]
   },
   "CardAugments:FragileMod": {
     "TEXT": [
       "",
       " Frágil",
-      " NL Agotar."
+      "Reduces cost by #b1. Adds #yExhaust."
     ],
     "EXTRA_TEXT": [
-
+      " NL Agotar."
     ]
   },
   "CardAugments:FrostyMod": {
     "TEXT": [
       "",
       " Helado/a",
-      " NL Invoca %d Escarcha."
+      "Reduces #yBlock by #b25%. #yChannels a #yFrost."
     ],
     "EXTRA_TEXT": [
-
+      " NL Invoca %d Escarcha."
     ]
   },
   "CardAugments:FollowUpMod": {
     "TEXT": [
       "",
       " Siguiente",
+      "Reduces damage by #b20%. Gains [E] is the last card played was an Attack."
+    ],
+    "EXTRA_TEXT": [
       " NL Si la última carta jugada en este combate fue un Ataque, obtén [E].",
       "Nota del traductor: Estas cadenas son para reemplazar la descripción de Seguidores. La primera cadena es lo que se busca y la segunda cadena lo reemplaza.",
       "Si la ultima carta jugada en este combate fue un Ataque, gana [W].",
       "Si la ultima carta jugada en este combate fue un Ataque, gana [W] [W]."
-    ],
-    "EXTRA_TEXT": [
-
     ]
   },
   "CardAugments:FormMod": {
     "TEXT": [
       "Forma ",
-      ""
+      "",
+      "Sets cost to #b3. Proportionally increases card effects."
     ],
     "EXTRA_TEXT": [
 
@@ -710,43 +714,43 @@
     "TEXT": [
       "",
       " para Uno/a",
-      " NL Mueve una carta aleatoria de costo 0 de tu pila de descarte a tu mano."
+      "Moves a random cost #b0 card from your discard pile to your hand."
     ],
     "EXTRA_TEXT": [
-
+      " NL Mueve una carta aleatoria de costo 0 de tu pila de descarte a tu mano."
     ]
   },
   "CardAugments:FusedMod": {
     "TEXT": [
       "",
       " Fusionado/a",
-      " NL No puede ser mejorada."
+      "Increases card values by #b33%. Removes ability to #yUpgrade the card."
     ],
     "EXTRA_TEXT": [
-
+      " NL No puede ser mejorada."
     ]
   },
   "CardAugments:GhostlyMod": {
     "TEXT": [
       "",
       " Fantasmal",
-      "Etérea. NL "
+      "Increases #yBlock by #b33%. Adds #yEthereal."
     ],
     "EXTRA_TEXT": [
-
+      "Etérea. NL "
     ]
   },
   "CardAugments:GlassMod": {
     "TEXT": [
       "",
       " de Vidrio",
+      "Increases damage by #b50%. Reduces damage by #b2 when played."
+    ],
+    "EXTRA_TEXT": [
       " NL Disminuye el daño de esta carta en 2 durante este combate.",
       "Nota del traductor: Estas cadenas son para reemplazar la descripción del Cuchillo de Vidrio. La primera cadena es lo que se busca y la segunda cadena lo reemplaza.",
       "Disminuye el daño de esta carta en 2 durante este combate.",
       "Disminuye el daño de esta carta en 4 durante este combate."
-    ],
-    "EXTRA_TEXT": [
-
     ]
   },
   "CardAugments:GloomMod": {

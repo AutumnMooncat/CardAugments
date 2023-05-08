@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class EndlessMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(EndlessMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     private boolean setExhaust;
 
@@ -55,11 +56,16 @@ public class EndlessMod extends AbstractAugment {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        if (rawDescription.contains(TEXT[5])) {
-            return rawDescription.replace(TEXT[5], TEXT[6]);
+        if (rawDescription.contains(CARD_TEXT[3])) {
+            return rawDescription.replace(CARD_TEXT[3], CARD_TEXT[4]);
         }
-        return insertAfterText(rawDescription, TEXT[2]) + (setExhaust ? TEXT[3] : "");
+        return insertAfterText(rawDescription, CARD_TEXT[0]) + (setExhaust ? CARD_TEXT[1] : "");
     }
 
     @Override

@@ -42,6 +42,11 @@ public class BludgeonMod extends AbstractAugment {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public AugmentRarity getModRarity() {
         return AugmentRarity.RARE;
     }

@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class BrutalMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(BrutalMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     @Override
     public void onInitialApplication(AbstractCard card) {
@@ -38,8 +39,13 @@ public class BrutalMod extends AbstractAugment {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return TEXT[2] + rawDescription;
+        return CARD_TEXT[0] + rawDescription;
     }
 
     @Override

@@ -17,6 +17,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class ErangMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(ErangMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     @Override
     public void onInitialApplication(AbstractCard card) {
@@ -37,8 +38,8 @@ public class ErangMod extends AbstractAugment {
     @Override
     public String modifyName(String cardName, AbstractCard card) {
         String[] nameParts = removeUpgradeText(cardName);
-        if (nameParts[0].equals(TEXT[4])) {
-            return nameParts[0] + TEXT[5] + nameParts[1];
+        if (nameParts[0].equals(TEXT[3])) {
+            return nameParts[0] + TEXT[4] + nameParts[1];
         }
         if (nameParts[0].endsWith(TEXT[0].substring(0, 2))) {
             return nameParts[0] + TEXT[2] + nameParts[1];
@@ -49,8 +50,13 @@ public class ErangMod extends AbstractAugment {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[5];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription.replaceFirst("[.。]", TEXT[3]);
+        return rawDescription.replaceFirst("[.。]", CARD_TEXT[0]);
     }
 
     @Override
