@@ -116,7 +116,7 @@
       "你拽下离你最近的一本书，草草读了一半，然后开始乱涂乱抹，直到修改了整个故事。 NL NL ~呵。~ NL NL 你把它放回了它本来在的地方，心里想着下次哪个倒霉鬼会读到它。",
       "选择一张卡来增加",
       "选择一条修改",
-      "这本书是关于一个被昆虫控制的相当英雄的少女的。书中有许多关于超能力、战术和……~嘿~，@等一下！@有人在这上面#r@乱涂乱画@ ！谁会干这么缺德的事情！",
+      "这本书是关于一个被昆虫控制的相当英雄的少女的。书中有许多关于超能力、战术和…… ~嘿~ ， @等一下！@ 有人在这上面 #r@乱涂乱画@  ！谁会干这么缺德的事情！",
       "这本书是关于一个在群星旅行，最后落难在一个荒芜陌生星球上的男人的。你期盼着他最终能够回到家园，但看起来有人把书破坏了！ NL 多么令人扫兴。",
       "这本书是关于一个巨大的废弃底下建筑的，地上的环境已经无法生存，小说的内容充满了阴谋、洗脑和不公。本书的后半部分充满喜感地无法辨认。 NL 你开始思考是否在高塔中也存在类似的关系网。"
     ],
@@ -300,7 +300,7 @@
   },
   "CardAugments:ChargedMod": {
     "TEXT": ["充能", "", "Reduces #yBlock by #b20%. Gives [E] next turn."],
-    "EXTRA_TEXT": [" NL 在下一回合获得 [E] ."]
+    "EXTRA_TEXT": [" NL 在下一回合获得 [E] 。"]
   },
   "CardAugments:ClashyMod": {
     "TEXT": ["交锋", "", "Increases damage by #b100%. Adds playability restriction."],
@@ -357,7 +357,7 @@
   },
   "CardAugments:EndlessMod": {
     "TEXT": ["无尽", "", "Reduces #yBlock and damage by #b20%. Duplicates when drawn. Adds #yExhaust."],
-    "EXTRA_TEXT": [" NL 每当你抽到这张牌，都增加1张其复制品到你的手牌。", " NL 消耗 。",
+    "EXTRA_TEXT": [" NL 每当你抽到这张牌，增加1张其复制品到你的手牌。", " NL 消耗 。",
       "Translator note: These strings are for replacing Endless Agony's description. The first string is what to search for, the second string replaces it.",
       " NL 每当你抽到这张牌，都增加1张其复制品到你的手牌。",
       " NL 每当你抽到这张牌，都增加2张其复制品到你的手牌。"]
@@ -388,7 +388,7 @@
   },
   "CardAugments:FlyingMod": {
     "TEXT": ["飞", "", "Reduces damage by #b20%. Gives [E] next turn."],
-    "EXTRA_TEXT": [" NL 在下一个回合获得 [E] ."]
+    "EXTRA_TEXT": [" NL 在下一个回合获得 [E] 。"]
   },
   "CardAugments:FragileMod": {
     "TEXT": ["易碎", "", "Reduces cost by #b1. Adds #yExhaust."],
@@ -400,7 +400,7 @@
   },
   "CardAugments:FollowUpMod": {
     "TEXT": ["追击", "", "Reduces damage by #b20%. Gains [E] if the last card played was an Attack."],
-    "EXTRA_TEXT": [" NL 如果本场战斗中打出的上一张牌是攻击牌，获得 [E]。",
+    "EXTRA_TEXT": [" NL 如果本场战斗中打出的上一张牌是攻击牌，获得 [E] 。",
       "Translator note: These strings are for replacing Follow-Up's description. The first string is what to search for, the second string replaces it.",
       "如果本场战斗中打出的上一张牌是攻击牌，获得 [W]。",
       "如果本场战斗中打出的上一张牌是攻击牌，获得 [W] [W]。"]
@@ -545,7 +545,7 @@
   },
   "CardAugments:PureMod": {
     "TEXT": ["净化", "", "#yExhausts all #yStatus and #yCurse cards in your hand."],
-    "EXTRA_TEXT": [" NL 消耗手牌中所有的 状态牌 与 诅咒 。"]
+    "EXTRA_TEXT": [" NL 消耗 手牌中所有的 状态牌 与 诅咒 。"]
   },
   "CardAugments:QuickMod": {
     "TEXT": ["快速", "", "Reduces damage by #b20%. Draws #b1 card."],
@@ -593,7 +593,7 @@
   },
   "CardAugments:ShiningMod": {
     "TEXT": ["闪光", "", "Gains [E] when drawn. Adds #yEthereal."],
-    "EXTRA_TEXT": [" 虚无 。 NL "," NL 抽到本牌时获得 [E]。"]
+    "EXTRA_TEXT": [" 虚无 。 NL "," NL 抽到本牌时获得 [E] 。"]
   },
   "CardAugments:ShivMod": {
     "TEXT": ["", "与匕首", "Reduces damage by #b20%. Adds a #yShiv into your hand."],

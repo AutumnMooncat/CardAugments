@@ -1,55 +1,59 @@
-# Chimera Cards
-### Overview
-Chimera Cards aims to add extra flavour to runs by adding modifiers to cards that change how they work. Instead of seeing the same Cleave every time, you may instead find a Searing Cleave which can be upgraded any number of times, or perhaps a Bludgeoning Cleave which costs much more, but deals proportionally more damage as well!
+# 奇美拉卡牌mod
+### 简介
+奇美拉mod旨在通过修改卡牌的方式为你的爬塔历程增添不同的风味。相比于每次都见到相同的5打5防铁斩波，你可能会看到可以多次升级的灼热铁斩波，亦或者是3费打更多费伤比的粗重铁斩波！(Translator note: Damage still not visually correct in zhs.)
 
-Modifiers should work on cards from most mods, with few exceptions, though which modifiers are able to roll will change on a card by card basis. Given the large amount of modifiers available, most cards will have plenty of options they can roll.
+卡牌修改对（大多数）其他mod卡也适用，当然也有部分不适用的，但基于修改此条众多，因此几乎所有的卡都有可供修改的词条。
 
-### Features
-Chimera Cards comes packaged with 100+ modifiers that are split into different rarities. By default, some modifiers are more likely to be seen than others, with rarer cards being more likely to see rarer modifiers. If you would like to know which modifiers are valid for any given card, a new button was added to the large card preview screen to view all modifiers which can be roll on the card.
+### 特性概述
+奇美拉mod为卡牌带来了超过100种不同稀有度的卡牌修改。在默认情况下，有些修改词条会比其他的更常见，而更稀有的卡牌会更容易应用更稀有的修改。如果你想知道这张卡能够应用哪些修改，你可以在预览卡牌的时候点击左下角新增的复选框查看。
 
-In addition to modifiers, it also adds 10+ new options in vanilla events. Some of these offer additional ways to get normal modifiers on cards, while others are the only way to receive event exclusive modifiers.
+除了单纯的卡牌修改，本mod也为原版事件增添了超过10个不同选项。有些是给你的卡牌带来修改的额外途径，而有些则是获得某些事件修改的唯一途径。(Translator note: Downfall event be like.)
 
-Finally, a Modifier Screen was added to the main menu to let you browse modifiers to see how they work on any cards they can be applied to. Included in this screen is a Settings button you can access to quickly change all the configuration options.
+最后，本mod在主界面添加了一个“卡牌修改”选项来让你能够浏览一个修改此条能够应用的所有卡牌。在这个选项中你也可以快速访问本mod的所有可配置设置来自定义你的游玩。
 
-### Configurable
-Appealing to different play styles was a core concept when designing the mod, and as such, it comes with many config options to suit your tastes. All of the config options can be accessed from the Modifier Screen and include the following:
+### 高度可配置化
+不同的游玩风格在设计本mod之初就是主要的目标，因此本mod有很多选项任君挑选。以下选项都可以在 主界面-卡牌修改-设置 中访问:
 
-What percentage of cards should roll modifiers
+修改卡牌的概率
 
-How likely Common / Uncommon / and Rare modifiers are to appear
+普通/罕见/稀有修改出现的概率
 
-How much the rarity of the card should influence the modifier it rolls
+卡牌稀有度影响修改的权重
 
-Should starter cards roll modifies
+是否允许修改初始牌
 
-Should cards in shops roll modifies
+是否允许修改商店牌
 
-Should cards from events or relics like Pandora's Box roll modifies
+是否允许修改事件和遗物获得的立即牌(例：潘多拉的魔盒)
 
-Should Orb related modifiers be able to roll on other characters
+是否允许其他角色也能获得充能球修改
 
-Should the extra Event options appear
+是否允许出现额外的事件选项
 
-In addition to this, any modifiers added via other mods (such as crossover content of modifier packs), will be given their own config option as well to toggle if those modifiers should also appear.
+此外，其它mod添加的修改内容（如额外的修改组）会有额外的选项来决定是否在游戏中启用。
 
-### Compatability
-Chimera Cards should play well with most other mods, though if you run into any compatability problems, please let me know!
+### 兼容性
+本mod应当能和其它mod一同游玩而不产生额外的兼容性问题。如果有，欢迎在steam评论区留言！
 
-Specific crossover support was added for the following mods:
+本mod为以下几个mod做了额外的兼容性修改:
 
-Spire Locations - Extra rewards added can roll modifiers
+Spire Locations - 额外卡牌奖励能开出修改
 
-The Rainbow - Rainbow cards from chests can roll modifiers
+The Rainbow - 彩虹牌能开出修改
 
-Big Cards - Massive Mod and Tiny Mod will change the size of the card
+Big Cards - 笨重与精小词条也会影响卡牌的大小
 
-Ocean's Pencil Case / Visible Card Rewards - Reward cards will have their names changed to reflect applied modifiers
+Ocean's Pencil Case / Visible Card Rewards - 被修改的卡牌会直接反映在显示的奖励卡牌名称上
 
-Blurry Blur - Blurry Mod will make whatever card it is applied to blurry.
+Blurry Blur - 残影词条会让卡牌变得模糊
 
-There are no known compatability issues at this time.
+当前没有已知的兼容性问题。
 
-### For Modders
-If you are a modder and you would like to make additional modifiers as crossover content (or just making a new modifier pack), check out the Chimera Card's wiki to get started! Registering your mod and modifiers with Chimera Cards will automatically add a new config into the Modifier Settings page to enable/disable your content pack.
+### 我想添加新的词条！
+如果你是一个mod开发者并且想要在你的mod中为此mod添加词条作为联动内容（或者单纯的做一个加一些修改词条的mod），你可以检查本项目的Wiki以开始！通过在本mod中将你的mod中编写的词条注册，mod会自动在设置中添加是否启用你的内容的选项。
 
 https://github.com/MistressAlison/CardAugments/wiki
+
+### 特别感谢
+
+cyxw与Sxy6214：简体中文翻译
