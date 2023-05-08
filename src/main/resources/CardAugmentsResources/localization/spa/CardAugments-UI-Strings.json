@@ -245,7 +245,7 @@
     "TEXT": [
       "",
       " Alfa",
-      "Reduces cost by #b2. Shuffles #yBeta into your draw pile. #yExhausts."
+      "Reduces cost by #b2. Shuffles a #yBeta version into your draw pile. #yExhausts."
     ],
     "EXTRA_TEXT": [
       "Baraja una *Beta %s en tu pila de robo.",
@@ -257,7 +257,7 @@
     "TEXT": [
       "",
       " Beta",
-      "Reduces cost by #b1. Shuffles #yOmega into your draw pile. #yExhausts."
+      "Reduces cost by #b1. Shuffles an #yOmega version into your draw pile. #yExhausts."
     ],
     "EXTRA_TEXT": [
       "Baraja una *Omega %s en tu pila de robo.",
@@ -301,7 +301,7 @@
     "TEXT": [
       "",
       " Armado/a",
-      "#yUpgrades random cards in your hand."
+      "Reduces #yBlock by #b20%. NL #yUpgrades #b1(+1) random card in your hand."
     ],
     "EXTRA_TEXT": [
       " NL Actualiza una carta aleatoria de tu mano.",
@@ -458,7 +458,7 @@
     "TEXT": [
       "",
       " Condicional",
-      "Increases damage by #b100%. Adds playability restriction."
+      "Increases damage by #b100%. Can only be played if every card in your hand is an Attack."
     ],
     "EXTRA_TEXT": [
       "Solo se puede jugar si todas las cartas en tu mano son Ataques. NL "
@@ -470,8 +470,8 @@
       " de Garra",
       "",
       " Contundente",
-      "Decreases damage by #b2. Increases the damage of ALL versions of this card when played.",
-      "Decreases damage by #b2. Increases the damage of ALL #yStrike cards when played."
+      "Decreases damage by #b2. Increases the damage of ALL versions of this card by #b2(+1) when played.",
+      "Decreases damage by #b2. Increases the damage of ALL #yStrike cards by #b2(+1) when played."
     ],
     "EXTRA_TEXT": [
       " NL Aumenta el daño de TODAS las %s cartas en %s de daño este combate.",
@@ -492,7 +492,7 @@
     "TEXT": [
       "",
       " Objetado/a",
-      "Increases #yBlock by #b100%. Adds playability restriction."
+      "Increases #yBlock by #b100%. Can only be played if every card in your hand is a Skill."
     ],
     "EXTRA_TEXT": [
       "Solo se puede jugar si todas las cartas en tu mano son Habilidades. NL "
@@ -542,7 +542,7 @@
     "TEXT": [
       "",
       " Dudoso/a",
-      "Reduce cost by #b1. Gains #b2 Weak."
+      "Reduces cost by #b1. Gains #b2 Weak."
     ],
     "EXTRA_TEXT": [
       " NL Gana %d Débil."
@@ -767,7 +767,7 @@
     "TEXT": [
       "",
       " Ve por él",
-      "Reduces damage by 20%. Deals damage to an enemy, then triggers the original card effect if the enemy intended to attack."
+      "Reduces damage by 20%. Deals #b3(+1) damage to an enemy, then triggers the original card effect if the enemy intended to attack."
     ],
     "EXTRA_TEXT": [
       "Inflige %s de daño. NL Si el enemigo tiene la intención de atacar, "
@@ -798,7 +798,7 @@
     "TEXT": [
       "",
       " de la avaricia",
-      "Gives #yGold is #yFatal. Adds #yExhaust."
+      "Gives #b15(+5) #yGold is #yFatal. Adds #yExhaust."
     ],
     "EXTRA_TEXT": [
       " NL Si es Fatal, obtén %s Oro. NL Agotar.",
@@ -881,7 +881,7 @@
     "TEXT": [
       "",
       " de Suerte",
-      "#yScries before drawing."
+      "#yScries #b1(+1) before drawing."
     ],
     "EXTRA_TEXT": [
       "Adivina %s. NL "
@@ -982,7 +982,7 @@
     "TEXT": [
       "",
       " Pernicioso/a",
-      "Reduces damage by #b50%. Applies #yPoison equal to unblocked damage dealt."
+      "Reduces damage by #b50%. Applies #b2(+1) #yPoison equal to unblocked damage dealt."
     ],
     "EXTRA_TEXT": [
       " NL Aplica Veneno igual al daño no bloqueado infligido."
@@ -1155,7 +1155,7 @@
     "TEXT": [
       "",
       " Blindado/a",
-      "Increases cost by #b1. Gives #yBlock."
+      "Increases cost by #b1. Gives #b7(+3) #yBlock."
     ],
     "EXTRA_TEXT": [
       "Gana %s de Bloqueo. NL "
@@ -1186,7 +1186,7 @@
     "TEXT": [
       "",
       " de Firma",
-      "Increases damage by #b75%. Adds playability restriction."
+      "Increases damage by #b75%. Can only be played if this is the only Attack in your hand."
     ],
     "EXTRA_TEXT": [
       "Solo se puede jugar si este es el único Ataque en tu mano. NL "
