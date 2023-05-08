@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 public class SurvivorMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(SurvivorMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     @Override
     public float modifyBaseBlock(float block, AbstractCard card) {
@@ -21,7 +22,7 @@ public class SurvivorMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost != -2 && card.baseBlock > 0;
+        return card.cost != -2 && card.baseBlock >= 3;
     }
 
     @Override
@@ -40,8 +41,13 @@ public class SurvivorMod extends AbstractAugment {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + String.format(TEXT[2], 1);
+        return rawDescription + String.format(CARD_TEXT[0], 1);
     }
 
     @Override

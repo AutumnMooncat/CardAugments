@@ -14,6 +14,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 public class RunicMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(RunicMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     public static final int DURATION = 2;
 
@@ -44,8 +45,13 @@ public class RunicMod extends AbstractAugment {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + String.format(TEXT[2], DURATION);
+        return insertAfterText(rawDescription , String.format(CARD_TEXT[0], DURATION));
     }
 
     @Override

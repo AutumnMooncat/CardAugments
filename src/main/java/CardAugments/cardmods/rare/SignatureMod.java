@@ -14,6 +14,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class SignatureMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(SignatureMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     @Override
     public float modifyBaseDamage(float damage, DamageInfo.DamageType type, AbstractCard card, AbstractMonster target) {
@@ -36,11 +37,16 @@ public class SignatureMod extends AbstractAugment {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
         if (card instanceof SignatureMove) {
             return rawDescription;
         }
-        return TEXT[2] + rawDescription;
+        return insertBeforeText(rawDescription, CARD_TEXT[0]);
     }
 
     @Override

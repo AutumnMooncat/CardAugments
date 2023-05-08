@@ -14,6 +14,7 @@ import com.megacrit.cardcrawl.powers.StrengthPower;
 public class HeavyMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(HeavyMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     private static final int BOOST = 3;
 
@@ -40,11 +41,16 @@ public class HeavyMod extends AbstractAugment {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
         if (card instanceof HeavyBlade) {
             return rawDescription;
         }
-        return rawDescription + String.format(TEXT[2], BOOST);
+        return insertAfterText(rawDescription , String.format(CARD_TEXT[0], BOOST));
     }
 
     @Override

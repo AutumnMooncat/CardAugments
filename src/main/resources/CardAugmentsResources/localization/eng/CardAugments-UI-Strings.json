@@ -398,7 +398,7 @@
     "EXTRA_TEXT": [" NL Channel %d Frost."]
   },
   "CardAugments:FollowUpMod": {
-    "TEXT": ["Following ", "", "Reduces damage by #b20%. Gains [E] is the last card played was an Attack."],
+    "TEXT": ["Following ", "", "Reduces damage by #b20%. Gains [E] if the last card played was an Attack."],
     "EXTRA_TEXT": [" NL If the last card played this combat was an Attack, gain [E].",
       "Translator note: These strings are for replacing Follow-Up's description. The first string is what to search for, the second string replaces it.",
       "If the last card played this combat was an Attack, gain [W].",
@@ -428,258 +428,258 @@
       "Decrease the damage of this card by 4 this combat."]
   },
   "CardAugments:GloomMod": {
-    "TEXT": ["", " and Gloom", " NL Channel %d Dark."],
-    "EXTRA_TEXT": []
+    "TEXT": ["", " and Gloom", "Reduces #yBlock and damage by #b25%. #yChannels a #yDark."],
+    "EXTRA_TEXT": [" NL Channel %d Dark."]
   },
   "CardAugments:GoForTheMod": {
-    "TEXT": ["Go for the ", "", "Deal %s damage. NL If the enemy intends to attack, "],
-    "EXTRA_TEXT": []
+    "TEXT": ["Go for the ", "", "Reduces damage by 20%. Deals damage to an enemy, then triggers the original card effect if the enemy intended to attack."],
+    "EXTRA_TEXT": ["Deal %s damage. NL If the enemy intends to attack, "]
   },
   "CardAugments:GraveMod": {
-    "TEXT": ["Crypt ", "", " NL Grave."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Crypt ", "", "Adds #yGrave."],
+    "EXTRA_TEXT": [" NL Grave."]
   },
   "CardAugments:GritMod": {
-    "TEXT": ["Gritty ", "", " NL Exhaust a random card in your hand."," NL Exhaust a card in your hand."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Gritty ", "", "#yExhausts a card in your hand."],
+    "EXTRA_TEXT": [" NL Exhaust a random card in your hand."," NL Exhaust a card in your hand."]
   },
   "CardAugments:GreedMod": {
-    "TEXT": ["", " of Greed", " NL If Fatal, gain %s Gold. NL Exhaust.", " NL If Fatal, gain %s Gold."],
-    "EXTRA_TEXT": []
+    "TEXT": ["", " of Greed", "Gives #yGold is #yFatal. Adds #yExhaust."],
+    "EXTRA_TEXT": [" NL If Fatal, gain %s Gold. NL Exhaust.", " NL If Fatal, gain %s Gold."]
   },
   "CardAugments:HemoMod": {
-    "TEXT": ["Hemo ", "", "Lose %d HP. NL "],
-    "EXTRA_TEXT": []
+    "TEXT": ["Hemo ", "", "Increases #yBlock and damage by #b50%. Loses #b2 HP."],
+    "EXTRA_TEXT": ["Lose %d HP. NL "]
   },
   "CardAugments:HeavyMod": {
-    "TEXT": ["Heavy ", "", " NL Strength affects this card %d times."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Heavy ", "", "#yStrength affects this card #b3 times."],
+    "EXTRA_TEXT": [" NL Strength affects this card %d times."]
   },
   "CardAugments:HolyMod": {
-    "TEXT": ["Holy ", "", " NL Add a *Miracle to your hand."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Holy ", "", "Increases cost by #b1. Adds a #yMiracle into your hand."],
+    "EXTRA_TEXT": [" NL Add a *Miracle to your hand."]
   },
   "CardAugments:InfiniteMod": {
-    "TEXT": ["Infinite ", "", "At the start of your turn, add a %s into your hand.", "Innate. NL "],
-    "EXTRA_TEXT": []
+    "TEXT": ["Infinite ", "", "At the start of your turn, adds a copy of the card into your hand."],
+    "EXTRA_TEXT": ["At the start of your turn, add a %s into your hand.", "Innate. NL "]
   },
   "CardAugments:InvertedMod": {
-    "TEXT": ["Inverted ", "", "Gain !B! Block.","Deal !D! damage."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Inverted ", "", "\"Gain Block.\" effects become \"Deal damage.\" and vice versa."],
+    "EXTRA_TEXT": ["Gain !B! Block.","Deal !D! damage."]
   },
   "CardAugments:JankMod": {
-    "TEXT": ["Janky ", ""],
+    "TEXT": ["Janky ", "", "Swaps values around on the card."],
     "EXTRA_TEXT": []
   },
   "CardAugments:LockingMod": {
-    "TEXT": ["Locking ", "", " NL Apply %d Lock-On."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Locking ", "", "Reduces damage by #b20%. Applies #b2 #yLock-On."],
+    "EXTRA_TEXT": [" NL Apply %d Lock-On."]
   },
   "CardAugments:LuckyMod": {
-    "TEXT": ["Lucky ", "", "Scry %s. NL "],
-    "EXTRA_TEXT": []
+    "TEXT": ["Lucky ", "", "#yScries before drawing."],
+    "EXTRA_TEXT": ["Scry %s. NL "]
   },
   "CardAugments:MasochisticMod": {
-    "TEXT": ["Masochistic ", "", " NL Gains 3 additional Block per debuff you have."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Masochistic ", "", "Gains #b3 additional #yBlock per debuff you have."],
+    "EXTRA_TEXT": [" NL Gains %d additional Block per debuff you have."]
   },
   "CardAugments:MassiveMod": {
-    "TEXT": ["Massive ", ""],
+    "TEXT": ["Massive ","", "Increases cost by #b1. Proportionally increases #yBlock and damage."],
     "EXTRA_TEXT": []
   },
   "CardAugments:MasterfulMod": {
-    "TEXT": ["Masterful ", "", " NL Costs 1 additional [E] for each time you lose HP this combat."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Masterful ", "", "Reduces cost by #b2. Increases cost by #b1 each time you lose HP."],
+    "EXTRA_TEXT": [" NL Costs 1 additional [E] for each time you lose HP this combat."]
   },
   "CardAugments:MementoMod": {
-    "TEXT": ["", "'s Memento", "Ethereal. NL "," NL When Exhausted, draw %d cards."],
-    "EXTRA_TEXT": []
+    "TEXT": ["", "'s Memento", "When #yExhausted, draws #b2 cards. Adds #yEthereal."],
+    "EXTRA_TEXT": ["Ethereal. NL "," NL When Exhausted, draw %d cards."]
   },
   "CardAugments:MeteorMod": {
-    "TEXT": ["Meteoric ", "", " NL Channel %d Plasma."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Meteoric ", "", "Sets cost to #b5. Increases damage by #b25% per cost increase. #yChannels #yPlasma equal to cost increase."],
+    "EXTRA_TEXT": [" NL Channel %d Plasma."]
   },
   "CardAugments:MK2Mod": {
-    "TEXT": ["", " MK2"],
+    "TEXT": ["", " MK2", "Increases card effects by #b20%."],
     "EXTRA_TEXT": []
   },
   "CardAugments:MoxieMod": {
-    "TEXT": ["Ritual ", "", " NL If Fatal, permanently increase this card's damage by %d. NL Exhaust."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Ritual ", "", "Permanently increases damage by #b2 if #yFatal. Adds #yExhaust."],
+    "EXTRA_TEXT": [" NL If Fatal, permanently increase this card's damage by %d. NL Exhaust."]
   },
   "CardAugments:NoxiousMod": {
-    "TEXT": ["Noxious ", "", " NL Apply %d Poison to ALL enemies."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Noxious ", "", "Applies #b2 #yPoison to ALL enemies."],
+    "EXTRA_TEXT": [" NL Apply %d Poison to ALL enemies."]
   },
   "CardAugments:NuclearMod": {
-    "TEXT": ["Nuclear ", "", " NL Channel %d Plasma."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Nuclear ", "", "Increases cost by #b1. #yChannels a #yPlasma."],
+    "EXTRA_TEXT": [" NL Channel %d Plasma."]
   },
   "CardAugments:PerniciousMod": {
-    "TEXT": ["Pernicious ", "", " NL Apply Poison equal to unblocked damage dealt."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Pernicious ", "", "Reduces damage by #b50%. Applies #yPoison equal to unblocked damage dealt."],
+    "EXTRA_TEXT": [" NL Apply Poison equal to unblocked damage dealt."]
   },
   "CardAugments:PhilosophersMod": {
-    "TEXT": ["Philosopher's ", "", " NL ALL enemies gain 1 Strength."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Philosopher's ", "", "Reduces cost by #b1. Gives #b1 #yStrength to ALL enemies."],
+    "EXTRA_TEXT": [" NL ALL enemies gain 1 Strength."]
   },
   "CardAugments:PiercingMod": {
-    "TEXT": ["Piercing ", "", " NL Ignores Block."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Piercing ", "", "Ignores #yBlock."],
+    "EXTRA_TEXT": [" NL Ignores Block."]
   },
   "CardAugments:PoisonedMod": {
-    "TEXT": ["Poisoned ", "", " NL Apply %s Poison."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Poisoned ", "", "Reduces damage by #b2. Applies #yPoison."],
+    "EXTRA_TEXT": [" NL Apply %s Poison."]
   },
   "CardAugments:PredatoryMod": {
-    "TEXT": ["Predatory ", "", " NL Next turn, draw %d additional cards.",
+    "TEXT": ["Predatory ", "", "Increases cost by #b1. Increases damage by #b33%. Draws #b2 cards next turn."],
+    "EXTRA_TEXT": [" NL Next turn, draw %d additional cards.",
       "Translator note: These strings are for replacing Predator's description. The first string is what to search for, the second string replaces it.",
       "Next turn, draw 2 additional cards.",
-      "Next turn, draw 4 additional cards."],
-    "EXTRA_TEXT": []
+      "Next turn, draw 4 additional cards."]
   },
   "CardAugments:PreparedMod": {
-    "TEXT": ["Prepared ", "", " NL Draw %d card. NL Discard %d card."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Prepared ", "", "Draws #b1 card. Discards #b1 card."],
+    "EXTRA_TEXT": [" NL Draw %d card. NL Discard %d card."]
   },
   "CardAugments:PureMod": {
-    "TEXT": ["Pure ", "", " NL Exhaust all Status and Curse cards in your hand."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Pure ", "", "#yExhausts all #yStatus and #yCurse cards in your hand."],
+    "EXTRA_TEXT": [" NL Exhaust all Status and Curse cards in your hand."]
   },
   "CardAugments:QuickMod": {
-    "TEXT": ["Quick ", "", " NL Draw %d card."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Quick ", "", "Reduces damage by #b20%. Draws #b1 card."],
+    "EXTRA_TEXT": [" NL Draw %d card."]
   },
   "CardAugments:RampedMod": {
-    "TEXT": ["Ramped ", "", " NL Increase this card's damage by %s this combat."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Ramped ", "", "Reduces damage by #b33%. Increases damage a proportionate amount when played."],
+    "EXTRA_TEXT": [" NL Increase this card's damage by %s this combat."]
   },
   "CardAugments:ReshuffleMod": {
-    "TEXT": ["Recalling ", "", " NL cardaugments:Reshuffle."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Recalling ", "", "Shuffles back into the draw pile."],
+    "EXTRA_TEXT": [" NL cardaugments:Reshuffle."]
   },
   "CardAugments:ReturningMod": {
-    "TEXT": ["Returning ", "", " NL cardaugments:Reshuffle."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Returning ", "", "Sets cost to #b0. Allows playing the card. Shuffles back into the draw pile."],
+    "EXTRA_TEXT": [" NL cardaugments:Reshuffle."]
   },
   "CardAugments:RollMod": {
-    "TEXT": ["", " and Roll", " NL Next turn, gain !B! Block."],
-    "EXTRA_TEXT": []
+    "TEXT": ["", " and Roll", "Reduces #yBlock by #b33%. Additionally gives #yBlock next turn."],
+    "EXTRA_TEXT": [" NL Next turn, gain !B! Block."]
   },
   "CardAugments:RunicMod": {
-    "TEXT": ["Runic ", "", " NL You cannot see enemy intents for %d turns."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Runic ", "", "Reduces cost by #b1. Obscures enemy intents for #b2 turns."],
+    "EXTRA_TEXT": [" NL You cannot see enemy intents for %d turns."]
   },
   "CardAugments:SadisticMod": {
-    "TEXT": ["Sadistic ", "", " NL Deals %d additional damage per debuff on the enemy."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Sadistic ", "", "Deals #b3 additional damage per debuff on the enemy."],
+    "EXTRA_TEXT": [" NL Deals %d additional damage per debuff on the enemy."]
   },
   "CardAugments:SanctifiedMod": {
-    "TEXT": ["Sanctified ", "", " NL If the last card played this combat was a Skill, draw %d cards."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Sanctified ", "", "Draws #b2 cards if the last card played was a Skill."],
+    "EXTRA_TEXT": [" NL If the last card played this combat was a Skill, draw %d cards."]
   },
   "CardAugments:ShamefulMod": {
-    "TEXT": ["Shameful ", "", " NL Gain %d Frail."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Shameful ", "", "Reduces cost by #b1. Gains #b2 #yFrail."],
+    "EXTRA_TEXT": [" NL Gain %d Frail."]
   },
   "CardAugments:SearingMod": {
-    "TEXT": ["Searing ", "", " NL Can be Upgraded any number of times."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Searing ", "", "Allows #Upgrading any number of times."],
+    "EXTRA_TEXT": [" NL Can be Upgraded any number of times."]
   },
   "CardAugments:ShieldedMod": {
-    "TEXT": ["Shielded ", "", " NL Gain %s Block."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Shielded ", "", "Increases cost by #b1. Gives #yBlock."],
+    "EXTRA_TEXT": ["Gain %s Block. NL "]
   },
   "CardAugments:ShiningMod": {
-    "TEXT": ["Shining ", "", "Ethereal. NL "," NL When you draw this card, gain [E]."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Shining ", "", "Gains [E] when drawn. Adds #yEthereal."],
+    "EXTRA_TEXT": ["Ethereal. NL "," NL When you draw this card, gain [E]."]
   },
   "CardAugments:ShivMod": {
-    "TEXT": ["", " and Dagger", " NL Add %d *Shiv into your hand."],
-    "EXTRA_TEXT": []
+    "TEXT": ["", " and Dagger", "Reduces damage by #b20%. Adds a #yShiv into your hand."],
+    "EXTRA_TEXT": [" NL Add %d *Shiv into your hand."]
   },
   "CardAugments:SignatureMod": {
-    "TEXT": ["Signature ", "", "Can only be played if this is the only Attack in your hand. NL "],
-    "EXTRA_TEXT": []
+    "TEXT": ["Signature ", "", "Increases damage by #b75%. Adds playability restriction."],
+    "EXTRA_TEXT": ["Can only be played if this is the only Attack in your hand. NL "]
   },
   "CardAugments:SlaverMod": {
-    "TEXT": ["Slaver's ", "", " NL Costs 1 less [E] in Boss and Elite combats."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Slaver's ", "", "Reduces cost by #b1 in Boss and Elite combats."],
+    "EXTRA_TEXT": [" NL Costs 1 less [E] in Boss and Elite combats."]
   },
   "CardAugments:SlayerMod": {
-    "TEXT": ["Slayer's ", "", " NL Deals double damage to the enemy with the lowest HP."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Slayer's ", "", "Reduces damage by #b25%. Deals double damage to the enemy with the lowest HP."],
+    "EXTRA_TEXT": [" NL Deals double damage to the enemy with the lowest HP."]
   },
   "CardAugments:SlipperyMod": {
-    "TEXT": ["Slippery ", "", " NL Discard this card the first time it is drawn each combat."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Slippery ", "", "Increases card effects by #b50%. Discards the first time it is drawn."],
+    "EXTRA_TEXT": [" NL Discard this card the first time it is drawn each combat."]
   },
   "CardAugments:SneckoMod": {
-    "TEXT": ["Snecko ", "", "Snecko. NL "],
-    "EXTRA_TEXT": []
+    "TEXT": ["Snecko ", "", "Randomizes cost when drawn."],
+    "EXTRA_TEXT": ["Snecko. NL "]
   },
   "CardAugments:StickyMod": {
-    "TEXT": ["Sticky ", "", "Retain. NL "],
-    "EXTRA_TEXT": []
+    "TEXT": ["Sticky ", "", "Adds #yRetain."],
+    "EXTRA_TEXT": ["Retain. NL "]
   },
   "CardAugments:StreamlinedMod": {
-    "TEXT": ["Streamlined ", "", " NL Reduce this card's cost by 1 this combat."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Streamlined ", "", "Increases cost by #b1. Increases #yBlock and damage by #b33%. Reduces cost by #b1 when played."],
+    "EXTRA_TEXT": [" NL Reduce this card's cost by 1 this combat."]
   },
   "CardAugments:SuckerMod": {
-    "TEXT": ["Sucker ", "", " NL Apply %d Weak."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Sucker ", "", "Reduces damage by #b20%. Applies #b1 #yWeak."],
+    "EXTRA_TEXT": [" NL Apply %d Weak."]
   },
   "CardAugments:SupplyMod": {
-    "TEXT": ["Supplier ", "", " NL Next turn, gain [E] [E] ."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Supplier ", "", "Increases cost by #b1. Gives [E] [E] next turn."],
+    "EXTRA_TEXT": [" NL Next turn, gain [E] [E] ."]
   },
   "CardAugments:SurgeMod": {
-    "TEXT": ["", " Surge", " NL Gain %d Artifact. NL Exhaust."],
-    "EXTRA_TEXT": []
+    "TEXT": ["", " Surge", "Gives #b1 #yArtifact. Adds #yExhaust."],
+    "EXTRA_TEXT": [" NL Gain %d Artifact. NL Exhaust."]
   },
   "CardAugments:SurvivorMod": {
-    "TEXT": ["Survivor's ", "", " NL Discard %d card."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Survivor's ", "", "Increases #yBlock by #b33%. Discards a card."],
+    "EXTRA_TEXT": [" NL Discard %d card."]
   },
   "CardAugments:SwivelMod": {
-    "TEXT": ["Swivelled ", "", " NL The next Attack you play costs 0."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Swivelled ", "", "Increases cost by #b1. The next Attack you play costs #b0."],
+    "EXTRA_TEXT": [" NL The next Attack you play costs 0."]
   },
   "CardAugments:TearMod": {
-    "TEXT": ["", " and Tear", " NL Deal !D! damage to a random enemy."],
-    "EXTRA_TEXT": []
+    "TEXT": ["", " and Tear", "Reduces damage by #b33%. Additionally hits a random enemy."],
+    "EXTRA_TEXT": [" NL Deal !D! damage to a random enemy."]
   },
   "CardAugments:TinyMod": {
-    "TEXT": ["Tiny ", ""],
+    "TEXT": ["Tiny ", "", "Reduces cost by #b1. Reduces #yBlock and damage by #b33%."],
     "EXTRA_TEXT": []
   },
   "CardAugments:TwinMod": {
-    "TEXT": ["Twin ", "", " twice."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Twin ", "", "Increases cost by #b1. Repeats all effects."],
+    "EXTRA_TEXT": [" twice."]
   },
   "CardAugments:VanishingMod": {
-    "TEXT": ["Vanishing ", "", " NL Exhausts whenever you lose HP this combat."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Vanishing ", "", "Increases card effects by #b33%. #yExhausts if you lose HP."],
+    "EXTRA_TEXT": [" NL Exhausts whenever you lose HP this combat."]
   },
   "CardAugments:VoidMod": {
-    "TEXT": ["Void ", "", " NL Shuffle %d *Void into your draw pile."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Void ", "", "Reduces cost by #b2. Shuffles a #yVoid into your draw pile."],
+    "EXTRA_TEXT": [" NL Shuffle %d *Void into your draw pile."]
   },
   "CardAugments:VoidingMod": {
-    "TEXT": ["Voiding ", "", "Ethereal. NL ", " NL Whenever this card is drawn, lose 1 Energy."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Voiding ", "", "Loses [E] when drawn. Adds #yEthereal."],
+    "EXTRA_TEXT": ["Ethereal. NL ", " NL Whenever this card is drawn, lose 1 Energy."]
   },
   "CardAugments:WallopMod": {
-    "TEXT": ["Walloping ", "", " NL Gain Block equal to unblocked damage dealt."],
-    "EXTRA_TEXT": []
+    "TEXT": ["Walloping ", "", "Increases cost by #b1. Gains #yBlock equal to unblocked damage dealt."],
+    "EXTRA_TEXT": [" NL Gain Block equal to unblocked damage dealt."]
   },
   "CardAugments:WaveMod": {
-    "TEXT": ["", " Wave", "Gain %s Block. NL "],
-    "EXTRA_TEXT": []
+    "TEXT": ["", " Wave", "Reduces damage by #b50%. Gives #yBlock equal to damage lost."],
+    "EXTRA_TEXT": ["Gain %s Block. NL "]
   },
   "CardAugments:XMod": {
-    "TEXT": ["", " X", " NL Performed X times."],
-    "EXTRA_TEXT": []
+    "TEXT": ["", " X", "Card becomes X cost."],
+    "EXTRA_TEXT": [" NL Performed X times."]
   }
 }

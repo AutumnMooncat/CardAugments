@@ -15,6 +15,7 @@ import com.megacrit.cardcrawl.powers.PoisonPower;
 public class NoxiousMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(NoxiousMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     private static final int EFFECT = 2;
 
@@ -34,8 +35,13 @@ public class NoxiousMod extends AbstractAugment {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + String.format(TEXT[2], EFFECT);
+        return insertAfterText(rawDescription , String.format(CARD_TEXT[0], EFFECT));
     }
 
     @Override

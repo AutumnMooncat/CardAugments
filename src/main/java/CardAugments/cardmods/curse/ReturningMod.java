@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.localization.LocalizedStrings;
 public class ReturningMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(ReturningMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     @Override
     public void onInitialApplication(AbstractCard card) {
@@ -35,12 +36,17 @@ public class ReturningMod extends AbstractAugment {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
         for (String s : GameDictionary.UNPLAYABLE.NAMES) {
             rawDescription = rawDescription.replace(FormatHelper.capitalize(s) + LocalizedStrings.PERIOD + " NL ", "");
             rawDescription = rawDescription.replace(FormatHelper.capitalize(s) + LocalizedStrings.PERIOD, ""); // In case someone doesn't use a new line
         }
-        return rawDescription + TEXT[2];
+        return insertAfterText(rawDescription , CARD_TEXT[0]);
     }
 
     @Override

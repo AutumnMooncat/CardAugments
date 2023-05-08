@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.orbs.Plasma;
 public class NuclearMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(NuclearMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     private static final int ORBS = 1;
 
@@ -39,8 +40,13 @@ public class NuclearMod extends AbstractAugment {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + String.format(TEXT[2], ORBS);
+        return insertAfterText(rawDescription , String.format(CARD_TEXT[0], ORBS));
     }
 
     @Override

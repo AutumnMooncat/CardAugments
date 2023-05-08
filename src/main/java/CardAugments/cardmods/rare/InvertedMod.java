@@ -33,17 +33,18 @@ import java.util.Arrays;
 public class InvertedMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(InvertedMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
     public static final ArrayList<Class<?>> bannedCards = new ArrayList<>(Arrays.asList(PerfectedStrike.class, Brilliance.class));
     private boolean toBlock;
 
     @Override
     public void onInitialApplication(AbstractCard card) {
-        if (card.rawDescription.contains(TEXT[3]) && card.type != AbstractCard.CardType.SKILL) {
+        if (card.rawDescription.contains(CARD_TEXT[1]) && card.type != AbstractCard.CardType.SKILL) {
             card.type = AbstractCard.CardType.SKILL;
             PortraitHelper.setMaskedPortrait(card);
             card.baseBlock = card.baseDamage;
             toBlock = true;
-        } else if (card.rawDescription.contains(TEXT[2]) && card.type != AbstractCard.CardType.ATTACK) {
+        } else if (card.rawDescription.contains(CARD_TEXT[0]) && card.type != AbstractCard.CardType.ATTACK) {
             card.type = AbstractCard.CardType.ATTACK;
             PortraitHelper.setMaskedPortrait(card);
             card.baseDamage = card.baseBlock;
@@ -119,8 +120,8 @@ public class InvertedMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        boolean damageText = cardCheck(card, c -> c.rawDescription.contains(TEXT[3]));
-        boolean blockText = cardCheck(card, c -> c.rawDescription.contains(TEXT[2]));
+        boolean damageText = cardCheck(card, c -> c.rawDescription.contains(CARD_TEXT[1]));
+        boolean blockText = cardCheck(card, c -> c.rawDescription.contains(CARD_TEXT[0]));
         if (!damageText && !blockText) {
             return false;
         }
@@ -148,12 +149,17 @@ public class InvertedMod extends AbstractAugment {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        if (rawDescription.contains(TEXT[3])) {
-            return rawDescription.replace(TEXT[3], TEXT[2]);
+        if (rawDescription.contains(CARD_TEXT[1])) {
+            return rawDescription.replace(CARD_TEXT[1], CARD_TEXT[0]);
         }
-        if (rawDescription.contains(TEXT[2])) {
-            return rawDescription.replace(TEXT[2], TEXT[3]);
+        if (rawDescription.contains(CARD_TEXT[0])) {
+            return rawDescription.replace(CARD_TEXT[0], CARD_TEXT[1]);
         }
         return rawDescription + " NL ???";
     }

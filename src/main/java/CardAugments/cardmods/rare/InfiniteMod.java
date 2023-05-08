@@ -20,6 +20,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 public class InfiniteMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(InfiniteMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     private boolean inherentHack = true;
 
@@ -57,8 +58,13 @@ public class InfiniteMod extends AbstractAugment {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return (card.isInnate ? TEXT[3] : "") + String.format(TEXT[2], FormatHelper.prefixWords(card.name, "*"));
+        return (card.isInnate ? CARD_TEXT[1] : "") + String.format(CARD_TEXT[0], FormatHelper.prefixWords(card.name, "*"));
     }
 
     @Override

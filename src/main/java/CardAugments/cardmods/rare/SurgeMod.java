@@ -14,6 +14,7 @@ import com.megacrit.cardcrawl.powers.ArtifactPower;
 public class SurgeMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(SurgeMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     private static final int AMOUNT = 1;
 
@@ -38,8 +39,13 @@ public class SurgeMod extends AbstractAugment {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + String.format(TEXT[2], AMOUNT);
+        return insertAfterText(rawDescription , String.format(CARD_TEXT[0], AMOUNT));
     }
 
     @Override

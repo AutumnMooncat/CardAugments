@@ -17,6 +17,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 public class PreparedMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(PreparedMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     public static final int DRAW = 1;
     private boolean modifiedBase;
@@ -58,11 +59,16 @@ public class PreparedMod extends AbstractAugment {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
         if (modifiedBase) {
             return rawDescription;
         }
-        return rawDescription + String.format(TEXT[2], DRAW, DRAW);
+        return insertAfterText(rawDescription , String.format(CARD_TEXT[0], DRAW, DRAW));
     }
 
     @Override

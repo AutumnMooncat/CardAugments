@@ -23,6 +23,7 @@ public class GoForTheMod extends AbstractAugment implements DynvarCarrier {
     public static final String ID = CardAugmentsMod.makeID(GoForTheMod.class.getSimpleName());
     public static final String DESCRIPTION_KEY = "!"+ID+"!";
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     private static final int DAMAGE = 3;
     private static final int UPGRADE_DAMAGE = 1;
@@ -85,6 +86,11 @@ public class GoForTheMod extends AbstractAugment implements DynvarCarrier {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
         if (Character.isAlphabetic(rawDescription.charAt(0))) {
             String word = rawDescription.split(" ")[0].replaceAll("[^a-zA-Z0-9]", "");
@@ -94,7 +100,7 @@ public class GoForTheMod extends AbstractAugment implements DynvarCarrier {
                 rawDescription = new String(c);
             }
         }
-        return String.format(TEXT[2], DESCRIPTION_KEY) + rawDescription;
+        return String.format(CARD_TEXT[0], DESCRIPTION_KEY) + rawDescription;
     }
 
     @Override

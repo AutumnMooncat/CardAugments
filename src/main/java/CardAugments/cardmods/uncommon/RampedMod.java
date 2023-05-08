@@ -15,6 +15,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class RampedMod extends AbstractAugment implements DynvarCarrier {
     public static final String ID = CardAugmentsMod.makeID(RampedMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
     private static final String KEY = "!" + ID + "!";
     public int baseAmount;
     public int upAmount;
@@ -56,8 +57,13 @@ public class RampedMod extends AbstractAugment implements DynvarCarrier {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + String.format(TEXT[2], KEY);
+        return insertAfterText(rawDescription , String.format(CARD_TEXT[0], KEY));
     }
 
     @Override

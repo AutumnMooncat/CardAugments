@@ -16,6 +16,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class HemoMod extends AbstractAugment {
     public static final String ID = CardAugmentsMod.makeID(HemoMod.class.getSimpleName());
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     private static final int LOSS = 2;
 
@@ -51,8 +52,13 @@ public class HemoMod extends AbstractAugment {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return String.format(TEXT[2], LOSS) + rawDescription;
+        return insertBeforeText(rawDescription, String.format(CARD_TEXT[0], LOSS));
     }
 
     @Override

@@ -691,7 +691,7 @@
     "TEXT": [
       "",
       " Siguiente",
-      "Reduces damage by #b20%. Gains [E] is the last card played was an Attack."
+      "Reduces damage by #b20%. Gains [E] if the last card played was an Attack."
     ],
     "EXTRA_TEXT": [
       " NL Si la última carta jugada en este combate fue un Ataque, obtén [E].",
@@ -757,110 +757,111 @@
     "TEXT": [
       "",
       " y Oscuridad",
-      " Invoca %d de Oscuridad."
+      "Reduces #yBlock and damage by #b25%. #yChannels a #yDark."
     ],
     "EXTRA_TEXT": [
-
+      " Invoca %d de Oscuridad."
     ]
   },
   "CardAugments:GoForTheMod": {
     "TEXT": [
       "",
       " Ve por él",
-      "Inflige %s de daño. NL Si el enemigo tiene la intención de atacar, "
+      "Reduces damage by 20%. Deals damage to an enemy, then triggers the original card effect if the enemy intended to attack."
     ],
     "EXTRA_TEXT": [
-
+      "Inflige %s de daño. NL Si el enemigo tiene la intención de atacar, "
     ]
   },
   "CardAugments:GraveMod": {
     "TEXT": [
       "",
       " de Cripta",
-      " NL Tumba."
+      "Adds #yGrave."
     ],
     "EXTRA_TEXT": [
-
+      " NL Tumba."
     ]
   },
   "CardAugments:GritMod": {
     "TEXT": [
       "",
       " Arenoso/a",
-      " NL Agota una carta aleatoria en tu mano.",
-      " NL Agota una carta de tu mano."
+      "#yExhausts a card in your hand."
     ],
     "EXTRA_TEXT": [
-
+      " NL Agota una carta aleatoria en tu mano.",
+      " NL Agota una carta de tu mano."
     ]
   },
   "CardAugments:GreedMod": {
     "TEXT": [
       "",
       " de la avaricia",
-      " NL Si es Fatal, obtén %s Oro. NL Agotar.",
-      " Si es Fatal, obtén %s Oro."
+      "Gives #yGold is #yFatal. Adds #yExhaust."
     ],
     "EXTRA_TEXT": [
-
+      " NL Si es Fatal, obtén %s Oro. NL Agotar.",
+      " NL Si es Fatal, obtén %s Oro."
     ]
   },
   "CardAugments:HemoMod": {
     "TEXT": [
       "Hemo ",
       "",
-      "Pierde %d HP. NL "
+      "Increases #yBlock and damage by #b50%. Loses #b2 HP."
     ],
     "EXTRA_TEXT": [
-
+      "Pierde %d HP. NL "
     ]
   },
   "CardAugments:HeavyMod": {
     "TEXT": [
       "",
       " Pesado/a",
-      " NL La Fuerza afecta esta carta %d veces."
+      "#yStrength affects this card #b3 times."
     ],
     "EXTRA_TEXT": [
-
+      " NL La Fuerza afecta esta carta %d veces."
     ]
   },
   "CardAugments:HolyMod": {
     "TEXT": [
       "",
       " Santo/a",
-      " NL Agrega un *Milagro a tu mano."
+      "Increases cost by #b1. Adds a #yMiracle into your hand."
     ],
     "EXTRA_TEXT": [
-
+      " NL Agrega un *Milagro a tu mano."
     ]
   },
   "CardAugments:InfiniteMod": {
     "TEXT": [
       "",
       " Infinito",
-      "Al inicio de tu turno, agrega un %s a tu mano.",
-      "Innata. NL "
+      "At the start of your turn, adds a copy of the card into your hand."
     ],
     "EXTRA_TEXT": [
-
+      "Al inicio de tu turno, agrega un %s a tu mano.",
+      "Innata. NL "
     ]
   },
   "CardAugments:InvertedMod": {
     "TEXT": [
       "",
       " Invertido",
-      "Gana !B! de Bloqueo.",
-      "Inflige !D! de daño."
+      "\"Gain Block.\" effects become \"Deal damage.\" and vice versa."
     ],
     "EXTRA_TEXT": [
-
+      "Gana !B! de Bloqueo.",
+      "Inflige !D! de daño."
     ]
   },
   "CardAugments:JankMod": {
     "TEXT": [
       "",
-      " Cutre"
+      " Cutre",
+      "Swaps values around on the card."
     ],
     "EXTRA_TEXT": [
 
@@ -870,36 +871,37 @@
     "TEXT": [
       "",
       " con Bloqueo",
-      " NL Aplica %d Bloquear objetivo."
+      "Reduces damage by #b20%. Applies #b2 #yLock-On."
     ],
     "EXTRA_TEXT": [
-
+      " NL Aplica %d ‘Localizar’ al objetivo."
     ]
   },
   "CardAugments:LuckyMod": {
     "TEXT": [
       "",
       " de Suerte",
-      "Adivina %s. NL "
+      "#yScries before drawing."
     ],
     "EXTRA_TEXT": [
-
+      "Adivina %s. NL "
     ]
   },
   "CardAugments:MasochisticMod": {
     "TEXT": [
       "",
       " Masoquista",
-      " Gana 3 de Bloqueo adicional por cada debuff que tengas."
+      "Gains #b3 additional #yBlock per debuff you have."
     ],
     "EXTRA_TEXT": [
-
+      " Gana %d de Bloqueo adicional por cada debuff que tengas."
     ]
   },
   "CardAugments:MassiveMod": {
     "TEXT": [
       "",
-      " Masivo/a"
+      " Masivo/a",
+      "Increases cost by #b1. Proportionally increases #yBlock and damage."
     ],
     "EXTRA_TEXT": [
 
@@ -909,37 +911,38 @@
     "TEXT": [
       "",
       " Magistral",
-      " Cuesta 1 [E] adicional por cada vez que pierdas HP en este combate."
+      "Reduces cost by #b2. Increases cost by #b1 each time you lose HP."
     ],
     "EXTRA_TEXT": [
-
+      " Cuesta 1 [E] adicional por cada vez que pierdas HP en este combate."
     ]
   },
   "CardAugments:MementoMod": {
     "TEXT": [
       "",
       " Memento",
-      "Etérea. NL ",
-      " NL Cuando se agote, roba %d cartas."
+      "When #yExhausted, draws #b2 cards. Adds #yEthereal."
     ],
     "EXTRA_TEXT": [
-
+      "Etérea. NL ",
+      " NL Cuando se agote, roba %d cartas."
     ]
   },
   "CardAugments:MeteorMod": {
     "TEXT": [
       "",
       " Meteorico/a",
-      " NL Invoca %d de Plasma."
+      "Sets cost to #b5. Increases damage by #b25% per cost increase. #yChannels #yPlasma equal to cost increase."
     ],
     "EXTRA_TEXT": [
-
+      " NL Invoca %d de Plasma."
     ]
   },
   "CardAugments:MK2Mod": {
     "TEXT": [
       "",
-      " MK2"
+      " MK2",
+      "Increases card effects by #b20%."
     ],
     "EXTRA_TEXT": [
 
@@ -949,370 +952,371 @@
     "TEXT": [
       "",
       " Ritual",
-      " NL Si es fatal, aumenta permanentemente el daño de esta carta en %d. NL Agotar."
+      "Permanently increases damage by #b2 if #yFatal. Adds #yExhaust."
     ],
     "EXTRA_TEXT": [
-
+      " NL Si es fatal, aumenta permanentemente el daño de esta carta en %d. NL Agotar."
     ]
   },
   "CardAugments:NoxiousMod": {
     "TEXT": [
       "",
       " Nocivo/a",
-      " NL Aplica %d de veneno a TODOS los enemigos."
+      "Applies #b2 #yPoison to ALL enemies."
     ],
     "EXTRA_TEXT": [
-
+      " NL Aplica %d de veneno a TODOS los enemigos."
     ]
   },
   "CardAugments:NuclearMod": {
     "TEXT": [
       "",
       " Nuclear",
-      " NL Invoca %d Plasma."
+      "Increases cost by #b1. #yChannels a #yPlasma."
     ],
     "EXTRA_TEXT": [
-
+      " NL Invoca %d Plasma."
     ]
   },
   "CardAugments:PerniciousMod": {
     "TEXT": [
       "",
       " Pernicioso/a",
-      " NL Aplica Veneno igual al daño no bloqueado infligido."
+      "Reduces damage by #b50%. Applies #yPoison equal to unblocked damage dealt."
     ],
     "EXTRA_TEXT": [
-
+      " NL Aplica Veneno igual al daño no bloqueado infligido."
     ]
   },
   "CardAugments:PhilosophersMod": {
     "TEXT": [
       "",
       " Filosofal",
-      " NL TODOS los enemigos ganan 1 Fuerza."
+      "Reduces cost by #b1. Gives #b1 #yStrength to ALL enemies."
     ],
     "EXTRA_TEXT": [
-
+      " NL TODOS los enemigos ganan 1 Fuerza."
     ]
   },
   "CardAugments:PiercingMod": {
     "TEXT": [
       "",
       " Piercing",
-      " NL Ignora el Bloqueo."
+      "Ignores #yBlock."
     ],
     "EXTRA_TEXT": [
-
+      " NL Ignora el Bloqueo."
     ]
   },
   "CardAugments:PoisonedMod": {
     "TEXT": [
       "",
       " Envenenado/a",
-      " NL Aplica %s de veneno."
+      "Reduces damage by #b2. Applies #yPoison."
     ],
     "EXTRA_TEXT": [
-
+      " NL Aplica %s de veneno."
     ]
   },
   "CardAugments:PredatoryMod": {
     "TEXT": [
       "",
       " Depredatorio/a",
+      "Increases cost by #b1. Increases damage by #b33%. Draws #b2 cards next turn."
+    ],
+    "EXTRA_TEXT": [
       " NL El próximo turno, roba %d cartas adicionales",
       "Nota del traductor: Estas cadenas son para reemplazar la descripción del Depredador. La primera cadena es lo que se debe buscar, la segunda cadena lo reemplaza",
       "El próximo turno, roba 2 cartas adicionales.",
       "El próximo turno, roba 4 cartas adicionales."
-    ],
-    "EXTRA_TEXT": [
-
     ]
   },
   "CardAugments:PreparedMod": {
     "TEXT": [
       "",
       " Preparado/a",
-      " NL Roba %d carta. Descarta %d carta."
+      "Draws #b1 card. Discards #b1 card."
     ],
     "EXTRA_TEXT": [
-
+      " NL Roba %d carta. Descarta %d carta."
     ]
   },
   "CardAugments:PureMod": {
     "TEXT": [
       "",
       " Puro/a",
-      " NL Agota todas las cartas de Estado y Maldición de tu mano."
+      "#yExhausts all #yStatus and #yCurse cards in your hand."
     ],
     "EXTRA_TEXT": [
-
+      " NL Agota todas las cartas de Estado y Maldición de tu mano."
     ]
   },
   "CardAugments:QuickMod": {
     "TEXT": [
       "",
       " Rápido/a",
-      " NL Roba %d carta."
+      "Reduces damage by #b20%. Draws #b1 card."
     ],
     "EXTRA_TEXT": [
-
+      " NL Roba %d carta."
     ]
   },
   "CardAugments:RampedMod": {
     "TEXT": [
       "",
       " Acelerado/a",
-      " NL Aumenta el daño de esta carta en %s durante este combate."
+      "Reduces damage by #b33%. Increases damage a proportionate amount when played."
     ],
     "EXTRA_TEXT": [
-
+      " NL Aumenta el daño de esta carta en %s durante este combate."
     ]
   },
   "CardAugments:ReshuffleMod": {
     "TEXT": [
       "Recordando ",
       "",
-      " NL cardaugments:Rebarajar."
+      "Shuffles back into the draw pile."
     ],
     "EXTRA_TEXT": [
-
+      " NL cardaugments:Rebarajar."
     ]
   },
   "CardAugments:ReturningMod": {
     "TEXT": [
       "Retornando ",
       "",
-      " NL cardaugments:Rebarajar."
+      "Sets cost to #b0. Allows playing the card. Shuffles back into the draw pile."
     ],
     "EXTRA_TEXT": [
-
+      " NL cardaugments:Rebarajar."
     ]
   },
   "CardAugments:RollMod": {
     "TEXT": [
       "",
       " y Balanceo",
-      " NL En el próximo turno, gana !B! de Bloqueo."
+      "Reduces #yBlock by #b33%. Gives #yBlock next turn."
     ],
     "EXTRA_TEXT": [
-
+      " NL En el próximo turno, gana !B! de Bloqueo."
     ]
   },
   "CardAugments:RunicMod": {
     "TEXT": [
       "",
       " Rúnico/a",
-      " NL No puedes ver las intenciones del enemigo durante %d turnos."
+      "Reduces cost by #b1. Obscures enemy intents for #b2 turns."
     ],
     "EXTRA_TEXT": [
-
+      " NL No puedes ver las intenciones del enemigo durante %d turnos."
     ]
   },
   "CardAugments:SadisticMod": {
     "TEXT": [
       "",
       " Sadístico/a",
-      " NL Inflige %d de daño adicional por cada debuff en el enemigo."
+      "Deals #b3 additional damage per debuff on the enemy."
     ],
     "EXTRA_TEXT": [
-
+      " NL Inflige %d de daño adicional por cada debuff en el enemigo."
     ]
   },
   "CardAugments:SanctifiedMod": {
     "TEXT": [
       "",
       " Santificado/a",
-      " NL Si la última carta jugada en este combate fue una Habilidad, roba %d cartas."
+      "Draws #b2 cards if the last card played was a Skill."
     ],
     "EXTRA_TEXT": [
-
+      " NL Si la última carta jugada en este combate fue una Habilidad, roba %d cartas."
     ]
   },
   "CardAugments:ShamefulMod": {
     "TEXT": [
       "",
       " Vergonzoso/a",
-      " NL Obtén %d Frágil."
+      "Reduces cost by #b1. Gains #b2 #yFrail."
     ],
     "EXTRA_TEXT": [
-
+      " NL Obtén %d Frágil."
     ]
   },
   "CardAugments:SearingMod": {
     "TEXT": [
       "",
       " Abrasador/a",
-      " NL Puede ser mejorado cualquier número de veces."
+      "Allows #Upgrading any number of times."
     ],
     "EXTRA_TEXT": [
-
+      " NL Puede ser mejorado cualquier número de veces."
     ]
   },
   "CardAugments:ShieldedMod": {
     "TEXT": [
       "",
       " Blindado/a",
-      " NL Gana %s de Bloqueo."
+      "Increases cost by #b1. Gives #yBlock."
     ],
     "EXTRA_TEXT": [
-
+      "Gana %s de Bloqueo. NL "
     ]
   },
   "CardAugments:ShiningMod": {
     "TEXT": [
       "",
       " Brillante",
-      "Etérea NL ",
-      " NL Cuando robes esta carta, gana [E]."
+      "Gains [E] when drawn. Adds #yEthereal."
     ],
     "EXTRA_TEXT": [
-
+      "Etérea NL ",
+      " NL Cuando robes esta carta, gana [E]."
     ]
   },
   "CardAugments:ShivMod": {
     "TEXT": [
       "",
       " y Daga",
-      " NL Agrega %d *Navaja a tu mano."
+      "Reduces damage by #b20%. Adds a #yShiv into your hand."
     ],
     "EXTRA_TEXT": [
-
+      " NL Agrega %d *Navaja a tu mano."
     ]
   },
   "CardAugments:SignatureMod": {
     "TEXT": [
       "",
       " de Firma",
-      "Solo se puede jugar si este es el único Ataque en tu mano. NL "
+      "Increases damage by #b75%. Adds playability restriction."
     ],
     "EXTRA_TEXT": [
-
+      "Solo se puede jugar si este es el único Ataque en tu mano. NL "
     ]
   },
   "CardAugments:SlaverMod": {
     "TEXT": [
       "",
       " Esclavista",
-      " NL Cuesta 1 menos de [E] en combates contra Jefes y Élites."
+      "Reduces cost by #b1 in Boss and Elite combats."
     ],
     "EXTRA_TEXT": [
-
+      " NL Cuesta 1 menos de [E] en combates contra Jefes y Élites."
     ]
   },
   "CardAugments:SlayerMod": {
     "TEXT": [
       "",
       " del Cazador",
-      " NL Inflige el doble de daño al enemigo con menos HP."
+      "Reduces damage by #b25%. Deals double damage to the enemy with the lowest HP."
     ],
     "EXTRA_TEXT": [
-
+      " NL Inflige el doble de daño al enemigo con menos HP."
     ]
   },
   "CardAugments:SlipperyMod": {
     "TEXT": [
       "",
       " Escurridizo/a",
-      " NL Descarta esta carta la primera vez que se roba durante cada combate."
+      "Increases card effects by #b50%. Discards the first time it is drawn."
     ],
     "EXTRA_TEXT": [
-
+      " NL Descarta esta carta la primera vez que se roba durante cada combate."
     ]
   },
   "CardAugments:SneckoMod": {
     "TEXT": [
       "",
       " Snecko",
-      "Snecko. NL "
+      "Randomizes cost when drawn."
     ],
     "EXTRA_TEXT": [
-
+      "Snecko. NL "
     ]
   },
   "CardAugments:StickyMod": {
     "TEXT": [
       "",
       " Pegajoso",
-      "Retiene. NL "
+      "Adds #yRetain."
     ],
     "EXTRA_TEXT": [
-
+      "Retiene. NL "
     ]
   },
   "CardAugments:StreamlinedMod": {
     "TEXT": [
       "",
       " Optimizado/a",
-      " NL Reduce el costo de esta carta en 1 durante este combate."
+      "Increases cost by #b1. Increases #yBlock and damage by #b33%. Reduces cost by #b1 when played."
     ],
     "EXTRA_TEXT": [
-
+      " NL Reduce el costo de esta carta en 1 durante este combate."
     ]
   },
   "CardAugments:SuckerMod": {
     "TEXT": [
       "",
       " de Ventosas",
-      " NL Aplica %d Débil."
+      "Reduces damage by #b20%. Applies #b1 #yWeak."
     ],
     "EXTRA_TEXT": [
-
+      " NL Aplica %d Débil."
     ]
   },
   "CardAugments:SupplyMod": {
     "TEXT": [
       "",
       " Proveedor",
-      " NL En el próximo turno, gana [E] [E] ."
+      "Increases cost by #b1. Gives [E] [E] next turn."
     ],
     "EXTRA_TEXT": [
-
+      " NL En el próximo turno, gana [E] [E] ."
     ]
   },
   "CardAugments:SurgeMod": {
     "TEXT": [
       "",
       "Sobrecarga de ",
-      " NL Gana %d Artefacto. NL Agotar."
+      "Gives #b1 #yArtifact. Adds #yExhaust."
     ],
     "EXTRA_TEXT": [
-
+      " NL Gana %d Artefacto. NL Agotar."
     ]
   },
   "CardAugments:SurvivorMod": {
     "TEXT": [
       "",
       " Sobreviviente",
-      " NL Descarta %d carta."
+      "Increases #yBlock by #b33%. Discards a card."
     ],
     "EXTRA_TEXT": [
-
+      " NL Descarta %d carta."
     ]
   },
   "CardAugments:SwivelMod": {
     "TEXT": [
       "",
       " Giratorio/a",
-      " NL El siguiente Ataque que juegues cuesta 0."
+      "Increases cost by #b1. The next Attack you play costs #b0."
     ],
     "EXTRA_TEXT": [
-
+      " NL El siguiente Ataque que juegues cuesta 0."
     ]
   },
   "CardAugments:TearMod": {
     "TEXT": [
       "",
       " y Lágrima",
-      " NL Inflige !D! de daño a un enemigo aleatorio."
+      "Reduces damage by #b33%. Additionally hits a random enemy."
     ],
     "EXTRA_TEXT": [
-
+      " NL Inflige !D! de daño a un enemigo aleatorio."
     ]
   },
   "CardAugments:TinyMod": {
     "TEXT": [
       "",
-      " Pequeño/a"
+      " Pequeño/a",
+      "Reduces cost by #b1. Reduces #yBlock and damage by #b33%."
     ],
     "EXTRA_TEXT": [
 
@@ -1322,30 +1326,30 @@
     "TEXT": [
       "Doble ",
       "",
-      " dos veces."
+      "Increases cost by #b1. Repeats all effects."
     ],
     "EXTRA_TEXT": [
-
+      " dos veces."
     ]
   },
   "CardAugments:VanishingMod": {
     "TEXT": [
       "",
       " Desvanecido",
-      " NL Se agota cuando pierdes HP en este combate."
+      "Increases card effects by #b33%. #yExhausts if you lose HP."
     ],
     "EXTRA_TEXT": [
-
+      " NL Se agota cuando pierdes HP en este combate."
     ]
   },
   "CardAugments:VoidMod": {
     "TEXT": [
       "",
       " Vacío",
-      " NL Baraja %d *Vacío en tu pila de robo."
+      "Reduces cost by #b2. Shuffles a #yVoid into your draw pile."
     ],
     "EXTRA_TEXT": [
-
+      " NL Baraja %d *Vacío en tu pila de robo."
     ]
   },
   "CardAugments:VoidingMod": {
@@ -1353,40 +1357,40 @@
       "",
       " Vaciando",
       "Etérea. NL ",
-      " NL Cada vez que sacas esta carta, pierdes 1 de Energía."
+      "Loses [E] when drawn. Adds #yEthereal."
     ],
     "EXTRA_TEXT": [
-
+      " NL Cada vez que sacas esta carta, pierdes 1 de Energía."
     ]
   },
   "CardAugments:WallopMod": {
     "TEXT": [
       "",
       " Demoledor",
-      " NL Gana Bloqueo igual al daño no bloqueado infligido."
+      "Increases cost by #b1. Gains #yBlock equal to unblocked damage dealt."
     ],
     "EXTRA_TEXT": [
-
+      " NL Gana Bloqueo igual al daño no bloqueado infligido."
     ]
   },
   "CardAugments:WaveMod": {
     "TEXT": [
       "",
       " en Oleada",
-      "Gana %s de Bloqueo. NL "
+      "Reduces damage by #b50%. Gives #yBlock equal to damage lost."
     ],
     "EXTRA_TEXT": [
-
+      "Gana %s de Bloqueo. NL "
     ]
   },
   "CardAugments:XMod": {
     "TEXT": [
       "",
       " X",
-      " NL Realizado X veces."
+      "Card becomes X cost."
     ],
     "EXTRA_TEXT": [
-
+      " NL Realizado X veces."
     ]
   }
 }

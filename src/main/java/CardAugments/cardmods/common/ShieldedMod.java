@@ -16,6 +16,7 @@ public class ShieldedMod extends AbstractAugment implements DynvarCarrier {
     public static final String ID = CardAugmentsMod.makeID(ShieldedMod.class.getSimpleName());
     public static final String DESCRIPTION_KEY = "!"+ID+"!";
     public static final String[] TEXT = CardCrawlGame.languagePack.getUIString(ID).TEXT;
+    public static final String[] CARD_TEXT = CardCrawlGame.languagePack.getUIString(ID).EXTRA_TEXT;
 
     private static final int BLOCK = 7;
     private static final int UPGRADE_BLOCK = 3;
@@ -63,13 +64,18 @@ public class ShieldedMod extends AbstractAugment implements DynvarCarrier {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        return rawDescription + String.format(TEXT[2], DESCRIPTION_KEY);
+        return insertBeforeText(rawDescription , String.format(CARD_TEXT[0], DESCRIPTION_KEY));
     }
 
     @Override
     public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
-        this.addToBot(new GainBlockAction(AbstractDungeon.player, val));
+        this.addToTop(new GainBlockAction(AbstractDungeon.player, val));
     }
 
     @Override

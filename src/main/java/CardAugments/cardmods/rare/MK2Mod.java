@@ -61,6 +61,11 @@ public class MK2Mod extends AbstractAugment {
     }
 
     @Override
+    public String getAugmentDescription() {
+        return TEXT[2];
+    }
+
+    @Override
     public AugmentRarity getModRarity() {
         return AugmentRarity.RARE;
     }
