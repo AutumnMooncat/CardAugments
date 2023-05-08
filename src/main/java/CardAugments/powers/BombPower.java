@@ -2,7 +2,6 @@ package CardAugments.powers;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.util.FormatHelper;
-import Starlight.powers.ProvidencePower;
 import basemod.ReflectionHacks;
 import com.badlogic.gdx.Gdx;
 import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.NonStackablePower;
@@ -40,7 +39,7 @@ public class BombPower extends AbstractPower implements NonStackablePower {
         isTurnBased = false;
         this.loadRegion("the_bomb");
         updateDescription();
-        this.array = ReflectionHacks.getPrivateInherited(this, ProvidencePower.class, "effect");
+        this.array = ReflectionHacks.getPrivateInherited(this, BombPower.class, "effect");
 
     }
 
