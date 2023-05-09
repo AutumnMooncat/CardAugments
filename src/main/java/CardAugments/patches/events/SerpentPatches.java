@@ -29,7 +29,6 @@ public class SerpentPatches {
     public static boolean choseMyOption = false;
     public static boolean needsContinue = false;
     public static AbstractAugment augment;
-    public static int damage = 0;
 
     @SpirePatch2(clz = Sssserpent.class, method = SpirePatch.CONSTRUCTOR)
     public static class EventInit {

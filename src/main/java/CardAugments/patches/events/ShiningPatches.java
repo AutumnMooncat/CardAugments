@@ -61,7 +61,7 @@ public class ShiningPatches {
             if (CardAugmentsMod.eventAddons) {
                 if (___screenNum[0] == 0) {
                     if (buttonPressed[0] == myIndex) {
-                        AbstractDungeon.player.damage(new DamageInfo(AbstractDungeon.player, damage));
+                        AbstractDungeon.player.damage(new DamageInfo(null, damage, DamageInfo.DamageType.HP_LOSS));
                         AbstractDungeon.effectList.add(new FlashAtkImgEffect(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, AbstractGameAction.AttackEffect.FIRE));
                         __instance.imageEventText.clearRemainingOptions();
                         __instance.imageEventText.updateBodyText(TEXT[0]);
