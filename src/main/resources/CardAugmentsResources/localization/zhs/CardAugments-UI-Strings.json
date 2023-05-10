@@ -12,7 +12,7 @@
       "允许修改立刻获得的牌 (噬咬, 潘多拉的魔盒, 诅咒, 等等)",
       "允许修改商店牌",
       "允许启用附加事件",
-      "Enable Modifier Tooltips"
+      "启用修改提示词"
     ],
     "EXTRA_TEXT": [
       "奇美拉卡牌",
@@ -21,8 +21,8 @@
   },
   "CardAugments:AbstractAugment": {
     "TEXT": [
-      "Card",
-      "Modifier"
+      "卡牌",
+      "修改"
     ]
   },
   "CardAugments:CrossoverConfig": {
@@ -240,7 +240,7 @@
     "EXTRA_TEXT": []
   },
   "CardAugments:ArmedMod": {
-    "TEXT": ["武装", "", "#y升级 随机手牌。"],
+    "TEXT": ["武装", "", "获得的 #y格挡 减少 #b20% 。 NL #y升级 #b1(+1) 张随机手牌。"],
     "EXTRA_TEXT": [" NL 升级 %s 张随机手牌。", " NL 升级 %s 张随机手牌。"]
   },
   "CardAugments:AugerMod": {
@@ -271,7 +271,7 @@
       "你每在战斗中失去生命一次，这张牌的耗能就减少 [E] [E] 。 NL "]
   },
   "CardAugments:BludgeonMod": {
-    "TEXT": ["粗重", "", "本牌耗能为 #b3 。 NL 卡牌数值增加 #b250% NL 如果原卡牌耗能为 #b1 或 #b0 ，改为增加 #b400% 。"],
+    "TEXT": ["粗重", "", "本牌耗能为 #b3 。 NL 基于卡牌的初始耗能，卡牌数值增加 #b250% 至 #b400% 。"],
     "EXTRA_TEXT": []
   },
   "CardAugments:BlurryMod": {
@@ -309,8 +309,8 @@
   "CardAugments:ClawfulMod": {
     "TEXT": ["爪击", "",
             "打击", "",
-            "造成的伤害减少 #b2 。 NL 打出本牌后，本场战斗所有的名字相同的牌伤害增加。",
-            "造成的伤害减少 #b2 。 NL 打出本牌后，本场战斗所有的 #y打击 牌伤害增加。"
+            "造成的伤害减少 #b2 。 NL 打出本牌后，本场战斗所有的名字相同的牌伤害增加 #b2(+1) 。",
+            "造成的伤害减少 #b2 。 NL 打出本牌后，本场战斗所有的 #y打击 牌伤害增加 #b2(+1) 。"
             ],
     "EXTRA_TEXT": [" NL 本场战斗所有 %s 伤害增加 %s 。",
       " NL 本场战斗所有 *打击 牌伤害增加 %s 。"]
@@ -433,7 +433,7 @@
     "EXTRA_TEXT": [" NL 生成 %d 个 黑暗 充能球."]
   },
   "CardAugments:GoForTheMod": {
-    "TEXT": ["预审", "", "造成的伤害减少 20% 。 NL 在打出本牌造成伤害后，若敌人意图为攻击，触发原牌效果。"],
+    "TEXT": ["预审", "", "造成的伤害减少 20% 。 NL 在打出本牌造成 #b3(+1) 伤害后，若敌人意图为攻击，触发原牌效果。"],
     "EXTRA_TEXT": ["造成 %s 点伤害。 NL 如果敌人意图为攻击，"]
   },
   "CardAugments:GraveMod": {
@@ -441,11 +441,11 @@
     "EXTRA_TEXT": [" NL 墓地 。"]
   },
   "CardAugments:GritMod": {
-    "TEXT": ["坚毅", "", "#y消耗 一张手牌。"],
+    "TEXT": ["坚毅", "", "随机 #y消耗 一张手牌。 #y升级 后可选择 #y消耗 的牌。"],
     "EXTRA_TEXT": [" NL 消耗 一张随机手牌。"," NL 消耗 一张手牌。"]
   },
   "CardAugments:GreedMod": {
-    "TEXT": ["贪婪", "","#斩杀 时，获得 #y金币。 NL #y消耗 。" ],
+    "TEXT": ["贪婪", "","#斩杀 时，获得 #b15(+5) #y金币。 NL #y消耗 。" ],
     "EXTRA_TEXT": [" NL 斩杀 时，获得 %s 金币。 NL 消耗 。", " NL 斩杀 时，获得 %s 金币。"]
   },
   "CardAugments:HemoMod": {
@@ -477,7 +477,7 @@
     "EXTRA_TEXT": [" NL 给予 %d 层 跟踪锁定 。"]
   },
   "CardAugments:LuckyMod": {
-    "TEXT": ["幸运", "", "抽牌前 #y预见 。"],
+    "TEXT": ["幸运", "", "抽牌前 #y预见 #b1(+1) 。"],
     "EXTRA_TEXT": [" 预见 %s 。 NL "]
   },
   "CardAugments:MasochisticMod": {
@@ -529,7 +529,7 @@
     "EXTRA_TEXT": [" NL 无视 格挡 。"]
   },
   "CardAugments:PoisonedMod": {
-    "TEXT": ["带毒", "", "造成的伤害减少 #b2 。 NL 给予 #y中毒 。"],
+    "TEXT": ["带毒", "", "造成的伤害减少 #b2 。 NL 给予 #b2(+1) 层 #y中毒 。"],
     "EXTRA_TEXT": [" NL 给予 %s 层 中毒 。"]
   },
   "CardAugments:PredatoryMod": {
@@ -588,7 +588,7 @@
     "EXTRA_TEXT": [" NL 能被多次 升级 。"]
   },
   "CardAugments:ShieldedMod": {
-    "TEXT": ["盾化", "", "本牌耗能增加 #b1 。 NL 给予 #y格挡 。"],
+    "TEXT": ["盾化", "", "本牌耗能增加 #b1 。 NL 给予 #b7(+3) 点 #y格挡 。"],
     "EXTRA_TEXT": ["获得 %s 点 格挡 。 NL "]
   },
   "CardAugments:ShiningMod": {
