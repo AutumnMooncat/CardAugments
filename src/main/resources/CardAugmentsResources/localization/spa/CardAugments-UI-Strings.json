@@ -16,13 +16,13 @@
     ],
     "EXTRA_TEXT": [
       "Cartas Quimera",
-      "Agrega modificadores de carta de rollo aleatorio a las recompensas de cartas. ¡Consulta las opciones de modificación si deseas cambiar alguna configuración!"
+      "Agrega modificadores de carta con valores aleatorios a las recompensas de carta. ¡Consulta las opciones de modificación si deseas cambiar alguna configuración!"
     ]
   },
   "CardAugments:AbstractAugment": {
     "TEXT": [
       "Carta",
-      "Modifier"
+      "Modificador"
     ]
   },
   "CardAugments:CrossoverConfig": {
@@ -64,7 +64,7 @@
       "Decides usar la forja y... NL #y@CLANG@ #y@CLAAANG@ #y@CLANG!@ NL ...¡mejora tu arsenal!",
       "Elige una carta para mejorar.",
       "Frágil",
-      "Coste -1. NL Agotar. NL Solo se aplica a cartas sin Agotar que no cambian de coste."
+      "Coste -1. NL Agota. NL Solo se aplica a cartas sin Agotar que no cambian de coste."
     ],
     "EXTRA_TEXT": [
       "[Trasteando] #gDa #gFrágil #gal #gAtaque #go #gHabilidad.",
@@ -77,7 +77,7 @@
       "Sostienes tu equipo contra el santuario. Una imagen especular espeluznante aparece desde el santuario y es absorbida por él.",
       "Elige una carta para mejorar.",
       "Ecoante",
-      "Doble Juego. NL Agotar. NL Solo se aplica a cartas sin Agotar."
+      "Doble Juego. NL Agota. NL Solo se aplica a cartas sin Agotar."
     ],
     "EXTRA_TEXT": [
       "[Imbuir] #gOtorga #gEcoante a una carta #gAtaque o #gHabilidad.",
@@ -103,7 +103,7 @@
       "#y\"¡Excelente!\" NL Mientras la forma fantasmal habla, notas que su gran boca se abre cada vez más. Un #p~Espeso~ #p~humo~ #p~negro~ brota y envuelve la habitación. No puedes ver ni respirar y comienzas a agitar cosas salvajemente en un intento por dispersarlo... NL NL Eventualmente, suficiente humo se dispersa y la sensación se detiene. NL NL Lo que sea que eran esas cosas, ya se han ido. Continúas adelante, sintiéndote bastante #bvacío",
       "Elige una carta para mejorar.",
       "Aberrante",
-      "Obtén 1 Intangible. NL Agotar. NL Solo aplicable a cartas sin Agotar."
+      "Obtén 1 Intangible. NL Agota. NL Solo aplicable a cartas sin Agotar."
     ],
     "EXTRA_TEXT": [
       "[Acceptar] #gDar #gun #gAtaque #go #gHabilidad Aberrante. #rPerder #r%s #rMáx #rHP.",
@@ -140,7 +140,7 @@
       "[Observar]",
       "[Bloqueado] Requiere: Un Ataque.",
       "[Estudiar Cultistas] #gDar #gun #gAtaque a los Cultistas.",
-      "[Study Ritual] #gDar #gun #gAtaque al Fanático.",
+      "[Estudiar Ritual] #gDar #gun #gAtaque al Fanático.",
       "[Bloqueado] Requiere: Un ataque que no se agote.",
       "[Irse]"
     ]
@@ -209,17 +209,17 @@
     "TEXT": [
       "",
       " Aberrante",
-      "Gains #b1 #yIntangible. #yExhausts."
+      "Gana #b1 #yIntangible. #yAgota."
     ],
     "EXTRA_TEXT": [
-      " NL Obtén 1 Intangible. NL Agotar."
+      " NL Obtén 1 Intangible. NL Agota."
     ]
   },
   "CardAugments:AbsoluteMod": {
     "TEXT": [
       "",
       " Absoluto/a",
-      "Increases card values by #b33%. Must be played before #ynon-Absolute cards."
+      "Aumenta los valores de las cartas en un #b33%. Debe ser jugada antes de las cartas #yno-Absoluto/a."
     ],
     "EXTRA_TEXT": [
       " NL Las cartas Absoluto/a deben ser jugadas antes que otras cartas en tu mano.",
@@ -232,7 +232,7 @@
     "TEXT": [
       "",
       " Todo o Nada",
-      "Increases damage by #b33%. Discards a random card."
+      "Aumenta el daño en #b33%. Descarta una carta al azar."
     ],
     "EXTRA_TEXT": [
       " NL Descarta %d carta al azar.",
@@ -245,11 +245,11 @@
     "TEXT": [
       "",
       " Alfa",
-      "Reduces cost by #b2. Shuffles a #yBeta version into your draw pile. #yExhausts."
+      "Reduce el costo en #b2. Baraja una versión #yBeta en tu pila de robo. #yAgota."
     ],
     "EXTRA_TEXT": [
       "Baraja una *Beta %s en tu pila de robo.",
-      " NL Agotar.",
+      " NL Agota.",
       "Innata. NL "
     ]
   },
@@ -257,18 +257,18 @@
     "TEXT": [
       "",
       " Beta",
-      "Reduces cost by #b1. Shuffles an #yOmega version into your draw pile. #yExhausts."
+      "Reduce el costo en #b1. Baraja una versión #yOmega en tu pila de robo. #yAgota."
     ],
     "EXTRA_TEXT": [
       "Baraja una *Omega %s en tu pila de robo.",
-      " NL Agotar."
+      " NL Agota."
     ]
   },
   "CardAugments:OmegaMod": {
     "TEXT": [
       "",
       " Omega",
-      "Increases card values by #b200%"
+      "Incrementa el valor de las cartas en un #b200%."
     ],
     "EXTRA_TEXT": [
       ""
@@ -278,7 +278,7 @@
     "TEXT": [
       "",
       " Enojado/a",
-      "Adds a copy of the card into your discard pile."
+      "Agrega una copia de la carta a tu pila de descarte."
     ],
     "EXTRA_TEXT": [
       " NL Añade una copia de esta carta a tu pila de descarte.",
@@ -291,7 +291,7 @@
     "TEXT": [
       "",
       " Amplificado/a",
-      "Increases cost by #b1. Proportionally increases effects that are not damage or #yBlock."
+      "Aumenta el costo por #b1. Aumenta proporcionalmente los efectos que no son daño o #yBloqueo."
     ],
     "EXTRA_TEXT": [
       ""
@@ -301,18 +301,18 @@
     "TEXT": [
       "",
       " Armado/a",
-      "Reduces #yBlock by #b20%. NL #yUpgrades #b1(+1) random card in your hand."
+      "Reduce el #yBloqueo en un #b20%. NL #yMejora #b1 (+1) carta al azar en tu mano."
     ],
     "EXTRA_TEXT": [
-      " NL Actualiza una carta aleatoria de tu mano.",
-      " NL Actualiza %s cartas al azar en tu mano."
+      " NL Actualiza una carta al azar de tu mano.",
+      " NL Actualiza %s cartas al azar de tu mano."
     ]
   },
   "CardAugments:AugerMod": {
     "TEXT": [
       "",
       " de Barrena",
-      "Applies #yVulnerable when breaking #yBlock."
+      "Aplica #yVulnerable al romper #yBloqueo."
     ],
     "EXTRA_TEXT": [
       " NL Si esto rompe el Bloqueo de un objetivo, aplica %d Vulnerable."
@@ -322,7 +322,7 @@
     "TEXT": [
       "Auto-",
       "",
-      "#yAutoplays. Draws a card."
+      "#yAutoplays. Roba una carta."
     ],
     "EXTRA_TEXT": [
       "Autoplay. NL ",
@@ -333,7 +333,7 @@
     "TEXT": [
       "",
       " de Porrazo",
-      "Deals #b25% less damage. Applies #yVulnerable."
+      "Inflige un #b25% menos de daño. Aplica #yVulnerable."
     ],
     "EXTRA_TEXT": [
       " NL Aplica %d Vulnerable."
@@ -343,7 +343,7 @@
     "TEXT": [
       "",
       " Berserk",
-      "Deals #b50% more damage when under half HP."
+      "Aumenta el daño en un #b50% cuando tienes menos de la mitad de HP."
     ],
     "EXTRA_TEXT": [
       " NL Inflige un 50% de daño adicional si tu HP es igual o inferior al 50%."
@@ -353,7 +353,7 @@
     "TEXT": [
       "",
       " Blasfemo/a",
-      "Increases card values by #b400%. Causes you to die next turn."
+      "Aumenta los valores de la carta en un #b400%. Te hace morir en el siguiente turno."
     ],
     "EXTRA_TEXT": [
       " NL Muere en el próximo turno."
@@ -363,7 +363,7 @@
     "TEXT": [
       "",
       " por Sangre",
-      "Increases cost by #b1. Reduces cost by #b1 each time you lose HP."
+      "Aumenta el costo en #b1. Reduce el costo en #b1 cada vez que pierdes HP."
     ],
     "EXTRA_TEXT": [
       "Cuesta 1 [E] menos por cada vez que pierdas HP en este combate. NL ",
@@ -376,7 +376,7 @@
     "TEXT": [
       "",
       " Aporreado/a",
-      "Sets cost to #b3. Increases card values by #b250% or #b400% if the initial cost was #b1 or #b0."
+      "Fija el costo en #b3. Aumenta los valores de la carta en un #b250% o #b400% si el costo inicial era #b1 o #b0."
     ],
     "EXTRA_TEXT": [
 
@@ -386,7 +386,7 @@
     "TEXT": [
       "",
       " Borroso",
-      "Reduces #yBlock by #b25%. Allows #yBlock to carry over next turn."
+      "Reduce el #yBloqueo por #b25%. Permite que el #yBloqueo se acumule para el siguiente turno."
     ],
     "EXTRA_TEXT": [
       " NL El Bloqueo no se elimina al comienzo del próximo turno."
@@ -396,7 +396,7 @@
     "TEXT": [
       "",
       " de Arranque",
-      "Adds #yInnate."
+      "Añade #yInnata."
     ],
     "EXTRA_TEXT": [
       "Innata. NL "
@@ -406,7 +406,7 @@
     "TEXT": [
       "",
       " de Bolos",
-      "Reduces damage by #b33%. Hits once for each enemy in combat."
+      "Reduce el daño en un #b33%. Golpea una vez por cada enemigo en combate."
     ],
     "EXTRA_TEXT": [
       " por cada enemigo en combate."
@@ -416,7 +416,7 @@
     "TEXT": [
       "",
       " Reforzado/a",
-      "Reduces #yBlock by #b33%. Increases #yBlock a proportionate amount on play."
+      "Reduce el #yBloqueo en un #b33%. Aumenta el #yBloqueo una cantidad proporcional al jugar."
     ],
     "EXTRA_TEXT": [
       " NL Aumenta el Bloqueo de esta carta en %s este combate."
@@ -426,7 +426,7 @@
     "TEXT": [
       "",
       " Brutal",
-      "Increases damage by #b33%. Adds #yEthereal."
+      "Aumenta el daño en un #b33%. Añade #yEtérea."
     ],
     "EXTRA_TEXT": [
       "Etérea. NL "
@@ -436,11 +436,11 @@
     "TEXT": [
       "",
       " Agrupado/a",
-      "Sets cost to #b0. Adds #b2 copies of the card into your hand. #yExhausts."
+      "Pone el costo a #b0. Agrega #b2 copias de la carta en tu mano. #yAgota."
     ],
     "EXTRA_TEXT": [
       "Agrega 2 %s a tu mano.",
-      " NL Agotar.",
+      " NL Agota.",
       "Innata. NL "
     ]
   },
@@ -448,7 +448,7 @@
     "TEXT": [
       "",
       " Cargado/a",
-      "Reduces #yBlock by #b20%. Gives [E] next turn."
+      "Reduce el #yBloqueo en un #b20%. Da [E] en el siguiente turno."
     ],
     "EXTRA_TEXT": [
       " NL Siguiente turno, ganas [E] ."
@@ -458,7 +458,7 @@
     "TEXT": [
       "",
       " Condicional",
-      "Increases damage by #b100%. Can only be played if every card in your hand is an Attack."
+      "Aumenta el daño en un #b100%. Solo se puede jugar si cada carta en tu mano es un Ataque."
     ],
     "EXTRA_TEXT": [
       "Solo se puede jugar si todas las cartas en tu mano son Ataques. NL "
@@ -467,14 +467,14 @@
   "CardAugments:ClawfulMod": {
     "TEXT": [
       "",
-      " de Garra",
+      " de Tajo",
       "",
       " Contundente",
-      "Decreases damage by #b2. Increases the damage of ALL versions of this card by #b2(+1) when played.",
-      "Decreases damage by #b2. Increases the damage of ALL #yStrike cards by #b2(+1) when played."
+      "Disminuye el daño por #b2. Aumenta el daño de TODAS las versiones de esta carta en #b2(+1) cuando se juega.",
+      "Disminuye el daño por #b2. Aumenta el daño de TODAS las cartas de #yGolpe por #b2(+1) cuando se juega."
     ],
     "EXTRA_TEXT": [
-      " NL Aumenta el daño de TODAS las %s cartas en %s de daño este combate.",
+      " NL Aumenta el daño de TODAS las cartas %s en %s de daño este combate.",
       " NL Aumenta el daño de TODAS tus cartas que contengan \"Golpe\" en %s este combate."
     ]
   },
@@ -482,7 +482,7 @@
     "TEXT": [
       "",
       " Cultista",
-      "Reduces damage by #b20%. Gains #b1 #yStrength."
+      "Reduce el daño en un #b20%. Obtiene #b1 de #yFuerza"
     ],
     "EXTRA_TEXT": [
       " NL Gana %d Fuerza."
@@ -492,7 +492,7 @@
     "TEXT": [
       "",
       " Objetado/a",
-      "Increases #yBlock by #b100%. Can only be played if every card in your hand is a Skill."
+      "Aumenta el #yBloqueo en un #b100%. Sólo puede ser jugada si todas las cartas en tu mano son Habilidades."
     ],
     "EXTRA_TEXT": [
       "Solo se puede jugar si todas las cartas en tu mano son Habilidades. NL "
@@ -502,7 +502,7 @@
     "TEXT": [
       "",
       " Devoto/a",
-      "Reduces #yBlock and damage by #b25%. Gains #yMantra relative to the card cost."
+      "Reduce el #yBloqueo y el daño en un #b25%. Obtiene #yMantra proporcional al costo de la carta."
     ],
     "EXTRA_TEXT": [
       " NL Gana %d Mantra."
@@ -512,7 +512,7 @@
     "TEXT": [
       "",
       " Desechable",
-      "Sets cost by #b1. Allows playing the card."
+      "Pone el costo en #b1. Permite jugar la carta."
     ],
     "EXTRA_TEXT": [
 
@@ -522,7 +522,7 @@
     "TEXT": [
       "",
       " Divergente",
-      "Reduces #yBlock and damage by #b50%. Plays twice."
+      "Reduce el #yBloqueo y el daño en un #b50%. Se juega dos veces."
     ],
     "EXTRA_TEXT": [
       " NL cardaugments:Eco."
@@ -532,7 +532,7 @@
     "TEXT": [
       "",
       " Maldito/a",
-      "Deals extra damage for each #yCurse in your deck."
+      "Inflige daño adicional por cada #yMaldición en tu mazo."
     ],
     "EXTRA_TEXT": [
       " NL Inflige %d de daño adicional por cada Maldición en tu mazo."
@@ -542,7 +542,7 @@
     "TEXT": [
       "",
       " Dudoso/a",
-      "Reduces cost by #b1. Gains #b2 Weak."
+      "Reduce el costo en #b1. Gana #b2 Debilidad."
     ],
     "EXTRA_TEXT": [
       " NL Gana %d Débil."
@@ -552,28 +552,28 @@
     "TEXT": [
       "",
       " Dramatico",
-      "Increases #yBlock and damage by #b33%. Adds #yInnate and #yExhaust."
+      "Aumenta el #yBloqueo y el daño en un #b33%. Añade #yInnata y #yAgota."
     ],
     "EXTRA_TEXT": [
       "Innata. NL ",
-      " NL Agotar."
+      " NL Agota."
     ]
   },
   "CardAugments:EchoMod": {
     "TEXT": [
       "",
       " Ecoante",
-      "Plays Twice. Adds #yExhaust."
+      "Juega dos veces. Añade #yAgota."
     ],
     "EXTRA_TEXT": [
-      " NL cardaugments:Eco. Agotar."
+      " NL cardaugments:Eco. Agota."
     ]
   },
   "CardAugments:ElectroMod": {
     "TEXT": [
       "Electro ",
       "",
-      "Reduces damage by #b25%. #yChannels a #yLightning."
+      "Reduce el daño en un #b25%. #yCanaliza un #yRelámpago."
     ],
     "EXTRA_TEXT": [
       " NL Invoca %d Relámpago."
@@ -583,11 +583,11 @@
     "TEXT": [
       "",
       " Infinito/a",
-      "Reduces #yBlock and damage by #b20%. Duplicates when drawn. Adds #yExhaust."
+      "Reduce el #yBloqueo y el daño en un #b20%. Se duplica cuando se roba. Añade #yAgotar."
     ],
     "EXTRA_TEXT": [
       " NL Cada vez que robes esta carta, añade una copia de ella a tu mano.",
-      " NL Agotar.",
+      " NL Agota.",
       "Nota del traductor: Estas cadenas son para reemplazar la descripción de Agonía Infinita. La primera cadena es lo que se busca, la segunda cadena lo reemplaza.",
       " NL Cada vez que roba esta carta, añade una copia a tu mano.",
       " NL Cada vez que robes esta carta, añade 2 copias a tu mano."
@@ -600,7 +600,7 @@
       " Búmeran",
       "Bang",
       " Búmeran",
-      "Reduces damage by #b50%. Hits #b3 random enemies."
+      "Reduce el daño en un #b50%. Golpea por #b3 a enemigos aleatorios."
     ],
     "EXTRA_TEXT": [
       " a un enemigo aleatorio 3 veces."
@@ -610,17 +610,17 @@
     "TEXT": [
       "",
       " en Erupción",
-      "Enters #yWrath."
+      "Entra en #yCólera."
     ],
     "EXTRA_TEXT": [
-      " NL Entra en Ira"
+      " NL Entra en Cólera"
     ]
   },
   "CardAugments:ExplosiveMod": {
     "TEXT": [
       "",
       " Explosivo",
-      "Delays effect for #b2 turns, then plays #b5 copies of the card."
+      "Retrasa el efecto durante #b2 turnos, luego juega #b5 copias de la carta"
     ],
     "EXTRA_TEXT": [
       "En 2 turnos, juega %1$s copias de %2$s al comienzo de tu turno.",
@@ -631,17 +631,17 @@
     "TEXT": [
       "",
       " Fanatico/a",
-      "Increases damage by #b50%. Adds #yExhaust."
+      "Aumenta el daño en un #b50%. Agrega #yAgotar."
     ],
     "EXTRA_TEXT": [
-      " NL Agotar."
+      " NL Agota."
     ]
   },
   "CardAugments:FearfulMod": {
     "TEXT": [
       "",
       " Temeroso/a",
-      "Reduces cost by #b2. Gains #b1 #yVulnerable."
+      "Reduce el costo por #b2. Gana #b1 #yVulnerable."
     ],
     "EXTRA_TEXT": [
       " NL Gana %d Vulnerable."
@@ -651,7 +651,7 @@
     "TEXT": [
       "",
       " Flexionado/a",
-      "Gains #b3 #yStrength this turn."
+      "Gana #b3 de #yFuerza este turno."
     ],
     "EXTRA_TEXT": [
       " NL Obtén %d Fuerza. Al final de este turno, pierde %d Fuerza."
@@ -661,7 +661,7 @@
     "TEXT": [
       "",
       " Volador/a",
-      "Reduces damage by #b20%. Gives [E] next turn."
+      "Reduce el daño por #b20%. Da [E] en el siguiente turno."
     ],
     "EXTRA_TEXT": [
       " NL Siguiente turno, gana [E] ."
@@ -671,17 +671,17 @@
     "TEXT": [
       "",
       " Frágil",
-      "Reduces cost by #b1. Adds #yExhaust."
+      "Reduce el costo por #b1. Añade #yAgotar."
     ],
     "EXTRA_TEXT": [
-      " NL Agotar."
+      " NL Agota."
     ]
   },
   "CardAugments:FrostyMod": {
     "TEXT": [
       "",
       " Helado/a",
-      "Reduces #yBlock by #b25%. #yChannels a #yFrost."
+      "Reduce el #yBloqueo en #b25%. #yGenera una #yEscarcha."
     ],
     "EXTRA_TEXT": [
       " NL Invoca %d Escarcha."
@@ -691,7 +691,7 @@
     "TEXT": [
       "",
       " Siguiente",
-      "Reduces damage by #b20%. Gains [E] if the last card played was an Attack."
+      "Reduce el daño en un #b20%. Obtiene [E] si la última carta jugada fue un Ataque."
     ],
     "EXTRA_TEXT": [
       " NL Si la última carta jugada en este combate fue un Ataque, obtén [E].",
@@ -704,7 +704,7 @@
     "TEXT": [
       "Forma ",
       "",
-      "Sets cost to #b3. Proportionally increases card effects."
+      "Pone el costo en #b3. Aumenta proporcionalmente los efectos de la carta."
     ],
     "EXTRA_TEXT": [
 
@@ -714,7 +714,7 @@
     "TEXT": [
       "",
       " para Uno/a",
-      "Moves a random cost #b0 card from your discard pile to your hand."
+      "Mueve una carta aleatoria con un costo de #b0 de tu pila de descarte a tu mano."
     ],
     "EXTRA_TEXT": [
       " NL Mueve una carta aleatoria de costo 0 de tu pila de descarte a tu mano."
@@ -724,7 +724,7 @@
     "TEXT": [
       "",
       " Fusionado/a",
-      "Increases card values by #b33%. Removes ability to #yUpgrade the card."
+      "Aumenta los valores de la carta en un #b33%. Elimina la posibilidad de mejorar la carta."
     ],
     "EXTRA_TEXT": [
       " NL No puede ser mejorada."
@@ -734,7 +734,7 @@
     "TEXT": [
       "",
       " Fantasmal",
-      "Increases #yBlock by #b33%. Adds #yEthereal."
+      "Aumenta el #yBloqueo por #b33%. Añade #yEtérea"
     ],
     "EXTRA_TEXT": [
       "Etérea. NL "
@@ -744,7 +744,7 @@
     "TEXT": [
       "",
       " de Vidrio",
-      "Increases damage by #b50%. Reduces damage by #b2 when played."
+      "Aumenta el daño en #b50%. Reduce el daño en #b2 al ser jugada."
     ],
     "EXTRA_TEXT": [
       " NL Disminuye el daño de esta carta en 2 durante este combate.",
@@ -757,7 +757,7 @@
     "TEXT": [
       "",
       " y Oscuridad",
-      "Reduces #yBlock and damage by #b25%. #yChannels a #yDark."
+      "Reduce el #yBloqueo y el daño en un #b25%. #yCanaliza una #yOscuridad."
     ],
     "EXTRA_TEXT": [
       " Invoca %d de Oscuridad."
@@ -767,7 +767,7 @@
     "TEXT": [
       "",
       " Ve por él",
-      "Reduces damage by 20%. Deals #b3(+1) damage to an enemy, then triggers the original card effect if the enemy intended to attack."
+      "Reduce el daño en un 20%. Inflige #b3(+1) de daño a un enemigo, y luego activa el efecto original de la carta si el enemigo tenía la intención de atacar."
     ],
     "EXTRA_TEXT": [
       "Inflige %s de daño. NL Si el enemigo tiene la intención de atacar, "
@@ -777,7 +777,7 @@
     "TEXT": [
       "",
       " de Cripta",
-      "Adds #yGrave."
+      "Añade #yTumba."
     ],
     "EXTRA_TEXT": [
       " NL Tumba."
@@ -787,7 +787,7 @@
     "TEXT": [
       "",
       " Arenoso/a",
-      "#yExhausts a card in your hand."
+      "#yAgota una carta en tu mano."
     ],
     "EXTRA_TEXT": [
       " NL Agota una carta aleatoria en tu mano.",
@@ -798,10 +798,10 @@
     "TEXT": [
       "",
       " de la avaricia",
-      "Gives #b15(+5) #yGold is #yFatal. Adds #yExhaust."
+      "Da #b15(+5) #yOro. Se vuelve #yFatal. Añade #yAgota."
     ],
     "EXTRA_TEXT": [
-      " NL Si es Fatal, obtén %s Oro. NL Agotar.",
+      " NL Si es Fatal, obtén %s Oro. NL Agota.",
       " NL Si es Fatal, obtén %s Oro."
     ]
   },
@@ -809,7 +809,7 @@
     "TEXT": [
       "Hemo ",
       "",
-      "Increases #yBlock and damage by #b50%. Loses #b2 HP."
+      "Aumenta el #yBloqueo y el daño en #b50%. Pierde #b2 de HP."
     ],
     "EXTRA_TEXT": [
       "Pierde %d HP. NL "
@@ -819,7 +819,7 @@
     "TEXT": [
       "",
       " Pesado/a",
-      "#yStrength affects this card #b3 times."
+      " La #yFuerza afecta esta carta #b3 veces."
     ],
     "EXTRA_TEXT": [
       " NL La Fuerza afecta esta carta %d veces."
@@ -829,7 +829,7 @@
     "TEXT": [
       "",
       " Santo/a",
-      "Increases cost by #b1. Adds a #yMiracle into your hand."
+      "Aumenta el costo po #b1. Añade un #yMiracle a tu mano."
     ],
     "EXTRA_TEXT": [
       " NL Agrega un *Milagro a tu mano."
@@ -839,7 +839,7 @@
     "TEXT": [
       "",
       " Infinito",
-      "At the start of your turn, adds a copy of the card into your hand."
+      "Al inicio de tu turno, agrega una copia de la carta a tu mano."
     ],
     "EXTRA_TEXT": [
       "Al inicio de tu turno, agrega un %s a tu mano.",
@@ -850,7 +850,7 @@
     "TEXT": [
       "",
       " Invertido",
-      "\"Gain Block.\" effects become \"Deal damage.\" and vice versa."
+      " Los efectos \"Ganar Bloque\" se convierten en \"Infligir daño\" y viceversa."
     ],
     "EXTRA_TEXT": [
       "Gana !B! de Bloqueo.",
@@ -861,7 +861,7 @@
     "TEXT": [
       "",
       " Cutre",
-      "Swaps values around on the card."
+      "Intercambia los valores en la carta"
     ],
     "EXTRA_TEXT": [
 
@@ -871,7 +871,7 @@
     "TEXT": [
       "",
       " con Bloqueo",
-      "Reduces damage by #b20%. Applies #b2 #yLock-On."
+      "Reduce el daño en un #b20%. Aplica #b2 #yLocalizar."
     ],
     "EXTRA_TEXT": [
       " NL Aplica %d ‘Localizar’ al objetivo."
@@ -881,7 +881,7 @@
     "TEXT": [
       "",
       " de Suerte",
-      "#yScries #b1(+1) before drawing."
+      "#yAdivina #b1(+1) antes de robar."
     ],
     "EXTRA_TEXT": [
       "Adivina %s. NL "
@@ -891,7 +891,7 @@
     "TEXT": [
       "",
       " Masoquista",
-      "Gains #b3 additional #yBlock per debuff you have."
+      "Gana #b3 de #yBloqueo adicional por cada debuff que tengas."
     ],
     "EXTRA_TEXT": [
       " Gana %d de Bloqueo adicional por cada debuff que tengas."
@@ -901,7 +901,7 @@
     "TEXT": [
       "",
       " Masivo/a",
-      "Increases cost by #b1. Proportionally increases #yBlock and damage."
+      "Aumenta el costo en #b1. Incrementa el #yBloqueo y el daño proporcionalmente."
     ],
     "EXTRA_TEXT": [
 
@@ -911,7 +911,7 @@
     "TEXT": [
       "",
       " Magistral",
-      "Reduces cost by #b2. Increases cost by #b1 each time you lose HP."
+      "Reduce el costo en #b2. Aumenta el costo en #b1 cada vez que pierdes HP."
     ],
     "EXTRA_TEXT": [
       " Cuesta 1 [E] adicional por cada vez que pierdas HP en este combate."
@@ -921,7 +921,7 @@
     "TEXT": [
       "",
       " Memento",
-      "When #yExhausted, draws #b2 cards. Adds #yEthereal."
+      "Cuando se #yAgota, roba #b2 cartas. Agrega #yEtérea."
     ],
     "EXTRA_TEXT": [
       "Etérea. NL ",
@@ -932,7 +932,7 @@
     "TEXT": [
       "",
       " Meteorico/a",
-      "Sets cost to #b5. Increases damage by #b25% per cost increase. #yChannels #yPlasma equal to cost increase."
+      "Pone el costo en #b5. Aumenta el daño en un #b25% por cada aumento de costo. #yCanaliza #yPlasma igual al aumento de costo"
     ],
     "EXTRA_TEXT": [
       " NL Invoca %d de Plasma."
@@ -942,7 +942,7 @@
     "TEXT": [
       "",
       " MK2",
-      "Increases card effects by #b20%."
+      "Aumenta los efectos de la carta en un #b20%."
     ],
     "EXTRA_TEXT": [
 
@@ -952,17 +952,17 @@
     "TEXT": [
       "",
       " Ritual",
-      "Permanently increases damage by #b2 if #yFatal. Adds #yExhaust."
+      "Aumenta el daño de forma permanente en #b2 si es #yFatal. Añade #yAgota."
     ],
     "EXTRA_TEXT": [
-      " NL Si es fatal, aumenta permanentemente el daño de esta carta en %d. NL Agotar."
+      " NL Si es fatal, aumenta permanentemente el daño de esta carta en %d. NL Agota."
     ]
   },
   "CardAugments:NoxiousMod": {
     "TEXT": [
       "",
       " Nocivo/a",
-      "Applies #b2 #yPoison to ALL enemies."
+      "Aplica #b2 de #Veneno a TODOS los enemigos."
     ],
     "EXTRA_TEXT": [
       " NL Aplica %d de veneno a TODOS los enemigos."
@@ -972,7 +972,7 @@
     "TEXT": [
       "",
       " Nuclear",
-      "Increases cost by #b1. #yChannels a #yPlasma."
+      "Aumenta el costo en #b1. #yGenera un #yPlasma."
     ],
     "EXTRA_TEXT": [
       " NL Invoca %d Plasma."
@@ -982,7 +982,7 @@
     "TEXT": [
       "",
       " Pernicioso/a",
-      "Reduces damage by #b50%. Applies #b2(+1) #yPoison equal to unblocked damage dealt."
+      "Reduce el daño en un #b50%. Aplica #b2(+1) #yVeneno igual al daño no bloqueado infligido."
     ],
     "EXTRA_TEXT": [
       " NL Aplica Veneno igual al daño no bloqueado infligido."
@@ -992,7 +992,7 @@
     "TEXT": [
       "",
       " Filosofal",
-      "Reduces cost by #b1. Gives #b1 #yStrength to ALL enemies."
+      "Reduce el costo por #b1. Da #b1 de #yFuerza a TODOS los enemigos."
     ],
     "EXTRA_TEXT": [
       " NL TODOS los enemigos ganan 1 Fuerza."
@@ -1002,7 +1002,7 @@
     "TEXT": [
       "",
       " Piercing",
-      "Ignores #yBlock."
+      "Ignora el #yBloqueo"
     ],
     "EXTRA_TEXT": [
       " NL Ignora el Bloqueo."
@@ -1012,7 +1012,7 @@
     "TEXT": [
       "",
       " Envenenado/a",
-      "Reduces damage by #b2. Applies #yPoison."
+      "Reduce el daño por #b2. Aplica #yVeneno."
     ],
     "EXTRA_TEXT": [
       " NL Aplica %s de veneno."
@@ -1022,7 +1022,7 @@
     "TEXT": [
       "",
       " Depredatorio/a",
-      "Increases cost by #b1. Increases damage by #b33%. Draws #b2 cards next turn."
+      "Aumenta el costo en #b1. Aumenta el daño en #b33%. Roba #b2 cartas el próximo turno."
     ],
     "EXTRA_TEXT": [
       " NL El próximo turno, roba %d cartas adicionales",
@@ -1035,7 +1035,7 @@
     "TEXT": [
       "",
       " Preparado/a",
-      "Draws #b1 card. Discards #b1 card."
+      "Roba #b1 carta. Descarta #b1 carta."
     ],
     "EXTRA_TEXT": [
       " NL Roba %d carta. Descarta %d carta."
@@ -1045,7 +1045,7 @@
     "TEXT": [
       "",
       " Puro/a",
-      "#yExhausts all #yStatus and #yCurse cards in your hand."
+      "#yAgota todas las cartas de #yEstado y #yMaldición en tu mano."
     ],
     "EXTRA_TEXT": [
       " NL Agota todas las cartas de Estado y Maldición de tu mano."
@@ -1055,7 +1055,7 @@
     "TEXT": [
       "",
       " Rápido/a",
-      "Reduces damage by #b20%. Draws #b1 card."
+      "Reduce el daño por #b20%. Roba #b1 carta."
     ],
     "EXTRA_TEXT": [
       " NL Roba %d carta."
@@ -1065,7 +1065,7 @@
     "TEXT": [
       "",
       " Acelerado/a",
-      "Reduces damage by #b33%. Increases damage a proportionate amount when played."
+      "Reduce el daño por #b33%. Aumenta el daño en una cantidad proporcional cuando se juega."
     ],
     "EXTRA_TEXT": [
       " NL Aumenta el daño de esta carta en %s durante este combate."
@@ -1075,7 +1075,7 @@
     "TEXT": [
       "Recordando ",
       "",
-      "Shuffles back into the draw pile."
+      "Se baraja de nuevo en la pila de robo."
     ],
     "EXTRA_TEXT": [
       " NL cardaugments:Rebarajar."
@@ -1085,7 +1085,7 @@
     "TEXT": [
       "Retornando ",
       "",
-      "Sets cost to #b0. Allows playing the card. Shuffles back into the draw pile."
+      "Pone el costo en #b0. Permite jugar la carta. Se baraja de vuelta la pila de robo."
     ],
     "EXTRA_TEXT": [
       " NL cardaugments:Rebarajar."
@@ -1095,7 +1095,7 @@
     "TEXT": [
       "",
       " y Balanceo",
-      "Reduces #yBlock by #b33%. Gives #yBlock next turn."
+      "Reduce el #yBloqueo por #b33%. Da #yBloqueo el próximo turno."
     ],
     "EXTRA_TEXT": [
       " NL En el próximo turno, gana !B! de Bloqueo."
@@ -1105,7 +1105,7 @@
     "TEXT": [
       "",
       " Rúnico/a",
-      "Reduces cost by #b1. Obscures enemy intents for #b2 turns."
+      "Reduce el costo en #b1. Oscurece las intenciones del enemigo durante #b2 turnos."
     ],
     "EXTRA_TEXT": [
       " NL No puedes ver las intenciones del enemigo durante %d turnos."
@@ -1115,7 +1115,7 @@
     "TEXT": [
       "",
       " Sadístico/a",
-      "Deals #b3 additional damage per debuff on the enemy."
+      "Inflige #b3 de daño adicional por cada debuff enemigo."
     ],
     "EXTRA_TEXT": [
       " NL Inflige %d de daño adicional por cada debuff en el enemigo."
@@ -1125,7 +1125,7 @@
     "TEXT": [
       "",
       " Santificado/a",
-      "Draws #b2 cards if the last card played was a Skill."
+      "Roba #b2 cartas si la última carta jugada fue una Habilidad."
     ],
     "EXTRA_TEXT": [
       " NL Si la última carta jugada en este combate fue una Habilidad, roba %d cartas."
@@ -1135,7 +1135,7 @@
     "TEXT": [
       "",
       " Vergonzoso/a",
-      "Reduces cost by #b1. Gains #b2 #yFrail."
+      "Reduce el costo en #b1. Obtiene #b2 #yFrágil."
     ],
     "EXTRA_TEXT": [
       " NL Obtén %d Frágil."
@@ -1145,7 +1145,7 @@
     "TEXT": [
       "",
       " Abrasador/a",
-      "Allows #Upgrading any number of times."
+      "Permite #Mejorar cualquier cantidad de veces"
     ],
     "EXTRA_TEXT": [
       " NL Puede ser mejorado cualquier número de veces."
@@ -1155,7 +1155,7 @@
     "TEXT": [
       "",
       " Blindado/a",
-      "Increases cost by #b1. Gives #b7(+3) #yBlock."
+      "Aumenta el costo en #b1. Otorga #b7(+3) de #yBloqueo."
     ],
     "EXTRA_TEXT": [
       "Gana %s de Bloqueo. NL "
@@ -1165,7 +1165,7 @@
     "TEXT": [
       "",
       " Brillante",
-      "Gains [E] when drawn. Adds #yEthereal."
+      "Gana [E] al ser robada. Añade #yEtérea."
     ],
     "EXTRA_TEXT": [
       "Etérea NL ",
@@ -1176,7 +1176,7 @@
     "TEXT": [
       "",
       " y Daga",
-      "Reduces damage by #b20%. Adds a #yShiv into your hand."
+      "Reduce el daño en #b20%. Agrega un #yNavaja a tu mano."
     ],
     "EXTRA_TEXT": [
       " NL Agrega %d *Navaja a tu mano."
@@ -1186,7 +1186,7 @@
     "TEXT": [
       "",
       " de Firma",
-      "Increases damage by #b75%. Can only be played if this is the only Attack in your hand."
+      "Aumenta el daño en #b75%. Solo se puede jugar si esta es la única carta de Ataque en tu mano."
     ],
     "EXTRA_TEXT": [
       "Solo se puede jugar si este es el único Ataque en tu mano. NL "
@@ -1196,7 +1196,7 @@
     "TEXT": [
       "",
       " Esclavista",
-      "Reduces cost by #b1 in Boss and Elite combats."
+      "Reduce el costo por #b1 en combates contra Jefes y Élites."
     ],
     "EXTRA_TEXT": [
       " NL Cuesta 1 menos de [E] en combates contra Jefes y Élites."
@@ -1206,7 +1206,7 @@
     "TEXT": [
       "",
       " del Cazador",
-      "Reduces damage by #b25%. Deals double damage to the enemy with the lowest HP."
+      "Reduce el daño en un #b25%. Inflige el doble de daño al enemigo con menos HP."
     ],
     "EXTRA_TEXT": [
       " NL Inflige el doble de daño al enemigo con menos HP."
@@ -1216,7 +1216,7 @@
     "TEXT": [
       "",
       " Escurridizo/a",
-      "Increases card effects by #b50%. Discards the first time it is drawn."
+      "Aumenta los efectos de la carta en un #b50%. Se descarta la primera vez que se roba."
     ],
     "EXTRA_TEXT": [
       " NL Descarta esta carta la primera vez que se roba durante cada combate."
@@ -1226,7 +1226,7 @@
     "TEXT": [
       "",
       " Snecko",
-      "Randomizes cost when drawn."
+      "Aleatoriza el costo al ser robada"
     ],
     "EXTRA_TEXT": [
       "Snecko. NL "
@@ -1236,7 +1236,7 @@
     "TEXT": [
       "",
       " Pegajoso",
-      "Adds #yRetain."
+      "Añade #yRetiene."
     ],
     "EXTRA_TEXT": [
       "Retiene. NL "
@@ -1246,7 +1246,7 @@
     "TEXT": [
       "",
       " Optimizado/a",
-      "Increases cost by #b1. Increases #yBlock and damage by #b33%. Reduces cost by #b1 when played."
+      "Aumenta el costo en #b1. Aumenta #yBloqueo y daño en un #b33%. Reduce el costo en #b1 al jugarlo."
     ],
     "EXTRA_TEXT": [
       " NL Reduce el costo de esta carta en 1 durante este combate."
@@ -1256,7 +1256,7 @@
     "TEXT": [
       "",
       " de Ventosas",
-      "Reduces damage by #b20%. Applies #b1 #yWeak."
+      "Reduce el daño en un #b20%. Aplica #b1 #yDebilidad."
     ],
     "EXTRA_TEXT": [
       " NL Aplica %d Débil."
@@ -1266,7 +1266,7 @@
     "TEXT": [
       "",
       " Proveedor",
-      "Increases cost by #b1. Gives [E] [E] next turn."
+      "Aumenta el costo en #b1. Da [E] [E] el siguiente turno"
     ],
     "EXTRA_TEXT": [
       " NL En el próximo turno, gana [E] [E] ."
@@ -1276,17 +1276,17 @@
     "TEXT": [
       "",
       "Sobrecarga de ",
-      "Gives #b1 #yArtifact. Adds #yExhaust."
+      "Otorga #b1 #yArtefacto. Añade #yAgota."
     ],
     "EXTRA_TEXT": [
-      " NL Gana %d Artefacto. NL Agotar."
+      " NL Gana %d Artefacto. NL Agota."
     ]
   },
   "CardAugments:SurvivorMod": {
     "TEXT": [
       "",
       " Sobreviviente",
-      "Increases #yBlock by #b33%. Discards a card."
+      "Aumenta el #yBloqueo en #b33%. Descarta una carta."
     ],
     "EXTRA_TEXT": [
       " NL Descarta %d carta."
@@ -1296,7 +1296,7 @@
     "TEXT": [
       "",
       " Giratorio/a",
-      "Increases cost by #b1. The next Attack you play costs #b0."
+      "Aumenta el costo en #b1. El siguiente Ataque que juegues cuesta #b0."
     ],
     "EXTRA_TEXT": [
       " NL El siguiente Ataque que juegues cuesta 0."
@@ -1306,7 +1306,7 @@
     "TEXT": [
       "",
       " y Lágrima",
-      "Reduces damage by #b33%. Additionally hits a random enemy."
+      "Reduce el daño en #b33%. Además, golpea a un enemigo aleatorio."
     ],
     "EXTRA_TEXT": [
       " NL Inflige !D! de daño a un enemigo aleatorio."
@@ -1316,7 +1316,7 @@
     "TEXT": [
       "",
       " Pequeño/a",
-      "Reduces cost by #b1. Reduces #yBlock and damage by #b33%."
+      "Reduce el costo en #b1. Reduce el #yBloqueo y el daño en #b33%."
     ],
     "EXTRA_TEXT": [
 
@@ -1326,7 +1326,7 @@
     "TEXT": [
       "Doble ",
       "",
-      "Increases cost by #b1. Repeats all effects."
+      "Aumenta el costo por #b1. Repite todos los efectos."
     ],
     "EXTRA_TEXT": [
       " dos veces."
@@ -1336,7 +1336,7 @@
     "TEXT": [
       "",
       " Desvanecido",
-      "Increases card effects by #b33%. #yExhausts if you lose HP."
+      "Aumenta los efectos de la carta en un #b33%. Se #yAgota si pierdes HP"
     ],
     "EXTRA_TEXT": [
       " NL Se agota cuando pierdes HP en este combate."
@@ -1346,7 +1346,7 @@
     "TEXT": [
       "",
       " Vacío",
-      "Reduces cost by #b2. Shuffles a #yVoid into your draw pile."
+      "Reduce el costo por #b2. Baraja un #yVacío en tu pila de robo."
     ],
     "EXTRA_TEXT": [
       " NL Baraja %d *Vacío en tu pila de robo."
@@ -1357,7 +1357,7 @@
       "",
       " Vaciando",
       "Etérea. NL ",
-      "Loses [E] when drawn. Adds #yEthereal."
+      "Pierdes [E] cuando se roba. Añade #yEtérea."
     ],
     "EXTRA_TEXT": [
       " NL Cada vez que sacas esta carta, pierdes 1 de Energía."
@@ -1367,7 +1367,7 @@
     "TEXT": [
       "",
       " Demoledor",
-      "Increases cost by #b1. Gains #yBlock equal to unblocked damage dealt."
+      "Aumenta el costo por #b1. Gana #yBloqueo igual al daño no bloqueado infligido."
     ],
     "EXTRA_TEXT": [
       " NL Gana Bloqueo igual al daño no bloqueado infligido."
@@ -1377,7 +1377,7 @@
     "TEXT": [
       "",
       " en Oleada",
-      "Reduces damage by #b50%. Gives #yBlock equal to damage lost."
+      "Reduce el daño en un #b50%. Da #yBloqueo igual al daño perdido."
     ],
     "EXTRA_TEXT": [
       "Gana %s de Bloqueo. NL "
@@ -1387,7 +1387,7 @@
     "TEXT": [
       "",
       " X",
-      "Card becomes X cost."
+      "La carta se convierte en una carta de costo X."
     ],
     "EXTRA_TEXT": [
       " NL Realizado X veces."

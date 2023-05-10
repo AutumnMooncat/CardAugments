@@ -47,7 +47,7 @@ public class MK2Mod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.baseDamage > 0 || card.baseBlock > 0 || cardCheck(card, c -> doesntDowngradeMagic() && c.baseMagicNumber >= 5);
+        return card.baseDamage >= 5 || card.baseBlock >= 5 || cardCheck(card, c -> doesntDowngradeMagic() && c.baseMagicNumber >= 5);
     }
 
     @Override
