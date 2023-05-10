@@ -5,8 +5,7 @@ import CardAugments.cardmods.DynvarCarrier;
 import CardAugments.commands.Chimera;
 import CardAugments.dynvars.DynamicDynamicVariableManager;
 import CardAugments.patches.RolledModFieldPatches;
-import CardAugments.ui.BiggerModButton;
-import CardAugments.ui.CenteredModLabel;
+import CardAugments.ui.*;
 import CardAugments.util.MintyFixer;
 import CardAugments.util.TextureLoader;
 import basemod.*;
@@ -125,7 +124,7 @@ public class CardAugmentsMod implements
     public static ModPanel settingsPanel;
     public static ModLabel noCrossoverLabel;
     public static HashMap<Integer, ArrayList<IUIElement>> pages = new HashMap<>();
-    public static final float LAYOUT_Y = 760f;
+    public static float LAYOUT_Y = 760f;
     public static final float LAYOUT_X = 400f;
     public static final float SPACING_Y = 50f;
     public static final float FULL_PAGE_Y = (SPACING_Y * 11);
@@ -297,6 +296,16 @@ public class CardAugmentsMod implements
     private static void setupSettingsPanel() {
         logger.info("Loading badge image and mod options");
         settingsPanel = new ModPanel();
+        float aspectRatio = (float)Settings.WIDTH/(float)Settings.HEIGHT;
+        float sixteenByNine = 1920f/1080f;
+        if (Settings.isFourByThree || (aspectRatio < 1.333F)) {
+            LAYOUT_Y *= 1.2222f;
+        } else if (Settings.isSixteenByTen) {
+            LAYOUT_Y *= 1.08f;
+        } else if (aspectRatio < sixteenByNine) {
+            LAYOUT_Y *= 1.8888f - aspectRatio/2f;
+        }
+
 
         //Grab the strings
         uiStrings = CardCrawlGame.languagePack.getUIString(makeID("ModConfigs"));
@@ -443,10 +452,10 @@ public class CardAugmentsMod implements
         registerUIElement(enableEventsButtom);
         registerUIElement(enableTooltipsButton);
 
-        CenteredModLabel pageLabel = new CenteredModLabel(crossoverUIStrings.TEXT[1], Settings.WIDTH/2f/Settings.xScale, 830f, settingsPanel, l -> {
+        CenteredModLabel pageLabel = new CenteredModLabel(crossoverUIStrings.TEXT[1], Settings.WIDTH/2f/Settings.xScale, LAYOUT_Y + 70f, settingsPanel, l -> {
             l.text = crossoverUIStrings.TEXT[1] + " " + (currentPage + 1) + "/" + (pages.size());
         });
-        BiggerModButton leftButton = new BiggerModButton(Settings.WIDTH/2F/Settings.xScale - 100f - ImageMaster.CF_LEFT_ARROW.getWidth()/2F, 805f, -5f, ImageMaster.CF_LEFT_ARROW, settingsPanel, b -> {
+        BiggerModButton leftButton = new BiggerModButton(Settings.WIDTH/2F/Settings.xScale - 100f - ImageMaster.CF_LEFT_ARROW.getWidth()/2F, LAYOUT_Y + 45f, -5f, ImageMaster.CF_LEFT_ARROW, settingsPanel, b -> {
             if (currentPage > 0) {
                 previousPage();
             } else {
@@ -455,7 +464,7 @@ public class CardAugmentsMod implements
                 }
             }
         });
-        BiggerModButton rightButton = new BiggerModButton(Settings.WIDTH/2F/Settings.xScale + 100f - ImageMaster.CF_LEFT_ARROW.getWidth()/2F, 805f, -5f, ImageMaster.CF_RIGHT_ARROW, settingsPanel, b -> {
+        BiggerModButton rightButton = new BiggerModButton(Settings.WIDTH/2F/Settings.xScale + 100f - ImageMaster.CF_LEFT_ARROW.getWidth()/2F, LAYOUT_Y + 45f, -5f, ImageMaster.CF_RIGHT_ARROW, settingsPanel, b -> {
             if (currentPage < pages.size()-1) {
                 nextPage();
             } else {
@@ -493,7 +502,9 @@ public class CardAugmentsMod implements
         int page = pages.size()-1;
         pages.get(page).add(elem);
         elem.setY(elem.getY() - deltaY);
-        elem.setX(elem.getX() + (page * Settings.WIDTH));
+        elem.setX(elem.getX() + (page * Settings.WIDTH)/Settings.scale);
+        //elem.setY((elem.getY() - deltaY)/Settings.scale*Settings.yScale);
+        //elem.setX((elem.getX()*Settings.xScale + (page * Settings.WIDTH))/Settings.scale);
         if (decrement) {
             deltaY += SPACING_Y;
             if (deltaY > FULL_PAGE_Y) {
@@ -506,7 +517,8 @@ public class CardAugmentsMod implements
     private static void nextPage() {
         for (ArrayList<IUIElement> elems : pages.values()) {
             for (IUIElement elem : elems) {
-                elem.setX(elem.getX() - Settings.WIDTH);
+                elem.setX(elem.getX() - Settings.WIDTH/Settings.scale);
+                //elem.setX((elem.getX()*Settings.xScale - Settings.WIDTH)/Settings.scale);
             }
         }
         currentPage++;
@@ -515,7 +527,8 @@ public class CardAugmentsMod implements
     private static void previousPage() {
         for (ArrayList<IUIElement> elems : pages.values()) {
             for (IUIElement elem : elems) {
-                elem.setX(elem.getX() + Settings.WIDTH);
+                elem.setX(elem.getX() + Settings.WIDTH/Settings.scale);
+                //elem.setX((elem.getX()*Settings.xScale + Settings.WIDTH)/Settings.scale);
             }
         }
         currentPage--;
