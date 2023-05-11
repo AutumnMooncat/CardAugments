@@ -25,7 +25,7 @@
   },
   "CardAugments:BombPower": {
     "NAME": "爆炸性增长",
-    "DESCRIPTIONS": ["在 #b%1$s 回合内, 每回合开始时打出 #b%2$s 次 %3$s 的复制品",
+    "DESCRIPTIONS": ["在 #b%1$s 回合后, 每回合开始时打出 #b%2$s 次 %3$s 的复制品",
       "下回合开始时打出 #b%1$s 次 %2$s 的复制品"]
   }
 }
