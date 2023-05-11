@@ -1,0 +1,23 @@
+[
+  {
+    "PROPER_NAME": "메아리",
+    "NAMES": [
+      "메아리"
+    ],
+    "DESCRIPTION": "두 번 사용됩니다."
+  },
+  {
+    "PROPER_NAME": "복귀",
+    "NAMES": [
+      "복귀"
+    ],
+    "DESCRIPTION": "이 카드가 사용되면, 버리는 대신 뽑을 카드 더미에 섞어넣습니다."
+  },
+  {
+    "PROPER_NAME": "저지불가",
+    "NAMES": [
+      "저지불가"
+    ],
+    "DESCRIPTION": "카드 사용 제한을 무시합니다."
+  }
+]

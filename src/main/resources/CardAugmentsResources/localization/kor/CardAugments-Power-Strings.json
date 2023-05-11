@@ -1,0 +1,33 @@
+{
+  "${ModID}:LosePowerPower": {
+    "NAME": "감소 ",
+    "DESCRIPTIONS": [ "매 턴 종료 시, #b를 잃습니다", "", "." ]
+  },
+  "${ModID}:NextTurnPowerPower": {
+    "NAME": "다음 턴 ",
+    "DESCRIPTIONS": [ "다음 턴에, #b를 얻습니다", "", "." ]
+  },
+  "CardAugments:IcizePower": {
+    "NAME": "화 ",
+    "DESCRIPTIONS": [ "매 턴 시작 시, #y%s 를 흉내냅니다." ]
+  },
+  "CardAugments:InfinitePower": {
+    "NAME": "무한 ",
+    "DESCRIPTIONS": [ "매 턴 시작 시, %s 카드를 얻습니다." ]
+  },
+  "CardAugments:BiasPower": {
+    "NAME": "편향 ",
+    "DESCRIPTIONS": [ "매 턴 시작 시, #y%s를 %d 잃습니다." ]
+  },
+  "CardAugments:RunicPower": {
+    "NAME": "불명확한 룬 ",
+    "DESCRIPTIONS": [ "적의 의도를 볼 수 없습니다." ]
+  },
+  "CardAugments:BombPower": {
+    "NAME": "폭발성 ",
+    "DESCRIPTIONS": [
+      "#b%1$s 턴 후 턴 시작 시, %3$s 카드를 #b%2$s 장 사용합니다.",
+      "다음 턴 시작 시, %2$s 카드를 #b%1$s 장 사용합니다."
+    ]
+  }
+}
