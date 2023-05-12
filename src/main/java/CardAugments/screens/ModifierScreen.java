@@ -11,6 +11,7 @@ import basemod.ModBadge;
 import basemod.ReflectionHacks;
 import basemod.helpers.CardModifierManager;
 import basemod.patches.com.megacrit.cardcrawl.screens.compendium.CardLibraryScreen.NoCompendium;
+import basemod.patches.com.megacrit.cardcrawl.screens.options.DropdownMenu.DropdownColoring;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.Loader;
@@ -18,6 +19,7 @@ import com.evacipated.cardcrawl.modthespire.ModInfo;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
+import com.megacrit.cardcrawl.cards.colorless.Madness;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.GameCursor;
@@ -54,10 +56,12 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
     private static final float VALID_CARDS_Y = RARITY_Y - 50f * Settings.scale;
     private static final float HB_X = DROPDOWN_X + 100f * Settings.scale;
     private static final float HB_Y = VALID_CARDS_Y - 60f * Settings.scale;
+    private static final float DISABLE_Y = HB_Y - 60f * Settings.scale;
     private static float drawStartX;
     private static final float drawStartY = (float)Settings.HEIGHT * 0.8F; //0.66
     private static final float padX = AbstractCard.IMG_WIDTH * 0.75F + Settings.CARD_VIEW_PAD_X;
     private static final float padY = AbstractCard.IMG_HEIGHT * 0.75F + Settings.CARD_VIEW_PAD_Y;
+    private static final Color DISABLE_COLOR = Settings.RED_TEXT_COLOR.cpy();
     private boolean grabbedScreen = false;
     private float grabStartY = 0.0F;
     private float currentDiffY = 0.0F;
@@ -83,12 +87,18 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
     private HashMap<String, AbstractCard.CardColor> colorMap = new HashMap<>();
     private ScrollBar scrollBar;
     private Hitbox upgradeHb;
+    private Hitbox disableHb;
     private boolean upgradePreview;
+    private boolean modifierDisabled;
     private boolean ignoreScrollReset;
     private static ModBadge myBadge;
+    private static Class<?> dropdownRowClass;
+    private static AbstractCard fallback;
     
     public ModifierScreen() {
+        fallback = new Madness();
         upgradeHb = new Hitbox(250.0F * Settings.scale, 80.0F * Settings.scale);
+        disableHb = new Hitbox(250.0F * Settings.scale, 80.0F * Settings.scale);
         cancelButton = new MenuCancelButton();
         settingsButton = new SettingsButton();
 
@@ -120,6 +130,7 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
         CardCrawlGame.mainMenuScreen.screen = MainMenuPatches.Enums.MODIFIERS_VIEW; //This is how we tell it what screen is open
         CardCrawlGame.mainMenuScreen.darken();
         upgradeHb.move(HB_X, HB_Y);
+        disableHb.move(HB_X, DISABLE_Y);
     }
 
     public void update() {
@@ -148,6 +159,20 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
                 upgradePreview = !upgradePreview;// 240
                 ignoreScrollReset = true;
                 refreshDropdownMenu(augmentDropdown);
+            }
+
+            if (selectedAugment != null && selectedAugment.getModRarity() != AbstractAugment.AugmentRarity.SPECIAL) {
+                this.disableHb.update();
+                if (this.disableHb.hovered && InputHelper.justClickedLeft) {// 233
+                    this.disableHb.clickStarted = true;// 234
+                }
+
+                if (this.disableHb.clicked || CInputActionSet.proceed.isJustPressed()) {// 237
+                    CInputActionSet.proceed.unpress();// 238
+                    this.disableHb.clicked = false;// 239
+                    modifierDisabled = !modifierDisabled;
+                    CardAugmentsMod.setModifierStatus(selectedAugment, modifierDisabled);
+                }
             }
 
             updateCards();
@@ -225,8 +250,10 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
         scrollBar.render(sb);
         cancelButton.render(sb);
         settingsButton.render(sb);
-        renderUpgradeViewToggle(sb);
-        renderInfo(sb);
+        if (selectedAugment != null) {
+            renderUpgradeViewToggle(sb);
+            renderInfo(sb);
+        }
         characterDropdown.render(sb, DROPDOWN_X, CHARACTER_DROPDOWN_Y);
         augmentDropdown.render(sb, DROPDOWN_X, AUGMENT_DROPDOWN_Y);
         rarityDropdown.render(sb, DROPDOWN_X, RARITY_DROPDOWN_Y);
@@ -264,13 +291,16 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
             AbstractAugment a = CardAugmentsMod.modMap.get(id);
             if (rarityFilter == null || a.getModRarity() == rarityFilter) {
                 if (CardAugmentsMod.crossoverMap.get(a).equals(selectedModID)) {
-                    String s = formatText(id);
+                    String s = a.modifyName("", fallback).replace("  ", " ").trim();
+                    if (s.isEmpty()) {
+                        s = formatText(s);
+                    }
                     ret.add(s);
                     augmentMap.put(s, a);
                 }
             }
         }
-        Collections.sort(ret);
+        ret.sort(String.CASE_INSENSITIVE_ORDER);
         //ret.replaceAll(this::formatText);
         if (ret.isEmpty()) {
             ret.add(TEXT[7]);
@@ -342,9 +372,12 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
             validCards.clear();
             if (s.equals(TEXT[7])) {
                 updateCardFilters();
+                selectedAugment = null;
+                modifierDisabled = false;
                 return;
             }
             selectedAugment = augmentMap.get(s);
+            modifierDisabled = CardAugmentsMod.disabledModifiers.contains(selectedAugment);
             for (AbstractCard c : CardLibrary.getAllCards()) {
                 if (!c.getClass().isAnnotationPresent(NoCompendium.class)) {
                     if (selectedAugment.validCard(c)) {
@@ -451,8 +484,23 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
             sb.setColor(Color.WHITE);// 1750
             sb.draw(ImageMaster.TICK, this.upgradeHb.cX - 80.0F * Settings.scale - 32.0F, this.upgradeHb.cY - 32.0F, 32.0F, 32.0F, 64.0F, 64.0F, Settings.scale, Settings.scale, 0.0F, 0, 0, 64, 64, false, false);// 1751
         }
-
         this.upgradeHb.render(sb);// 1769
+
+        if (selectedAugment.getModRarity() != AbstractAugment.AugmentRarity.SPECIAL) {
+            sb.draw(ImageMaster.CHECKBOX, this.disableHb.cX - 80.0F * Settings.scale - 32.0F, this.disableHb.cY - 32.0F, 32.0F, 32.0F, 64.0F, 64.0F, Settings.scale, Settings.scale, 0.0F, 0, 0, 64, 64, false, false);// 1713
+            if (this.disableHb.hovered) {// 1731
+                FontHelper.renderFont(sb, FontHelper.tipBodyFont, TEXT[8], this.disableHb.cX - 45.0F * Settings.scale, this.disableHb.cY + 10.0F * Settings.scale, Settings.RED_TEXT_COLOR);// 1732
+            } else {
+                FontHelper.renderFont(sb, FontHelper.tipBodyFont, TEXT[8], this.disableHb.cX - 45.0F * Settings.scale, this.disableHb.cY + 10.0F * Settings.scale, Settings.GOLD_COLOR);// 1740
+            }
+
+            if (modifierDisabled) {// 1749
+                sb.setColor(Color.WHITE);// 1750
+                sb.draw(ImageMaster.TICK, this.disableHb.cX - 80.0F * Settings.scale - 32.0F, this.disableHb.cY - 32.0F, 32.0F, 32.0F, 64.0F, 64.0F, Settings.scale, Settings.scale, 0.0F, 0, 0, 64, 64, false, false);// 1751
+            }
+
+            this.disableHb.render(sb);
+        }
     }
 
     private void updateScrolling() {
@@ -517,9 +565,22 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
         try {
             Object o = ReflectionHacks.getPrivate(menu, DropdownMenu.class, "selectionBox");
             ReflectionHacks.privateMethod(DropdownMenu.class, "changeSelectionToRow", Class.forName(DropdownMenu.class.getName()+"$DropdownRow")).invoke(menu, o);
+            DropdownColoring.RowToColor.function.set(augmentDropdown, index -> CardAugmentsMod.disabledModifiers.contains(augmentMap.get(getDropdownText(augmentDropdown, index))) ? DISABLE_COLOR : null);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    private String getDropdownText(DropdownMenu menu, int index) {
+        if (dropdownRowClass == null) {
+            try {
+                dropdownRowClass = Class.forName(DropdownMenu.class.getName()+"$DropdownRow");
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        Object dropdownRow = augmentDropdown.rows.get(index);
+        return ReflectionHacks.getPrivate(dropdownRow, dropdownRowClass, "text");
     }
 
     @SpirePatch2(clz = AbstractCard.class, method = "renderInLibrary")

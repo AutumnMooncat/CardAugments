@@ -59,7 +59,8 @@
       "Todos los personajes",
       "Configuración",
       "Todas las rarezas",
-      "Ninguno"
+      "Ninguno",
+      "Disable Modifier"
     ]
   },
   "CardAugments:SCVScreen": {

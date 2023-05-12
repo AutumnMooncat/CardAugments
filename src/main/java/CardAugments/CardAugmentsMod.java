@@ -59,8 +59,10 @@ public class CardAugmentsMod implements
 
     public static SpireConfig cardAugmentsConfig;
     public static SpireConfig cardAugmentsCrossoverConfig;
+    public static SpireConfig cardAugmentsDisabledModifierConfig;
     public static String FILE_NAME = "CardsAugmentsConfig";
     public static String CROSSOVER_FILE_NAME = "CardsAugmentsCrossoverConfig";
+    public static String DISABLED_MODIFIER_FILE_NAME;
 
     public static final String ENABLE_MODS_SETTING = "enableMods";
     public static boolean enableMods = true;
@@ -117,6 +119,7 @@ public class CardAugmentsMod implements
     public static final HashMap<String, String> crossoverLabelMap = new HashMap<>();
     public static final HashMap<String, Integer> crossoverSizeMap = new HashMap<>();
     public static final HashMap<String, Boolean> crossoverEnableMap = new HashMap<>();
+    public static final HashSet<AbstractAugment> disabledModifiers = new HashSet<>();
     public static final String UNMANAGED_ID = "UnmanagedChimeraID";
     //List of orbies
     public static final ArrayList<AbstractPlayer.PlayerClass> ORB_CHARS = new ArrayList<>(Collections.singletonList(AbstractPlayer.PlayerClass.DEFECT));
@@ -178,6 +181,7 @@ public class CardAugmentsMod implements
         try {
             cardAugmentsConfig = new SpireConfig(modID, FILE_NAME, cardAugmentsDefaultSettings);
             cardAugmentsCrossoverConfig = new SpireConfig(modID, CROSSOVER_FILE_NAME);
+            cardAugmentsDisabledModifierConfig = new SpireConfig(modID, DISABLED_MODIFIER_FILE_NAME);
             enableMods = cardAugmentsConfig.getBool(ENABLE_MODS_SETTING);
             modProbabilityPercent = cardAugmentsConfig.getInt(MOD_PROBABILITY);
             commonWeight = cardAugmentsConfig.getInt(COMMON_WEIGHT);
@@ -265,6 +269,19 @@ public class CardAugmentsMod implements
         CardBorderGlowManager.GlowInfo i = a.getGlowInfo();
         if (i != null) {
             CardBorderGlowManager.addGlowInfo(i);
+        }
+        if (cardAugmentsDisabledModifierConfig.has(a.identifier(null))) {
+            if (cardAugmentsDisabledModifierConfig.getBool(a.identifier(null)) && a.getModRarity() != AbstractAugment.AugmentRarity.SPECIAL) {
+                disabledModifiers.add(a);
+            } else {
+                cardAugmentsDisabledModifierConfig.remove(a.identifier(null));
+                try {
+                    cardAugmentsDisabledModifierConfig.save();
+                } catch (IOException e) {
+                    logger.error("Card Augments Modifier Config failed:");
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -731,8 +748,24 @@ public class CardAugmentsMod implements
         }
     }
 
-    public static boolean isCrossOverEnabled(AbstractAugment m) {
-        return crossoverEnableMap.getOrDefault(crossoverMap.getOrDefault(m, UNMANAGED_ID), true);
+    public static void setModifierStatus(AbstractAugment m, boolean disabled) {
+        if (disabled && m.getModRarity() != AbstractAugment.AugmentRarity.SPECIAL) {
+            disabledModifiers.add(m);
+            cardAugmentsDisabledModifierConfig.setBool(m.identifier(null), true);
+        } else {
+            disabledModifiers.remove(m);
+            cardAugmentsDisabledModifierConfig.remove(m.identifier(null));
+        }
+        try {
+            cardAugmentsDisabledModifierConfig.save();
+        } catch (IOException e) {
+            logger.error("Card Augments Modifier Config failed:");
+            e.printStackTrace();
+        }
+    }
+
+    public static boolean isAugmentEnabled(AbstractAugment m) {
+        return !disabledModifiers.contains(m) && crossoverEnableMap.getOrDefault(crossoverMap.getOrDefault(m, UNMANAGED_ID), true);
     }
 
     public static void rollCardAugment(AbstractCard c) {
@@ -780,13 +813,13 @@ public class CardAugmentsMod implements
         ArrayList<AbstractAugment> validMods = new ArrayList<>();
         switch (rarity) {
             case COMMON:
-                validMods.addAll(commonMods.stream().filter(m -> m.canRoll(c) && isCrossOverEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
+                validMods.addAll(commonMods.stream().filter(m -> m.canRoll(c) && isAugmentEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
                 break;
             case UNCOMMON:
-                validMods.addAll(uncommonMods.stream().filter(m -> m.canRoll(c) && isCrossOverEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
+                validMods.addAll(uncommonMods.stream().filter(m -> m.canRoll(c) && isAugmentEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
                 break;
             case RARE:
-                validMods.addAll(rareMods.stream().filter(m -> m.canRoll(c) && isCrossOverEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
+                validMods.addAll(rareMods.stream().filter(m -> m.canRoll(c) && isAugmentEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
                 break;
         }
         if (!validMods.isEmpty()) {
@@ -819,9 +852,9 @@ public class CardAugmentsMod implements
 
     public static ArrayList<AbstractAugment> getAllValidMods(AbstractCard c) {
         ArrayList<AbstractAugment> validMods = new ArrayList<>();
-        validMods.addAll(commonMods.stream().filter(m -> m.canRoll(c) && isCrossOverEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
-        validMods.addAll(uncommonMods.stream().filter(m -> m.canRoll(c) && isCrossOverEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
-        validMods.addAll(rareMods.stream().filter(m -> m.canRoll(c) && isCrossOverEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
+        validMods.addAll(commonMods.stream().filter(m -> m.canRoll(c) && isAugmentEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
+        validMods.addAll(uncommonMods.stream().filter(m -> m.canRoll(c) && isAugmentEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
+        validMods.addAll(rareMods.stream().filter(m -> m.canRoll(c) && isAugmentEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
         return validMods;
     }
 
