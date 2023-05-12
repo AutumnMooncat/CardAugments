@@ -551,33 +551,37 @@ public abstract class AbstractAugment extends AbstractCardModifier {
 
     public static String insertBeforeText(String rawDescription, String text) {
         StringBuilder removed = new StringBuilder();
-        while (rawDescription.startsWith(INNATE_TEXT) || rawDescription.startsWith(ETHEREAL_TEXT) || rawDescription.startsWith(RETAIN_TEXT) || rawDescription.startsWith(UNPLAYABLE_TEXT)) {
-            if (rawDescription.startsWith(INNATE_TEXT)) {
-                rawDescription = rawDescription.substring(INNATE_TEXT.length());
-                removed.append(INNATE_TEXT);
-            }
-            if (rawDescription.startsWith(ETHEREAL_TEXT)) {
-                rawDescription = rawDescription.substring(ETHEREAL_TEXT.length());
-                removed.append(ETHEREAL_TEXT);
-            }
-            if (rawDescription.startsWith(RETAIN_TEXT)) {
-                rawDescription = rawDescription.substring(RETAIN_TEXT.length());
-                removed.append(RETAIN_TEXT);
-            }
-            if (rawDescription.startsWith(UNPLAYABLE_TEXT)) {
-                rawDescription = rawDescription.substring(UNPLAYABLE_TEXT.length());
-                removed.append(UNPLAYABLE_TEXT);
+        ArrayList<String> matches = makeMatchers(INNATE_TEXT, ETHEREAL_TEXT, RETAIN_TEXT, UNPLAYABLE_TEXT);
+        while (matches.stream().anyMatch(rawDescription::startsWith)) {
+            for (String match : matches) {
+                if (rawDescription.startsWith(match)) {
+                    rawDescription = rawDescription.substring(match.length());
+                    removed.append(match);
+                }
             }
         }
         return removed + text + rawDescription;
     }
 
     public static String insertAfterText(String rawDescription, String text) {
-        String removed = "";
-        if (rawDescription.endsWith(EXHAUST_TEXT)) {
-            rawDescription = rawDescription.substring(0, rawDescription.length()-EXHAUST_TEXT.length());
-            removed += EXHAUST_TEXT;
+        StringBuilder removed = new StringBuilder();
+        for (String match : makeMatchers(EXHAUST_TEXT)) {
+            if (rawDescription.endsWith(match)) {
+                rawDescription = rawDescription.substring(0, rawDescription.length()-match.length());
+                removed.append(match);
+            }
         }
         return rawDescription + text + removed;
+    }
+
+    //Work with Minty Better Upgrade Text
+    public static ArrayList<String> makeMatchers(String... inputs) {
+        ArrayList<String> ret = new ArrayList<>();
+        Collections.addAll(ret, inputs);
+        for (String s : inputs) {
+            ret.add((" [diffRmvS] "+s+" [diffRmvE] ").replace("  ", " "));
+            ret.add((" [diffAddS] "+s+" [diffAddE] ").replace("  ", " "));
+        }
+        return ret;
     }
 }
