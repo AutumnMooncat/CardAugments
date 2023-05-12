@@ -15,6 +15,7 @@ import com.megacrit.cardcrawl.screens.CombatRewardScreen;
 import com.megacrit.cardcrawl.screens.select.GridCardSelectScreen;
 import com.megacrit.cardcrawl.shop.Merchant;
 import com.megacrit.cardcrawl.shop.ShopScreen;
+import com.megacrit.cardcrawl.vfx.FastCardObtainEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 import javassist.CtBehavior;
 
@@ -156,10 +157,11 @@ public class OnCardGeneratedPatches {
     }
 
     @SpirePatch2(clz = ShowCardAndObtainEffect.class, method = SpirePatch.CONSTRUCTOR, paramtypez = {AbstractCard.class, float.class, float.class, boolean.class})
+    @SpirePatch2(clz = FastCardObtainEffect.class, method = SpirePatch.CONSTRUCTOR)
     public static class ModifySpawnedMasterDeckCards {
         @SpirePostfixPatch
         public static void patch(AbstractCard ___card) {
-            if (CardAugmentsMod.modifyInstantObtain && CopyTheDamnModPatches.modsToCopy.isEmpty()) {
+            if (CardAugmentsMod.modifyInstantObtain && !CopyTheDamnModPatches.needsCopy) {
                 rollCardAugment(___card);
             }
         }

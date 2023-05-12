@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 public class CopyTheDamnModPatches {
     public static final ArrayList<AbstractCardModifier> modsToCopy = new ArrayList<>();
+    public static boolean needsCopy;
 
     @SpirePatch2(clz = GremlinMatchGame.class, method = "updateMatchGameLogic")
     public static class ModifyMatchGameCards {
@@ -25,6 +26,7 @@ public class CopyTheDamnModPatches {
                     modsToCopy.add(m);
                 }
             }
+            needsCopy = true;
         }
         private static class Locator extends SpireInsertLocator {
             @Override
@@ -38,10 +40,13 @@ public class CopyTheDamnModPatches {
     @SpirePatch2(clz = ShowCardAndObtainEffect.class, method = SpirePatch.CONSTRUCTOR, paramtypez = {AbstractCard.class, float.class, float.class, boolean.class})
     public static class CopyTheMod {
         public static void Postfix(AbstractCard card) {
-            for (AbstractCardModifier m : modsToCopy) {
-                CardModifierManager.addModifier(card, m.makeCopy());
+            if (needsCopy) {
+                for (AbstractCardModifier m : modsToCopy) {
+                    CardModifierManager.addModifier(card, m.makeCopy());
+                }
+                RolledModFieldPatches.RolledModField.rolled.set(card, true);
+                needsCopy = false;
             }
-            RolledModFieldPatches.RolledModField.rolled.set(card, true);
             modsToCopy.clear();
         }
     }
