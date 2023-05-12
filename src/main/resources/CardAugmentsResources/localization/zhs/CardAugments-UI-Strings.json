@@ -3,20 +3,33 @@
     "TEXT": [
       "启用卡牌修改",
       "修改几率百分比 (默认 10):",
-      "普通修改比重 (默认 3):",
-      "罕见修改比重 (默认 2):",
-      "稀有修改比重 (默认 1):",
+      "普通修改比重 (默认 4):",
+      "罕见修改比重 (默认 3):",
+      "稀有修改比重 (默认 2):",
       "允许修改初始牌",
       "允许在没有棱镜碎片的情况下获得充能球修改",
       "卡牌稀有度权重偏置 (默认 1):",
       "允许修改立刻获得的牌 (噬咬, 潘多拉的魔盒, 诅咒, 等等)",
       "允许修改商店牌",
       "允许启用附加事件",
-      "启用修改提示词"
+      "启用修改提示词",
+      "Roll Attempts (Default 1):",
+      "Show/Hide Probability Analysis"
     ],
     "EXTRA_TEXT": [
       "奇美拉卡牌",
-      "为奖励卡牌添加随机修改。查看Mod设置来更改设置！"
+      "为奖励卡牌添加随机修改。查看Mod设置来更改设置！",
+      "#yAppearance #yRates:",
+      " Modifier: #b",
+      " Modifiers: #b",
+      " NL Common Mod: #b",
+      " NL Uncommon Mod: #b",
+      " NL Rare Mod: #b",
+      " NL NL #yCommon #yCards:",
+      " NL NL #yUncommon #yCards:",
+      " NL NL #yRare #yCards:",
+      " NL NL #yCommon/Starter #yCards:",
+      " NL NL #ySpecial/Curse #yCards:"
     ]
   },
   "CardAugments:AbstractAugment": {

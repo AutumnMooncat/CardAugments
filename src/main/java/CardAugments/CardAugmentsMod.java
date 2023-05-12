@@ -5,7 +5,9 @@ import CardAugments.cardmods.DynvarCarrier;
 import CardAugments.commands.Chimera;
 import CardAugments.dynvars.DynamicDynamicVariableManager;
 import CardAugments.patches.RolledModFieldPatches;
-import CardAugments.ui.*;
+import CardAugments.ui.BiggerModButton;
+import CardAugments.ui.CenteredModLabel;
+import CardAugments.ui.ModLabeledToggleTooltipButton;
 import CardAugments.util.MintyFixer;
 import CardAugments.util.TextureLoader;
 import basemod.*;
@@ -67,13 +69,16 @@ public class CardAugmentsMod implements
     public static int modProbabilityPercent = 10;
 
     public static final String COMMON_WEIGHT = "commonWeight";
-    public static int commonWeight = 3;
+    public static int commonWeight = 4;
 
     public static final String UNCOMMON_WEIGHT = "uncommonWeight";
-    public static int uncommonWeight = 2;
+    public static int uncommonWeight = 3;
 
     public static final String RARE_WEIGHT = "rareWeight";
-    public static int rareWeight = 1;
+    public static int rareWeight = 2;
+
+    public static final String RARITY_BIAS = "rarityBias";
+    public static int rarityBias = 1;
 
     public static final String MODIFY_STARTERS = "modifyStarters";
     public static boolean modifyStarters = false;
@@ -87,9 +92,6 @@ public class CardAugmentsMod implements
     public static final String ALLOW_ORBS = "allowOrbs";
     public static boolean allowOrbs = false;
 
-    public static final String RARITY_BIAS = "rarityBias";
-    public static int rarityBias = 1;
-
     public static final String EVENT_ADDONS = "eventAddons";
     public static boolean eventAddons = true;
 
@@ -98,6 +100,12 @@ public class CardAugmentsMod implements
 
     public static final String GRIEF_LIBRARY = "libraryGrief";
     public static boolean griefLibrary = false;
+
+    public static final String ROLL_ATTEMPTS = "rollAttempts";
+    public static int rollAttempts = 1;
+
+    public static final String SHOW_BREAKDOWN = "showBreakdown";
+    public static boolean showBreakdown = false;
 
     //Cardmod Lists
     public static final ArrayList<AbstractAugment> commonMods = new ArrayList<>();
@@ -126,8 +134,8 @@ public class CardAugmentsMod implements
     public static HashMap<Integer, ArrayList<IUIElement>> pages = new HashMap<>();
     public static float LAYOUT_Y = 760f;
     public static final float LAYOUT_X = 400f;
-    public static final float SPACING_Y = 50f;
-    public static final float FULL_PAGE_Y = (SPACING_Y * 11);
+    public static final float SPACING_Y = 46f;
+    public static final float FULL_PAGE_Y = (SPACING_Y * 12);
     public static float deltaY = 0;
     public static int currentPage = 0;
     
@@ -165,6 +173,8 @@ public class CardAugmentsMod implements
         cardAugmentsDefaultSettings.setProperty(EVENT_ADDONS, Boolean.toString(eventAddons));
         cardAugmentsDefaultSettings.setProperty(GRIEF_LIBRARY, Boolean.toString(griefLibrary));
         cardAugmentsDefaultSettings.setProperty(ENABLE_TOOLTIPS, Boolean.toString(enableTooltips));
+        cardAugmentsDefaultSettings.setProperty(ROLL_ATTEMPTS, String.valueOf(rollAttempts));
+        cardAugmentsDefaultSettings.setProperty(SHOW_BREAKDOWN, Boolean.toString(showBreakdown));
         try {
             cardAugmentsConfig = new SpireConfig(modID, FILE_NAME, cardAugmentsDefaultSettings);
             cardAugmentsCrossoverConfig = new SpireConfig(modID, CROSSOVER_FILE_NAME);
@@ -181,6 +191,8 @@ public class CardAugmentsMod implements
             eventAddons = cardAugmentsConfig.getBool(EVENT_ADDONS);
             griefLibrary = cardAugmentsConfig.getBool(GRIEF_LIBRARY);
             enableTooltips = cardAugmentsConfig.getBool(ENABLE_TOOLTIPS);
+            rollAttempts = cardAugmentsConfig.getInt(ROLL_ATTEMPTS);
+            showBreakdown = cardAugmentsConfig.getBool(SHOW_BREAKDOWN);
         } catch (IOException e) {
             logger.error("Card Augments SpireConfig initialization failed:");
             e.printStackTrace();
@@ -323,6 +335,18 @@ public class CardAugmentsMod implements
         float sliderOffset = getSliderPosition(labelStrings.subList(1,5));
         labelStrings.clear();
 
+        //Show data?
+        ModLabeledToggleTooltipButton dataButton = new ModLabeledToggleTooltipButton(TEXT[13], getProbabilityData(), LAYOUT_X + 830f, LAYOUT_Y - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
+                cardAugmentsConfig.getBool(SHOW_BREAKDOWN), settingsPanel, panel -> panel.tooltip = getProbabilityData(), (button) -> {
+            cardAugmentsConfig.setBool(SHOW_BREAKDOWN, button.enabled);
+            showBreakdown = button.enabled;
+            try {
+                cardAugmentsConfig.save();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
         //Enable or disable the mod entirely.
         ModLabeledToggleButton enableModsButton = new ModLabeledToggleButton(TEXT[0],LAYOUT_X - 40f, LAYOUT_Y - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
                 cardAugmentsConfig.getBool(ENABLE_MODS_SETTING), settingsPanel, (label) -> {}, (button) -> {
@@ -339,6 +363,17 @@ public class CardAugmentsMod implements
                 0, 100, cardAugmentsConfig.getInt(MOD_PROBABILITY), "%.0f", settingsPanel, slider -> {
             cardAugmentsConfig.setInt(MOD_PROBABILITY, Math.round(slider.getValue()));
             modProbabilityPercent = Math.round(slider.getValue());
+            try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
+        });
+
+        //Used for roll attempts
+        ModLabel attemptsLabel = new ModLabel(TEXT[12], LAYOUT_X, LAYOUT_Y, Settings.CREAM_COLOR, FontHelper.charDescFont, settingsPanel, modLabel -> {});
+        ModMinMaxSlider attemptsSlider = new ModMinMaxSlider("",
+                LAYOUT_X + sliderOffset,
+                LAYOUT_Y + 7f,
+                1, 3, cardAugmentsConfig.getInt(ROLL_ATTEMPTS), "%.0f", settingsPanel, slider -> {
+            cardAugmentsConfig.setInt(ROLL_ATTEMPTS, Math.round(slider.getValue()));
+            rollAttempts = Math.round(slider.getValue());
             try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
         });
 
@@ -394,19 +429,19 @@ public class CardAugmentsMod implements
             try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
         });
 
-        //Used to modify starter cards
-        ModLabeledToggleButton enableInstantObtainModificationButton = new ModLabeledToggleButton(TEXT[8],LAYOUT_X - 40f, LAYOUT_Y - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
-                cardAugmentsConfig.getBool(MODIFY_INSTANT_OBTAIN), settingsPanel, (label) -> {}, (button) -> {
-            cardAugmentsConfig.setBool(MODIFY_INSTANT_OBTAIN, button.enabled);
-            modifyInstantObtain = button.enabled;
-            try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
-        });
-
-        //Used to modify starter cards
+        //Used to modify shop cards
         ModLabeledToggleButton enableShopButton = new ModLabeledToggleButton(TEXT[9],LAYOUT_X - 40f, LAYOUT_Y - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
                 cardAugmentsConfig.getBool(MODIFY_SHOP), settingsPanel, (label) -> {}, (button) -> {
             cardAugmentsConfig.setBool(MODIFY_SHOP, button.enabled);
             modifyShop = button.enabled;
+            try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
+        });
+
+        //Used to modify event/relic cards
+        ModLabeledToggleButton enableInstantObtainModificationButton = new ModLabeledToggleButton(TEXT[8],LAYOUT_X - 40f, LAYOUT_Y - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
+                cardAugmentsConfig.getBool(MODIFY_INSTANT_OBTAIN), settingsPanel, (label) -> {}, (button) -> {
+            cardAugmentsConfig.setBool(MODIFY_INSTANT_OBTAIN, button.enabled);
+            modifyInstantObtain = button.enabled;
             try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
         });
 
@@ -434,9 +469,12 @@ public class CardAugmentsMod implements
             try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
         });
 
+        registerUIElement(dataButton, false);
         registerUIElement(enableModsButton);
         registerUIElement(probabilityLabel, false);
         registerUIElement(probabilitySlider);
+        registerUIElement(attemptsLabel, false);
+        registerUIElement(attemptsSlider);
         registerUIElement(commonLabel, false);
         registerUIElement(commonSlider);
         registerUIElement(uncommonLabel, false);
@@ -446,8 +484,8 @@ public class CardAugmentsMod implements
         registerUIElement(biasLabel, false);
         registerUIElement(biasSlider);
         registerUIElement(enableStarterModificationButton);
-        registerUIElement(enableInstantObtainModificationButton);
         registerUIElement(enableShopButton);
+        registerUIElement(enableInstantObtainModificationButton);
         registerUIElement(enableAllowOrbsButton);
         registerUIElement(enableEventsButtom);
         registerUIElement(enableTooltipsButton);
@@ -542,6 +580,96 @@ public class CardAugmentsMod implements
         }
         return longest + 40f;
     }
+
+    private static float getRollProbability(int exactly) {
+        return (float) ((Math.pow(modProbabilityPercent/100f, exactly) * Math.pow(1-modProbabilityPercent/100f, rollAttempts-exactly)) * 100f * combination(rollAttempts, exactly));
+    }
+
+    private static int combination(int total, int choose) {
+        return factorial(total) / (factorial(choose) * factorial(total-choose));
+    }
+
+    private static int factorial(int x) {
+        if (x <= 1) {
+            return 1;
+        }
+        return x * factorial(x-1);
+    }
+
+    private static float getBiasedWeightProbability(AbstractAugment.AugmentRarity r, boolean matches) {
+        if (commonWeight + uncommonWeight + rareWeight + rarityBias == 0) {
+            return 0;
+        }
+        switch (r) {
+            case COMMON:
+                return 100 * ((float) commonWeight + (matches ? rarityBias : 0)) / (commonWeight + uncommonWeight + rareWeight + rarityBias);
+            case UNCOMMON:
+                return 100 * ((float) uncommonWeight + (matches ? rarityBias : 0)) / (commonWeight + uncommonWeight + rareWeight + rarityBias);
+            case RARE:
+                return 100 * ((float) rareWeight + (matches ? rarityBias : 0)) / (commonWeight + uncommonWeight + rareWeight + rarityBias);
+            case SPECIAL:
+                return 0;
+        }
+        return 0;
+    }
+
+    private static float getWeightProbability(AbstractAugment.AugmentRarity r) {
+        if (commonWeight + uncommonWeight + rareWeight == 0) {
+            return 0;
+        }
+        switch (r) {
+            case COMMON:
+                return 100 * ((float) commonWeight) / (commonWeight + uncommonWeight + rareWeight);
+            case UNCOMMON:
+                return 100 * ((float) uncommonWeight) / (commonWeight + uncommonWeight + rareWeight);
+            case RARE:
+                return 100 * ((float) rareWeight) / (commonWeight + uncommonWeight + rareWeight);
+            case SPECIAL:
+                return 0;
+        }
+        return 0;
+    }
+
+    private static String getProbabilityData() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(EXTRA_TEXT[2]);
+        for (int i = 0 ; i <= rollAttempts ; i++) {
+            if (i == 1) {
+                sb.append(" NL #b").append(i).append(EXTRA_TEXT[3]).append(String.format("%.02f", getRollProbability(i))).append("%");
+            } else {
+                sb.append(" NL #b").append(i).append(EXTRA_TEXT[4]).append(String.format("%.02f", getRollProbability(i))).append("%");
+            }
+        }
+        if (rarityBias == 0) {
+            sb.append(EXTRA_TEXT[5]).append(String.format("%.02f", getWeightProbability(AbstractAugment.AugmentRarity.COMMON))).append("%");
+            sb.append(EXTRA_TEXT[6]).append(String.format("%.02f", getWeightProbability(AbstractAugment.AugmentRarity.UNCOMMON))).append("%");
+            sb.append(EXTRA_TEXT[7]).append(String.format("%.02f", getWeightProbability(AbstractAugment.AugmentRarity.RARE))).append("%");
+        } else {
+            if (modifyStarters) {
+                sb.append(EXTRA_TEXT[11]);
+            } else {
+                sb.append(EXTRA_TEXT[8]);
+            }
+            sb.append(EXTRA_TEXT[5]).append(String.format("%.02f", getBiasedWeightProbability(AbstractAugment.AugmentRarity.COMMON, true))).append("%");
+            sb.append(EXTRA_TEXT[6]).append(String.format("%.02f", getBiasedWeightProbability(AbstractAugment.AugmentRarity.UNCOMMON, false))).append("%");
+            sb.append(EXTRA_TEXT[7]).append(String.format("%.02f", getBiasedWeightProbability(AbstractAugment.AugmentRarity.RARE, false))).append("%");
+            sb.append(EXTRA_TEXT[9]);
+            sb.append(EXTRA_TEXT[5]).append(String.format("%.02f", getBiasedWeightProbability(AbstractAugment.AugmentRarity.COMMON, false))).append("%");
+            sb.append(EXTRA_TEXT[6]).append(String.format("%.02f", getBiasedWeightProbability(AbstractAugment.AugmentRarity.UNCOMMON, true))).append("%");
+            sb.append(EXTRA_TEXT[7]).append(String.format("%.02f", getBiasedWeightProbability(AbstractAugment.AugmentRarity.RARE, false))).append("%");
+            sb.append(EXTRA_TEXT[10]);
+            sb.append(EXTRA_TEXT[5]).append(String.format("%.02f", getBiasedWeightProbability(AbstractAugment.AugmentRarity.COMMON, false))).append("%");
+            sb.append(EXTRA_TEXT[6]).append(String.format("%.02f", getBiasedWeightProbability(AbstractAugment.AugmentRarity.UNCOMMON, false))).append("%");
+            sb.append(EXTRA_TEXT[7]).append(String.format("%.02f", getBiasedWeightProbability(AbstractAugment.AugmentRarity.RARE, true))).append("%");
+            if (modifyInstantObtain) {
+                sb.append(EXTRA_TEXT[12]);
+                sb.append(EXTRA_TEXT[5]).append(String.format("%.02f", getWeightProbability(AbstractAugment.AugmentRarity.COMMON))).append("%");
+                sb.append(EXTRA_TEXT[6]).append(String.format("%.02f", getWeightProbability(AbstractAugment.AugmentRarity.UNCOMMON))).append("%");
+                sb.append(EXTRA_TEXT[7]).append(String.format("%.02f", getWeightProbability(AbstractAugment.AugmentRarity.RARE))).append("%");
+            }
+        }
+        return sb.toString();
+    }
     
     // =============== / POST-INITIALIZE/ =================
 
@@ -612,8 +740,12 @@ public class CardAugmentsMod implements
     }
 
     public static void rollCardAugment(AbstractCard c, int index) {
-        if (enableMods && !RolledModFieldPatches.RolledModField.rolled.get(c) && AbstractDungeon.miscRng.random(99) < modProbabilityPercent) {
-            applyWeightedCardMod(c, rollRarity(c.rarity), index);
+        if (enableMods && !RolledModFieldPatches.RolledModField.rolled.get(c) && (commonWeight + uncommonWeight + rareWeight + rarityBias != 0)) {
+            for (int i = 0 ; i < rollAttempts ; i++) {
+                if (AbstractDungeon.miscRng.random(99) < modProbabilityPercent) {
+                    applyWeightedCardMod(c, rollRarity(c.rarity), index);
+                }
+            }
         }
         RolledModFieldPatches.RolledModField.rolled.set(c, true);
     }

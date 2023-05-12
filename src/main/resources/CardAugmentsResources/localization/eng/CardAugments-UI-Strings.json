@@ -3,20 +3,33 @@
     "TEXT": [
       "Enable Card Augments",
       "Mod Percent Chance (Default 10):",
-      "Common Mod Weight (Default 3):",
-      "Uncommon Mod Weight (Default 2):",
-      "Rare Mod Weight (Default 1):",
+      "Common Mod Weight (Default 4):",
+      "Uncommon Mod Weight (Default 3):",
+      "Rare Mod Weight (Default 2):",
       "Modify Starter Cards",
       "Allow Orb Mods Without Prismatic Shard",
       "Card Rarity Weight Bias (Default 1):",
-      "Modify Instant Obtain Cards (Bites, Pandora's Box, Curses, etc.)",
+      "Modify Cards From Events, Relics, etc.",
       "Modify Shop Cards",
       "Enable Event Addons",
-      "Enable Modifier Tooltips"
+      "Enable Modifier Tooltips",
+      "Roll Attempts (Default 1):",
+      "Show Analysis"
     ],
     "EXTRA_TEXT": [
       "Chimera Cards",
-      "Adds randomly rolled card modifiers to card rewards. See the Mod Options if you would like to change any configurations!"
+      "Adds randomly rolled card modifiers to card rewards. See the Mod Options if you would like to change any configurations!",
+      "#yAppearance #yRates:",
+      " Modifier: #b",
+      " Modifiers: #b",
+      " NL Common Mod: #b",
+      " NL Uncommon Mod: #b",
+      " NL Rare Mod: #b",
+      " NL NL #yCommon #yCards:",
+      " NL NL #yUncommon #yCards:",
+      " NL NL #yRare #yCards:",
+      " NL NL #yCommon/Starter #yCards:",
+      " NL NL #ySpecial/Curse #yCards:"
     ]
   },
   "CardAugments:AbstractAugment": {

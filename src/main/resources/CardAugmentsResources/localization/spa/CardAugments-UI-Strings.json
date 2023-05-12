@@ -3,20 +3,33 @@
     "TEXT": [
       "Activar Mejoras de Cartas.",
       "Porcentaje de probabilidad del mod (por defecto 10):",
-      "Peso de Modificador Común (por defecto 3):",
-      "Peso de Modificador poco común (por defecto 2):",
-      "Peso de Modificador Raro (por defecto 1):",
+      "Peso de Modificador Común (por defecto 4):",
+      "Peso de Modificador poco común (por defecto 3):",
+      "Peso de Modificador Raro (por defecto 2):",
       "Modifica las cartas iniciales.",
       "Permitir modificadores de orbes sin Fragmento Prismático.",
       "Sesgo de peso de rareza de carta (por defecto 1):",
       "Modificar cartas de Obtención Instantánea (Mordeduras, Caja de Pandora, Maldiciones, etc.)",
       "Modificar cartas de tienda",
       "Activar complementos de eventos",
-      "Enable Modifier Tooltips"
+      "Enable Modifier Tooltips",
+      "Roll Attempts (Default 1):",
+      "Show/Hide Probability Analysis"
     ],
     "EXTRA_TEXT": [
       "Cartas Quimera",
-      "Agrega modificadores de carta con valores aleatorios a las recompensas de carta. ¡Consulta las opciones de modificación si deseas cambiar alguna configuración!"
+      "Agrega modificadores de carta con valores aleatorios a las recompensas de carta. ¡Consulta las opciones de modificación si deseas cambiar alguna configuración!",
+      "#yAppearance #yRates:",
+      " Modifier: #b",
+      " Modifiers: #b",
+      " NL Common Mod: #b",
+      " NL Uncommon Mod: #b",
+      " NL Rare Mod: #b",
+      " NL NL #yCommon #yCards:",
+      " NL NL #yUncommon #yCards:",
+      " NL NL #yRare #yCards:",
+      " NL NL #yCommon/Starter #yCards:",
+      " NL NL #ySpecial/Curse #yCards:"
     ]
   },
   "CardAugments:AbstractAugment": {

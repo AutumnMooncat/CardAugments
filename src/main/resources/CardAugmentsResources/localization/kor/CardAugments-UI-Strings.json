@@ -3,20 +3,33 @@
     "TEXT": [
       "카드 증강 활성화",
       "카드 증강 확률 (기본값 10):",
-      "일반 증강 비율 (기본값 3):",
-      "특별 증강 비율 (기본값 2):",
-      "희귀 증강 비율 (기본값 1):",
+      "일반 증강 비율 (기본값 4):",
+      "특별 증강 비율 (기본값 3):",
+      "희귀 증강 비율 (기본값 2):",
       "시작 카드를 증강",
       "프리즘 조각 없이도 구체 관련 증강이 등장",
       "카드 희귀도 배율 편향 (bias) (기본값 1):",
       "즉시 획득 카드 증강 (물기, 판도라의 상자, 저주, 등등.)",
       "상점 카드 증강",
       "이벤트 애드온 활성화",
-      "증강 효과 툴팁 활성화"
+      "증강 효과 툴팁 활성화",
+      "Roll Attempts (Default 1):",
+      "Show Analysis"
     ],
     "EXTRA_TEXT": [
       "키메라 카드",
-      "카드 보상에 무작위 증강 효과가 추가됩니다. 모드 옵션에서 다양한 설정을 변경할 수 있습니다!"
+      "카드 보상에 무작위 증강 효과가 추가됩니다. 모드 옵션에서 다양한 설정을 변경할 수 있습니다!",
+      "#yAppearance #yRates:",
+      " Modifier: #b",
+      " Modifiers: #b",
+      " NL Common Mod: #b",
+      " NL Uncommon Mod: #b",
+      " NL Rare Mod: #b",
+      " NL NL #yCommon #yCards:",
+      " NL NL #yUncommon #yCards:",
+      " NL NL #yRare #yCards:",
+      " NL NL #yCommon/Starter #yCards:",
+      " NL NL #ySpecial/Curse #yCards:"
     ]
   },
   "CardAugments:AbstractAugment": {
