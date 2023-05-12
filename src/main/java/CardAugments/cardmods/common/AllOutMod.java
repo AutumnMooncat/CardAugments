@@ -54,7 +54,7 @@ public class AllOutMod extends AbstractAugment {
         if (rawDescription.contains(CARD_TEXT[2])) {
             return rawDescription.replace(CARD_TEXT[2], CARD_TEXT[3]);
         }
-        return rawDescription + String.format(CARD_TEXT[0], DISCARD);
+        return insertAfterText(rawDescription , String.format(CARD_TEXT[0], DISCARD));
     }
 
     @Override
