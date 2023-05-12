@@ -14,6 +14,9 @@ public class MasterfulMod extends AbstractAugment {
     @Override
     public void onInitialApplication(AbstractCard card) {
         card.cost = card.cost - 2;
+        if (card.cost < 0) {
+            card.cost = 0;
+        }
         card.costForTurn = card.cost;
     }
 

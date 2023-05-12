@@ -22,6 +22,9 @@ public class VoidMod extends AbstractAugment {
     public void onInitialApplication(AbstractCard card) {
         MultiCardPreview.add(card, new VoidCard());
         card.cost -= 2;
+        if (card.cost < 0) {
+            card.cost = 0;
+        }
         card.costForTurn = card.cost;
     }
 

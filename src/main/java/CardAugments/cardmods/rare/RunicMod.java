@@ -21,6 +21,9 @@ public class RunicMod extends AbstractAugment {
     @Override
     public void onInitialApplication(AbstractCard card) {
         card.cost = card.cost - 1;
+        if (card.cost < 0) {
+            card.cost = 0;
+        }
         card.costForTurn = card.cost;
     }
 

@@ -24,6 +24,9 @@ public class SlaverMod extends AbstractAugment {
         }
         if (activated) {
             card.cost = card.cost - 1;
+            if (card.cost < 0) {
+                card.cost = 0;
+            }
             card.costForTurn = card.cost;
             card.isCostModified = true;
         }
