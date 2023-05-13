@@ -8,28 +8,28 @@
       "희귀 증강 비율 (기본값 2):",
       "시작 카드를 증강",
       "프리즘 조각 없이도 구체 관련 증강이 등장",
-      "카드 희귀도 배율 편향 (bias) (기본값 1):",
+      "카드 희귀도에 따른 증강 희귀도 (기본값 1):",
       "즉시 획득 카드 증강 (물기, 판도라의 상자, 저주, 등등.)",
       "상점 카드 증강",
       "이벤트 애드온 활성화",
       "증강 효과 툴팁 활성화",
-      "Roll Attempts (Default 1):",
-      "Show Analysis"
+      "최대 증강 시도 횟수 (기본값 1):",
+      "분석창 보기"
     ],
     "EXTRA_TEXT": [
       "키메라 카드",
       "카드 보상에 무작위 증강 효과가 추가됩니다. 모드 옵션에서 다양한 설정을 변경할 수 있습니다!",
-      "#yAppearance #yRates:",
-      " Modifier: #b",
-      " Modifiers: #b",
-      " NL Common Mod: #b",
-      " NL Uncommon Mod: #b",
-      " NL Rare Mod: #b",
-      " NL NL #yCommon #yCards:",
-      " NL NL #yUncommon #yCards:",
-      " NL NL #yRare #yCards:",
-      " NL NL #yCommon/Starter #yCards:",
-      " NL NL #ySpecial/Curse #yCards:"
+      "#y등장 #y비율:",
+      " 증강: #b",
+      " 증강: #b",
+      " NL 일반 증강: #b",
+      " NL 특별 증강: #b",
+      " NL 희귀 증강: #b",
+      " NL NL #y일반 #y카드:",
+      " NL NL #y특별 #y카드:",
+      " NL NL #y희귀 #y카드:",
+      " NL NL #y일반/시작 #y카드:",
+      " NL NL #y특수/저주 #y카드:"
     ]
   },
   "CardAugments:AbstractAugment": {
@@ -40,7 +40,7 @@
   },
   "CardAugments:CrossoverConfig": {
     "TEXT": [
-      "키메라 카드의 베이스 활성화",
+      "Chimera Cards의 기본 콘텐츠 활성화",
       "페이지",
       "증강 효과들"
     ]
@@ -60,7 +60,7 @@
       "설정",
       "모든 희귀도",
       "없음",
-      "Disable Modifier"
+      "증강 비활성화"
     ]
   },
   "CardAugments:SCVScreen": {
@@ -78,11 +78,11 @@
       "당신은 대장간에 들어가기로 결정했습니다. 도구를 사용해... NL #y@깡@ #y@까앙@ #y@깡!@ NL ...장비들을 강화하기 위해!",
       "증강할 카드를 선택하십시오.",
       "손상된",
-      "비용이 1 감소합니다. NL 소멸. NL 비용을 변경하지 않고 소멸이 아닌 카드에만 가능합니다."
+      "비용이 1 감소합니다. NL 소멸. NL 비용이 바뀌지 않고 소멸이 아닌 카드에만 가능합니다."
     ],
     "EXTRA_TEXT": [
       "[재련] #g덱에 #g있는 #g공격 #g또는 #g스킬 카드 #g1장에 손상된 증강을 부여합니다.",
-      "[잠김] 조건: 소멸하지 않고 비용을 변경하지 않는 공격 또는 스킬 카드.",
+      "[잠김] 조건: 소멸하지 않고 비용이 바뀌지 않는 공격 또는 스킬 카드.",
       "[떠난다]"
     ]
   },
@@ -107,7 +107,7 @@
       "매 전투 시작 시 버린 카드 더미에 섞어넣습니다."
     ],
     "EXTRA_TEXT": [
-      "[발휘한다] #r3 장에 모두 #r무덤 증강을 #r부여 합니다.",
+      "[발휘] #r3 장에 모두 #r무덤 증강을 #r부여 합니다.",
       "[잠김] 조건: 스킬 또는 파워 또는 공격카드.",
       "[떠난다]"
     ]
@@ -145,16 +145,16 @@
       "당신은 무슨 일이 일어나는지 알기 위해 줄에서 빠져나옵니다. 곧바로, 한 #r광신자 무리가 다가가 활기차게 @구호@ 를 외치고 그들의 무기를 사방으로 ~흔듭니다~. NL NL #r@\"죽여라!!@ #r@죽여라@ #r@죽여라!!\"@ NL #b~\"까악~ #b~까악~ #b~까아아아아아악!\"~ NL #r@\"죽여라!@ #r@죽여라@ #r@죽여라!!\"@ NL #b~\"까아악~ #b~까악~ #b~까아아아아아악!!\"~ NL NL 그들의 행동에서 무언가를 배울 수 있을 것 같습니다...",
       "#r광신자들 과 그들의 #r@의식@을 보자, 당신은 스스로가 #p~최면~에 빠지는 것을 느낍니다. NL 번뜩이는 #b@영감@ 과 함께, 당신은 집중합니다... NL #y@깡@ #y@까앙@ #y@깡!@ NL ...장비들을 강화하기 위해! ",
       "증강할 카드를 선택하십시오.",
-      "이단의",
+      "광신자의",
       "힘을 1 얻습니다. NL 피해 -20%.",
-      "광신의",
+      "열광적인",
       "피해 +50%. NL 소멸. NL 소멸하지 않는 카드에만 가능합니다."
     ],
     "EXTRA_TEXT": [
       "[관찰한다]",
       "[잠김] 조건: 공격 카드.",
-      "[광신자들을 관찰한다] #g공격 카드 #g1 장에 이단의 증강을 #g부여 합니다.",
-      "[의식을 관찰한다] #g공격 카드 #g1 장에 광신의 증강을 #g부여 합니다.",
+      "[광신자들을 관찰한다] #g공격 카드 #g1 장에 광신자의 증강을 #g부여 합니다.",
+      "[의식을 관찰한다] #g공격 카드 #g1 장에 열광적인 증강을 #g부여 합니다.",
       "[잠김] 조건: 소멸하지 않는 공격 카드.",
       "[떠난다]"
     ]
@@ -218,12 +218,12 @@
     "EXTRA_TEXT": [ " NL 불가침을 1 얻습니다. NL 소멸." ]
   },
   "CardAugments:AbsoluteMod": {
-    "TEXT": [ "독자적인 ", "", "카드의 효과가 #b33% 증가합니다. NL #y독자적인 증강이 없는 카드보다 먼저 사용되어야 합니다." ],
+    "TEXT": [ "절대적인 ", "", "카드의 효과가 #b33% 증가합니다. NL #y절대적인 카드를 사용하기 전까지 다른 카드를 사용할 수 없습니다." ],
     "EXTRA_TEXT": [
-      " NL 이 카드는 다른 카드보다 먼저 사용되어야 합니다.",
+      " NL 이 카드를 사용하기 전까지 다른 카드를 사용할 수 없습니다.",
       "Translator note: This is the cant use message that will appear",
       "",
-      " 는 가장 먼저 사용해야만 한다!"
+      " 를 먼저 사용해야만 한다!"
     ]
   },
   "CardAugments:AllOutMod": {
@@ -250,10 +250,10 @@
   "CardAugments:AngryMod": {
     "TEXT": [ "분노의 ", "", "이 카드를 1장 복사하여 버린 카드 더미에 섞어넣습니다." ],
     "EXTRA_TEXT": [
-      " NL 이 카드를 1장 복사하여 버린 카드 더미에 섞어넣습니다.",
+      " NL 이 카드를 한 장 복사하여 버린 카드 더미에 섞어넣습니다.",
       "Translator note: These strings are for replacing Anger's description. The first string is what to search for, the second string replaces it.",
-      " NL 이 카드를 1장 복사해 버린 카드 더미에 섞어넣습니다.",
-      " NL 이 카드를 2장 복사해 버린 카드 더미에 섞어넣습니다."
+      " NL 이 카드를 한 장 복사해 버린 카드 더미에 섞어 넣습니다.",
+      " NL 이 카드를 두 장 복사해 버린 카드 더미에 섞어 넣습니다."
     ]
   },
   "CardAugments:AmplifiedMod": {
@@ -265,11 +265,11 @@
     "EXTRA_TEXT": [ " NL 손의 무작위 카드를 %s 장 강화합니다.", " NL 손의 무작위 카드를 %s 장 강화합니다." ]
   },
   "CardAugments:AugerMod": {
-    "TEXT": [ "송곳의 ", "", "#yBlock를 넘어선 피해를 줄 시, #yVulnerable을 부여합니다." ],
+    "TEXT": [ "송곳의 ", "", "#y방어도를 넘어선 피해를 줄 시, #y취약을 부여합니다." ],
     "EXTRA_TEXT": [ "NL 적의 방어도를 넘어선 피해를 줄 시, 취약을 %d 부여합니다." ]
   },
   "CardAugments:AutoMod": {
-    "TEXT": [ "자동 ", "", "#자동사용. 카드를 1장 뽑습니다." ],
+    "TEXT": [ "자동 ", "", "#y자동사용. 카드를 1장 뽑습니다." ],
     "EXTRA_TEXT": [ "자동사용. NL ", " NL 카드를 %d장 뽑습니다." ]
   },
   "CardAugments:BashMod": {
@@ -289,8 +289,8 @@
     "EXTRA_TEXT": [
       "이번 전투에서 체력을 잃을 때마다 이 카드의 비용이 [E] 감소합니다. NL ",
       "Translator note: These strings are for replacing Blood for Blood's description. The first string is what to search for, the second string replaces it.",
-      "이번 전투에서 체력을 잃을 때마다 이 카드의 비용이 [R] 감소합니다. NL ",
-      "이번 전투에서 체력을 잃을 때마다 이 카드의 비용이 [R] [R] 감소합니다. NL "
+      " NL 이번 전투에서 체력을 잃을 때마다 이 카드의 비용이 [R] 감소합니다. NL ",
+      " NL 이번 전투에서 체력을 잃을 때마다 이 카드의 비용이 [R] [R] 감소합니다. NL "
     ]
   },
   "CardAugments:BludgeonMod": {
@@ -322,7 +322,7 @@
     "EXTRA_TEXT": [ "%s 카드 2장을 손으로 가져옵니다.", " NL 소멸.", "선천성. NL " ]
   },
   "CardAugments:ChargedMod": {
-    "TEXT": [ "충전된 ", "", "#y방어도가 #b20% 감소합니다.. NL 다음 턴에 에너지를 1 얻습니다." ],
+    "TEXT": [ "충전된 ", "", "#y방어도가 #b20% 감소합니다. NL 다음 턴에 에너지를 1 얻습니다." ],
     "EXTRA_TEXT": [ " NL 다음 턴에 [E] 을 얻습니다." ]
   },
   "CardAugments:ClashyMod": {
@@ -344,19 +344,19 @@
     ]
   },
   "CardAugments:CultistMod": {
-    "TEXT": [ "이단의 ", "", "피해량이 #b20% 감소합니다. NL #y힘을 #b1 얻습니다." ],
+    "TEXT": [ "광신자의 ", "", "피해량이 #b20% 감소합니다. NL #y힘을 #b1 얻습니다." ],
     "EXTRA_TEXT": [ " NL 힘을 %d 얻습니다." ]
   },
   "CardAugments:DemurMod": {
-    "TEXT": [ "거부하는 ", "", "#y방어도가 #b100% 증가합니다. NL 손에 있는 카드가 전부 수비 카드일 때만 사용할 수 있습니다." ],
-    "EXTRA_TEXT": [ "손에 있는 카드가 전부 수비 카드일 때만 사용할 수 있습니다. NL " ]
+    "TEXT": [ "거부하는 ", "", "#y방어도가 #b100% 증가합니다. NL 손에 있는 카드가 전부 스킬 카드일 때만 사용할 수 있습니다." ],
+    "EXTRA_TEXT": [ "손에 있는 카드가 전부 스킬 카드일 때만 사용할 수 있습니다. NL " ]
   },
   "CardAugments:DevotedMod": {
     "TEXT": [ "헌신적인 ", "", "#y방어도와 피해량이 #b25% 감소합니다. 비용에 비례하여 #y만트라를 얻습니다." ],
     "EXTRA_TEXT": [ " NL 만트라를 %d 얻습니다." ]
   },
   "CardAugments:DisposableMod": {
-    "TEXT": [ "일회용 ", "", "비용이 #b1이 됩니다. NL 사용할 수 있습니다." ],
+    "TEXT": [ "떠나가는 ", "", "비용이 #b1이 됩니다. NL 사용할 수 있습니다." ],
     "EXTRA_TEXT": []
   },
   "CardAugments:DivergentMod": {
@@ -402,11 +402,11 @@
     "EXTRA_TEXT": [ " NL 진노합니다." ]
   },
   "CardAugments:ExplosiveMod": {
-    "TEXT": [ "폭발성 ", "", "비용이 #b1 증가합니다. #b2 턴 뒤에, 이 카드를 #b5 번 사용합니다." ],
+    "TEXT": [ "폭발적인 ", "", "비용이 #b1 증가합니다. #b2 턴 뒤에, 이 카드를 #b5 번 사용합니다." ],
     "EXTRA_TEXT": [ "2턴 후 턴 시작 시, %2$s 카드를 %1$s 번 사용합니다.", "선천성. NL " ]
   },
   "CardAugments:FanaticMod": {
-    "TEXT": [ "광신의 ", "", "피해가 #b50% 증가합니다. NL #y소멸이 추가됩니다." ],
+    "TEXT": [ "열광적인 ", "", "피해가 #b50% 증가합니다. NL #y소멸이 추가됩니다." ],
     "EXTRA_TEXT": [ " NL 소멸." ]
   },
   "CardAugments:FearfulMod": {
@@ -434,8 +434,8 @@
     "EXTRA_TEXT": [
       " NL 이번 전투에서 직전에 사용한 카드가 공격 카드일 경우 [E] 를 얻습니다.",
       "Translator note: These strings are for replacing Follow-Up's description. The first string is what to search for, the second string replaces it.",
-      "이번 전투에서 직전에 사용한 카드가 공격 카드일 경우 [W] 를 얻습니다.",
-      "이번 전투에서 직전에 사용한 카드가 공격 카드일 경우 [W] [W] 를 얻습니다."
+      " NL 이번 전투에서 직전에 사용한 카드가 공격 카드일 경우 [W] 를 얻습니다.",
+      " NL 이번 전투에서 직전에 사용한 카드가 공격 카드일 경우 [W] [W] 를 얻습니다."
     ]
   },
   "CardAugments:FormMod": {
@@ -457,10 +457,10 @@
   "CardAugments:GlassMod": {
     "TEXT": [ "유리 ", "", "피해가 #b50% 증가합니다. 사용할 때마다 이 카드의 피해량이 #b2 씩 감소합니다." ],
     "EXTRA_TEXT": [
-      " NL 이번 전투동안 이 카드의 피해량이 2 감소합니다.",
+      " NL 이번 전투 동안 이 카드의 피해량이 2 감소합니다.",
       "Translator note: These strings are for replacing Glass Knife's description. The first string is what to search for, the second string replaces it.",
-      "사용할 때마다 이 카드의 피해량이 2씩 감소합니다.",
-      "사용할 때마다 이 카드의 피해량이 4씩 감소합니다."
+      "이번 전투 동안 이 카드의 피해량이 2 감소합니다.",
+      "이번 전투 동안 이 카드의 피해량이 4 감소합니다."
     ]
   },
   "CardAugments:GloomMod": {
@@ -545,7 +545,7 @@
   },
   "CardAugments:NoxiousMod": {
     "TEXT": [ "유독성 ", "", "모든 적에게 #y중독을 #b2 부여합니다." ],
-    "EXTRA_TEXT": [ " NL 모든 적에게 중독을 %d 부여합니다." ]
+    "EXTRA_TEXT": [ " NL 적 전체에게 중독을 %d 부여합니다." ]
   },
   "CardAugments:NuclearMod": {
     "TEXT": [ "핵의 ", "", "비용이 #b1 증가합니다. NL #y플라즈마를 1번 #y영창합니다." ],
@@ -572,8 +572,8 @@
     "EXTRA_TEXT": [
       " NL 다음 턴에 카드를 %d 장 더 뽑습니다.",
       "Translator note: These strings are for replacing Predator's description. The first string is what to search for, the second string replaces it.",
-      "다음 턴에 카드를 2장 더 뽑습니다.",
-      "다음 턴에 카드를 4장 더 뽑습니다."
+      " NL 다음 턴에 카드를 2 장 더 뽑습니다.",
+      " NL 다음 턴에 카드를 4 장 더 뽑습니다."
     ]
   },
   "CardAugments:PreparedMod": {
@@ -597,7 +597,7 @@
     "EXTRA_TEXT": [ " NL cardaugments:복귀." ]
   },
   "CardAugments:ReturningMod": {
-    "TEXT": [ "귀환의 ", "", "비용이 #b0이 됩니다. NL 사용 가능해집니다. NL 이 카드를 뽑을 카드 더미에 섞어넣습니다." ],
+    "TEXT": [ "회귀의 ", "", "비용이 #b0이 됩니다. NL 사용 가능해집니다. NL 이 카드를 뽑을 카드 더미에 섞어넣습니다." ],
     "EXTRA_TEXT": [ " NL cardaugments:복귀." ]
   },
   "CardAugments:RollMod": {
@@ -633,8 +633,8 @@
     "EXTRA_TEXT": [ "휘발성. NL ", " NL 이 카드를 뽑으면 [E] 을 얻습니다." ]
   },
   "CardAugments:ShivMod": {
-    "TEXT": [ "", "와 단검", "피해가 #b20% 감소합니다. NL #y단도 카드를 1장 얻습니다." ],
-    "EXTRA_TEXT": [ " NL *단도 카드를 %d 장 얻습니다." ]
+    "TEXT": [ "단검과 ", "", "피해가 #b20% 감소합니다. NL #y단도 를 1장 얻습니다." ],
+    "EXTRA_TEXT": [ " NL *단도 를 %d 장 얻습니다." ]
   },
   "CardAugments:SignatureMod": {
     "TEXT": [ "개인기 ", "", "피해가 #b75% 증가합니다. NL 이 카드가 손에 있는 유일한 공격 카드일 경우에만 사용 가능합니다." ],
