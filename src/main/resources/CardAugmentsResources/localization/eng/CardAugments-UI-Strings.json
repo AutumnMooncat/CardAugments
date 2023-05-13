@@ -341,7 +341,7 @@
     "EXTRA_TEXT": [" NL Gain %d Mantra."]
   },
   "CardAugments:DisposableMod": {
-    "TEXT": ["Disposable ", "", "Sets cost by #b1. NL Allows playing the card."],
+    "TEXT": ["Disposable ", "", "Sets cost to #b1. NL Allows playing the card."],
     "EXTRA_TEXT": []
   },
   "CardAugments:DivergentMod": {
@@ -384,7 +384,7 @@
     "EXTRA_TEXT": [" NL Enter Wrath."]
   },
   "CardAugments:ExplosiveMod": {
-    "TEXT": ["Explosive ", "", "Delays effect for #b2 turns, then plays #b5 copies of the card."],
+    "TEXT": ["Explosive ", "", "Increases cost by #b1. NL Delays effect for #b2 turns, then plays #b5 copies of the card."],
     "EXTRA_TEXT": ["In 2 turns, play %1$s copies of %2$s at the start of your turn.", "Innate. NL "]
   },
   "CardAugments:FanaticMod": {

@@ -634,7 +634,7 @@
     "TEXT": [
       "",
       " Explosivo",
-      "Retrasa el efecto durante #b2 turnos, luego juega #b5 copias de la carta"
+      "Aumenta el costo en #b1. Retrasa el efecto durante #b2 turnos, luego juega #b5 copias de la carta"
     ],
     "EXTRA_TEXT": [
       "En 2 turnos, juega %1$s copias de %2$s al comienzo de tu turno.",

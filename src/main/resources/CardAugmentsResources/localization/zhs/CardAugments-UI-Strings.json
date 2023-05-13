@@ -385,7 +385,7 @@
     "EXTRA_TEXT": [" NL 进入 愤怒 。"]
   },
   "CardAugments:ExplosiveMod": {
-    "TEXT": ["炸弹化", "", "在打出这张牌后第 #b3 回合开始时, 打出原牌的 #b5 张复制。"],
+    "TEXT": ["炸弹化", "", "本牌耗能增加 #b1 。 NL 在打出这张牌后第 #b3 回合开始时, 打出原牌的 #b5 张复制。"],
     "EXTRA_TEXT": ["在打出这张牌后第3回合开始时，打出 %2$s 的 %1$s 张复制。", " 固有 。 NL "]
   },
   "CardAugments:FanaticMod": {
