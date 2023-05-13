@@ -13,23 +13,23 @@
       "允许修改商店牌",
       "允许启用附加事件",
       "启用修改提示词",
-      "Roll Attempts (Default 1):",
-      "Show/Hide Probability Analysis"
+      "尝试添加修改词条次数 (默认 1):",
+      "显示修改概率统计"
     ],
     "EXTRA_TEXT": [
       "奇美拉卡牌",
       "为奖励卡牌添加随机修改。查看Mod设置来更改设置！",
-      "#yAppearance #yRates:",
-      " Modifier: #b",
-      " Modifiers: #b",
-      " NL Common Mod: #b",
-      " NL Uncommon Mod: #b",
-      " NL Rare Mod: #b",
-      " NL NL #yCommon #yCards:",
-      " NL NL #yUncommon #yCards:",
-      " NL NL #yRare #yCards:",
-      " NL NL #yCommon/Starter #yCards:",
-      " NL NL #ySpecial/Curse #yCards:"
+      "#y出现概率 :",
+      " 修改: #b",
+      " 修改: #b",
+      " NL 普通修改: #b",
+      " NL 罕见修改: #b",
+      " NL 稀有修改: #b",
+      " NL NL #y普通牌 :",
+      " NL NL #y罕见牌 :",
+      " NL NL #y稀有牌 :",
+      " NL NL #y普通/基础牌 :",
+      " NL NL #y事件/诅咒牌 :"
     ]
   },
   "CardAugments:AbstractAugment": {
@@ -60,7 +60,7 @@
       "设置",
       "所有稀有度",
       "无",
-      "Disable Modifier"
+      "禁用此修改"
     ]
   },
   "CardAugments:SCVScreen": {
@@ -432,7 +432,7 @@
     "EXTRA_TEXT": [" NL 不能被 升级。"]
   },
   "CardAugments:GhostlyMod": {
-    "TEXT": ["鬼祟", "", "获得的 #y格挡 增加 #b33% 。 NL #y虚无 。"],
+    "TEXT": ["幽灵", "", "获得的 #y格挡 增加 #b33% 。 NL #y虚无 。"],
     "EXTRA_TEXT": [" 虚无 。 NL "]
   },
   "CardAugments:GlassMod": {
