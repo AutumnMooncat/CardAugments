@@ -27,6 +27,7 @@ public class HeavyMod extends AbstractAugment {
     public void onInitialApplication(AbstractCard card) {
         if (card instanceof HeavyBlade) {
             card.magicNumber += BOOST;
+            card.baseMagicNumber += BOOST;
         }
     }
 
