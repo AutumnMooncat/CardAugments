@@ -31,7 +31,7 @@ public class ExplosiveMod extends AbstractAugment {
         inherentHack = false;
         CardModifierManager.addModifier(preview, new PreviewedMod());
         MultiCardPreview.add(card, preview);
-        card.cost = 2;
+        card.cost = card.cost + 1;
         card.costForTurn = card.cost;
         card.isEthereal = false;
         card.exhaust = false;

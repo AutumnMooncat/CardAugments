@@ -402,7 +402,7 @@
     "EXTRA_TEXT": [ " NL 진노합니다." ]
   },
   "CardAugments:ExplosiveMod": {
-    "TEXT": [ "폭발성 ", "", "#b2 턴 뒤에, 이 카드를 #b5 번 사용합니다." ],
+    "TEXT": [ "폭발성 ", "", "비용이 #b1 증가합니다. #b2 턴 뒤에, 이 카드를 #b5 번 사용합니다." ],
     "EXTRA_TEXT": [ "2턴 후 턴 시작 시, %2$s 카드를 %1$s 번 사용합니다.", "선천성. NL " ]
   },
   "CardAugments:FanaticMod": {

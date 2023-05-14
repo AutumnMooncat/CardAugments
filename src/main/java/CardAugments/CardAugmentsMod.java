@@ -190,7 +190,7 @@ public class CardAugmentsMod implements
             modifyStarters = cardAugmentsConfig.getBool(MODIFY_STARTERS);
             allowOrbs = cardAugmentsConfig.getBool(ALLOW_ORBS);
             rarityBias = cardAugmentsConfig.getInt(RARITY_BIAS);
-            modifyInstantObtain = cardAugmentsConfig.getBool(MODIFY_STARTERS);
+            modifyInstantObtain = cardAugmentsConfig.getBool(MODIFY_INSTANT_OBTAIN);
             modifyShop = cardAugmentsConfig.getBool(MODIFY_SHOP);
             eventAddons = cardAugmentsConfig.getBool(EVENT_ADDONS);
             griefLibrary = cardAugmentsConfig.getBool(GRIEF_LIBRARY);
