@@ -77,19 +77,19 @@ public class FallingPatches {
                         __instance.imageEventText.updateDialogOption(0, OPTIONS[2]);
                         List<String> cardMetrics = new ArrayList<>();
 
-                        if (___skillCard != null && augment.validCard(___skillCard)) {
+                        if (___skillCard != null && augment.canApplyTo(___skillCard)) {
                             CardModifierManager.addModifier(___skillCard, augment.makeCopy());
                             AbstractDungeon.effectsQueue.add(new ShowCardBrieflyEffect(___skillCard.makeStatEquivalentCopy(), Settings.WIDTH * (1/4F), Settings.HEIGHT * (1/2F)));
                             AbstractDungeon.topLevelEffects.add(new UpgradeShineEffect(Settings.WIDTH * (1/4F), Settings.HEIGHT * (1/2F)));
                             cardMetrics.add(___skillCard.cardID);
                         }
-                        if (___powerCard != null && augment.validCard(___powerCard)) {
+                        if (___powerCard != null && augment.canApplyTo(___powerCard)) {
                             CardModifierManager.addModifier(___powerCard, augment.makeCopy());
                             AbstractDungeon.effectsQueue.add(new ShowCardBrieflyEffect(___powerCard.makeStatEquivalentCopy(), Settings.WIDTH * (2/4F), Settings.HEIGHT * (1/2F)));
                             AbstractDungeon.topLevelEffects.add(new UpgradeShineEffect(Settings.WIDTH * (2/4F), Settings.HEIGHT * (1/2F)));
                             cardMetrics.add(___powerCard.cardID);
                         }
-                        if (___attackCard != null && augment.validCard(___attackCard)) {
+                        if (___attackCard != null && augment.canApplyTo(___attackCard)) {
                             CardModifierManager.addModifier(___attackCard, augment.makeCopy());
                             AbstractDungeon.effectsQueue.add(new ShowCardBrieflyEffect(___attackCard.makeStatEquivalentCopy(), Settings.WIDTH * (3/4F), Settings.HEIGHT * (1/2F)));
                             AbstractDungeon.topLevelEffects.add(new UpgradeShineEffect(Settings.WIDTH * (3/4F), Settings.HEIGHT * (1/2F)));

@@ -43,7 +43,7 @@ public class ShiningPatches {
                 //Rip the leave button out and put it back later
                 __instance.imageEventText.clearRemainingOptions();
                 myIndex = __instance.imageEventText.optionList.size();
-                if (AbstractDungeon.player.masterDeck.group.stream().anyMatch(augment::validCard)) {
+                if (AbstractDungeon.player.masterDeck.group.stream().anyMatch(augment::canApplyTo)) {
                     damage = (int) (ReflectionHacks.<Integer>getPrivate(__instance, ShiningLight.class, "damage") * 0.5f);
                     __instance.imageEventText.setDialogOption(String.format(OPTIONS[0], damage), new AugmentPreviewCard(TEXT[1], TEXT[2]));
                 } else {
@@ -68,7 +68,7 @@ public class ShiningPatches {
                         __instance.imageEventText.updateDialogOption(0, OPTIONS[2]);
                         ArrayList<AbstractCard> validCards = new ArrayList<>();
                         for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
-                            if (augment.validCard(c)) {
+                            if (augment.canApplyTo(c)) {
                                 validCards.add(c);
                             }
                         }

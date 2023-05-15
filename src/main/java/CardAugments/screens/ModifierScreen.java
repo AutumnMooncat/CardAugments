@@ -380,7 +380,7 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
             modifierDisabled = CardAugmentsMod.disabledModifiers.contains(selectedAugment);
             for (AbstractCard c : CardLibrary.getAllCards()) {
                 if (!c.getClass().isAnnotationPresent(NoCompendium.class)) {
-                    if (selectedAugment.validCard(c)) {
+                    if (selectedAugment.canApplyTo(c)) {
                         AbstractCard copy = c.makeCopy();
                         CardModifierManager.addModifier(copy, selectedAugment.makeCopy());
                         if (upgradePreview && copy.canUpgrade()) {

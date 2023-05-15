@@ -23,7 +23,7 @@ public class ChimeraDeckMod extends ConsoleCommand {
             String cardName = Chimera.unpackCardName(tokens[depth]);
             AbstractAugment a = CardAugmentsMod.modMap.get(tokens[depth+1]);
             for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
-                if (c.cardID.equals(cardName) && a.validCard(c)) {
+                if (c.cardID.equals(cardName) && a.canApplyTo(c)) {
                     CardModifierManager.addModifier(c, a.makeCopy());
                     break;
                 }

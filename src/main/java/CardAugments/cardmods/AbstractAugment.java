@@ -77,7 +77,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
 
     public abstract AugmentRarity getModRarity();
 
-    public abstract boolean validCard(AbstractCard card);
+    protected abstract boolean validCard(AbstractCard card);
 
     public String getPrefix() {
         return "";
@@ -153,8 +153,11 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         return false;
     }
 
-    public boolean canRoll(AbstractCard card) {
-        return validCard(card) && !CardModifierManager.hasModifier(card, identifier(card));
+    public boolean canApplyTo(AbstractCard card) {
+        if (!CardModifierManager.hasModifier(card, identifier(card))) {
+            return validCard(card);
+        }
+        return false;
     }
 
     public static AbstractCard makeNewInstance(AbstractCard card) {

@@ -35,7 +35,7 @@ public class DuplicatorPatches {
                 //Rip the leave button out and put it back later
                 __instance.imageEventText.clearRemainingOptions();
                 myIndex = __instance.imageEventText.optionList.size();
-                if (AbstractDungeon.player.masterDeck.group.stream().anyMatch(c -> augment.validCard(c))) {
+                if (AbstractDungeon.player.masterDeck.group.stream().anyMatch(c -> augment.canApplyTo(c))) {
                     __instance.imageEventText.setDialogOption(OPTIONS[0], new AugmentPreviewCard(TEXT[2], TEXT[3]));
                 } else {
                     __instance.imageEventText.setDialogOption(OPTIONS[1], true);
@@ -62,7 +62,7 @@ public class DuplicatorPatches {
                         __instance.imageEventText.updateDialogOption(0, OPTIONS[2]);
                         CardGroup group = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
                         for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
-                            if (augment.validCard(c)) {
+                            if (augment.canApplyTo(c)) {
                                 group.addToTop(c);
                             }
                         }

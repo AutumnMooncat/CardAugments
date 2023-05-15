@@ -43,7 +43,7 @@ public class ChimeraHandForce extends ConsoleCommand {
             String cardName = Chimera.unpackCardName(tokens[depth]);
             AbstractCard c = CardLibrary.getCard(cardName);
             if (c != null) {
-                options = CardAugmentsMod.modMap.keySet().stream().filter(s -> !CardAugmentsMod.modMap.get(s).validCard(c)).collect(Collectors.toCollection(ArrayList::new));
+                options = CardAugmentsMod.modMap.keySet().stream().filter(s -> !CardAugmentsMod.modMap.get(s).canApplyTo(c)).collect(Collectors.toCollection(ArrayList::new));
                 if (tokens.length > depth + 1) {
                     if (options.contains(tokens[depth+1])) {
                         ConsoleCommand.complete = true;

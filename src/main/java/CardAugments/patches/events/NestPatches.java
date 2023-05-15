@@ -64,7 +64,7 @@ public class NestPatches {
                     }
                     CardGroup group = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
                     for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
-                        if (augment.validCard(c)) {
+                        if (augment.canApplyTo(c)) {
                             group.addToTop(c);
                         }
                     }
@@ -80,7 +80,7 @@ public class NestPatches {
                         __instance.imageEventText.updateBodyText(TEXT[0]);
                         __instance.imageEventText.updateDialogOption(0, OPTIONS[2], new AugmentPreviewCard(TEXT[3], TEXT[4]));
                         FanaticMod mod = new FanaticMod();
-                        if (AbstractDungeon.player.masterDeck.group.stream().anyMatch(mod::validCard)) {
+                        if (AbstractDungeon.player.masterDeck.group.stream().anyMatch(mod::canApplyTo)) {
                             __instance.imageEventText.setDialogOption(OPTIONS[3], new AugmentPreviewCard(TEXT[5], TEXT[6]));
                         } else {
                             __instance.imageEventText.setDialogOption(OPTIONS[4], true);

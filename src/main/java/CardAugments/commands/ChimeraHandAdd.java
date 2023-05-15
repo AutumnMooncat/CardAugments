@@ -28,7 +28,7 @@ public class ChimeraHandAdd extends ConsoleCommand {
             AbstractCard c = CardLibrary.getCard(cardName);
             AbstractAugment a = CardAugmentsMod.modMap.get(tokens[depth+1]);
             if (c != null) {
-                if (a.validCard(c)) {
+                if (a.canApplyTo(c)) {
                     int count = 1;
                     if (tokens.length > depth + 2 && ConvertHelper.tryParseInt(tokens[depth + 2]) != null) {
                         count = ConvertHelper.tryParseInt(tokens[depth + 2], 0);

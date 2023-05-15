@@ -41,7 +41,7 @@ public class SerpentPatches {
                 //Rip the leave button out and put it back later
                 __instance.imageEventText.clearRemainingOptions();
                 myIndex = __instance.imageEventText.optionList.size();
-                if (AbstractDungeon.player.masterDeck.group.stream().anyMatch(augment::validCard)) {
+                if (AbstractDungeon.player.masterDeck.group.stream().anyMatch(augment::canApplyTo)) {
                     __instance.imageEventText.setDialogOption(String.format(OPTIONS[0]), new AugmentPreviewCard(TEXT[2], TEXT[3]));
                 } else {
                     __instance.imageEventText.setDialogOption(OPTIONS[1], true);
@@ -63,7 +63,7 @@ public class SerpentPatches {
                         ArrayList<AbstractCard> validCards = new ArrayList<>();
                         List<String> cardMetrics = new ArrayList<>();
                         for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
-                            if (augment.validCard(c)) {
+                            if (augment.canApplyTo(c)) {
                                 cardMetrics.add(c.cardID);
                                 validCards.add(c);
                                 CardModifierManager.addModifier(c, augment.makeCopy());

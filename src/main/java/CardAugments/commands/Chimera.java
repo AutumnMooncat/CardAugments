@@ -38,7 +38,7 @@ public class Chimera extends ConsoleCommand {
     }
 
     public static ArrayList<String> getValidMods(AbstractCard card) {
-        return CardAugmentsMod.modMap.keySet().stream().filter(s -> CardAugmentsMod.modMap.get(s).validCard(card)).collect(Collectors.toCollection(ArrayList::new));
+        return CardAugmentsMod.modMap.keySet().stream().filter(s -> CardAugmentsMod.modMap.get(s).canApplyTo(card)).collect(Collectors.toCollection(ArrayList::new));
     }
 
     public static ArrayList<String> getAllMods() {
@@ -48,7 +48,7 @@ public class Chimera extends ConsoleCommand {
     public static ArrayList<String> getAllValidCards(AbstractAugment a) {
         ArrayList<String> cardIDs = new ArrayList<>();
         for (String s : CardLibrary.cards.keySet()) {
-            if (a.validCard(CardLibrary.cards.get(s))) {
+            if (a.canApplyTo(CardLibrary.cards.get(s))) {
                 String cardid = CardLibrary.cards.get(s).cardID.replace(' ', '_');
                 if (!cardIDs.contains(cardid)) {// 248
                     cardIDs.add(cardid);

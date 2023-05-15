@@ -813,13 +813,13 @@ public class CardAugmentsMod implements
         ArrayList<AbstractAugment> validMods = new ArrayList<>();
         switch (rarity) {
             case COMMON:
-                validMods.addAll(commonMods.stream().filter(m -> m.canRoll(c) && isAugmentEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
+                validMods.addAll(commonMods.stream().filter(m -> m.canApplyTo(c) && isAugmentEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
                 break;
             case UNCOMMON:
-                validMods.addAll(uncommonMods.stream().filter(m -> m.canRoll(c) && isAugmentEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
+                validMods.addAll(uncommonMods.stream().filter(m -> m.canApplyTo(c) && isAugmentEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
                 break;
             case RARE:
-                validMods.addAll(rareMods.stream().filter(m -> m.canRoll(c) && isAugmentEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
+                validMods.addAll(rareMods.stream().filter(m -> m.canApplyTo(c) && isAugmentEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
                 break;
         }
         if (!validMods.isEmpty()) {
@@ -833,17 +833,17 @@ public class CardAugmentsMod implements
 
     public static boolean canReceiveModifier(AbstractCard card) {
         for (AbstractAugment a : commonMods) {
-            if (a.validCard(card)) {
+            if (a.canApplyTo(card)) {
                 return true;
             }
         }
         for (AbstractAugment a : uncommonMods) {
-            if (a.validCard(card)) {
+            if (a.canApplyTo(card)) {
                 return true;
             }
         }
         for (AbstractAugment a : rareMods) {
-            if (a.validCard(card)) {
+            if (a.canApplyTo(card)) {
                 return true;
             }
         }
@@ -852,9 +852,9 @@ public class CardAugmentsMod implements
 
     public static ArrayList<AbstractAugment> getAllValidMods(AbstractCard c) {
         ArrayList<AbstractAugment> validMods = new ArrayList<>();
-        validMods.addAll(commonMods.stream().filter(m -> m.canRoll(c) && isAugmentEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
-        validMods.addAll(uncommonMods.stream().filter(m -> m.canRoll(c) && isAugmentEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
-        validMods.addAll(rareMods.stream().filter(m -> m.canRoll(c) && isAugmentEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
+        validMods.addAll(commonMods.stream().filter(m -> m.canApplyTo(c) && isAugmentEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
+        validMods.addAll(uncommonMods.stream().filter(m -> m.canApplyTo(c) && isAugmentEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
+        validMods.addAll(rareMods.stream().filter(m -> m.canApplyTo(c) && isAugmentEnabled(m)).collect(Collectors.toCollection(ArrayList::new)));
         return validMods;
     }
 
