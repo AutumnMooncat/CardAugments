@@ -12,24 +12,24 @@
       "Modificar cartas de Obtención Instantánea (Mordeduras, Caja de Pandora, Maldiciones, etc.)",
       "Modificar cartas de tienda",
       "Activar complementos de eventos",
-      "Enable Modifier Tooltips",
-      "Roll Attempts (Default 1):",
-      "Show/Hide Probability Analysis"
+      "Habilitar información sobre herramientas de modificadores",
+      "Intentos de tirada (por defecto 1):",
+      "Mostrar/Ocultar análisis de probabilidad"
     ],
     "EXTRA_TEXT": [
       "Cartas Quimera",
       "Agrega modificadores de carta con valores aleatorios a las recompensas de carta. ¡Consulta las opciones de modificación si deseas cambiar alguna configuración!",
-      "#yAppearance #yRates:",
-      " Modifier: #b",
-      " Modifiers: #b",
-      " NL Common Mod: #b",
-      " NL Uncommon Mod: #b",
-      " NL Rare Mod: #b",
-      " NL NL #yCommon #yCards:",
-      " NL NL #yUncommon #yCards:",
-      " NL NL #yRare #yCards:",
-      " NL NL #yCommon/Starter #yCards:",
-      " NL NL #ySpecial/Curse #yCards:"
+      "#yTasa de #yaparición:",
+      " Modificador: #b",
+      " Modificadores: #b",
+      " NL Modificador común: #b",
+      " NL Modificador poco común: #b",
+      " NL Modificador raro: #b",
+      " NL NL #yCartas #ycomunes:",
+      " NL NL #yCartas poco #ycomunes:",
+      " NL NL #yCartas #yraras:",
+      " NL NL #yCartas #ycomunes/iniciales:",
+      " NL NL #yCartas especiales/maldiciones:"
     ]
   },
   "CardAugments:AbstractAugment": {
@@ -60,7 +60,7 @@
       "Configuración",
       "Todas las rarezas",
       "Ninguno",
-      "Disable Modifier"
+      "Deshabilitar modificador"
     ]
   },
   "CardAugments:SCVScreen": {
@@ -245,12 +245,12 @@
   "CardAugments:AllOutMod": {
     "TEXT": [
       "",
-      " Todo o Nada",
+      " A Toda Costa",
       "Aumenta el daño en #b33%. Descarta una carta al azar."
     ],
     "EXTRA_TEXT": [
       " NL Descarta %d carta al azar.",
-      "Nota del traductor: Estas cadenas son para reemplazar la descripción del ataque Todo o Nada. La primera cadena es lo que se busca, la segunda cadena lo reemplaza.",
+      "Nota del traductor: Estas cadenas son para reemplazar la descripción del ataque A Toda Costa. La primera cadena es lo que se busca, la segunda cadena lo reemplaza.",
       " NL Descarta 1 carta al azar.",
       "Descarta 2 cartas al azar."
     ]
@@ -291,12 +291,12 @@
   "CardAugments:AngryMod": {
     "TEXT": [
       "",
-      " Enojado/a",
+      " Enfadado/a",
       "Agrega una copia de la carta a tu pila de descarte."
     ],
     "EXTRA_TEXT": [
       " NL Añade una copia de esta carta a tu pila de descarte.",
-      "Nota del traductor: Estas cadenas son para reemplazar la descripción de las Iras. La primera cadena es lo que se busca, la segunda cadena lo reemplaza.",
+      "Nota del traductor: Estas cadenas son para reemplazar la descripción de la Ira. La primera cadena es lo que se busca, la segunda cadena lo reemplaza.",
       " NL Añade una copia de esta carta a tu pila de descarte.",
       " NL Agregar 2 copias de esta carta a tu pila de descarte."
     ]
@@ -576,7 +576,7 @@
   "CardAugments:EchoMod": {
     "TEXT": [
       "",
-      " Ecoante",
+      " Resonante",
       "Juega dos veces. Añade #yAgota."
     ],
     "EXTRA_TEXT": [
@@ -596,7 +596,7 @@
   "CardAugments:EndlessMod": {
     "TEXT": [
       "",
-      " Infinito/a",
+      " Sin Fin",
       "Reduce el #yBloqueo y el daño en un #b20%. Se duplica cuando se roba. Añade #yAgotar."
     ],
     "EXTRA_TEXT": [
@@ -694,7 +694,7 @@
   "CardAugments:FrostyMod": {
     "TEXT": [
       "",
-      " Helado/a",
+      " Congelado/a",
       "Reduce el #yBloqueo en #b25%. #yGenera una #yEscarcha."
     ],
     "EXTRA_TEXT": [
@@ -704,7 +704,7 @@
   "CardAugments:FollowUpMod": {
     "TEXT": [
       "",
-      " Siguiente",
+      "Siguiente ",
       "Reduce el daño en un #b20%. Obtiene [E] si la última carta jugada fue un Ataque."
     ],
     "EXTRA_TEXT": [
@@ -780,7 +780,7 @@
   "CardAugments:GoForTheMod": {
     "TEXT": [
       "",
-      " Ve por él",
+      "A por el/la",
       "Reduce el daño en un 20%. Inflige #b3(+1) de daño a un enemigo, y luego activa el efecto original de la carta si el enemigo tenía la intención de atacar."
     ],
     "EXTRA_TEXT": [
@@ -800,7 +800,7 @@
   "CardAugments:GritMod": {
     "TEXT": [
       "",
-      " Arenoso/a",
+      " Agresivo/a",
       "#yAgota una carta en tu mano."
     ],
     "EXTRA_TEXT": [
@@ -811,7 +811,7 @@
   "CardAugments:GreedMod": {
     "TEXT": [
       "",
-      " de la avaricia",
+      " de Codicia",
       "Da #b15(+5) #yOro. Se vuelve #yFatal. Añade #yAgota."
     ],
     "EXTRA_TEXT": [
@@ -894,7 +894,7 @@
   "CardAugments:LuckyMod": {
     "TEXT": [
       "",
-      " de Suerte",
+      " Afortunado/a",
       "#yAdivina #b1(+1) antes de robar."
     ],
     "EXTRA_TEXT": [
@@ -1015,7 +1015,7 @@
   "CardAugments:PiercingMod": {
     "TEXT": [
       "",
-      " Piercing",
+      " Perforante",
       "Ignora el #yBloqueo"
     ],
     "EXTRA_TEXT": [
@@ -1087,7 +1087,7 @@
   },
   "CardAugments:ReshuffleMod": {
     "TEXT": [
-      "Recordando ",
+      "Reinvocando ",
       "",
       "Se baraja de nuevo en la pila de robo."
     ],
@@ -1108,7 +1108,7 @@
   "CardAugments:RollMod": {
     "TEXT": [
       "",
-      " y Balanceo",
+      " y Lanzar",
       "Reduce el #yBloqueo por #b33%. Da #yBloqueo el próximo turno."
     ],
     "EXTRA_TEXT": [
@@ -1219,7 +1219,7 @@
   "CardAugments:SlayerMod": {
     "TEXT": [
       "",
-      " del Cazador",
+      " Matador/a",
       "Reduce el daño en un #b25%. Inflige el doble de daño al enemigo con menos HP."
     ],
     "EXTRA_TEXT": [
@@ -1269,7 +1269,7 @@
   "CardAugments:SuckerMod": {
     "TEXT": [
       "",
-      " de Ventosas",
+      " Chupador/a",
       "Reduce el daño en un #b20%. Aplica #b1 #yDebilidad."
     ],
     "EXTRA_TEXT": [
@@ -1349,7 +1349,7 @@
   "CardAugments:VanishingMod": {
     "TEXT": [
       "",
-      " Desvanecido",
+      " Desvanecido/a",
       "Aumenta los efectos de la carta en un #b33%. Se #yAgota si pierdes HP"
     ],
     "EXTRA_TEXT": [
