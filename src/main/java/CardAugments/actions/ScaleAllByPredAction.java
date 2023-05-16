@@ -1,6 +1,6 @@
 package CardAugments.actions;
 
-import CardAugments.util.CrossoverHelper;
+import CardAugments.util.crossover.SistersHelper;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -35,7 +35,7 @@ public class ScaleAllByPredAction extends AbstractGameAction {
         cards.addAll(AbstractDungeon.player.hand.group);
         cards.addAll(AbstractDungeon.player.discardPile.group);
         if (Loader.isModLoaded("Starlight")) {
-            cards.addAll(CrossoverHelper.Sisters.projectedCards());
+            cards.addAll(SistersHelper.projectedCards());
         }
 
         for (AbstractCard c : cards) {
