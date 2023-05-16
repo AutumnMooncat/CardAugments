@@ -7,6 +7,7 @@ import CardAugments.util.AugmentPreviewCard;
 import CardAugments.util.Wiz;
 import basemod.ReflectionHacks;
 import basemod.helpers.CardModifierManager;
+import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -44,7 +45,11 @@ public class ShiningPatches {
                 __instance.imageEventText.clearRemainingOptions();
                 myIndex = __instance.imageEventText.optionList.size();
                 if (AbstractDungeon.player.masterDeck.group.stream().anyMatch(augment::canApplyTo)) {
-                    damage = (int) (ReflectionHacks.<Integer>getPrivate(__instance, ShiningLight.class, "damage") * 0.5f);
+                    if (AbstractDungeon.ascensionLevel >= 15) {
+                        damage = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.15F);
+                    } else {
+                        damage = MathUtils.round((float)AbstractDungeon.player.maxHealth * 0.1F);
+                    }
                     __instance.imageEventText.setDialogOption(String.format(OPTIONS[0], damage), new AugmentPreviewCard(TEXT[1], TEXT[2]));
                 } else {
                     __instance.imageEventText.setDialogOption(OPTIONS[1], true);
