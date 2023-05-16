@@ -1190,7 +1190,7 @@
     "TEXT": [
       "",
       " y Daga",
-      "Reduce el daño en #b20%. Agrega un #yNavaja a tu mano."
+      "Reduce el #yBloqueo en un #b20%. Agrega un #yNavaja a tu mano."
     ],
     "EXTRA_TEXT": [
       " NL Agrega %d *Navaja a tu mano."

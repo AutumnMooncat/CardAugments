@@ -609,7 +609,7 @@
     "EXTRA_TEXT": ["Ethereal. NL "," NL When you draw this card, gain [E]."]
   },
   "CardAugments:ShivMod": {
-    "TEXT": ["", " and Dagger", "Reduces damage by #b20%. NL Adds a #yShiv into your hand."],
+    "TEXT": ["", " and Dagger", "Reduces #yBlock by #b20%. NL Adds a #yShiv into your hand."],
     "EXTRA_TEXT": [" NL Add %d *Shiv into your hand."]
   },
   "CardAugments:SignatureMod": {

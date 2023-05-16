@@ -610,7 +610,7 @@
     "EXTRA_TEXT": [" 虚无 。 NL "," NL 抽到本牌时获得 [E] 。"]
   },
   "CardAugments:ShivMod": {
-    "TEXT": ["", "与匕首", "造成的伤害减少 #b20% 。 NL 增加 #b1 张 #y小刀 到你的手牌。"],
+    "TEXT": ["", "与匕首", "获得的 #y格挡 减少 #b20% 。 NL 增加 #b1 张 #y小刀 到你的手牌。"],
     "EXTRA_TEXT": [" NL 增加 %d 张 *小刀 到你的手牌。"]
   },
   "CardAugments:SignatureMod": {

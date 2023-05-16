@@ -633,7 +633,7 @@
     "EXTRA_TEXT": [ "휘발성. NL ", " NL 이 카드를 뽑으면 [E] 을 얻습니다." ]
   },
   "CardAugments:ShivMod": {
-    "TEXT": [ "단검과 ", "", "피해가 #b20% 감소합니다. NL #y단도 를 1장 얻습니다." ],
+    "TEXT": [ "단검과 ", "", "#y방어도가 #b20% 감소합니다. NL #y단도 를 1장 얻습니다." ],
     "EXTRA_TEXT": [ " NL *단도 를 %d 장 얻습니다." ]
   },
   "CardAugments:SignatureMod": {
