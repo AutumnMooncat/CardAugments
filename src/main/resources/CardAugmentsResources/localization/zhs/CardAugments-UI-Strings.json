@@ -594,7 +594,7 @@
     "EXTRA_TEXT": [" NL 若本场战斗上一张打出的牌是技能牌，抽 %d 张牌。"]
   },
   "CardAugments:ShamefulMod": {
-    "TEXT": ["羞耻", "", "本牌耗能减少 #b2 。 NL 获得 #b2 层 #y脆弱 。"],
+    "TEXT": ["羞耻", "", "本牌耗能减少 #b1 。 NL 获得 #b2 层 #y脆弱 。"],
     "EXTRA_TEXT": [" NL 获得 %d 层 脆弱 。"]
   },
   "CardAugments:SearingMod": {
