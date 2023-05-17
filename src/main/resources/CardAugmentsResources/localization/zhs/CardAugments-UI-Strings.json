@@ -678,7 +678,7 @@
     "EXTRA_TEXT": [" NL 一旦在战斗中失去生命， 消耗 本牌。"]
   },
   "CardAugments:VoidMod": {
-    "TEXT": ["预支", "", "本牌耗能减少 #b2 。 VL 将一张 #y虚空 洗入抽牌堆 。"],
+    "TEXT": ["预支", "", "本牌耗能减少 #b2 。 NL 将一张 #y虚空 洗入抽牌堆 。"],
     "EXTRA_TEXT": [" NL 将 %d 张 *虚空 洗入抽牌堆。"]
   },
   "CardAugments:VoidingMod": {
