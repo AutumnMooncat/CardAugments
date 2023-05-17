@@ -159,6 +159,25 @@
       "[离开]"
     ]
   },
+  "CardAugments:NestEventDownfall": {
+    "TEXT": [
+      "You stand to the side and encourage the cultists to resume what they were doing. Not long after, the group begins to gleefully @chant@ and ~wave~ their weapons around. NL NL #r@\"MURDER!!@ #r@MURDER@ #r@MURDER!!\"@ NL #b~\"CAW~ #b~CAW~ #b~CAAAAAWWW!\"~ NL #r@\"MURDER!@ #r@MURDER@ #r@MUURDER!!\"@ NL #b~\"CAAW~ #b~CAW~ #b~CAAAAAAWW!!\"~ NL NL You feel you may be able to learn something by observing them in action...",
+      "As you watch the #rCultists and their #r@ritual,@ you feel yourself falling into a #p~trance.~ NL NL With a spark of #b@inspiration,@ you focus in and... NL #y@CLANG@ #y@CLAAANG@ #y@CLANG!@ NL ...improve your arsenal! ",
+      "Choose a Card to Augment.",
+      "Cultist's",
+      "Gain 1 Strength. NL Damage -20%.",
+      "Fanatic",
+      "Damage +50%. NL Exhaust. NL Only applicable to cards without Exhaust."
+    ],
+    "EXTRA_TEXT": [
+      "[Observe]",
+      "[Locked] Requires: An Attack.",
+      "[Study Cultists] #gGive #gan #gAttack Cultist's.",
+      "[Study Ritual] #gGive #gan #gAttack Fanatic.",
+      "[Locked] Requires: A non-Exhausting Attack.",
+      "[Leave]"
+    ]
+  },
   "CardAugments:SensoryEvent": {
     "TEXT": [
       "#y拒绝 NL NL 你@拒绝@被你不认识的记忆所支配！某个你内在的东西 #r~碎裂了。~  NL NL 你 #r痛苦地 摇了摇头并环顾四周。事物没有什么不同, 然而感觉又 #p~那么不一样。~ ",
@@ -184,6 +203,20 @@
       "[锁定] 需要: 一张攻击牌。",
       "[离开]",
       "[继续]"
+    ]
+  },
+  "CardAugments:SerpentEventDownfall": {
+    "TEXT": [
+      "~\"Yeeeeeeessssssssssessss!~ NL ~Thisss~ ~will~ ~all~ ~be~ ~worthhh~ ~it.~ NL ~..ssSSs.....~ ~ss...~ ~sssss....!\"~",
+      "The serpent rears its head and stares at you with its ~hypnotic~ ~eyes!~ NL You feel #y@invigorated@ and ready to beat down whoever dares to stand before you! NL You thank the snake, and get going.",
+      "Slugger",
+      "Deal 6 damage to ALL enemies. NL Exhaust."
+    ],
+    "EXTRA_TEXT": [
+      "[Agree] #gGive #gALL #gyour #gAttacks Slugger.",
+      "[Locked] Requires: An Attack.",
+      "[Leave]",
+      "[Continue]"
     ]
   },
   "CardAugments:ShiningEvent": {

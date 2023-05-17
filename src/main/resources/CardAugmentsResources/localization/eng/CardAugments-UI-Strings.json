@@ -159,6 +159,25 @@
       "[Leave]"
     ]
   },
+  "CardAugments:NestEventDownfall": {
+    "TEXT": [
+      "You stand to the side and encourage the cultists to resume what they were doing. Not long after, the group begins to gleefully @chant@ and ~wave~ their weapons around. NL NL #r@\"MURDER!!@ #r@MURDER@ #r@MURDER!!\"@ NL #b~\"CAW~ #b~CAW~ #b~CAAAAAWWW!\"~ NL #r@\"MURDER!@ #r@MURDER@ #r@MUURDER!!\"@ NL #b~\"CAAW~ #b~CAW~ #b~CAAAAAAWW!!\"~ NL NL You feel you may be able to learn something by observing them in action...",
+      "As you watch the #rCultists and their #r@ritual,@ you feel yourself falling into a #p~trance.~ NL NL With a spark of #b@inspiration,@ you focus in and... NL #y@CLANG@ #y@CLAAANG@ #y@CLANG!@ NL ...improve your arsenal! ",
+      "Choose a Card to Augment.",
+      "Cultist's",
+      "Gain 1 Strength. NL Damage -20%.",
+      "Fanatic",
+      "Damage +50%. NL Exhaust. NL Only applicable to cards without Exhaust."
+    ],
+    "EXTRA_TEXT": [
+      "[Observe]",
+      "[Locked] Requires: An Attack.",
+      "[Study Cultists] #gGive #gan #gAttack Cultist's.",
+      "[Study Ritual] #gGive #gan #gAttack Fanatic.",
+      "[Locked] Requires: A non-Exhausting Attack.",
+      "[Leave]"
+    ]
+  },
   "CardAugments:SensoryEvent": {
     "TEXT": [
       "#yREJECTION NL NL You @refuse@ to be overtaken by the memories that you do not recognize! Something in you #r~cracks.~ NL NL You shake your head in #rpain and look around. Things appear the same, and yet feel #p~eerily~ #p~different.~",
@@ -180,7 +199,21 @@
       "If Fatal, gain 15 Gold. NL Exhaust."
     ],
     "EXTRA_TEXT": [
-      "[Agree] #gGive #gALL #gAttacks Greedy.",
+      "[Agree] #gGive #gALL #gyour #gAttacks Greedy.",
+      "[Locked] Requires: An Attack.",
+      "[Leave]",
+      "[Continue]"
+    ]
+  },
+  "CardAugments:SerpentEventDownfall": {
+    "TEXT": [
+      "~\"Yeeeeeeessssssssssessss!~ NL ~Thisss~ ~will~ ~all~ ~be~ ~worthhh~ ~it.~ NL ~..ssSSs.....~ ~ss...~ ~sssss....!\"~",
+      "The serpent rears its head and stares at you with its ~hypnotic~ ~eyes!~ NL You feel #y@invigorated@ and ready to beat down whoever dares to stand before you! NL You thank the snake, and get going.",
+      "Slugger",
+      "Deal 6 damage to ALL enemies. NL Exhaust."
+    ],
+    "EXTRA_TEXT": [
+      "[Agree] #gGive #gALL #gyour #gAttacks Slugger.",
       "[Locked] Requires: An Attack.",
       "[Leave]",
       "[Continue]"
