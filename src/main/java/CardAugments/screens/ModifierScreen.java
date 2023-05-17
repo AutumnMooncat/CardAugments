@@ -97,8 +97,8 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
     
     public ModifierScreen() {
         fallback = new Madness();
-        upgradeHb = new Hitbox(250.0F * Settings.scale, 80.0F * Settings.scale);
-        disableHb = new Hitbox(250.0F * Settings.scale, 80.0F * Settings.scale);
+        upgradeHb = new Hitbox(250.0F * Settings.scale, 60.0F * Settings.scale);
+        disableHb = new Hitbox(250.0F * Settings.scale, 60.0F * Settings.scale);
         cancelButton = new MenuCancelButton();
         settingsButton = new SettingsButton();
 
