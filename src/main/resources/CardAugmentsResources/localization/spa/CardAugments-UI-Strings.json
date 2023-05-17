@@ -1236,6 +1236,17 @@
       " NL Descarta esta carta la primera vez que se roba durante cada combate."
     ]
   },
+  "CardAugments:SluggerMod": {
+    "TEXT": [
+      "Slugger ",
+      "",
+      "Deals #b6(+3) damage to ALL enemies. NL Adds #yExhaust."
+    ],
+    "EXTRA_TEXT": [
+      " NL Deal %s damage to ALL enemies.",
+      " NL Deal %s damage to ALL enemies. NL Exhaust."
+    ]
+  },
   "CardAugments:SneckoMod": {
     "TEXT": [
       "",

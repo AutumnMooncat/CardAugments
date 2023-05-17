@@ -629,6 +629,10 @@
     "TEXT": ["滑溜", "", "卡牌数值增加 #b50% 。 NL 当本牌于本次战斗中第一次被抽到时，丢弃本牌。"],
     "EXTRA_TEXT": [" NL 当本牌于本次战斗中第一次被抽到时，丢弃本牌。"]
   },
+  "CardAugments:SluggerMod": {
+    "TEXT": ["Slugger ", "", "Deals #b6(+3) damage to ALL enemies. NL Adds #yExhaust."],
+    "EXTRA_TEXT": [" NL Deal %s damage to ALL enemies.", " NL Deal %s damage to ALL enemies. NL Exhaust."]
+  },
   "CardAugments:SneckoMod": {
     "TEXT": ["混乱", "", "抽到时随机耗能。"],
     "EXTRA_TEXT": ["耗能随机。 NL "]

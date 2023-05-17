@@ -652,6 +652,10 @@
     "TEXT": [ "미끄러운 ", "", "이 카드의 효과가 #b50% 증가합니다. NL 매 전투마다 이 카드를 처음으로 뽑으면 즉시 버립니다." ],
     "EXTRA_TEXT": [ " NL 이번 전투에서 이 카드를 처음 뽑았다면 즉시 버립니다." ]
   },
+  "CardAugments:SluggerMod": {
+    "TEXT": ["Slugger ", "", "Deals #b6(+3) damage to ALL enemies. NL Adds #yExhaust."],
+    "EXTRA_TEXT": [" NL Deal %s damage to ALL enemies.", " NL Deal %s damage to ALL enemies. NL Exhaust."]
+  },
   "CardAugments:SneckoMod": {
     "TEXT": [ "스네코 ", "", "뽑을 때 비용이 무작위로 정해집니다." ],
     "EXTRA_TEXT": [ "스네코. NL " ]
