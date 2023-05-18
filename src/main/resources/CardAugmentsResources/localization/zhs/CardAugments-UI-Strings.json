@@ -142,7 +142,7 @@
   },
   "CardAugments:NestEvent": {
     "TEXT": [
-      "你站在队伍外观察接下来发生的事情。没过一会, 一队 #r邪教徒 到达了并且开始兴奋地~挥舞着~自己的武器并且 @呼喊着@ 些什么。 NL NL #r@\"杀！杀～杀杀杀！！\"@ NL #b~\"咔～咔～咔—咔！\"~ NL #r@\"杀！杀～杀杀杀！！\"@ NL #b~\"咔～咔～咔—咔！\"~ NL NL 你想着你可以从他们的行为中学到一点什么……",
+      "你站在队伍外观察接下来发生的事情。没过一会, 一队 #r邪教徒 到达了并且开始兴奋地 ~挥舞着~ 自己的武器并且 @呼喊着@ 些什么。 NL NL #r@\"杀！杀～杀杀杀！！\"@ NL #b~\"咔～咔～咔—咔！\"~ NL #r@\"杀！杀～杀杀杀！！\"@ NL #b~\"咔～咔～咔—咔！\"~ NL NL 你想着你可以从他们的行为中学到一点什么……",
       "当你观察 #r邪教徒 和他们的 #r@仪式@ 时，你陷入了一种 #p~幻象~ 。 NL NL 随着一星 #b@灵感@ 的闪入，你重新集中精神并… NL #y@铛铛铛@ NL …强化了你的卡牌！ ",
       "选择一张卡来增加",
       "邪教",
@@ -161,26 +161,26 @@
   },
   "CardAugments:NestEventDownfall": {
     "TEXT": [
-      "You stand to the side and encourage the cultists to resume what they were doing. Not long after, the group begins to gleefully @chant@ and ~wave~ their weapons around. NL NL #r@\"MURDER!!@ #r@MURDER@ #r@MURDER!!\"@ NL #b~\"CAW~ #b~CAW~ #b~CAAAAAWWW!\"~ NL #r@\"MURDER!@ #r@MURDER@ #r@MUURDER!!\"@ NL #b~\"CAAW~ #b~CAW~ #b~CAAAAAAWW!!\"~ NL NL You feel you may be able to learn something by observing them in action...",
-      "As you watch the #rCultists and their #r@ritual,@ you feel yourself falling into a #p~trance.~ NL NL With a spark of #b@inspiration,@ you focus in and... NL #y@CLANG@ #y@CLAAANG@ #y@CLANG!@ NL ...improve your arsenal! ",
-      "Choose a Card to Augment.",
-      "Cultist's",
-      "Gain 1 Strength. NL Damage -20%.",
-      "Fanatic",
-      "Damage +50%. NL Exhaust. NL Only applicable to cards without Exhaust."
+      "你站在一旁并鼓励邪教徒们重复他们刚才做的动作。 没过一会，邪教徒开始高兴地 ~挥舞着~ 自己的武器并且 @呼喊着@ 些什么。 NL NL #r@\"杀！杀～杀杀杀！！\"@ NL #b~\"咔～咔～咔—咔！\"~ NL #r@\"杀！杀～杀杀杀！！\"@ NL #b~\"咔～咔～咔—咔！\"~ NL NL 你想着你可以从他们的行为中学到一点什么……",
+      "当你观察 #r邪教徒 和他们的 #r@仪式@ 时，你陷入了一种 #p~幻象~ 。 NL NL 随着一星 #b@灵感@ 的闪入，你重新集中精神并… NL #y@铛铛铛@ NL …强化了你的卡牌！ ",
+      "选择一张卡来增加",
+      "邪教",
+      "获得1点力量 NL 伤害 -20%.",
+      "狂热",
+      "伤害 +50% NL 消耗 NL 只能应用于不会消耗的卡牌"
     ],
     "EXTRA_TEXT": [
-      "[Observe]",
-      "[Locked] Requires: An Attack.",
-      "[Study Cultists] #gGive #gan #gAttack Cultist's.",
-      "[Study Ritual] #gGive #gan #gAttack Fanatic.",
-      "[Locked] Requires: A non-Exhausting Attack.",
-      "[Leave]"
+      "[观察]",
+      "[锁定] 需要: 一张攻击牌。",
+      "[研习邪教徒] #g给予一张攻击牌 邪教。",
+      "[研习仪式] #g给予一张攻击牌 狂热。",
+      "[锁定] 需要: 不会消耗的攻击牌。",
+      "[离开]"
     ]
   },
   "CardAugments:SensoryEvent": {
     "TEXT": [
-      "#y拒绝 NL NL 你@拒绝@被你不认识的记忆所支配！某个你内在的东西 #r~碎裂了。~  NL NL 你 #r痛苦地 摇了摇头并环顾四周。事物没有什么不同, 然而感觉又 #p~那么不一样。~ ",
+      "#y拒绝 NL NL 你 @拒绝@ 被你不认识的记忆所支配！某个你内在的东西 #r~碎裂了。~  NL NL 你 #r痛苦地 摇了摇头并环顾四周。事物没有什么不同, 然而感觉又 #p~那么不一样。~ ",
       "选择一张卡来增加",
       "自动",
       "自动打出 NL 抽1张牌 NL 只能应用于没有保留与自动打出的牌"
@@ -207,16 +207,16 @@
   },
   "CardAugments:SerpentEventDownfall": {
     "TEXT": [
-      "~\"Yeeeeeeessssssssssessss!~ NL ~Thisss~ ~will~ ~all~ ~be~ ~worthhh~ ~it.~ NL ~..ssSSs.....~ ~ss...~ ~sssss....!\"~",
-      "The serpent rears its head and stares at you with its ~hypnotic~ ~eyes!~ NL You feel #y@invigorated@ and ready to beat down whoever dares to stand before you! NL You thank the snake, and get going.",
-      "Slugger",
-      "Deal 6 damage to ALL enemies. NL Exhaust."
+      "~\"对～~ NL ~这会很值～得的。~ NL ~嘶……嘶～嘶……\"~",
+      "蛇抬起头，用它的 ~催眠之眼~ 瞪视着你！ NL 你觉得自己 #y@充满力量@ 并且准备扫除面前敢于阻碍你的一切！ NL 你谢过蛇后，重新上路。",
+      "猛击",
+      "对所有敌人造成6点伤害。 NL 消耗 。"
     ],
     "EXTRA_TEXT": [
-      "[Agree] #gGive #gALL #gyour #gAttacks Slugger.",
-      "[Locked] Requires: An Attack.",
-      "[Leave]",
-      "[Continue]"
+      "[同意] #g给予所有攻击牌 猛击。",
+      "[锁定] 需要: 一张攻击牌。",
+      "[离开]",
+      "[继续]"
     ]
   },
   "CardAugments:ShiningEvent": {
@@ -663,8 +663,8 @@
     "EXTRA_TEXT": [" NL 当本牌于本次战斗中第一次被抽到时，丢弃本牌。"]
   },
   "CardAugments:SluggerMod": {
-    "TEXT": ["Slugger ", "", "Deals #b6(+3) damage to ALL enemies. NL Adds #yExhaust."],
-    "EXTRA_TEXT": [" NL Deal %s damage to ALL enemies.", " NL Deal %s damage to ALL enemies. NL Exhaust."]
+    "TEXT": ["猛击", "", "对所有敌人造成 #b6(+3) 伤害。 NL #y消耗 。"],
+    "EXTRA_TEXT": [" NL 对所有敌人造成 %s 伤害。", " NL 对所有敌人造成 %s 伤害。 NL 消耗 。"]
   },
   "CardAugments:SneckoMod": {
     "TEXT": ["混乱", "", "抽到时随机耗能。"],
