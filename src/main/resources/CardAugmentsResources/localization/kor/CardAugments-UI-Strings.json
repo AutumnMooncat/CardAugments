@@ -161,21 +161,21 @@
   },
   "CardAugments:NestEventDownfall": {
     "TEXT": [
-      "You stand to the side and encourage the cultists to resume what they were doing. Not long after, the group begins to gleefully @chant@ and ~wave~ their weapons around. NL NL #r@\"MURDER!!@ #r@MURDER@ #r@MURDER!!\"@ NL #b~\"CAW~ #b~CAW~ #b~CAAAAAWWW!\"~ NL #r@\"MURDER!@ #r@MURDER@ #r@MUURDER!!\"@ NL #b~\"CAAW~ #b~CAW~ #b~CAAAAAAWW!!\"~ NL NL You feel you may be able to learn something by observing them in action...",
-      "As you watch the #rCultists and their #r@ritual,@ you feel yourself falling into a #p~trance.~ NL NL With a spark of #b@inspiration,@ you focus in and... NL #y@CLANG@ #y@CLAAANG@ #y@CLANG!@ NL ...improve your arsenal! ",
-      "Choose a Card to Augment.",
-      "Cultist's",
-      "Gain 1 Strength. NL Damage -20%.",
-      "Fanatic",
-      "Damage +50%. NL Exhaust. NL Only applicable to cards without Exhaust."
+      "당신은 무슨 일이 일어나는지 알기 위해 줄에서 빠져나옵니다. 곧바로, 한 #r광신자 무리가 다가가 활기차게 @구호@ 를 외치고 그들의 무기를 사방으로 ~흔듭니다~. NL NL #r@\"죽여라!!@ #r@죽여라@ #r@죽여라!!\"@ NL #b~\"까악~ #b~까악~ #b~까아아아아아악!\"~ NL #r@\"죽여라!@ #r@죽여라@ #r@죽여라!!\"@ NL #b~\"까아악~ #b~까악~ #b~까아아아아아악!!\"~ NL NL 그들의 행동에서 무언가를 배울 수 있을 것 같습니다...",
+      "#r광신자들 과 그들의 #r@의식@을 보자, 당신은 스스로가 #p~최면~에 빠지는 것을 느낍니다. NL 번뜩이는 #b@영감@ 과 함께, 당신은 집중합니다... NL #y@깡@ #y@까앙@ #y@깡!@ NL ...장비들을 강화하기 위해! ",
+      "증강할 카드를 선택하십시오.",
+      "광신자의",
+      "힘을 1 얻습니다. NL 피해 -20%.",
+      "열광적인",
+      "피해 +50%. NL 소멸. NL 소멸하지 않는 카드에만 가능합니다."
     ],
     "EXTRA_TEXT": [
-      "[Observe]",
-      "[Locked] Requires: An Attack.",
-      "[Study Cultists] #gGive #gan #gAttack Cultist's.",
-      "[Study Ritual] #gGive #gan #gAttack Fanatic.",
-      "[Locked] Requires: A non-Exhausting Attack.",
-      "[Leave]"
+      "[관찰한다]",
+      "[잠김] 조건: 공격 카드.",
+      "[광신자들을 관찰한다] #g공격 카드 #g1 장에 광신자의 증강을 #g부여 합니다.",
+      "[의식을 관찰한다] #g공격 카드 #g1 장에 열광적인 증강을 #g부여 합니다.",
+      "[잠김] 조건: 소멸하지 않는 공격 카드.",
+      "[떠난다]"
     ]
   },
   "CardAugments:SensoryEvent": {
@@ -207,16 +207,16 @@
   },
   "CardAugments:SerpentEventDownfall": {
     "TEXT": [
-      "~\"Yeeeeeeessssssssssessss!~ NL ~Thisss~ ~will~ ~all~ ~be~ ~worthhh~ ~it.~ NL ~..ssSSs.....~ ~ss...~ ~sssss....!\"~",
-      "The serpent rears its head and stares at you with its ~hypnotic~ ~eyes!~ NL You feel #y@invigorated@ and ready to beat down whoever dares to stand before you! NL You thank the snake, and get going.",
-      "Slugger",
-      "Deal 6 damage to ALL enemies. NL Exhaust."
+      "~\"그래애애애애애!~ NL ~이~ ~모든~ ~건~ ~반드시~ ~도움이~ ~될거야.~ NL ~..스스슷슷스.....~ ~스스...~ ~스스스스스....!\"~",
+      "뱀은 머리를 세우고는 당신을 ~최면을 거는 눈~으로 주시합니다! NL 당신은 @활력이 솟는 것@을 느끼며 당긴에게 맞서는 자들을 쓰러뜨릴 준비가 되었습니다! NL 당신은 뱀에게 감사하며 출발합니다.",
+      "휘두르는",
+      "모든 적에게 피해를 6 줍니다. NL 소멸."
     ],
     "EXTRA_TEXT": [
-      "[Agree] #gGive #gALL #gyour #gAttacks Slugger.",
-      "[Locked] Requires: An Attack.",
-      "[Leave]",
-      "[Continue]"
+      "[동의한다] #g모든 #g공격 카드에 휘두르는 증강을 #g부여합니다.",
+      "[잠김] 조건: 공격 카드.",
+      "[떠난다]",
+      "[계속]"
     ]
   },
   "CardAugments:ShiningEvent": {
@@ -686,8 +686,8 @@
     "EXTRA_TEXT": [ " NL 이번 전투에서 이 카드를 처음 뽑았다면 즉시 버립니다." ]
   },
   "CardAugments:SluggerMod": {
-    "TEXT": ["Slugger ", "", "Deals #b6(+3) damage to ALL enemies. NL Adds #yExhaust."],
-    "EXTRA_TEXT": [" NL Deal %s damage to ALL enemies.", " NL Deal %s damage to ALL enemies. NL Exhaust."]
+    "TEXT": ["휘두르는", "", "적 전체에게 피해를 #b6(+3) 줍니다. NL #y소멸이 추가됩니다."],
+    "EXTRA_TEXT": [" NL 적 전체에게 피해를 %s 줍니다.", " NL 적 전체에게 피해를 %s 줍니다. NL 소멸."]
   },
   "CardAugments:SneckoMod": {
     "TEXT": [ "스네코 ", "", "뽑을 때 비용이 무작위로 정해집니다." ],
