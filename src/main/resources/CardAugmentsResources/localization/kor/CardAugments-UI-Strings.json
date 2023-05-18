@@ -686,7 +686,7 @@
     "EXTRA_TEXT": [ " NL 이번 전투에서 이 카드를 처음 뽑았다면 즉시 버립니다." ]
   },
   "CardAugments:SluggerMod": {
-    "TEXT": ["휘두르는", "", "적 전체에게 피해를 #b6(+3) 줍니다. NL #y소멸이 추가됩니다."],
+    "TEXT": ["휘두르는 ", "", "적 전체에게 피해를 #b6(+3) 줍니다. NL #y소멸이 추가됩니다."],
     "EXTRA_TEXT": [" NL 적 전체에게 피해를 %s 줍니다.", " NL 적 전체에게 피해를 %s 줍니다. NL 소멸."]
   },
   "CardAugments:SneckoMod": {
