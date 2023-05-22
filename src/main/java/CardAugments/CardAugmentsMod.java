@@ -91,6 +91,9 @@ public class CardAugmentsMod implements
     public static final String MODIFY_SHOP = "modifyShop";
     public static boolean modifyShop = false;
 
+    public static final String MODIFY_IN_COMBAT = "modifyInCombat";
+    public static boolean modifyInCombat = false;
+
     public static final String ALLOW_ORBS = "allowOrbs";
     public static boolean allowOrbs = false;
 
@@ -137,8 +140,8 @@ public class CardAugmentsMod implements
     public static HashMap<Integer, ArrayList<IUIElement>> pages = new HashMap<>();
     public static float LAYOUT_Y = 760f;
     public static final float LAYOUT_X = 400f;
-    public static final float SPACING_Y = 46f;
-    public static final float FULL_PAGE_Y = (SPACING_Y * 12);
+    public static final float SPACING_Y = 43f;
+    public static final float FULL_PAGE_Y = (SPACING_Y * 13);
     public static float deltaY = 0;
     public static int currentPage = 0;
     
@@ -178,6 +181,7 @@ public class CardAugmentsMod implements
         cardAugmentsDefaultSettings.setProperty(ENABLE_TOOLTIPS, Boolean.toString(enableTooltips));
         cardAugmentsDefaultSettings.setProperty(ROLL_ATTEMPTS, String.valueOf(rollAttempts));
         cardAugmentsDefaultSettings.setProperty(SHOW_BREAKDOWN, Boolean.toString(showBreakdown));
+        cardAugmentsDefaultSettings.setProperty(MODIFY_IN_COMBAT, Boolean.toString(modifyInCombat));
         try {
             cardAugmentsConfig = new SpireConfig(modID, FILE_NAME, cardAugmentsDefaultSettings);
             cardAugmentsCrossoverConfig = new SpireConfig(modID, CROSSOVER_FILE_NAME);
@@ -197,6 +201,7 @@ public class CardAugmentsMod implements
             enableTooltips = cardAugmentsConfig.getBool(ENABLE_TOOLTIPS);
             rollAttempts = cardAugmentsConfig.getInt(ROLL_ATTEMPTS);
             showBreakdown = cardAugmentsConfig.getBool(SHOW_BREAKDOWN);
+            modifyInCombat = cardAugmentsConfig.getBool(MODIFY_IN_COMBAT);
         } catch (IOException e) {
             logger.error("Card Augments SpireConfig initialization failed:");
             e.printStackTrace();
@@ -462,6 +467,14 @@ public class CardAugmentsMod implements
             try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
         });
 
+        //Used to modify in combat cards
+        ModLabeledToggleButton enableInCombatButton = new ModLabeledToggleButton(TEXT[14],LAYOUT_X - 40f, LAYOUT_Y - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
+                cardAugmentsConfig.getBool(MODIFY_IN_COMBAT), settingsPanel, (label) -> {}, (button) -> {
+            cardAugmentsConfig.setBool(MODIFY_IN_COMBAT, button.enabled);
+            modifyInCombat = button.enabled;
+            try {cardAugmentsConfig.save();} catch (IOException e) {e.printStackTrace();}
+        });
+
         //Used to allow orbs without prismatic shard
         ModLabeledToggleButton enableAllowOrbsButton = new ModLabeledToggleButton(TEXT[6],LAYOUT_X - 40f, LAYOUT_Y - 10f, Settings.CREAM_COLOR, FontHelper.charDescFont,
                 cardAugmentsConfig.getBool(ALLOW_ORBS), settingsPanel, (label) -> {}, (button) -> {
@@ -503,6 +516,7 @@ public class CardAugmentsMod implements
         registerUIElement(enableStarterModificationButton);
         registerUIElement(enableShopButton);
         registerUIElement(enableInstantObtainModificationButton);
+        registerUIElement(enableInCombatButton);
         registerUIElement(enableAllowOrbsButton);
         registerUIElement(enableEventsButtom);
         registerUIElement(enableTooltipsButton);
@@ -678,7 +692,7 @@ public class CardAugmentsMod implements
             sb.append(EXTRA_TEXT[5]).append(String.format("%.02f", getBiasedWeightProbability(AbstractAugment.AugmentRarity.COMMON, false))).append("%");
             sb.append(EXTRA_TEXT[6]).append(String.format("%.02f", getBiasedWeightProbability(AbstractAugment.AugmentRarity.UNCOMMON, false))).append("%");
             sb.append(EXTRA_TEXT[7]).append(String.format("%.02f", getBiasedWeightProbability(AbstractAugment.AugmentRarity.RARE, true))).append("%");
-            if (modifyInstantObtain) {
+            if (modifyInstantObtain || modifyInCombat) {
                 sb.append(EXTRA_TEXT[12]);
                 sb.append(EXTRA_TEXT[5]).append(String.format("%.02f", getWeightProbability(AbstractAugment.AugmentRarity.COMMON))).append("%");
                 sb.append(EXTRA_TEXT[6]).append(String.format("%.02f", getWeightProbability(AbstractAugment.AugmentRarity.UNCOMMON))).append("%");

@@ -18,13 +18,15 @@ import com.megacrit.cardcrawl.screens.select.GridCardSelectScreen;
 import com.megacrit.cardcrawl.shop.Merchant;
 import com.megacrit.cardcrawl.shop.ShopScreen;
 import com.megacrit.cardcrawl.vfx.FastCardObtainEffect;
+import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToDiscardEffect;
+import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToDrawPileEffect;
+import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToHandEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 import javassist.CtBehavior;
 
 import java.util.ArrayList;
 
-import static CardAugments.CardAugmentsMod.modifyStarters;
-import static CardAugments.CardAugmentsMod.rollCardAugment;
+import static CardAugments.CardAugmentsMod.*;
 
 public class OnCardGeneratedPatches {
 
@@ -257,6 +259,46 @@ public class OnCardGeneratedPatches {
                 for (AbstractCard c : __instance.rewardGroup) {
                     rollCardAugment(c);
                 }
+            }
+        }
+    }
+
+    @SpirePatch2(clz = CardRewardScreen.class, method = "customCombatOpen")
+    public static class DiscoveryStyleCards {
+        @SpirePrefixPatch
+        public static void roll(ArrayList<AbstractCard> choices) {
+            if (modifyInCombat) {
+                for (AbstractCard c : choices) {
+                    rollCardAugment(c);
+                }
+            }
+        }
+    }
+
+    @SpirePatch2(clz = ShowCardAndAddToHandEffect.class, method = SpirePatch.CONSTRUCTOR, paramtypez = {AbstractCard.class})
+    @SpirePatch2(clz = ShowCardAndAddToHandEffect.class, method = SpirePatch.CONSTRUCTOR, paramtypez = {AbstractCard.class, float.class, float.class})
+    @SpirePatch2(clz = ShowCardAndAddToDrawPileEffect.class, method = SpirePatch.CONSTRUCTOR, paramtypez = {AbstractCard.class, boolean.class, boolean.class})
+    @SpirePatch2(clz = ShowCardAndAddToDrawPileEffect.class, method = SpirePatch.CONSTRUCTOR, paramtypez = {AbstractCard.class, float.class, float.class, boolean.class, boolean.class, boolean.class})
+    @SpirePatch2(clz = ShowCardAndAddToDiscardEffect.class, method = SpirePatch.CONSTRUCTOR, paramtypez = {AbstractCard.class})
+    @SpirePatch2(clz = ShowCardAndAddToDiscardEffect.class, method = SpirePatch.CONSTRUCTOR, paramtypez = {AbstractCard.class, float.class, float.class})
+    public static class CreatedCards {
+        @SpirePrefixPatch
+        public static void roll(Object[] __args) {
+            if (modifyInCombat) {
+                if (__args[0] instanceof AbstractCard) {
+                    rollCardAugment((AbstractCard) __args[0]);
+                }
+            }
+        }
+    }
+
+    @SpirePatch2(clz = CardGroup.class, method = "initializeDeck")
+    public static class CopiesMadeAreFinal {
+        @SpirePostfixPatch
+        public static void fixMods(CardGroup __instance) {
+            //If we make copies of a card like Anger, we want the copies to be proper copies without rolling new modifiers
+            for (AbstractCard c : __instance.group) {
+                RolledModFieldPatches.RolledModField.rolled.set(c, true);
             }
         }
     }
