@@ -14,7 +14,8 @@
       "Activar complementos de eventos",
       "Habilitar información sobre herramientas de modificadores",
       "Intentos de tirada (por defecto 1):",
-      "Mostrar/Ocultar análisis de probabilidad"
+      "Mostrar/Ocultar análisis de probabilidad",
+      "Modify Cards Created In Combat"
     ],
     "EXTRA_TEXT": [
       "Cartas Quimera",

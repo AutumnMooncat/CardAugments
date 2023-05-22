@@ -14,7 +14,8 @@
       "Enable Event Addons",
       "Enable Modifier Tooltips",
       "Roll Attempts (Default 1):",
-      "Show Analysis"
+      "Show Analysis",
+      "Modify Cards Created In Combat"
     ],
     "EXTRA_TEXT": [
       "Chimera Cards",
