@@ -8,9 +8,11 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.events.city.TheLibrary;
 import com.megacrit.cardcrawl.events.shrines.GremlinMatchGame;
+import com.megacrit.cardcrawl.neow.NeowEvent;
 import com.megacrit.cardcrawl.neow.NeowReward;
 import com.megacrit.cardcrawl.relics.PandorasBox;
 import com.megacrit.cardcrawl.rewards.RewardItem;
+import com.megacrit.cardcrawl.screens.CardRewardScreen;
 import com.megacrit.cardcrawl.screens.CombatRewardScreen;
 import com.megacrit.cardcrawl.screens.select.GridCardSelectScreen;
 import com.megacrit.cardcrawl.shop.Merchant;
@@ -21,6 +23,7 @@ import javassist.CtBehavior;
 
 import java.util.ArrayList;
 
+import static CardAugments.CardAugmentsMod.modifyStarters;
 import static CardAugments.CardAugmentsMod.rollCardAugment;
 
 public class OnCardGeneratedPatches {
@@ -185,6 +188,75 @@ public class OnCardGeneratedPatches {
             public int[] Locate(CtBehavior ctMethodToPatch) throws Exception {
                 Matcher finalMatcher = new Matcher.MethodCallMatcher(ShopScreen.class, "init");
                 return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
+            }
+        }
+    }
+
+    @SpirePatch2(clz = NeowEvent.class, method = "dailyBlessing")
+    public static class RunModifierPatches {
+        @SpireInsertPatch(locator = SealedLocator.class, localvars = "sealedGroup")
+        public static void sealedDeck(CardGroup sealedGroup) {
+            //Setting to rolled to prevent instant obtain is handled in StopTossingMods patch
+            if (CardAugmentsMod.modifyStarters) {
+                for (AbstractCard c : sealedGroup.group) {
+                    rollCardAugment(c);
+                }
+            }
+        }
+
+        @SpireInsertPatch(locator = AddedLocator.class, localvars = "group")
+        public static void addedCards(CardGroup group) {
+            for (AbstractCard c : group.group) {
+                if (modifyStarters) {
+                    rollCardAugment(c);
+                }
+                //Don't let it try to roll on instant obtain, since these are starter cards
+                RolledModFieldPatches.RolledModField.rolled.set(c, true);
+            }
+        }
+
+        @SpireInsertPatch(locator = FastObtainLocator.class, localvars = "tmpCard")
+        public static void fixSpecialized(AbstractCard tmpCard) {
+            if (modifyStarters) {
+                rollCardAugment(tmpCard);
+            }
+            //Don't let it try to roll on instant obtain, since these are starter cards
+            RolledModFieldPatches.RolledModField.rolled.set(tmpCard, true);
+        }
+
+        public static class SealedLocator extends SpireInsertLocator {
+            @Override
+            public int[] Locate(CtBehavior ctBehavior) throws Exception {
+                Matcher m = new Matcher.MethodCallMatcher(GridCardSelectScreen.class, "open");
+                return LineFinder.findInOrder(ctBehavior, m);
+            }
+        }
+
+        public static class AddedLocator extends SpireInsertLocator {
+            @Override
+            public int[] Locate(CtBehavior ctBehavior) throws Exception {
+                Matcher m = new Matcher.MethodCallMatcher(GridCardSelectScreen.class, "openConfirmationGrid");
+                return LineFinder.findInOrder(ctBehavior, m);
+            }
+        }
+
+        public static class FastObtainLocator extends SpireInsertLocator {
+            @Override
+            public int[] Locate(CtBehavior ctBehavior) throws Exception {
+                Matcher m = new Matcher.NewExprMatcher(FastCardObtainEffect.class);
+                return LineFinder.findInOrder(ctBehavior, m);
+            }
+        }
+    }
+
+    @SpirePatch2(clz = CardRewardScreen.class, method = "draftOpen")
+    public static class DraftFix {
+        @SpirePostfixPatch
+        public static void plz(CardRewardScreen __instance) {
+            if (modifyStarters) {
+                for (AbstractCard c : __instance.rewardGroup) {
+                    rollCardAugment(c);
+                }
             }
         }
     }
