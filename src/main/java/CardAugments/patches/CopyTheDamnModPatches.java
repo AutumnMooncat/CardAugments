@@ -5,9 +5,12 @@ import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardModifierManager;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.events.city.TheLibrary;
 import com.megacrit.cardcrawl.events.shrines.GremlinMatchGame;
+import com.megacrit.cardcrawl.neow.NeowEvent;
+import com.megacrit.cardcrawl.screens.select.GridCardSelectScreen;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 import javassist.CtBehavior;
 
@@ -67,6 +70,30 @@ public class CopyTheDamnModPatches {
             public int[] Locate(CtBehavior ctMethodToPatch) throws Exception {
                 Matcher finalMatcher = new Matcher.MethodCallMatcher(ArrayList.class, "add");
                 return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
+            }
+        }
+    }
+
+    @SpirePatch2(clz = NeowEvent.class, method = "update")
+    public static class StopTossingMods {
+        @SpireInsertPatch(locator = Locator.class, localvars = "group")
+        public static void plz(CardGroup group) {
+            for (int i = 0 ; i < AbstractDungeon.gridSelectScreen.selectedCards.size() ; i++) {
+                for (AbstractCardModifier mod : CardModifierManager.modifiers(AbstractDungeon.gridSelectScreen.selectedCards.get(i))) {
+                    if (mod instanceof AbstractAugment) {
+                        CardModifierManager.addModifier(group.group.get(group.group.size()-1-i), mod.makeCopy());
+                    }
+                }
+                //Don't let it try to roll on instant obtain, since these are starter cards
+                RolledModFieldPatches.RolledModField.rolled.set(group.group.get(group.group.size()-1-i), true);
+            }
+        }
+
+        public static class Locator extends SpireInsertLocator {
+            @Override
+            public int[] Locate(CtBehavior ctBehavior) throws Exception {
+                Matcher m = new Matcher.MethodCallMatcher(GridCardSelectScreen.class, "openConfirmationGrid");
+                return LineFinder.findInOrder(ctBehavior, m);
             }
         }
     }
