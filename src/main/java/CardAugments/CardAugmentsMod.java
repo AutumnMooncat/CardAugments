@@ -44,6 +44,7 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @SpireInitializer
@@ -123,6 +124,7 @@ public class CardAugmentsMod implements
     public static final HashMap<String, Integer> crossoverSizeMap = new HashMap<>();
     public static final HashMap<String, Boolean> crossoverEnableMap = new HashMap<>();
     public static final HashSet<AbstractAugment> disabledModifiers = new HashSet<>();
+    public static final HashMap<String, Predicate<AbstractCard>> customBanChecks = new HashMap<>();
     public static final String UNMANAGED_ID = "UnmanagedChimeraID";
     //List of orbies
     public static final ArrayList<AbstractPlayer.PlayerClass> ORB_CHARS = new ArrayList<>(Collections.singletonList(AbstractPlayer.PlayerClass.DEFECT));
@@ -288,6 +290,10 @@ public class CardAugmentsMod implements
                 }
             }
         }
+    }
+
+    public static void registerCustomBan(String modifierID, Predicate<AbstractCard> banIf) {
+        customBanChecks.put(modifierID, customBanChecks.getOrDefault(modifierID, c -> false).or(banIf));
     }
 
     public static void setModID(String ID) {

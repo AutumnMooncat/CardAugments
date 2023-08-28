@@ -156,7 +156,7 @@ public abstract class AbstractAugment extends AbstractCardModifier {
     }
 
     public boolean canApplyTo(AbstractCard card) {
-        if (!CardModifierManager.hasModifier(card, identifier(card))) {
+        if (!CardModifierManager.hasModifier(card, identifier(card)) && !CardAugmentsMod.customBanChecks.getOrDefault(identifier(card), c -> false).test(card)) {
             return validCard(card);
         }
         return false;
