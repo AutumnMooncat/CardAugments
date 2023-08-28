@@ -18,7 +18,7 @@ public class StickyMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.type != AbstractCard.CardType.CURSE && cardCheck(card, AbstractAugment::notRetain);
+        return card.type != AbstractCard.CardType.CURSE && cardCheck(card, AbstractAugment::notRetain) && doesntOverride(card, "triggerOnEndOfTurnForPlayingCard");
     }
 
     @Override

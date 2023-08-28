@@ -26,7 +26,7 @@ public class AmplifiedMod extends AbstractAugment {
 
     @Override
     public boolean validCard(AbstractCard card) {
-        return card.cost >= 0 && cardCheck(card, c -> doesntUpgradeCost() && doesntDowngradeMagic() && c.baseMagicNumber > 0 && card.cost <= c.baseMagicNumber);
+        return card.cost >= 0 && cardCheck(card, c -> c.baseDamage == -1 && c.baseBlock == -1 && doesntUpgradeCost() && doesntDowngradeMagic() && c.baseMagicNumber > 0 && card.cost <= c.baseMagicNumber);
     }
 
     @Override
