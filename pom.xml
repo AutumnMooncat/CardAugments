@@ -16,7 +16,7 @@
         <ModTheSpire.version>3.30.3</ModTheSpire.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--CHANGE THIS TO YOUR STEAM INSTALLATION-->
-        <Steam.path>E:\SteamLibrary\steamapps</Steam.path>
+        <Steam.path>C:\Program Files (x86)\Steam\steamapps</Steam.path>
     </properties>
 
     <dependencies>
@@ -96,7 +96,7 @@
             <artifactId>TheRainbow</artifactId>
             <version>0.3.3</version>
             <scope>system</scope>
-            <systemPath>${Steam.path}/common/SlayTheSpire/mods/TheRainbow.jar</systemPath>
+            <systemPath>${Steam.path}/workshop/content/646570/2969378732/TheRainbow.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>autumn</groupId>
@@ -110,7 +110,7 @@
             <artifactId>BlurryBlur</artifactId>
             <version>1.0.0</version>
             <scope>system</scope>
-            <systemPath>${Steam.path}/common/SlayTheSpire/mods/everything_is_the_same_but_blur_is_blurry.jar</systemPath>
+            <systemPath>${Steam.path}/workshop/content/646570/2863946088/everything is the same but blur is blurry.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>downfall</groupId>
