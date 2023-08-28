@@ -147,6 +147,8 @@ public abstract class AbstractAugment extends AbstractCardModifier {
 
     public void onUpgradeCheck(AbstractCard card) {}
 
+    public void onCreatedMidCombat(AbstractCard card) {}
+
     public void updateDynvar(AbstractCard card) {}
 
     public boolean atBattleStartPreDraw(AbstractCard card) {

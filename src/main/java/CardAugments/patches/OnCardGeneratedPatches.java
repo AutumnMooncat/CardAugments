@@ -1,6 +1,9 @@
 package CardAugments.patches;
 
 import CardAugments.CardAugmentsMod;
+import CardAugments.cardmods.AbstractAugment;
+import basemod.abstracts.AbstractCardModifier;
+import basemod.helpers.CardModifierManager;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
@@ -284,9 +287,15 @@ public class OnCardGeneratedPatches {
     public static class CreatedCards {
         @SpirePrefixPatch
         public static void roll(Object[] __args) {
-            if (modifyInCombat) {
-                if (__args[0] instanceof AbstractCard) {
-                    rollCardAugment((AbstractCard) __args[0]);
+            if (__args[0] instanceof AbstractCard) {
+                AbstractCard card = (AbstractCard) __args[0];
+                if (modifyInCombat) {
+                    rollCardAugment(card);
+                }
+                for (AbstractCardModifier m : CardModifierManager.modifiers(card)) {
+                    if (m instanceof AbstractAugment) {
+                        ((AbstractAugment) m).onCreatedMidCombat(card);
+                    }
                 }
             }
         }

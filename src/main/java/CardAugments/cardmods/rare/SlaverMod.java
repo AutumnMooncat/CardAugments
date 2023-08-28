@@ -34,6 +34,11 @@ public class SlaverMod extends AbstractAugment {
     }
 
     @Override
+    public void onCreatedMidCombat(AbstractCard card) {
+        atBattleStartPreDraw(card);
+    }
+
+    @Override
     public boolean validCard(AbstractCard card) {
         return card.cost > 0 && cardCheck(card, c -> doesntUpgradeCost());
     }
