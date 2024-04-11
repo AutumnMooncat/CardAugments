@@ -608,8 +608,10 @@ public class ModifierScreen implements DropdownMenuListener, ScrollBarListener {
     public static class GrabBadge {
         @SpireInsertPatch(locator = Locator.class, localvars = {"badge"})
         public static void plz(ModBadge badge) {
-            if (ReflectionHacks.getPrivate(badge, ModBadge.class, "modName").equals(CardAugmentsMod.EXTRA_TEXT[0])) {
-                myBadge = badge;
+            if (CardAugmentsMod.EXTRA_TEXT != null) {
+                if (CardAugmentsMod.EXTRA_TEXT[0].equals(ReflectionHacks.getPrivate(badge, ModBadge.class, "modName"))) {
+                    myBadge = badge;
+                }
             }
         }
 
