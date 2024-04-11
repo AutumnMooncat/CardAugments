@@ -34,11 +34,9 @@ public class InterruptUseCardFieldPatches {
         public static ExprEditor patch() {
             return new ExprEditor() {
                 @Override
-                //Method call is basically the equivalent of a methodcallmatcher of an insert patch, checks the edit method against every method call in the function you#re patching
                 public void edit(MethodCall m) throws CannotCompileException {
-                    //If the method is from the class AnimationState and the method is called update
                     if (m.getClassName().equals(AbstractCard.class.getName()) && m.getMethodName().equals("use")) {
-                        m.replace("if(CardAugments.patches.InterruptUseCardFieldPatches.interceptCheck($0)) {$proceed($$);}");
+                        m.replace("if ("+InterruptUseCardFieldPatches.class.getName()+".interceptCheck($0)) {$proceed($$);}");
                     }
                 }
             };
