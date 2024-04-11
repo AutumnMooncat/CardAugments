@@ -216,14 +216,6 @@ public abstract class AbstractAugment extends AbstractCardModifier {
         return ret;
     }
 
-    protected void addToBot(AbstractGameAction action) {
-        AbstractDungeon.actionManager.addToBottom(action);
-    }
-
-    protected void addToTop(AbstractGameAction action) {
-        AbstractDungeon.actionManager.addToTop(action);
-    }
-
     public static boolean customCheck(Predicate<AbstractCard> pred) {
         return cardsToCheck.stream().allMatch(pred);
     }
