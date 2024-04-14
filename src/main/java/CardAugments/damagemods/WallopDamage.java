@@ -11,7 +11,7 @@ public class WallopDamage extends AbstractDamageModifier {
     @Override
     public void onLastDamageTakenUpdate(DamageInfo info, int lastDamageTaken, int overkillAmount, AbstractCreature target) {
         if (lastDamageTaken > 0) {
-            addToBot(new GainBlockAction(AbstractDungeon.player, lastDamageTaken));
+            addToTop(new GainBlockAction(AbstractDungeon.player, lastDamageTaken));
         }
     }
 
