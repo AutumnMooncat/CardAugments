@@ -480,7 +480,7 @@
     "EXTRA_TEXT": [" NL Channel %d Dark."]
   },
   "CardAugments:GoForTheMod": {
-    "TEXT": ["Go for the ", "", "Reduces damage by 20%. Deals #b3(+1) damage to an enemy, then triggers the original card effect if the enemy intended to attack."],
+    "TEXT": ["Go for the ", "", "Reduces damage by 20%. Reduces cost by #b1. Deals #b3(+1) damage to an enemy, then triggers the original card effect if the enemy intended to attack."],
     "EXTRA_TEXT": ["Deal %s damage. NL If the enemy intends to attack, "]
   },
   "CardAugments:GraveMod": {
