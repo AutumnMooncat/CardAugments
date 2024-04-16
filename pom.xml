@@ -6,7 +6,7 @@
     <groupId>CardAugments</groupId>
     <artifactId>CardAugments</artifactId> <!--Keep a note of this one: this is the ID used in the "auto add cards" method-->
     <name>Chimera Cards</name>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <description>Adds random modifiers to card rewards.</description>
 
     <properties>
