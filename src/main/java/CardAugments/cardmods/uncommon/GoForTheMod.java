@@ -5,6 +5,7 @@ import CardAugments.cardmods.AbstractAugment;
 import CardAugments.cardmods.DynvarCarrier;
 import CardAugments.patches.InterruptUseCardFieldPatches;
 import CardAugments.util.CalcHelper;
+import CardAugments.util.Wiz;
 import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardBorderGlowManager;
 import com.badlogic.gdx.graphics.Color;
@@ -126,7 +127,7 @@ public class GoForTheMod extends AbstractAugment implements DynvarCarrier {
         return new CardBorderGlowManager.GlowInfo() {
             @Override
             public boolean test(AbstractCard abstractCard) {
-                return hasThisMod(abstractCard) && AbstractDungeon.getMonsters().monsters.stream().anyMatch(m -> !m.isDeadOrEscaped() && m.getIntentBaseDmg() >= 0);
+                return hasThisMod(abstractCard) && Wiz.isInCombat() && AbstractDungeon.getMonsters().monsters.stream().anyMatch(m -> !m.isDeadOrEscaped() && m.getIntentBaseDmg() >= 0);
             }
 
             @Override
