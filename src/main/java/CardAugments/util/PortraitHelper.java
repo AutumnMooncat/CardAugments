@@ -28,6 +28,9 @@ public class PortraitHelper {
     private static final HashMap<Pair<String, AbstractCard.CardType>, Pair<TextureAtlas.AtlasRegion, Texture>> hashedTextures = new HashMap<>();
 
     public static void setMaskedPortrait(AbstractCard card) {
+        if (CardLibrary.getCard(card.cardID) == null) {
+            return;
+        }
         Pair<String, AbstractCard.CardType> key = new Pair<>(card.cardID, card.type);
         if (hashedTextures.containsKey(key)) {
             card.portrait = hashedTextures.get(key).getKey();
