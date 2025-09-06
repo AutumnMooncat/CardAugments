@@ -16,7 +16,7 @@
         <ModTheSpire.version>3.30.3</ModTheSpire.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--CHANGE THIS TO YOUR STEAM INSTALLATION-->
-        <Steam.path>C:\Program Files (x86)\Steam\steamapps</Steam.path>
+        <Steam.path>/extra/SteamLibrary/steamapps/</Steam.path>
     </properties>
 
     <dependencies>
@@ -39,8 +39,8 @@
             <artifactId>basemod</artifactId>
             <version>5.27.0</version>
             <scope>system</scope>
-            <!--<systemPath>${Steam.path}/workshop/content/646570/1605833019/BaseMod.jar</systemPath>-->
-            <systemPath>${Steam.path}/common/SlayTheSpire/mods/BaseMod.jar</systemPath>
+            <systemPath>${Steam.path}/workshop/content/646570/1605833019/BaseMod.jar</systemPath>
+            <!--<systemPath>${Steam.path}/common/SlayTheSpire/mods/BaseMod.jar</systemPath>-->
         </dependency>
         <dependency>
             <groupId>sltslib</groupId>
@@ -54,7 +54,7 @@
             <artifactId>MintySpire</artifactId>
             <version>2.5.5</version>
             <scope>system</scope>
-            <systemPath>${Steam.path}/workshop/content/646570/1812723899/MintySpire.jar</systemPath>
+            <systemPath>${Steam.path}/workshop/content/646570/1812723899/mintySpire.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>ocean</groupId>
